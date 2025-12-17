@@ -18,8 +18,8 @@ export function Nav() {
     };
 
     return (
-        <div className="flex justify-center w-screen fixed top-0 z-50 mt-4">
-            <nav className="bg-blue-900/80 backdrop-blur-md w-fit p-4 rounded-3xl shadow-2xl border border-blue-800">
+        <div className="flex justify-center w-screen fixed top-0 z-50 mt-1">
+            <nav className="bg-blue-900/80 backdrop-blur-md w-fit p-3 rounded-3xl shadow-2xl border border-blue-800">
                 <ul className="flex justify-center gap-6 text-xl text-gray-300">
                     <li className="hover:text-white transition-colors">
                         <a href="#" onClick={(e) => handleScroll(e, "#")}>Home</a>
