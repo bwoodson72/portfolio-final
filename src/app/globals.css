@@ -1,2 +1,6 @@
 @import "tailwindcss";
 
+html {
+  /* Prevents browser native smooth scroll from fighting with Lenis */
+  scroll-behavior: auto !important;
+}
