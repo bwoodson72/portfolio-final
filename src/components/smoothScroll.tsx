@@ -4,18 +4,19 @@ import React, { useEffect } from "react";
 import { ReactLenis, useLenis } from "lenis/react";
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
-  // Logs when Lenis fires scroll updates (good proof it’s running)
   useLenis((lenis) => {
-    // Avoid spam: log only occasionally
+    if (!lenis) return;
+
+    // Avoid type headaches across environments/builds
+    const anyLenis = lenis as unknown as { animatedScroll?: number; scroll?: number };
+    const y = anyLenis.animatedScroll ?? anyLenis.scroll ?? 0;
+
     if (process.env.NODE_ENV === "production") {
-      // Lenis emits a lot; keep it light:
-      // @ts-expect-error lenis.animatedScroll exists at runtime
-      const y = lenis?.animatedScroll ?? lenis?.scroll ?? 0;
       if (typeof y === "number" && Math.round(y) % 500 === 0) {
         console.log("[Lenis] scroll y =", Math.round(y));
       }
     } else {
-      console.log("[Lenis] scroll event");
+      console.log("[Lenis] scroll y =", Math.round(y));
     }
   });
 
