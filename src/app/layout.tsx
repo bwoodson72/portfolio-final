@@ -23,8 +23,9 @@ export default function RootLayout({
 
         className={`dark:bg-[#121212] dark:text-white light:bg-white light:text-black font-family-inter font-sans`}
       >
-      <Nav/>
       <SmoothScroll>
+      <Nav/>
+
         {children}
       </SmoothScroll>
       </body>
