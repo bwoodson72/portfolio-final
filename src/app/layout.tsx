@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import {Nav} from "../components/nav";
+import {Nav} from "@/components/nav";
+import {SmoothScroll} from "@/components/smoothScroll";
 
 import "./globals.css";
+import React from "react";
 
 
 
@@ -18,10 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+
         className={`dark:bg-[#121212] dark:text-white light:bg-white light:text-black font-family-inter font-sans`}
       >
       <Nav/>
+      <SmoothScroll>
         {children}
+      </SmoothScroll>
       </body>
     </html>
   );
