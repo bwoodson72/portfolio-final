@@ -14,10 +14,10 @@ const projects = [
     {
         title: "Modern Form Architecture",
         description: "A complex multi-step validation system utilizing Zod and React Hook Form to ensure data integrity and smooth UX.",
-        image: "/form-project.jpg",
+        image: "/form.webp",
         tags: ["Next.js", "Zod", "React Hook Form"],
-        liveUrl: "https://your-form-app.vercel.app",
-        repoUrl: "https://github.com/your-username/form-app"
+        liveUrl: "https://react-hook-form-plum.vercel.app",
+        repoUrl: "https://github.com/bwoodson72/react_hook_form"
     },
     {
         title: "Premium Landing Page",
@@ -34,7 +34,7 @@ export function ProjectsSection() {
         <section id="projects" className="relative flex flex-col items-center gap-6 py-20 px-6 w-full min-h-screen scroll-mt-20 overflow-hidden">
 
             {/* Ambient Background Glow (optional, matches your hero theme) */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-500/5 blur-[120px] -z-10" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-125 bg-blue-500/5 blur-[120px] -z-10" />
 
             {/* Header Area */}
             <div className="text-center max-w-3xl mb-12">
