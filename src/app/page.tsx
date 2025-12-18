@@ -5,7 +5,7 @@ import {ContactSection} from "@/components/contactSection";
 
 export default function Home() {
   return (
-   <div className="flex flex-col items-center w-screen">
+   <main className="flex flex-col items-center w-screen">
 
        <HeroSection/>
 
@@ -18,6 +18,6 @@ export default function Home() {
 
 
 
-   </div>
+   </main>
   );
 }

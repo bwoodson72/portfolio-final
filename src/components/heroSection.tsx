@@ -6,11 +6,14 @@ export function HeroSection() {
         <section id='hero' className="relative flex justify-center w-screen h-screen overflow-hidden">
             {/* 1. The Background Image */}
             <Image
-                src="/hero-2-bg.jpg"
-                alt="Dark Blue Geometric Background"
+                src="/hero-bg.avif"
+                alt=""
                 fill
                 className="object-cover opacity-60 pointer-events-none z-0"
                 priority
+                role="presentation"
+                quality={100}
+                sizes="100vw"
             />
 
             {/* 2. The Overlay (Optional: only use if you want to darken edges) */}

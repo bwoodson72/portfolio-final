@@ -35,7 +35,7 @@ export function AboutSection() {
                 <Image
                     className='object-cover rounded-2xl shadow-2xl border border-white/10 grayscale hover:grayscale-0 transition-all duration-500'
                     src="/brianwoodson.jpg"
-                    alt="Brian Woodson"
+                    alt="Brian Woodson - Frontend Engineer"
                     width={500}
                     height={500}
                     priority
