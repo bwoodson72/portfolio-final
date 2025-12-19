@@ -107,22 +107,22 @@ export function ContactForm() {
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 relative z-10">
                                         <motion.div animate={errors.firstName ? "error" : ""} variants={shakeVariants} className="space-y-2">
-                                            <label className="text-[10px] uppercase tracking-widest text-blue-500/80 font-bold ml-1">First Name</label>
+                                            <label className="text-[10px] uppercase tracking-widest text-blue-400 font-bold ml-1">First Name</label>
                                             <input {...register("firstName")} className={inputStyles("firstName")} placeholder="Brian" />
                                         </motion.div>
 
                                         <motion.div animate={errors.lastName ? "error" : ""} variants={shakeVariants} className="space-y-2">
-                                            <label className="text-[10px] uppercase tracking-widest text-blue-500/80 font-bold ml-1">Last Name</label>
+                                            <label className="text-[10px] uppercase tracking-widest text-blue-400 font-bold ml-1">Last Name</label>
                                             <input {...register("lastName")} className={inputStyles("lastName")} placeholder="Woodson" />
                                         </motion.div>
 
                                         <motion.div animate={errors.email ? "error" : ""} variants={shakeVariants} className="md:col-span-2 space-y-2">
-                                            <label className="text-[10px] uppercase tracking-widest text-blue-500/80 font-bold ml-1">Email Address</label>
+                                            <label className="text-[10px] uppercase tracking-widest text-blue-400 font-bold ml-1">Email Address</label>
                                             <input {...register("email")} className={inputStyles("email")} placeholder="hello@brianwoodson.io" />
                                         </motion.div>
 
                                         <motion.div animate={errors.message ? "error" : ""} variants={shakeVariants} className="md:col-span-2 space-y-2">
-                                            <label className="text-[10px] uppercase tracking-widest text-blue-500/80 font-bold ml-1">Message</label>
+                                            <label className="text-[10px] uppercase tracking-widest text-blue-400 font-bold ml-1">Message</label>
                                             <textarea {...register("message")} rows={4} className={`${inputStyles("message")} resize-none`} placeholder="Describe your vision..." />
                                         </motion.div>
                                     </div>
