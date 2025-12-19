@@ -1,6 +1,8 @@
 'use client'
 
 import { ProjectCard } from "@/components/projectCard";
+import { motion } from "motion/react";
+import Divider from "@/components/divider";
 
 const projects = [
     {
@@ -31,37 +33,58 @@ const projects = [
 
 export function ProjectsSection() {
     return (
-        <section id="projects" className="relative flex flex-col items-center gap-6 py-20 px-6 w-full min-h-screen scroll-mt-20 overflow-hidden">
+        <>
+        <section id="projects" className="relative flex flex-col items-center py-32 px-6 w-full min-h-screen scroll-mt-20 bg-transparent overflow-hidden">
 
-            {/* Ambient Background Glow (optional, matches your hero theme) */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-125 bg-blue-500/5 blur-[120px] -z-10" />
+            {/* Ambient Background Glow */}
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-600/10 blur-[150px] -z-10 pointer-events-none" />
 
             {/* Header Area */}
-            <div className="text-center max-w-3xl mb-12">
-                <h2 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight">
-                    Featured Work
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="text-center max-w-4xl mb-24 space-y-4"
+            >
+                {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
+                <span className="text-blue-500 font-mono text-xs tracking-[0.3em] uppercase italic">
+                    // Selected Works
+                </span>
+                <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white uppercase italic leading-none">
+                    Featured <span className="text-blue-500 not-italic">Artifacts.</span>
                 </h2>
-                <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
-                    A collection of projects where I prioritize <span className="text-blue-400 font-medium">refined interactions</span>,
-                    <span className="text-white"> responsive layouts</span>, and
-                    <span className="text-blue-400 font-medium"> performant frontend architecture</span>.
+                <p className="text-lg md:text-xl text-white/40 leading-relaxed max-w-2xl mx-auto pt-4 italic">
+                    Architecting digital interfaces with a focus on <span className="text-blue-400">performance</span>,
+                    <span className="text-white/80"> motion</span>, and accessibility.
                 </p>
-            </div>
+            </motion.div>
 
-            {/* Cards Container - Using Grid for better control than Flex */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl">
+            {/* Cards Container - Using grid-rows-fr ensures rows take equal space */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-7xl relative z-10">
                 {projects.map((project, index) => (
-                    <ProjectCard
+                    <motion.div
                         key={index}
-                        title={project.title}
-                        description={project.description}
-                        image={project.image}
-                        tags={project.tags}
-                        liveUrl={project.liveUrl}
-                        repoUrl={project.repoUrl}
-                    />
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                        className="flex h-full" // Constrains the motion wrapper to match the grid cell
+                    >
+                        <ProjectCard
+                            title={project.title}
+                            description={project.description}
+                            image={project.image}
+                            tags={project.tags}
+                            liveUrl={project.liveUrl}
+                            repoUrl={project.repoUrl}
+
+                        />
+                    </motion.div>
                 ))}
             </div>
         </section>
+<Divider/>
+        </>
     );
 }

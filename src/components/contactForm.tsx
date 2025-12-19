@@ -1,130 +1,157 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Loader2, CheckCircle2 } from "lucide-react"; // npm install lucide-react
+import { useState } from "react";
+import { type SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion, AnimatePresence } from "motion/react";
 
-const contactSchema = z.object({
-    name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-    email: z.string().email({ message: "Please enter a valid email address" }),
-    message: z.string().min(10, { message: "Message must be at least 10 characters" }),
+const schema = z.object({
+    firstName: z.string().min(2, "Name required."),
+    lastName: z.string().min(2, "Name required."),
+    email: z.string().email("Invalid email address."),
+    message: z.string().min(10, "Provide more project details."),
 });
 
-type ContactFormData = z.infer<typeof contactSchema>;
+type Inputs = z.infer<typeof schema>;
 
 export function ContactForm() {
     const [isSuccess, setIsSuccess] = useState(false);
 
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors, isSubmitting },
-    } = useForm<ContactFormData>({
-        resolver: zodResolver(contactSchema),
-        defaultValues: { name: "", email: "", message: "" }
+    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<Inputs>({
+        resolver: zodResolver(schema),
     });
 
-    const onSubmit = async (data: ContactFormData) => {
-        setIsSuccess(false);
-        // Simulate API call
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
         await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        console.log("Form Data:", data);
-        reset();
         setIsSuccess(true);
-
-        // Hide success message after 5 seconds
-        setTimeout(() => setIsSuccess(false), 5000);
+        reset();
     };
 
+    const shakeVariants = {
+        error: { x: [0, -4, 4, -4, 4, 0], transition: { duration: 0.4 } }
+    };
+
+    const inputStyles = (fieldName: keyof Inputs) => `
+    w-full bg-white/[0.03] border py-3 px-4 text-base text-white rounded-xl
+    placeholder:text-white/10 focus:outline-none transition-all duration-500
+    backdrop-blur-md
+    ${errors[fieldName] ? "border-red-500/40 bg-red-500/5" : "border-white/5 focus:border-blue-500/50 focus:bg-white/[0.07]"}
+  `;
+
     return (
-        <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-6 w-full max-w-xl mx-auto"
-            noValidate
-        >
-            {/* Name Field */}
-            <div className="flex flex-col gap-2">
-                <label htmlFor="name" className="text-sm font-medium text-gray-400">
-                    Name <span className="text-red-500" aria-hidden="true">*</span>
-                </label>
-                <input
-                    {...register("name")}
-                    id="name"
-                    placeholder="Your Name"
-                    aria-required="true"
-                    aria-invalid={errors.name ? "true" : "false"}
-                    aria-describedby={errors.name ? "name-error" : undefined}
-                    className={`p-4 rounded-lg bg-gray-900 border ${errors.name ? 'border-red-500' : 'border-gray-800'} focus:border-blue-500 outline-none transition-all focus:ring-1 focus:ring-blue-500`}
-                />
-                {errors.name && <p id="name-error" className="text-red-500 text-sm" role="alert">{errors.name.message}</p>}
-            </div>
+        <section id="contact" className="relative min-h-screen w-full flex items-center justify-center px-4 md:px-6 py-20 md:py-32 bg-transparent overflow-hidden font-sans">
 
-            {/* Email Field */}
-            <div className="flex flex-col gap-2">
-                <label htmlFor="email" className="text-sm font-medium text-gray-400">
-                    Email Address <span className="text-red-500" aria-hidden="true">*</span>
-                </label>
-                <input
-                    {...register("email")}
-                    id="email"
-                    type="email"
-                    placeholder="email@example.com"
-                    aria-required="true"
-                    aria-invalid={errors.email ? "true" : "false"}
-                    aria-describedby={errors.email ? "email-error" : undefined}
-                    className={`p-4 rounded-lg bg-gray-900 border ${errors.email ? 'border-red-500' : 'border-gray-800'} focus:border-blue-500 outline-none transition-all focus:ring-1 focus:ring-blue-500`}
-                />
-                {errors.email && <p id="email-error" className="text-red-500 text-sm" role="alert">{errors.email.message}</p>}
-            </div>
+            <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center relative z-10">
 
-            {/* Message Field */}
-            <div className="flex flex-col gap-2">
-                <label htmlFor="message" className="text-sm font-medium text-gray-400">
-                    Message <span className="text-red-500" aria-hidden="true">*</span>
-                </label>
-                <textarea
-                    {...register("message")}
-                    id="message"
-                    rows={5}
-                    placeholder="Tell me about your project..."
-                    aria-required="true"
-                    aria-invalid={errors.message ? "true" : "false"}
-                    aria-describedby={errors.message ? "message-error" : undefined}
-                    className={`p-4 rounded-lg bg-gray-900 border ${errors.message ? 'border-red-500' : 'border-gray-800'} focus:border-blue-500 outline-none transition-all focus:ring-1 focus:ring-blue-500`}
-                />
-                {errors.message && <p id="message-error" className="text-red-500 text-sm" role="alert">{errors.message.message}</p>}
-            </div>
-
-            {/* Submit & Status Area */}
-            <div className="flex flex-col gap-4 mt-2">
-                <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    aria-busy={isSubmitting}
-                    className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 disabled:opacity-70 text-white font-bold py-4 px-8 rounded-lg transition-all active:scale-[0.98] flex justify-center items-center gap-2"
+                {/* Narrative: Switched to order-1 for mobile flow */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true }}
+                    className="space-y-8 md:space-y-10 order-1"
                 >
-                    {isSubmitting ? (
-                        <>
-                            <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
-                            <span>Sending...</span>
-                        </>
-                    ) : (
-                        "Send Message"
-                    )}
-                </button>
-
-                {/* Success Feedback Animation */}
-                {isSuccess && (
-                    <div className="flex items-center justify-center gap-2 text-green-400 bg-green-400/10 border border-green-400/20 py-3 rounded-lg transition-opacity" role="status">
-                        <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
-                        <span>Message sent successfully!</span>
+                    <div className="space-y-4">
+                        {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
+                        <p className="text-blue-500 font-mono text-[10px] tracking-[0.4em] uppercase italic opacity-80">
+                            // Available for New Projects
+                        </p>
+                        {/* Fluid Typography: md:text-8xl to text-5xl */}
+                        <h2 className="text-5xl md:text-8xl font-bold tracking-tighter text-white uppercase italic leading-[0.9] md:leading-[0.85]">
+                            Let’s build <br />
+                            <span className="text-blue-500 not-italic">together.</span>
+                        </h2>
                     </div>
-                )}
+
+                    <div className="space-y-6 max-w-md">
+                        <p className="text-white/40 text-base md:text-lg leading-relaxed font-light">
+                            If you have a project in mind or want to discuss technical strategy, reach out.
+                        </p>
+
+                        <div className="pt-8 border-t border-white/5 space-y-4">
+                            <div className="flex justify-between items-center group">
+                                <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">Email</span>
+                                <span className="text-xs md:text-sm text-white/70 group-hover:text-blue-500 transition-colors truncate ml-4">
+                                    hello@brianwoodson.com
+                                </span>
+                            </div>
+                            <div className="flex justify-between items-center group">
+                                <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">Connect</span>
+                                <div className="flex gap-4">
+                                    <a href="#" className="text-xs md:text-sm text-white/70 hover:text-blue-500 transition-colors">GH</a>
+                                    <a href="#" className="text-xs md:text-sm text-white/70 hover:text-blue-500 transition-colors">LI</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* Form Column: order-2 */}
+                <div className="relative order-2 w-full">
+                    <AnimatePresence mode="wait">
+                        {!isSuccess ? (
+                            <motion.div
+                                key="prod-form"
+                                initial={{ opacity: 0, scale: 0.98 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.98 }}
+                                transition={{ duration: 0.4 }}
+                            >
+                                <form
+                                    onSubmit={handleSubmit(onSubmit)}
+                                    /* Responsive Padding: p-6 on mobile, p-12 on desktop */
+                                    className="relative group bg-white/[0.02] border border-white/[0.05] backdrop-blur-xl p-6 md:p-12 rounded-[1.5rem] md:rounded-[2.5rem] shadow-2xl transition-all duration-700"
+                                    noValidate
+                                >
+                                    <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-50" />
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 relative z-10">
+                                        <motion.div animate={errors.firstName ? "error" : ""} variants={shakeVariants} className="space-y-2">
+                                            <label className="text-[10px] uppercase tracking-widest text-blue-500/80 font-bold ml-1">First Name</label>
+                                            <input {...register("firstName")} className={inputStyles("firstName")} placeholder="Brian" />
+                                        </motion.div>
+
+                                        <motion.div animate={errors.lastName ? "error" : ""} variants={shakeVariants} className="space-y-2">
+                                            <label className="text-[10px] uppercase tracking-widest text-blue-500/80 font-bold ml-1">Last Name</label>
+                                            <input {...register("lastName")} className={inputStyles("lastName")} placeholder="Woodson" />
+                                        </motion.div>
+
+                                        <motion.div animate={errors.email ? "error" : ""} variants={shakeVariants} className="md:col-span-2 space-y-2">
+                                            <label className="text-[10px] uppercase tracking-widest text-blue-500/80 font-bold ml-1">Email Address</label>
+                                            <input {...register("email")} className={inputStyles("email")} placeholder="hello@brianwoodson.io" />
+                                        </motion.div>
+
+                                        <motion.div animate={errors.message ? "error" : ""} variants={shakeVariants} className="md:col-span-2 space-y-2">
+                                            <label className="text-[10px] uppercase tracking-widest text-blue-500/80 font-bold ml-1">Message</label>
+                                            <textarea {...register("message")} rows={4} className={`${inputStyles("message")} resize-none`} placeholder="Describe your project..." />
+                                        </motion.div>
+                                    </div>
+
+                                    <button
+                                        disabled={isSubmitting}
+                                        className="mt-8 md:mt-10 w-full py-4 md:py-5 bg-blue-600 text-white font-bold uppercase tracking-[0.3em] text-[10px] rounded-xl hover:bg-blue-500 transition-all duration-500 disabled:opacity-50"
+                                    >
+                                        {isSubmitting ? "Transmitting..." : "Send Transmission"}
+                                    </button>
+                                </form>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="prod-success"
+                                className="bg-white/[0.02] border border-white/5 backdrop-blur-xl p-8 md:p-16 rounded-[1.5rem] md:rounded-[2.5rem] text-center space-y-6 min-h-[400px] md:min-h-[500px] flex flex-col justify-center items-center"
+                            >
+                                <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-500/10 rounded-full flex items-center justify-center border border-blue-500/20 mb-4">
+                                    <span className="text-blue-500 text-xl md:text-2xl">✓</span>
+                                </div>
+                                <h2 className="text-2xl md:text-3xl font-bold text-white uppercase italic tracking-tight">Transmission <span className="text-blue-500 not-italic">Complete.</span></h2>
+                                <p className="text-white/40 text-[10px] md:text-xs font-mono tracking-widest uppercase">Response within 24 hours.</p>
+                                <button onClick={() => setIsSuccess(false)} className="text-blue-500 underline uppercase tracking-widest text-[10px] pt-6 hover:text-white transition-colors">Reset Terminal</button>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
             </div>
-        </form>
+        </section>
     );
 }

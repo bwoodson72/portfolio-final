@@ -4,3 +4,24 @@ html {
   /* Prevents browser native smooth scroll from fighting with Lenis */
   scroll-behavior: auto !important;
 }
+@layer base {
+  :root {
+    --background: 0 0% 2%; /* Matches #050505 for a deep black */
+    --foreground: 210 40% 98%;
+    --brand-blue: 217 91% 60%; /* #3b82f6 */
+  }
+
+  body {
+    background-color: #050505; /* Deep brand black */
+    color: #ffffff;
+    font-family: 'Inter', sans-serif; /* Or your preferred sans font */
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Stabilize selection color to your brand blue */
+  ::selection {
+    background-color: rgba(59, 130, 246, 0.3);
+    color: #ffffff;
+  }
+}
