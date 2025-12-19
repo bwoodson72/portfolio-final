@@ -7,11 +7,39 @@ import {Footer} from "@/components/footer";
 import LoadingScreen from "@/components/loadingScreen";
 import CustomCursor from "@/components/customCursor";
 
-export const metadata: Metadata = {
-    title: "Brian Woodson - Full Stack Web Developer",
-    description: "High-performance, interactive digital experiences crafted with React and Next.js.",
-};
 
+
+export const metadata: Metadata = {
+    title: "Brian Woodson // Frontend Engineer",
+    description: "Specializing in high-performance, immersive digital experiences with React and Next.js.",
+    keywords: ["Frontend Engineer", "React Developer", "Next.js", "Web Performance"],
+    authors: [{ name: "Brian Woodson" }],
+    openGraph: {
+        title: "Brian Woodson // Frontend Engineer",
+        description: "Building high-performance, immersive digital experiences.",
+        url: "https://brianwoodson.dev/",
+        siteName: "Brian Woodson Portfolio",
+        images: [
+            {
+                url: "/og-image.png", // Create a 1200x630 image and place in /public
+                width: 1200,
+                height: 630,
+                alt: "Brian Woodson Portfolio Preview",
+            },
+        ],
+        locale: "en_US",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Brian Woodson // Frontend Engineer",
+        description: "Building high-performance, immersive digital experiences.",
+        images: ["/og-image.png"],
+    },
+    icons: {
+        icon: "/favicon.ico",
+    },
+};
 export default function RootLayout({
                                        children,
                                    }: Readonly<{
