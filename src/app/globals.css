@@ -1,25 +1,32 @@
 @import "tailwindcss";
 
-html {
-  /* Prevents browser native smooth scroll from fighting with Lenis */
-  scroll-behavior: auto !important;
+@theme {
+  /* Define custom variables in the @theme block for Tailwind 4 */
+  --color-brand-blue: #3b82f6;
+  --text-glow-blue: 0 0 25px rgba(59, 130, 246, 0.45);
+
+  /* Next.js font variables fallback resolution */
+  --font-geist-sans: initial;
+  --font-geist-mono: initial;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 }
+
 @layer base {
-  :root {
-    --background: 0 0% 2%; /* Matches #050505 for a deep black */
-    --foreground: 210 40% 98%;
-    --brand-blue: 217 91% 60%; /* #3b82f6 */
+  html {
+    /* Prevents browser native smooth scroll from fighting with Lenis */
+    scroll-behavior: auto !important;
   }
 
   body {
-    background-color: #050505; /* Deep brand black */
+    background-color: #050505;
     color: #ffffff;
-    font-family: 'Inter', sans-serif; /* Or your preferred sans font */
+    /* Use the font variable we mapped in @theme */
+    font-family: var(--font-sans), sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
-  /* Stabilize selection color to your brand blue */
   ::selection {
     background-color: rgba(59, 130, 246, 0.3);
     color: #ffffff;

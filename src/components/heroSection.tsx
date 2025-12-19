@@ -69,7 +69,8 @@ export function HeroSection() {
                         variants={itemVariants}
                         className="text-5xl md:text-8xl font-bold text-white tracking-tighter uppercase italic leading-[0.85]"
                     >
-                        Building <span className="text-blue-500 not-italic drop-shadow-[0_0_25px_rgba(59,130,246,0.4)]">Immersive</span> <br />
+                        Building <span  className="text-blue-500 not-italic "
+                                        style={{ textShadow: '0 0 25px rgba(59, 130, 246, 0.4)'}}>Immersive</span> <br />
                         Digital Experiences.
                     </motion.h1>
 
