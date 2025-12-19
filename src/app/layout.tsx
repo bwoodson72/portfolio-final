@@ -24,8 +24,8 @@ export default function RootLayout({
         >
         {/* Global Brand Atmosphere - Lowered opacity to keep the black deep */}
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-            <div className="absolute -top-[10%] -left-[10%] w-[45%] h-[45%] bg-blue-600/[0.03] blur-[150px] rounded-full" />
-            <div className="absolute -bottom-[10%] -right-[10%] w-[45%] h-[45%] bg-blue-600/[0.03] blur-[150px] rounded-full" />
+            <div className="absolute -top-[10%] -left-[10%] w-[45%] h-[45%] bg-blue-600/3 blur-[150px] rounded-full" />
+            <div className="absolute -bottom-[10%] -right-[10%] w-[45%] h-[45%] bg-blue-600/3 blur-[150px] rounded-full" />
         </div>
         <CustomCursor />
         <LoadingScreen />
@@ -33,7 +33,7 @@ export default function RootLayout({
             {/* Ensure the wrapper is transparent so the body color shows through */}
             <div className="relative z-10 flex flex-col min-h-screen bg-transparent">
                 <Nav />
-                <main className="flex-grow">
+                <main className="grow">
                     {children}
                 </main>
                 <Footer />
