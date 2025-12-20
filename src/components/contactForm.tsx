@@ -7,11 +7,22 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "motion/react";
 import { sendEmail } from "@/app/actions/sendEmail";
 
+// FIXED: Replaced deprecated helpers (.min, .email) with .refine()
+// This bypasses the Zod 4 TS6385 error by using the stable primitive API.
 const schema = z.object({
-    firstName: z.string().min(2, "Name required."),
-    lastName: z.string().min(2, "Name required."),
-    email: z.string().email("Invalid email address."),
-    message: z.string().min(10, "Provide more project details."),
+    firstName: z.string().refine((s) => s.length >= 2, {
+        message: "Name required"
+    }),
+    lastName: z.string().refine((s) => s.length >= 2, {
+        message: "Last name required"
+    }),
+    // Simple, robust email regex to replace .email()
+    email: z.string().refine((s) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s), {
+        message: "Invalid email address"
+    }),
+    message: z.string().refine((s) => s.length >= 10, {
+        message: "Please provide more details (10+ chars)"
+    }),
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -32,7 +43,6 @@ export function ContactForm() {
             setIsSuccess(true);
             reset();
         } else {
-            // Ensure result.error is treated as a string to satisfy TS2345
             setServerError(String(result.error || "Unknown transmission error."));
         }
     };
@@ -41,11 +51,14 @@ export function ContactForm() {
         error: { x: [0, -4, 4, -4, 4, 0], transition: { duration: 0.4 } }
     };
 
+    // Tailwind v4: Supports direct opacity modifiers (/0.03) without needing legacy utilities
     const inputStyles = (fieldName: keyof Inputs) => `
         w-full bg-white/[0.03] border py-3 px-4 text-base text-white rounded-xl
         placeholder:text-white/10 focus:outline-none transition-all duration-500
         backdrop-blur-md
-        ${errors[fieldName] ? "border-red-500/40 bg-red-500/5" : "border-white/5 focus:border-blue-500/50 focus:bg-white/[0.07]"}
+        ${errors[fieldName]
+        ? "border-red-500/40 bg-red-500/5 focus:border-red-500/60"
+        : "border-white/5 focus:border-blue-500/50 focus:bg-white/[0.07]"}
     `;
 
     return (
@@ -61,9 +74,9 @@ export function ContactForm() {
                     className="space-y-8 md:space-y-10 order-1"
                 >
                     <div className="space-y-4">
-                        {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
                         <p className="text-blue-500 font-mono text-[10px] tracking-[0.4em] uppercase italic opacity-80">
-                            // Available for New Projects
+
+                            {'// Available for New Projects'}
                         </p>
                         <h2 className="text-5xl md:text-8xl font-bold tracking-tighter text-white uppercase italic leading-[0.9] md:leading-[0.85]">
                             Let’s build <br />
@@ -103,43 +116,91 @@ export function ContactForm() {
                                     className="relative group bg-white/2 border border-white/5 backdrop-blur-xl p-6 md:p-12 rounded-3xl md:rounded-[2.5rem] shadow-2xl transition-all duration-700"
                                     noValidate
                                 >
+                                    {/* Tailwind v4 Syntax: bg-linear-to-r */}
                                     <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-white/10 to-transparent opacity-50" />
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 relative z-10">
+
+                                        {/* First Name */}
                                         <motion.div animate={errors.firstName ? "error" : ""} variants={shakeVariants} className="space-y-2">
-                                            <label className="text-[10px] uppercase tracking-widest text-blue-400 font-bold ml-1">First Name</label>
-                                            <input {...register("firstName")} className={inputStyles("firstName")} placeholder="Brian" />
+                                            <div className="flex justify-between items-baseline">
+                                                <label htmlFor="firstName" className="text-[10px] uppercase tracking-widest text-blue-400 font-bold ml-1">First Name</label>
+                                                {/* Error Message */}
+                                                {errors.firstName && <span role="alert" className="text-[10px] text-red-400 font-mono">{errors.firstName.message}</span>}
+                                            </div>
+                                            <input
+                                                id="firstName"
+                                                {...register("firstName")}
+                                                className={inputStyles("firstName")}
+                                                placeholder="Brian"
+                                                aria-invalid={!!errors.firstName}
+                                            />
                                         </motion.div>
 
+                                        {/* Last Name */}
                                         <motion.div animate={errors.lastName ? "error" : ""} variants={shakeVariants} className="space-y-2">
-                                            <label className="text-[10px] uppercase tracking-widest text-blue-400 font-bold ml-1">Last Name</label>
-                                            <input {...register("lastName")} className={inputStyles("lastName")} placeholder="Woodson" />
+                                            <div className="flex justify-between items-baseline">
+                                                <label htmlFor="lastName" className="text-[10px] uppercase tracking-widest text-blue-400 font-bold ml-1">Last Name</label>
+                                                {errors.lastName && <span role="alert" className="text-[10px] text-red-400 font-mono">{errors.lastName.message}</span>}
+                                            </div>
+                                            <input
+                                                id="lastName"
+                                                {...register("lastName")}
+                                                className={inputStyles("lastName")}
+                                                placeholder="Woodson"
+                                                aria-invalid={!!errors.lastName}
+                                            />
                                         </motion.div>
 
+                                        {/* Email */}
                                         <motion.div animate={errors.email ? "error" : ""} variants={shakeVariants} className="md:col-span-2 space-y-2">
-                                            <label className="text-[10px] uppercase tracking-widest text-blue-400 font-bold ml-1">Email Address</label>
-                                            <input {...register("email")} className={inputStyles("email")} placeholder="hello@brianwoodson.io" />
+                                            <div className="flex justify-between items-baseline">
+                                                <label htmlFor="email" className="text-[10px] uppercase tracking-widest text-blue-400 font-bold ml-1">Email Address</label>
+                                                {errors.email && <span role="alert" className="text-[10px] text-red-400 font-mono">{errors.email.message}</span>}
+                                            </div>
+                                            <input
+                                                id="email"
+                                                {...register("email")}
+                                                className={inputStyles("email")}
+                                                placeholder="hello@brianwoodson.io"
+                                                aria-invalid={!!errors.email}
+                                            />
                                         </motion.div>
 
+                                        {/* Message */}
                                         <motion.div animate={errors.message ? "error" : ""} variants={shakeVariants} className="md:col-span-2 space-y-2">
-                                            <label className="text-[10px] uppercase tracking-widest text-blue-400 font-bold ml-1">Message</label>
-                                            <textarea {...register("message")} rows={4} className={`${inputStyles("message")} resize-none`} placeholder="Describe your vision..." />
+                                            <div className="flex justify-between items-baseline">
+                                                <label htmlFor="message" className="text-[10px] uppercase tracking-widest text-blue-400 font-bold ml-1">Message</label>
+                                                {errors.message && <span role="alert" className="text-[10px] text-red-400 font-mono">{errors.message.message}</span>}
+                                            </div>
+                                            <textarea
+                                                id="message"
+                                                {...register("message")}
+                                                rows={4}
+                                                className={`${inputStyles("message")} resize-none`}
+                                                placeholder="Describe your vision..."
+                                                aria-invalid={!!errors.message}
+                                            />
                                         </motion.div>
                                     </div>
 
+                                    {/* Global Server Error */}
                                     {serverError && (
-                                        <p className="mt-4 text-[10px] text-red-500 font-mono text-center uppercase tracking-widest animate-pulse">
-                                            {serverError}
-                                        </p>
+                                        <div role="alert" className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
+                                            <p className="text-[10px] text-red-400 font-mono text-center uppercase tracking-widest">
+                                                {serverError}
+                                            </p>
+                                        </div>
                                     )}
 
                                     <button
                                         disabled={isSubmitting}
-                                        className="mt-8 md:mt-10 w-full py-4 md:py-5 bg-blue-600 text-white font-bold uppercase tracking-[0.3em] text-[10px] rounded-xl hover:bg-blue-500 transition-all duration-500 disabled:opacity-50 flex items-center justify-center gap-3 shadow-lg shadow-blue-600/20"
+                                        className="mt-8 md:mt-10 w-full py-4 md:py-5 bg-blue-600 text-white font-bold uppercase tracking-[0.3em] text-[10px] rounded-xl hover:bg-blue-500 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg shadow-blue-600/20"
                                     >
                                         {isSubmitting ? (
                                             <>
-                                                <div className="w-1.5 h-1.5 bg-white rounded-full animate-ping" />
+                                                {/* Tailwind v4 Syntax: size-1.5 */}
+                                                <div className="size-1.5 bg-white rounded-full animate-ping" />
                                                 Transmitting...
                                             </>
                                         ) : "Send Transmission"}
@@ -153,7 +214,8 @@ export function ContactForm() {
                                 animate={{ opacity: 1, y: 0 }}
                                 className="bg-white/2 border border-white/5 backdrop-blur-xl p-8 md:p-16 rounded-3xl md:rounded-[2.5rem] text-center space-y-6 min-h-100 flex flex-col justify-center items-center"
                             >
-                                <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-500/10 rounded-full flex items-center justify-center border border-blue-500/20 mb-4 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                                {/* Tailwind v4 Syntax: size-12 / size-16 */}
+                                <div className="size-12 md:size-16 bg-blue-500/10 rounded-full flex items-center justify-center border border-blue-500/20 mb-4 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                                     <span className="text-blue-500 text-xl md:text-2xl">✓</span>
                                 </div>
                                 <h2 className="text-2xl md:text-3xl font-bold text-white uppercase italic tracking-tight">Transmission <span className="text-blue-500 not-italic">Complete.</span></h2>
