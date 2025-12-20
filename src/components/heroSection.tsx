@@ -62,7 +62,7 @@ export function HeroSection() {
 
 
                     >
-                        // Available for New Projects
+                        {' // Available for New Projects'}
                     </motion.p>
 
                     <motion.h1
@@ -76,7 +76,7 @@ export function HeroSection() {
 
                     <motion.div variants={itemVariants} className="mt-8 space-y-2">
                         <p className="text-lg md:text-xl text-white/70 max-w-2xl leading-relaxed font-medium">
-                            I’m Brian Woodson // Frontend-focused Engineer
+                           Brian Woodson // Frontend-focused Engineer
                         </p>
                         <p className="text-sm md:text-base text-white/30 italic font-mono uppercase tracking-widest">
                             Specializing in high-performance React systems
