@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Brian Woodson - Engineering Portfolio
 
-## Getting Started
+A high-performance personal portfolio engineered with the bleeding-edge React ecosystem. This project serves as a demonstration of modern frontend architecture, accessibility compliance (WCAG AA), and Core Web Vitals optimization.
 
-First, run the development server:
+## ⚡️ Core Tech Stack
+
+* **Framework:** [Next.js 16](https://nextjs.org/) (React 19 RC)
+* **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) (Oxide engine)
+* **Animation:** [Motion](https://motion.dev/) (formerly Framer Motion)
+* **Validation:** [Zod 4](https://zod.dev/) & React Hook Form
+* **Type Safety:** TypeScript 5
+
+## 🛠️ Engineering Highlights
+
+### 1. Performance Optimization (Lighthouse 100/100)
+Achieving a perfect Lighthouse score required granular optimization of the rendering pipeline:
+* **LCP Optimization:** Refactored entrance animations to use native `text-shadow` instead of expensive `drop-shadow` filters, eliminating main-thread blocking time during hydration.
+* **Image Strategy:** Implemented responsive `sizes` prop logic on all `next/image` components to prevent layout shifts (CLS) and minimize payload size on mobile devices.
+* **Tree Shaking:** Replaced heavy icon libraries with inline SVGs to eliminate unused bundle weight.
+
+### 2. Next-Gen Form Architecture
+The contact form demonstrates a robust, type-safe approach to user input:
+* **Validation:** Implemented **Zod 4** schemas with strict refinement logic to handle deprecations in the latest beta API.
+* **Accessibility:** Fully accessible error handling using `role="alert"` and `aria-invalid` states to ensure screen reader compatibility.
+* **UX:** Optimistic UI states for submission loading and success feedback.
+
+### 3. Tailwind v4 Integration
+Leverages the new CSS-first configuration engine:
+* Usage of native CSS variables for theme values.
+* Implementation of new utility shorthands like `size-*` and `bg-linear-*`.
+* Zero runtime overhead for styles.
+
+## 🚀 Running Locally
+
+This project requires **Node.js 18+** due to Next.js 16 dependencies.
 
 ```bash
+# 1. Clone the repository
+git clone [https://github.com/bwoodson72/portfolio-final.git](https://github.com/bwoodson72/portfolio-final.git)
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
