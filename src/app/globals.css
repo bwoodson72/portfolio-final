@@ -10,6 +10,22 @@
   --font-geist-mono: initial;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* --- NEW: Hero Section Animations (LCP Optimization) --- */
+  --animate-reveal: reveal 0.8s cubic-bezier(0.5, 0, 0, 1) forwards;
+
+  @keyframes reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
 }
 
 @layer base {
