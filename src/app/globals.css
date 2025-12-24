@@ -11,8 +11,13 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 
-  /* --- NEW: Hero Section Animations (LCP Optimization) --- */
+  /* --- NEW: Animations (LCP & Visuals) --- */
+
+  /* 1. The Fade Up Reveal (Used for Text/Cards) */
   --animate-reveal: reveal 0.8s cubic-bezier(0.5, 0, 0, 1) forwards;
+
+  /* 2. The SVG Line Drawing (Used for Graphs/Gauges) */
+  --animate-draw: draw 1.5s ease-out forwards;
 
   @keyframes reveal {
     0% {
@@ -24,6 +29,12 @@
       opacity: 1;
       transform: translateY(0);
       filter: blur(0);
+    }
+  }
+
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
     }
   }
 }
