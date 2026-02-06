@@ -20,6 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://brianwoodson.dev/"),
     title: "Brian Woodson // Frontend Engineer",
     description: "Specializing in high-performance, immersive digital experiences with React and Next.js.",
     keywords: ["Frontend Engineer", "React Developer", "Next.js", "Web Performance"],
