@@ -16,10 +16,8 @@ const schema = z.object({
     lastName: z.string().refine((s) => s.length >= 2, {
         message: "Last name required"
     }),
-    // Simple, robust email regex to replace .email()
-    email: z.string().refine((s) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s), {
-        message: "Invalid email address"
-    }),
+    // Zod v4 style z.email()
+    email: z.email(),
     message: z.string().refine((s) => s.length >= 10, {
         message: "Please provide more details (10+ chars)"
     }),

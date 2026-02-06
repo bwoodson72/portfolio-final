@@ -3,6 +3,8 @@
 import { useLenis } from 'lenis/react'
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import Link from "next/link";
+import { INTAKE_URL, UPWORK_PROFILE_URL } from "@/content/portfolio";
 
 export function Nav() {
     const lenis = useLenis();
@@ -17,90 +19,109 @@ export function Nav() {
         }
     };
 
-    const navLinks = ['home', 'about', 'projects', 'contact'];
+    const desktopLinks: { label: string; href: string }[] = [
+        { label: "Home", href: "#top" },
+        { label: "Work", href: "#work" },
+        { label: "Packages", href: "#packages" },
+        { label: "Process", href: "#process" },
+        { label: "FAQ", href: "#faq" },
+    ];
 
     return (
-        <header className="flex justify-center w-full fixed top-4 md:top-6 z-50 px-4 pointer-events-none">
-            {/* --- Desktop & Mobile Capsule --- */}
-            <motion.nav
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, ease: "circOut" }}
-                className="pointer-events-auto bg-[#0c0c0c]/80 backdrop-blur-xl py-2 md:py-3 px-5 md:px-8 rounded-full shadow-[0_0_40px_rgba(0,0,0,0.7)] border border-white/10 flex items-center justify-between transition-all duration-500"
-            >
-                {/* Desktop Menu */}
-                <ul className="hidden md:flex items-center gap-10 text-[13px] font-mono font-bold uppercase tracking-[0.2em]">
-                    {navLinks.map((item) => (
-                        <li key={item} className="relative group">
-                            <a
-                                href={item === 'home' ? '#' : `#${item}`}
-                                onClick={(e) => handleScroll(e, item === 'home' ? '#' : `#${item}`)}
-                                className="text-white/60 hover:text-white transition-colors duration-300 block py-1"
-                            >
-                                {item}
-                                <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-blue-500 transition-all duration-300 group-hover:w-full" />
-                            </a>
-                        </li>
-                    ))}
-                    <li className="flex items-center pl-4 border-l border-white/10">
-                        {/* v4 Syntax: size-2 */}
-                        <div className="size-2 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(37,99,235,1)] animate-pulse" />
-                    </li>
-                </ul>
+        <header className="sticky top-0 z-50 w-full border-b border-[color:var(--color-border)]/80 bg-[color:var(--color-bg)]/70 backdrop-blur-xl">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6">
+                <motion.nav
+                    initial={{ y: -12, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="flex h-16 items-center justify-between"
+                >
+                    {/* Left: Brand */}
+                    <div className="flex items-center gap-3">
+                        <Link href="#top" onClick={(e) => handleScroll(e as unknown as React.MouseEvent<HTMLAnchorElement>, '#top')} className="text-sm font-bold tracking-tight text-[color:var(--color-text)]">
+                            Brian Woodson
+                        </Link>
+                        <span className="hidden md:inline-flex h-2 w-2 rounded-full bg-[color:var(--color-accent)] shadow-[var(--text-glow-blue)] animate-pulse" />
+                    </div>
 
-                {/* Mobile Trigger & Branding */}
-                <div className="flex md:hidden items-center gap-4">
-                    <div className="size-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(37,99,235,1)] animate-pulse" />
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="text-white/70 hover:text-white active:text-blue-500 transition-colors p-1"
-                        aria-label="Toggle Menu"
-                    >
-                        {isOpen ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 18 18"/></svg>
-                        ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-                        )}
-                    </button>
-                </div>
-            </motion.nav>
+                    {/* Center/Right: Links */}
+                    <ul className="hidden md:flex items-center gap-6 text-sm font-semibold text-[color:var(--color-text-muted-2)]">
+                        {desktopLinks.map((l) => (
+                            <li key={l.href}>
+                                <a
+                                    href={l.href}
+                                    onClick={(e) => handleScroll(e, l.href)}
+                                    className="px-2 py-1 rounded-md hover:text-[color:var(--color-text)] hover:bg-[color:var(--color-surface-hover)]/40 transition"
+                                >
+                                    {l.label}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
 
-            {/* --- Mobile Full-Screen Overlay --- */}
+                    {/* Right: CTAs + Mobile Menu */}
+                    <div className="flex items-center gap-3">
+                        <Link
+                            href={UPWORK_PROFILE_URL}
+                            className="hidden md:inline-flex rounded-full bg-[color:var(--color-accent)] px-4 py-2 text-xs font-bold text-slate-950 hover:bg-[color:var(--color-accent-weak)] transition"
+                        >
+                            Hire me on Upwork
+                        </Link>
+                        <Link
+                            href={INTAKE_URL}
+                            className="hidden md:inline-flex rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-xs font-bold text-[color:var(--color-text)] hover:bg-[color:var(--color-surface-hover)] transition"
+                        >
+                            Submit intake
+                        </Link>
+
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-[color:var(--color-text-muted-2)] hover:text-[color:var(--color-text)] hover:bg-[color:var(--color-surface-hover)]/40 focus:outline-none"
+                            aria-label="Toggle Menu"
+                        >
+                            {isOpen ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                            ) : (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                            )}
+                        </button>
+                    </div>
+                </motion.nav>
+            </div>
+
+            {/* Mobile Dropdown Panel */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                        animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
-                        exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                        className="fixed inset-0 bg-black/90 z-[-1] flex flex-col items-center justify-center md:hidden pointer-events-auto"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="md:hidden border-t border-[color:var(--color-border)] bg-[color:var(--color-surface)]/90 backdrop-blur-xl"
                     >
-                        <ul className="flex flex-col items-center gap-10 text-2xl font-mono font-bold uppercase tracking-[0.3em]">
-                            {navLinks.map((item, idx) => (
-                                <motion.li
-                                    key={item}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: idx * 0.1 }}
+                        <div className="px-4 py-4 space-y-2">
+                            {desktopLinks.map((l) => (
+                                <a
+                                    key={l.href}
+                                    href={l.href}
+                                    onClick={(e) => handleScroll(e, l.href)}
+                                    className="block rounded-lg px-3 py-3 text-sm font-semibold text-[color:var(--color-text)] hover:bg-[color:var(--color-surface-hover)]"
                                 >
-                                    <motion.a
-                                        href={item === 'home' ? '#' : `#${item}`}
-                                        onClick={(e) => handleScroll(e, item === 'home' ? '#' : `#${item}`)}
-                                        className="text-white/40 block py-2 transition-colors duration-200"
-                                        // The Neon Flash Interaction
-                                        whileTap={{
-                                            color: "#ffffff",
-                                            textShadow: "0px 0px 8px rgb(59, 130, 246)",
-                                            scale: 1.05 // Subtle pop to emphasize the light
-                                        }}
-                                    >
-                                        {item}
-                                    </motion.a>
-                                </motion.li>
+                                    {l.label}
+                                </a>
                             ))}
-                        </ul>
-
-                        <div className="absolute bottom-12 text-[10px] font-mono text-white/20 uppercase tracking-[0.4em]">
-                            {' // Systems Ready'}
+                            <div className="h-px bg-[color:var(--color-border)] my-2" />
+                            <a
+                                href={UPWORK_PROFILE_URL}
+                                className="block text-center rounded-full bg-[color:var(--color-accent)] px-4 py-3 text-sm font-bold text-slate-950 hover:bg-[color:var(--color-accent-weak)]"
+                            >
+                                Hire me on Upwork
+                            </a>
+                            <a
+                                href={INTAKE_URL}
+                                className="block text-center rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-sm font-bold text-[color:var(--color-text)] hover:bg-[color:var(--color-surface-hover)]"
+                            >
+                                Submit intake
+                            </a>
                         </div>
                     </motion.div>
                 )}

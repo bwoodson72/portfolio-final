@@ -1,9 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  /* Define custom variables in the @theme block for Tailwind 4 */
-  --color-brand-blue: #3b82f6;
-  --text-glow-blue: 0 0 25px rgba(59, 130, 246, 0.45);
+  /* --- Dark Slate Design Tokens --- */
+  --color-bg: #020617;              /* slate-950 */
+  --color-surface: #0f172a;         /* slate-900 */
+  --color-surface-hover: #1e293b;   /* slate-800 */
+  --color-border: #1f2937;          /* slate-800-ish */
+  --color-border-strong: #334155;   /* slate-700 */
+  --color-text: #f1f5f9;            /* slate-100 */
+  --color-text-muted: #cbd5e1;      /* slate-300 */
+  --color-text-muted-2: #94a3b8;    /* slate-400 */
+  --color-accent: #06b6d4;          /* cyan-500 */
+  --color-accent-weak: #22d3ee;     /* cyan-400 */
+  --ring-accent: 0 0 0 3px rgba(6, 182, 212, 0.35);
+
+  /* Legacy blue references (kept for components that use glow) */
+  --color-brand-blue: #06b6d4; /* mapped to cyan to keep consistent */
+  --text-glow-blue: 0 0 25px rgba(6, 182, 212, 0.45);
 
   /* Next.js font variables fallback resolution */
   --font-geist-sans: initial;
@@ -11,51 +24,31 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 
-  /* --- NEW: Animations (LCP & Visuals) --- */
-
-  /* 1. The Fade Up Reveal (Used for Text/Cards) */
+  /* --- Animations --- */
   --animate-reveal: reveal 0.8s cubic-bezier(0.5, 0, 0, 1) forwards;
-
-  /* 2. The SVG Line Drawing (Used for Graphs/Gauges) */
   --animate-draw: draw 1.5s ease-out forwards;
 
   @keyframes reveal {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-      filter: blur(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
+    0% { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
   }
 
-  @keyframes draw {
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
 }
 
 @layer base {
-  html {
-    /* Prevents browser native smooth scroll from fighting with Lenis */
-    scroll-behavior: auto !important;
-  }
+  html { scroll-behavior: auto !important; }
 
   body {
-    background-color: #050505;
-    color: #ffffff;
-    /* Use the font variable we mapped in @theme */
+    background-color: var(--color-bg);
+    color: var(--color-text);
     font-family: var(--font-sans), sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
   ::selection {
-    background-color: rgba(59, 130, 246, 0.3);
+    background-color: rgba(6, 182, 212, 0.25); /* cyan */
     color: #ffffff;
   }
 }
