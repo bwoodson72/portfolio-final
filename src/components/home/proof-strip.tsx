@@ -1,16 +1,24 @@
-import { proofChips } from "@/content/portfolio";
+import { siteContent } from "@/content/portfolio";
 
 export const ProofStrip = () => {
+  const { stats } = siteContent;
+  if (!stats) return null;
+
   return (
-    <section id="proof" className="w-full py-8">
+    <section id="proof" className="w-full py-12 border-y border-[color:var(--color-border)] bg-[color:var(--color-surface)]/30">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
-          {proofChips.map((chip) => (
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          {stats.map((stat) => (
             <div
-              key={chip}
-              className="text-[11px] md:text-xs font-bold uppercase tracking-wide rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-1.5 text-[color:var(--color-text-muted-2)] hover:bg-[color:var(--color-surface-hover)] transition"
+              key={stat.label}
+              className="flex flex-col items-center justify-center text-center space-y-1"
             >
-              {chip}
+              <div className="text-2xl font-bold text-[color:var(--color-text)] md:text-3xl">
+                {stat.value}
+              </div>
+              <div className="text-xs font-bold uppercase tracking-widest text-[color:var(--color-text-muted)]">
+                {stat.label}
+              </div>
             </div>
           ))}
         </div>

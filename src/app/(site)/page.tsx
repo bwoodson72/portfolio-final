@@ -3,10 +3,7 @@ import { ProofStrip } from "@/components/home/proof-strip";
 import { FeaturedOutcomes } from "@/components/home/featured-outcomes";
 import { PortfolioSection } from "@/components/home/portfolio-section";
 import { HowIWork } from "@/components/home/how-i-work";
-import { PackageMatcher } from "@/components/home/package-matcher";
-import { FAQ } from "@/components/home/faq";
 import { FinalCTA } from "@/components/home/final-cta";
-import { portfolioItems } from "@/content/portfolio";
 
 export default function Home() {
   return (
@@ -14,10 +11,8 @@ export default function Home() {
       <Hero />
       <ProofStrip />
       <FeaturedOutcomes />
-      <PortfolioSection items={portfolioItems} />
+      <PortfolioSection />
       <HowIWork />
-      <PackageMatcher />
-      <FAQ />
       <FinalCTA />
     </main>
   );

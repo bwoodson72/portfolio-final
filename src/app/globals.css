@@ -5,18 +5,15 @@
   --color-bg: #020617;              /* slate-950 */
   --color-surface: #0f172a;         /* slate-900 */
   --color-surface-hover: #1e293b;   /* slate-800 */
-  --color-border: #1f2937;          /* slate-800-ish */
+  --color-border: #1f2937;          /* slate-800 */
   --color-border-strong: #334155;   /* slate-700 */
   --color-text: #f1f5f9;            /* slate-100 */
-  --color-text-muted: #cbd5e1;      /* slate-300 */
-  --color-text-muted-2: #94a3b8;    /* slate-400 */
-  --color-accent: #06b6d4;          /* cyan-500 */
-  --color-accent-weak: #22d3ee;     /* cyan-400 */
-  --ring-accent: 0 0 0 3px rgba(6, 182, 212, 0.35);
-
-  /* Legacy blue references (kept for components that use glow) */
-  --color-brand-blue: #06b6d4; /* mapped to cyan to keep consistent */
-  --text-glow-blue: 0 0 25px rgba(6, 182, 212, 0.45);
+  --color-text-muted: #94a3b8;      /* slate-400 */
+  --color-text-muted-2: #64748b;    /* slate-500 */
+  --color-accent: #334155;          /* slate-700 subtle accent */
+  --color-accent-hover: #475569;    /* slate-600 */
+  
+  --ring-accent: 0 0 0 2px rgba(148, 163, 184, 0.2);
 
   /* Next.js font variables fallback resolution */
   --font-geist-sans: initial;
@@ -26,18 +23,15 @@
 
   /* --- Animations --- */
   --animate-reveal: reveal 0.8s cubic-bezier(0.5, 0, 0, 1) forwards;
-  --animate-draw: draw 1.5s ease-out forwards;
 
   @keyframes reveal {
-    0% { opacity: 0; transform: translateY(20px); filter: blur(10px); }
-    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
-
-  @keyframes draw { to { stroke-dashoffset: 0; } }
 }
 
 @layer base {
-  html { scroll-behavior: auto !important; }
+  html { scroll-behavior: smooth !important; }
 
   body {
     background-color: var(--color-bg);
@@ -48,7 +42,7 @@
   }
 
   ::selection {
-    background-color: rgba(6, 182, 212, 0.25); /* cyan */
+    background-color: rgba(148, 163, 184, 0.2);
     color: #ffffff;
   }
 }
