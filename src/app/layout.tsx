@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google"; // <--- RESTORED
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import CustomCursor from "@/components/customCursor";
 
 // 1. Configure Fonts with "swap" for performance
 const geistSans = Geist({
@@ -60,10 +59,8 @@ export default function RootLayout({
     return (
         <html lang="en" className="scroll-smooth">
         <body
-            // 2. Inject Font Variables here so Tailwind can see them
             className={`${geistSans.variable} ${geistMono.variable} bg-[#050505] text-white antialiased min-h-screen selection:bg-blue-500/30 selection:text-white font-sans`}
         >
-        <CustomCursor />
         {children}
         </body>
         </html>

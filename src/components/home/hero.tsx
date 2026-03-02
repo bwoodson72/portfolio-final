@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { siteContent } from "@/content/portfolio";
 
 export const Hero = () => {
@@ -7,25 +8,33 @@ export const Hero = () => {
   return (
     <section
       id="top"
-      className="flex flex-col items-center justify-center px-6 py-24 text-center md:py-32"
+      className="relative flex flex-col items-center justify-center px-6 py-24 text-center md:py-32 overflow-hidden"
     >
-      <div className="max-w-[960px] space-y-8">
-        <h1 className="text-4xl font-extrabold tracking-tight text-[color:var(--color-text)] sm:text-6xl md:text-7xl">
+      <Image
+        src="/bg-hero.avif"
+        alt=""
+        fill
+        className="object-cover opacity-20 pointer-events-none select-none"
+        priority
+        aria-hidden
+      />
+      <div className="relative max-w-240 space-y-8">
+        <h1 className="text-4xl font-extrabold tracking-tight text-text sm:text-6xl md:text-7xl">
           {hero.headline}
         </h1>
-        <p className="mx-auto max-w-2xl text-lg leading-relaxed text-[color:var(--color-text-muted)] md:text-xl">
+        <p className="mx-auto max-w-2xl text-lg leading-relaxed text-text-muted md:text-xl">
           {hero.subheadline}
         </p>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
           <Link
             href="#work"
-            className="rounded-full bg-[color:var(--color-accent)] px-8 py-4 text-sm font-bold text-[color:var(--color-text)] transition hover:bg-[color:var(--color-accent-hover)]"
+            className="rounded-full bg-(--color-accent) px-8 py-4 text-sm font-bold text-text transition hover:bg-accent-hover"
           >
             {hero.ctaPrimary}
           </Link>
           <Link
             href="#packages"
-            className="rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-8 py-4 text-sm font-bold text-[color:var(--color-text)] transition hover:bg-[color:var(--color-surface-hover)]"
+            className="rounded-full border border-border bg-(--color-surface) px-8 py-4 text-sm font-bold text-(--color-text) transition hover:bg-(--color-surface-hover)"
           >
             {hero.ctaSecondary}
           </Link>
