@@ -34,27 +34,6 @@ export const faqs: FAQItem[] = [
   },
 ];
 
-export type LinkSet = {
-  repoUrl?: string;
-  liveUrl?: string;
-  loomUrl?: string;
-};
-
-export type Project = {
-  slug: string;
-  title: string;
-  tagline: string;
-  problem: string[];
-  solution: string[];
-  deliverables: string[];
-  stack: string[];
-  timeline?: string;
-  role?: string;
-  links?: LinkSet;
-  screenshots?: { src: string; alt: string }[];
-  featured?: boolean;
-};
-
 export type PackageTier = {
   name: string;
   priceFrom: number;
@@ -67,7 +46,6 @@ export type PackageTier = {
 export type SiteContent = {
   hero: { headline: string; subheadline: string; ctaPrimary: string; ctaSecondary: string };
   stats?: { label: string; value: string }[];
-  projects: Project[];
   packages: PackageTier[];
   about: { headline: string; body: string[]; stack: string[] };
   cta: { headline: string; body: string; email: string };
@@ -89,133 +67,6 @@ export const siteContent: SiteContent = {
     { label: "SEO", value: "100" },
     { label: "Best Practices", value: "100" },
     { label: "Accessibility", value: "96" },
-  ],
-
-  projects: [
-    {
-      slug: "granbury-peak-roofing",
-      title: "Granbury Peak Roofing & Restoration",
-      tagline: "A high-performance business website for a roofing contractor, built for lead generation, visual polish, and Lighthouse score optimization.",
-      role: "Website Developer",
-      featured: true,
-      problem: [
-        "No existing web presence for a local roofing and storm damage company",
-        "Needed to rank on Google for local service searches",
-        "Required a contact flow that converts visitors into leads",
-      ],
-      solution: [
-        "Built a multi-page Next.js site with dynamic service pages and clean routing",
-        "Implemented structured SEO metadata, canonical URLs, and a generated sitemap on every page",
-        "Built a contact form with Zod 4 validation and server-side submission handling",
-      ],
-      deliverables: [
-        "Home, About, Services, FAQ, Testimonials, Contact pages",
-        "Dynamic service detail pages with individual SEO metadata",
-        "Server-side contact form with validation",
-        "Generated sitemap and robots.txt",
-        "Production deployment to Vercel",
-      ],
-      stack: ["Next.js 16", "React 19", "Tailwind CSS 4", "Zod 4", "React Hook Form"],
-      timeline: "2 weeks",
-      links: {
-        liveUrl: "https://granbury-roofing.vercel.app",
-        repoUrl: "https://github.com/bwoodson72/granbury-roofing",
-      },
-      screenshots: [{ src: "/portfolio/granbury-roofing.avif", alt: "Granbury Peak Roofing website preview" }],
-    },
-    {
-      slug: "forge-athletics",
-      title: "FORGE Athletics",
-      tagline: "A modern gym and fitness website with bold visuals and smooth interactions, designed to demonstrate range beyond service-based businesses.",
-      role: "Website Developer",
-      featured: true,
-      problem: [
-        "Needed a compelling demo project outside the contractor/services niche",
-        "Required bold, high-energy design with smooth animations that felt modern and premium",
-        "Had to be performant while supporting rich visual elements and interactivity",
-      ],
-      solution: [
-        "Designed and built a full gym website with a dark, high-contrast aesthetic and bold typography",
-        "Used Lucide React icons and Tailwind CSS 4 for a polished, component-driven UI",
-        "Achieved high Lighthouse scores while maintaining fluid transitions and scroll-based reveals",
-      ],
-      deliverables: [
-        "Home, Classes, Trainers, Pricing, Contact pages",
-        "Animated hero and section reveals",
-        "Contact form with Zod 4 validation",
-        "Mobile responsive layout",
-        "Production deployment to Vercel",
-      ],
-      stack: ["Next.js 16", "React 19", "Tailwind CSS 4", "Zod 4", "React Hook Form", "Lucide React"],
-      timeline: "2 weeks",
-      links: {
-        liveUrl: "https://forge-athletics-ruby.vercel.app",
-        repoUrl: "https://github.com/bwoodson72/forge-athletics",
-      },
-      screenshots: [{ src: "/portfolio/forge.avif", alt: "FORGE Athletics website preview" }],
-    },
-    {
-      slug: "aetheria",
-      title: "Aetheria",
-      tagline: "A premium landing page focused on high-speed performance, accessibility, and fluid motion design with parallax animations.",
-      role: "Website Developer",
-      featured: true,
-      problem: [
-        "Needed a showcase project demonstrating advanced motion design and performance optimization",
-        "Parallax and animation-heavy pages often suffer on Lighthouse — needed to prove it doesn't have to",
-        "Accessibility is frequently sacrificed on visually complex pages",
-      ],
-      solution: [
-        "Built a fully animated landing page using Motion (Framer Motion) for fluid scroll-driven parallax",
-        "Carefully scoped animations to avoid layout thrash and maintain a high Lighthouse performance score",
-        "Ensured full keyboard navigation and screen-reader compatibility despite heavy visual effects",
-      ],
-      deliverables: [
-        "Single-page premium landing page",
-        "Scroll-driven parallax sections",
-        "Motion-animated hero, features, and CTA",
-        "Accessible, keyboard-navigable layout",
-        "Production deployment to Vercel",
-      ],
-      stack: ["Next.js 16", "React 19", "Tailwind CSS 4", "Motion"],
-      timeline: "1 week",
-      links: {
-        liveUrl: "https://aetheria-landing-page.vercel.app",
-        repoUrl: "https://github.com/bwoodson72/aetheria--landing-page",
-      },
-      screenshots: [{ src: "/portfolio/aetheria.avif", alt: "Aetheria landing page preview" }],
-    },
-    {
-      slug: "nea-ionia-coffee-steki",
-      title: "Nea Ionia Coffee (Steki)",
-      tagline: "A warm, Mediterranean-inspired cafe website featuring parallax animations, smooth scrolling, and full internationalization with Greek translations.",
-      role: "Website Developer",
-      featured: false,
-      problem: [
-        "A Greek-owned cafe needed a site that reflected its cultural identity and warm atmosphere",
-        "Required full bilingual support (English and Greek) with seamless language switching",
-        "Smooth scrolling and parallax were essential to the brand feel",
-      ],
-      solution: [
-        "Built a warm, texture-rich design with earthy tones and Mediterranean typography",
-        "Implemented full i18n with next-intl for English/Greek with URL-based locale routing",
-        "Used Lenis for buttery smooth scroll and Motion for parallax image sections",
-      ],
-      deliverables: [
-        "Home, Menu, About, Contact pages",
-
-        "Lenis smooth scroll integration",
-        "Parallax image sections with Motion",
-        "Production deployment to Vercel",
-      ],
-      stack: ["Next.js 16", "React 19", "Tailwind CSS 4", "Motion", "Lenis", "next-intl"],
-      timeline: "2 weeks",
-      links: {
-        liveUrl: "https://the-steki.vercel.app",
-        repoUrl: "https://github.com/bwoodson72/the-steki",
-      },
-      screenshots: [{ src: "/portfolio/steki.avif", alt: "Nea Ionia Coffee (Steki) website preview" }],
-    },
   ],
 
   packages: [

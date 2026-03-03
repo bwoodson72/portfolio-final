@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { siteContent } from '@/content/portfolio'
-import { ALL_POST_SLUGS_QUERY } from '@/lib/sanity/queries'
+import { ALL_POST_SLUGS_QUERY, ALL_PROJECT_SLUGS_QUERY } from '@/lib/sanity/queries'
 
 const BASE = 'https://brianwoodson.dev'
 
@@ -16,20 +15,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/contact`,   lastModified: now, changeFrequency: 'yearly',  priority: 0.6 },
   ]
 
-  const workRoutes: MetadataRoute.Sitemap = siteContent.projects
-    .filter((p) => p.problem.length > 0)
-    .map((p) => ({
-      url: `${BASE}/work/${p.slug}`,
+  let workRoutes: MetadataRoute.Sitemap = []
+  let knowledgeRoutes: MetadataRoute.Sitemap = []
+  if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+    const { client } = await import('@/lib/sanity/client')
+    const [projectSlugs, postSlugs] = await Promise.all([
+      client.fetch<{ slug: string }[]>(ALL_PROJECT_SLUGS_QUERY),
+      client.fetch<{ slug: string }[]>(ALL_POST_SLUGS_QUERY),
+    ])
+    workRoutes = projectSlugs.map(({ slug }) => ({
+      url: `${BASE}/work/${slug}`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,
     }))
-
-  let knowledgeRoutes: MetadataRoute.Sitemap = []
-  if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
-    const { client } = await import('@/lib/sanity/client')
-    const slugs = await client.fetch<{ slug: string }[]>(ALL_POST_SLUGS_QUERY)
-    knowledgeRoutes = slugs.map(({ slug }) => ({
+    knowledgeRoutes = postSlugs.map(({ slug }) => ({
       url: `${BASE}/knowledge/${slug}`,
       lastModified: now,
       changeFrequency: 'weekly',

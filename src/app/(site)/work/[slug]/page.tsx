@@ -2,23 +2,29 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { siteContent } from "@/content/portfolio";
+import { PROJECT_BY_SLUG_QUERY, ALL_PROJECT_SLUGS_QUERY } from "@/lib/sanity/queries";
+import type { Project } from "@/lib/sanity/types";
 
 type Props = {
     params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-    return siteContent.projects
-        .filter((p) => p.problem.length > 0)
-        .map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+    if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return [];
+    const { client } = await import("@/lib/sanity/client");
+    const slugs = await client.fetch<{ slug: string }[]>(ALL_PROJECT_SLUGS_QUERY);
+    return slugs.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
-    const project = siteContent.projects.find((p) => p.slug === slug);
+    if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return {};
+    const { client, urlFor } = await import("@/lib/sanity/client");
+    const project = await client.fetch<Project | null>(PROJECT_BY_SLUG_QUERY, { slug });
     if (!project) return {};
-    const ogImage = project.screenshots?.[0]?.src ?? "/og-image.png";
+    const ogImage = project.coverImage
+        ? urlFor(project.coverImage).width(1200).height(630).url()
+        : "/og-image.png";
     return {
         title: project.title,
         description: project.tagline,
@@ -40,9 +46,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CaseStudyPage({ params }: Props) {
     const { slug } = await params;
-    const project = siteContent.projects.find((p) => p.slug === slug);
 
-    if (!project || project.problem.length === 0) notFound();
+    if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) notFound();
+
+    const { client, urlFor } = await import("@/lib/sanity/client");
+    const project = await client.fetch<Project | null>(PROJECT_BY_SLUG_QUERY, { slug });
+
+    if (!project) notFound();
+
+    const heroUrl = project.coverImage
+        ? urlFor(project.coverImage).width(1200).height(675).auto("format").url()
+        : undefined;
 
     return (
         <main className="mx-auto w-full max-w-5xl px-6 py-24 space-y-16">
@@ -61,12 +75,12 @@ export default async function CaseStudyPage({ params }: Props) {
                 </p>
             </div>
 
-            {/* Screenshot */}
-            {project.screenshots?.[0] && (
+            {/* Hero screenshot */}
+            {heroUrl && (
                 <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-(--color-border)">
                     <Image
-                        src={project.screenshots[0].src}
-                        alt={project.screenshots[0].alt}
+                        src={heroUrl}
+                        alt={project.coverImage?.alt ?? project.title}
                         fill
                         priority
                         className="object-cover"
@@ -137,12 +151,35 @@ export default async function CaseStudyPage({ params }: Props) {
                 </ul>
             </div>
 
+            {/* Additional screenshots */}
+            {project.screenshots?.length > 0 && (
+                <div className="space-y-6">
+                    {project.screenshots.map((shot, idx) => {
+                        const src = urlFor(shot).width(1200).height(675).auto("format").url();
+                        return (
+                            <div
+                                key={idx}
+                                className="relative aspect-video w-full overflow-hidden rounded-3xl border border-(--color-border)"
+                            >
+                                <Image
+                                    src={src}
+                                    alt={shot.alt}
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 1024px) 100vw, 1024px"
+                                />
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+
             {/* Links */}
-            {project.links && (project.links.liveUrl || project.links.loomUrl) && (
+            {(project.liveUrl || project.loomUrl) && (
                 <div className="flex flex-wrap gap-4 pt-8 border-t border-(--color-border)">
-                    {project.links.liveUrl && (
+                    {project.liveUrl && (
                         <a
-                            href={project.links.liveUrl}
+                            href={project.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="rounded-full bg-(--color-text) px-6 py-3 text-xs font-bold text-(--color-bg) transition hover:opacity-90"
@@ -150,9 +187,9 @@ export default async function CaseStudyPage({ params }: Props) {
                             View live site
                         </a>
                     )}
-                    {project.links.loomUrl && (
+                    {project.loomUrl && (
                         <a
-                            href={project.links.loomUrl}
+                            href={project.loomUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="rounded-full border border-(--color-border) px-6 py-3 text-xs font-bold text-(--color-text) transition hover:bg-(--color-surface-hover)"

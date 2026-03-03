@@ -36,3 +36,47 @@ export const ALL_POST_SLUGS_QUERY = groq`
     "slug": slug.current
   }
 `
+
+const PROJECT_CARD_FIELDS = groq`
+  _id,
+  title,
+  slug,
+  tagline,
+  role,
+  stack,
+  featured,
+  sortOrder,
+  coverImage { asset, alt, hotspot }
+`
+
+export const ALL_PROJECTS_QUERY = groq`
+  *[_type == "project"] | order(coalesce(sortOrder, 999) asc, publishedAt desc) {
+    ${PROJECT_CARD_FIELDS}
+  }
+`
+
+export const FEATURED_PROJECTS_QUERY = groq`
+  *[_type == "project" && featured == true] | order(coalesce(sortOrder, 999) asc, publishedAt desc)[0...3] {
+    ${PROJECT_CARD_FIELDS}
+  }
+`
+
+export const PROJECT_BY_SLUG_QUERY = groq`
+  *[_type == "project" && slug.current == $slug][0] {
+    ${PROJECT_CARD_FIELDS},
+    timeline,
+    problem,
+    solution,
+    deliverables,
+    screenshots[] { asset, alt, hotspot },
+    liveUrl,
+    loomUrl,
+    publishedAt
+  }
+`
+
+export const ALL_PROJECT_SLUGS_QUERY = groq`
+  *[_type == "project"] {
+    "slug": slug.current
+  }
+`

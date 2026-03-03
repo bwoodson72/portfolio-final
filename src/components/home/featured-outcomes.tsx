@@ -1,10 +1,14 @@
 import Link from "next/link";
-import { siteContent } from "@/content/portfolio";
+import { FEATURED_PROJECTS_QUERY } from "@/lib/sanity/queries";
+import type { ProjectCard } from "@/lib/sanity/types";
 
-export const FeaturedOutcomes = () => {
-  const projects = siteContent.projects
-    .filter((p) => p.problem.length > 0)
-    .slice(0, 3);
+export async function FeaturedOutcomes() {
+  if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return null;
+
+  const { client } = await import("@/lib/sanity/client");
+  const projects = await client.fetch<ProjectCard[]>(FEATURED_PROJECTS_QUERY);
+
+  if (projects.length === 0) return null;
 
   return (
     <section id="work" className="mx-auto w-full max-w-7xl px-6 py-24">
@@ -20,8 +24,8 @@ export const FeaturedOutcomes = () => {
       <div className="mt-12 grid gap-6 md:grid-cols-3">
         {projects.map((project) => (
           <Link
-            key={project.slug}
-            href={`/work/${project.slug}`}
+            key={project._id}
+            href={`/work/${project.slug.current}`}
             className="flex flex-col text-left rounded-2xl border border-(--color-border) bg-(--color-surface) p-8 transition hover:border-(--color-border-strong) hover:-translate-y-1"
           >
             <div className="mb-4 inline-block self-start rounded-full bg-(--color-accent) px-3 py-1 text-[10px] font-bold tracking-wider text-(--color-text) uppercase">
@@ -39,4 +43,4 @@ export const FeaturedOutcomes = () => {
       </div>
     </section>
   );
-};
+}
