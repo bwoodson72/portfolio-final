@@ -6,6 +6,21 @@ import { siteContent } from "@/content/portfolio";
 export const metadata: Metadata = {
     title: "About | Brian Woodson",
     description: "Senior frontend developer specializing in Next.js. Fixed-scope projects, fast delivery, no bloat.",
+    openGraph: {
+        title: "About | Brian Woodson",
+        description: "Senior frontend developer specializing in Next.js. Fixed-scope projects, fast delivery, no bloat.",
+        url: "/about",
+        siteName: "Brian Woodson Portfolio",
+        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Portfolio Preview" }],
+        locale: "en_US",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "About | Brian Woodson",
+        description: "Senior frontend developer specializing in Next.js. Fixed-scope projects, fast delivery, no bloat.",
+        images: ["/og-image.png"],
+    },
 };
 
 const howIWork = [

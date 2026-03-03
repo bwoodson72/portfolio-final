@@ -5,7 +5,22 @@ import { siteContent } from "@/content/portfolio";
 
 export const metadata: Metadata = {
     title: "Work | Brian Woodson",
-    description: "Projects and case studies",
+    description: "Case studies and projects — Next.js websites built for real businesses.",
+    openGraph: {
+        title: "Work | Brian Woodson",
+        description: "Case studies and projects — Next.js websites built for real businesses.",
+        url: "/work",
+        siteName: "Brian Woodson Portfolio",
+        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Portfolio Preview" }],
+        locale: "en_US",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Work | Brian Woodson",
+        description: "Case studies and projects — Next.js websites built for real businesses.",
+        images: ["/og-image.png"],
+    },
 };
 
 export default function WorkPage() {

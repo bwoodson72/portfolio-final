@@ -10,6 +10,23 @@ export const metadata: Metadata = {
   title: 'Knowledge | Brian Woodson',
   description:
     'Practical writing on Next.js, React, and web performance — things learned building production sites.',
+  openGraph: {
+    title: 'Knowledge | Brian Woodson',
+    description:
+      'Practical writing on Next.js, React, and web performance — things learned building production sites.',
+    url: '/knowledge',
+    siteName: 'Brian Woodson Portfolio',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Brian Woodson Portfolio Preview' }],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Knowledge | Brian Woodson',
+    description:
+      'Practical writing on Next.js, React, and web performance — things learned building production sites.',
+    images: ['/og-image.png'],
+  },
 }
 
 const CATEGORIES = [

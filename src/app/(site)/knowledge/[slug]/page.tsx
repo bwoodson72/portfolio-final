@@ -37,12 +37,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const ogImage = post.coverImage
     ? urlFor(post.coverImage).width(1200).height(630).url()
-    : undefined
+    : '/og-image.png'
+  const title = `${post.title} | Brian Woodson`
 
   return {
-    title: `${post.title} | Brian Woodson`,
+    title,
     description: post.excerpt,
-    openGraph: ogImage ? { images: [{ url: ogImage }] } : undefined,
+    openGraph: {
+      type: 'article',
+      title,
+      description: post.excerpt,
+      url: `/knowledge/${slug}`,
+      publishedTime: post.publishedAt,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: post.excerpt,
+      images: [ogImage],
+    },
   }
 }
 

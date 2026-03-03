@@ -29,14 +29,7 @@ export const metadata: Metadata = {
         description: "Building high-performance, immersive digital experiences.",
         url: "https://brianwoodson.dev/",
         siteName: "Brian Woodson Portfolio",
-        images: [
-            {
-                url: "/og-image.png",
-                width: 1200,
-                height: 630,
-                alt: "Brian Woodson Portfolio Preview",
-            },
-        ],
+        images: [],
         locale: "en_US",
         type: "website",
     },
@@ -44,7 +37,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Brian Woodson // Frontend Engineer",
         description: "Building high-performance, immersive digital experiences.",
-        images: ["/og-image.png"],
+        images: [],
     },
     icons: {
         icon: "/favicon.ico",

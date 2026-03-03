@@ -5,6 +5,21 @@ import { faqs } from "@/content/portfolio";
 export const metadata: Metadata = {
     title: "FAQ | Brian Woodson",
     description: "Common questions about working with Brian Woodson on your Next.js website project",
+    openGraph: {
+        title: "FAQ | Brian Woodson",
+        description: "Common questions about working with Brian Woodson on your Next.js website project",
+        url: "/faq",
+        siteName: "Brian Woodson Portfolio",
+        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Portfolio Preview" }],
+        locale: "en_US",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "FAQ | Brian Woodson",
+        description: "Common questions about working with Brian Woodson on your Next.js website project",
+        images: ["/og-image.png"],
+    },
 };
 
 export default function FAQPage() {
