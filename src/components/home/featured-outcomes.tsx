@@ -1,11 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import { FEATURED_PROJECTS_QUERY } from "@/lib/sanity/queries";
 import type { ProjectCard } from "@/lib/sanity/types";
 
 export async function FeaturedOutcomes() {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return null;
 
-  const { client } = await import("@/lib/sanity/client");
+  const { client, urlFor } = await import("@/lib/sanity/client");
   const projects = await client.fetch<ProjectCard[]>(FEATURED_PROJECTS_QUERY);
 
   if (projects.length === 0) return null;
@@ -26,17 +27,32 @@ export async function FeaturedOutcomes() {
           <Link
             key={project._id}
             href={`/work/${project.slug.current}`}
-            className="flex flex-col text-left rounded-2xl border border-(--color-border) bg-(--color-surface) p-8 transition hover:border-(--color-border-strong) hover:-translate-y-1"
+            className="group flex flex-col text-left rounded-2xl border border-(--color-border) bg-(--color-surface) overflow-hidden transition hover:border-(--color-border-strong) hover:-translate-y-1"
           >
-            <div className="mb-4 inline-block self-start rounded-full bg-(--color-accent) px-3 py-1 text-[10px] font-bold tracking-wider text-(--color-text) uppercase">
-              {project.role}
-            </div>
-            <h3 className="text-xl font-bold text-(--color-text)">{project.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-(--color-text-muted)">
-              {project.tagline}
-            </p>
-            <div className="mt-8 text-sm font-bold text-(--color-text) hover:underline">
-              View details →
+            {project.coverImage && (
+              <div className="relative aspect-video w-full overflow-hidden">
+                <Image
+                  src={urlFor(project.coverImage).width(800).height(450).auto("format").url()}
+                  alt={project.coverImage.alt}
+                  fill
+                  className="object-cover transition duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+            )}
+            <div className="flex flex-col flex-1 p-6">
+              {project.role && (
+                <div className="mb-3 inline-block self-start rounded-full bg-(--color-accent) px-3 py-1 text-[10px] font-bold tracking-wider text-(--color-text) uppercase">
+                  {project.role}
+                </div>
+              )}
+              <h3 className="text-xl font-bold text-(--color-text)">{project.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-(--color-text-muted)">
+                {project.tagline}
+              </p>
+              <div className="mt-6 text-sm font-bold text-(--color-text)">
+                View details →
+              </div>
             </div>
           </Link>
         ))}
