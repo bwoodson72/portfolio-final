@@ -7,7 +7,13 @@ export async function FeaturedOutcomes() {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return null;
 
   const { client, urlFor } = await import("@/lib/sanity/client");
-  const projects = await client.fetch<ProjectCard[]>(FEATURED_PROJECTS_QUERY);
+  let projects: ProjectCard[] = [];
+  try {
+    projects = await client.fetch<ProjectCard[]>(FEATURED_PROJECTS_QUERY);
+  } catch (err) {
+    console.error("Failed to fetch featured projects:", err);
+    return null;
+  }
 
   if (projects.length === 0) return null;
 

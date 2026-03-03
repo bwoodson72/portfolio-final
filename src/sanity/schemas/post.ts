@@ -87,6 +87,7 @@ export const postType = defineType({
       name: 'body',
       title: 'Body',
       type: 'array',
+      validation: (Rule) => Rule.required(),
       of: [
         defineField({
           name: 'block',

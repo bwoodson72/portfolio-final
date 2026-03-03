@@ -11,37 +11,45 @@ type Props = {
 
 export async function generateStaticParams() {
     if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return [];
-    const { client } = await import("@/lib/sanity/client");
-    const slugs = await client.fetch<{ slug: string }[]>(ALL_PROJECT_SLUGS_QUERY);
-    return slugs.map(({ slug }) => ({ slug }));
+    try {
+        const { client } = await import("@/lib/sanity/client");
+        const slugs = await client.fetch<{ slug: string }[]>(ALL_PROJECT_SLUGS_QUERY);
+        return slugs.map(({ slug }) => ({ slug }));
+    } catch {
+        return [];
+    }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return {};
-    const { client, urlFor } = await import("@/lib/sanity/client");
-    const project = await client.fetch<Project | null>(PROJECT_BY_SLUG_QUERY, { slug });
-    if (!project) return {};
-    const ogImage = project.coverImage
-        ? urlFor(project.coverImage).width(1200).height(630).url()
-        : "/og-image.png";
-    return {
-        title: project.title,
-        description: project.tagline,
-        openGraph: {
-            type: "article",
+    try {
+        const { client, urlFor } = await import("@/lib/sanity/client");
+        const project = await client.fetch<Project | null>(PROJECT_BY_SLUG_QUERY, { slug });
+        if (!project) return {};
+        const ogImage = project.coverImage
+            ? urlFor(project.coverImage).width(1200).height(630).url()
+            : "/og-image.png";
+        return {
             title: project.title,
             description: project.tagline,
-            url: `/work/${slug}`,
-            images: [{ url: ogImage, width: 1200, height: 630, alt: project.title }],
-        },
-        twitter: {
-            card: "summary_large_image",
-            title: project.title,
-            description: project.tagline,
-            images: [ogImage],
-        },
-    };
+            openGraph: {
+                type: "article",
+                title: project.title,
+                description: project.tagline,
+                url: `/work/${slug}`,
+                images: [{ url: ogImage, width: 1200, height: 630, alt: project.title }],
+            },
+            twitter: {
+                card: "summary_large_image",
+                title: project.title,
+                description: project.tagline,
+                images: [ogImage],
+            },
+        };
+    } catch {
+        return {};
+    }
 }
 
 export default async function CaseStudyPage({ params }: Props) {
@@ -50,7 +58,12 @@ export default async function CaseStudyPage({ params }: Props) {
     if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) notFound();
 
     const { client, urlFor } = await import("@/lib/sanity/client");
-    const project = await client.fetch<Project | null>(PROJECT_BY_SLUG_QUERY, { slug });
+    let project: Project | null = null;
+    try {
+        project = await client.fetch<Project | null>(PROJECT_BY_SLUG_QUERY, { slug });
+    } catch {
+        notFound();
+    }
 
     if (!project) notFound();
 
@@ -96,7 +109,7 @@ export default async function CaseStudyPage({ params }: Props) {
                         Problem
                     </h2>
                     <ul className="space-y-2">
-                        {project.problem.map((item, idx) => (
+                        {(project.problem ?? []).map((item, idx) => (
                             <li key={idx} className="flex gap-2 text-sm text-(--color-text-muted)">
                                 <span className="text-(--color-text)">•</span> {item}
                             </li>
@@ -108,7 +121,7 @@ export default async function CaseStudyPage({ params }: Props) {
                         Solution
                     </h2>
                     <ul className="space-y-2">
-                        {project.solution.map((item, idx) => (
+                        {(project.solution ?? []).map((item, idx) => (
                             <li key={idx} className="flex gap-2 text-sm text-(--color-text-muted)">
                                 <span className="text-(--color-text)">•</span> {item}
                             </li>
@@ -123,7 +136,7 @@ export default async function CaseStudyPage({ params }: Props) {
                     Stack
                 </h2>
                 <div className="flex flex-wrap gap-2">
-                    {project.stack.map((tech) => (
+                    {(project.stack ?? []).map((tech) => (
                         <span
                             key={tech}
                             className="rounded-md border border-(--color-border) bg-(--color-bg) px-2 py-1 text-[10px] font-mono text-(--color-text)"
@@ -140,7 +153,7 @@ export default async function CaseStudyPage({ params }: Props) {
                     Deliverables
                 </h2>
                 <ul className="grid gap-4 md:grid-cols-2">
-                    {project.deliverables.map((item, idx) => (
+                    {(project.deliverables ?? []).map((item, idx) => (
                         <li
                             key={idx}
                             className="rounded-xl border border-(--color-border) bg-(--color-bg) p-4 text-xs font-bold text-(--color-text)"

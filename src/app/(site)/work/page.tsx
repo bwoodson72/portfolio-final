@@ -30,9 +30,13 @@ export default async function WorkPage() {
 
     if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
         const { client, urlFor } = await import("@/lib/sanity/client");
-        projects = await client.fetch<ProjectCard[]>(ALL_PROJECTS_QUERY);
-        resolveImageUrl = (source) =>
-            source ? urlFor(source).width(800).height(450).auto("format").url() : undefined;
+        try {
+            projects = await client.fetch<ProjectCard[]>(ALL_PROJECTS_QUERY);
+            resolveImageUrl = (source) =>
+                source ? urlFor(source).width(800).height(450).auto("format").url() : undefined;
+        } catch (err) {
+            console.error("Failed to fetch projects:", err);
+        }
     }
 
     return (
@@ -82,7 +86,7 @@ export default async function WorkPage() {
                                         {project.tagline}
                                     </p>
                                     <div className="flex flex-wrap gap-2 pt-2">
-                                        {project.stack.map((tech) => (
+                                        {(project.stack ?? []).map((tech) => (
                                             <span
                                                 key={tech}
                                                 className="rounded-md border border-(--color-border) bg-(--color-bg) px-2 py-1 text-[10px] font-mono text-(--color-text)"

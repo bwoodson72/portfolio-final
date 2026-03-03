@@ -23,40 +23,48 @@ type Props = {
 
 export async function generateStaticParams() {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return []
-  const { client } = await import('@/lib/sanity/client')
-  const slugs = await client.fetch<{ slug: string }[]>(ALL_POST_SLUGS_QUERY)
-  return slugs.map(({ slug }) => ({ slug }))
+  try {
+    const { client } = await import('@/lib/sanity/client')
+    const slugs = await client.fetch<{ slug: string }[]>(ALL_POST_SLUGS_QUERY)
+    return slugs.map(({ slug }) => ({ slug }))
+  } catch {
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return {}
-  const { client, urlFor } = await import('@/lib/sanity/client')
-  const post = await client.fetch<Post | null>(POST_BY_SLUG_QUERY, { slug })
-  if (!post) return {}
+  try {
+    const { client, urlFor } = await import('@/lib/sanity/client')
+    const post = await client.fetch<Post | null>(POST_BY_SLUG_QUERY, { slug })
+    if (!post) return {}
 
-  const ogImage = post.coverImage
-    ? urlFor(post.coverImage).width(1200).height(630).url()
-    : '/og-image.png'
-  const title = `${post.title} | Brian Woodson`
+    const ogImage = post.coverImage
+      ? urlFor(post.coverImage).width(1200).height(630).url()
+      : '/og-image.png'
+    const title = `${post.title} | Brian Woodson`
 
-  return {
-    title,
-    description: post.excerpt,
-    openGraph: {
-      type: 'article',
+    return {
       title,
       description: post.excerpt,
-      url: `/knowledge/${slug}`,
-      publishedTime: post.publishedAt,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description: post.excerpt,
-      images: [ogImage],
-    },
+      openGraph: {
+        type: 'article',
+        title,
+        description: post.excerpt,
+        url: `/knowledge/${slug}`,
+        publishedTime: post.publishedAt,
+        images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description: post.excerpt,
+        images: [ogImage],
+      },
+    }
+  } catch {
+    return {}
   }
 }
 
@@ -66,7 +74,12 @@ export default async function PostPage({ params }: Props) {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) notFound()
 
   const { client, urlFor } = await import('@/lib/sanity/client')
-  const post = await client.fetch<Post | null>(POST_BY_SLUG_QUERY, { slug })
+  let post: Post | null = null
+  try {
+    post = await client.fetch<Post | null>(POST_BY_SLUG_QUERY, { slug })
+  } catch {
+    notFound()
+  }
 
   if (!post) notFound()
 

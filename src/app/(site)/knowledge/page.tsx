@@ -53,9 +53,13 @@ export default async function KnowledgePage({ searchParams }: Props) {
 
   if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
     const { client, urlFor } = await import('@/lib/sanity/client')
-    posts = await client.fetch<PostCard[]>(ALL_POSTS_QUERY)
-    resolveImageUrl = (source) =>
-      source ? urlFor(source).width(800).height(450).auto('format').url() : undefined
+    try {
+      posts = await client.fetch<PostCard[]>(ALL_POSTS_QUERY)
+      resolveImageUrl = (source) =>
+        source ? urlFor(source).width(800).height(450).auto('format').url() : undefined
+    } catch (err) {
+      console.error('Failed to fetch posts:', err)
+    }
   }
 
   const filtered = category ? posts.filter((p) => p.category === category) : posts

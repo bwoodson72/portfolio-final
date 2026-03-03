@@ -93,7 +93,7 @@ export const projectType = defineType({
       type: 'array',
       description: 'Bullet points describing the problem.',
       of: [{ type: 'string' }],
-      validation: (Rule) => Rule.min(1),
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'solution',
@@ -101,7 +101,7 @@ export const projectType = defineType({
       type: 'array',
       description: 'Bullet points describing the solution.',
       of: [{ type: 'string' }],
-      validation: (Rule) => Rule.min(1),
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'deliverables',
@@ -109,6 +109,7 @@ export const projectType = defineType({
       type: 'array',
       description: 'What was delivered.',
       of: [{ type: 'string' }],
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'stack',
@@ -116,6 +117,7 @@ export const projectType = defineType({
       type: 'array',
       description: 'Technologies used (e.g. Next.js, Tailwind CSS).',
       of: [{ type: 'string' }],
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: 'liveUrl',
