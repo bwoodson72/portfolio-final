@@ -9,6 +9,7 @@ export function Nav() {
 
     const navLinks: { label: string; href: string }[] = [
         { label: "Work", href: "/work" },
+        { label: "Knowledge", href: "/knowledge" },
         { label: "Packages", href: "/#packages" },
         { label: "About", href: "/about" },
         { label: "FAQ", href: "/faq" },
