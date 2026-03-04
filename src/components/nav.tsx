@@ -17,24 +17,24 @@ export function Nav() {
     ];
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-(--color-border) bg-(--color-bg)/80 backdrop-blur-md">
+        <header className="sticky top-0 z-50 w-full border-b border-border bg-bg/80 backdrop-blur-md">
             <div className="mx-auto max-w-7xl px-6">
                 <nav className="flex h-20 items-center justify-between">
                     {/* Left: Brand */}
                     <Link
                         href="/"
-                        className="text-lg font-bold tracking-tighter text-(--color-text)"
+                        className="text-lg font-bold tracking-tighter text-text"
                     >
                         Brian Woodson
                     </Link>
 
                     {/* Center: Links */}
-                    <ul className="hidden md:flex items-center gap-8 text-sm font-bold text-(--color-text-muted)">
+                    <ul className="hidden md:flex items-center gap-8 text-sm font-bold text-text-muted">
                         {navLinks.map((l) => (
                             <li key={l.href}>
                                 <Link
                                     href={l.href}
-                                    className="hover:text-(--color-text) transition-colors"
+                                    className="hover:text-text transition-colors"
                                 >
                                     {l.label}
                                 </Link>
@@ -45,7 +45,7 @@ export function Nav() {
                     {/* Right: Mobile Menu Toggle */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden p-2 text-(--color-text)"
+                        className="md:hidden p-2 text-text"
                         aria-label="Toggle Menu"
                     >
                         {isOpen ? (
@@ -64,7 +64,7 @@ export function Nav() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden border-t border-(--color-border) bg-(--color-bg)"
+                        className="md:hidden border-t border-border bg-bg"
                     >
                         <div className="px-6 py-8 space-y-6">
                             {navLinks.map((l) => (
@@ -72,7 +72,7 @@ export function Nav() {
                                     key={l.href}
                                     href={l.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="block text-2xl font-bold text-(--color-text)"
+                                    className="block text-2xl font-bold text-text"
                                 >
                                     {l.label}
                                 </Link>

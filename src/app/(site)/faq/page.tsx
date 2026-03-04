@@ -26,10 +26,10 @@ export default function FAQPage() {
     return (
         <main className="mx-auto w-full max-w-3xl px-6 py-24 space-y-16">
             <div className="space-y-4">
-                <h1 className="text-4xl font-extrabold tracking-tight text-(--color-text) md:text-6xl">
+                <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-6xl">
                     FAQ
                 </h1>
-                <p className="text-lg text-(--color-text-muted)">
+                <p className="text-lg text-text-muted">
                     Common questions before we work together
                 </p>
             </div>
@@ -37,8 +37,8 @@ export default function FAQPage() {
             <ul className="space-y-3">
                 {faqs.map((item) => (
                     <li key={item.question}>
-                        <details className="group rounded-2xl border border-(--color-border) bg-(--color-surface) open:border-(--color-border-strong)">
-                            <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-sm font-bold text-(--color-text) marker:content-none list-none select-none">
+                        <details className="group rounded-2xl border border-border bg-surface open:border-border-strong">
+                            <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-sm font-bold text-text marker:content-none list-none select-none">
                                 {item.question}
                                 {/* Chevron — rotates when open */}
                                 <svg
@@ -51,14 +51,14 @@ export default function FAQPage() {
                                     strokeWidth="2"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
-                                    className="shrink-0 text-(--color-text-muted) transition-transform group-open:rotate-180"
+                                    className="shrink-0 text-text-muted transition-transform group-open:rotate-180"
                                     aria-hidden
                                 >
                                     <path d="m6 9 6 6 6-6"/>
                                 </svg>
                             </summary>
-                            <div className="border-t border-(--color-border) px-6 py-5">
-                                <p className="text-sm leading-relaxed text-(--color-text-muted)">
+                            <div className="border-t border-border px-6 py-5">
+                                <p className="text-sm leading-relaxed text-text-muted">
                                     {item.answer}
                                 </p>
                             </div>
@@ -67,13 +67,13 @@ export default function FAQPage() {
                 ))}
             </ul>
 
-            <div className="rounded-3xl border border-(--color-border) bg-(--color-surface) p-10 text-center space-y-4">
-                <p className="font-bold text-(--color-text)">
+            <div className="rounded-3xl border border-border bg-surface p-10 text-center space-y-4">
+                <p className="font-bold text-text">
                     Still have questions?
                 </p>
                 <Link
                     href="/contact"
-                    className="inline-flex rounded-full bg-(--color-text) px-6 py-3 text-sm font-bold text-(--color-bg) transition hover:opacity-90"
+                    className="inline-flex rounded-full bg-text px-6 py-3 text-sm font-bold text-bg transition hover:opacity-90"
                 >
                     Get in touch
                 </Link>

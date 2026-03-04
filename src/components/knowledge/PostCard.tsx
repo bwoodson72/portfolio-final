@@ -30,7 +30,7 @@ export default function PostCard({ post, variant = 'default', imageUrl }: Props)
   return (
     <Link
       href={`/knowledge/${slug.current}`}
-      className="group flex flex-col rounded-2xl border border-(--color-border) bg-(--color-surface) overflow-hidden transition-all duration-200 hover:border-(--color-border-strong) hover:-translate-y-1"
+      className="group flex flex-col rounded-2xl border border-border bg-surface overflow-hidden transition-all duration-200 hover:border-border-strong hover:-translate-y-1"
     >
       {/* Cover image */}
       <div className="relative aspect-video w-full overflow-hidden">
@@ -43,7 +43,7 @@ export default function PostCard({ post, variant = 'default', imageUrl }: Props)
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
-          <div className="absolute inset-0 bg-linear-to-br from-(--color-surface-hover) to-(--color-bg)" />
+          <div className="absolute inset-0 bg-linear-to-br from-surface-hover to-bg" />
         )}
       </div>
 
@@ -51,15 +51,15 @@ export default function PostCard({ post, variant = 'default', imageUrl }: Props)
       <div className="flex flex-1 flex-col gap-3 p-6">
         {/* Badge + reading time */}
         <div className="flex items-center gap-2.5">
-          <span className="rounded-full border border-(--color-border) px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-(--color-text-muted)">
+          <span className="rounded-full border border-border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-text-muted">
             {CATEGORY_LABELS[category] ?? category}
           </span>
-          <span className="text-[10px] text-(--color-text-muted-2)">{readingTime} min read</span>
+          <span className="text-[10px] text-text-muted-2">{readingTime} min read</span>
         </div>
 
         {/* Title */}
         <h2
-          className={`font-extrabold leading-snug text-(--color-text) ${
+          className={`font-extrabold leading-snug text-text ${
             isFeatured ? 'text-2xl' : 'text-lg'
           }`}
         >
@@ -67,14 +67,14 @@ export default function PostCard({ post, variant = 'default', imageUrl }: Props)
         </h2>
 
         {/* Excerpt */}
-        <p className="line-clamp-3 text-sm leading-relaxed text-(--color-text-muted)">
+        <p className="line-clamp-3 text-sm leading-relaxed text-text-muted">
           {excerpt}
         </p>
 
         {/* Footer */}
         <div className="mt-auto flex items-center justify-between pt-4">
-          <span className="text-xs text-(--color-text-muted-2)">{formattedDate}</span>
-          <span className="flex items-center gap-1 text-xs font-semibold text-(--color-text-muted) transition-transform duration-200 group-hover:translate-x-1">
+          <span className="text-xs text-text-muted-2">{formattedDate}</span>
+          <span className="flex items-center gap-1 text-xs font-semibold text-text-muted transition-transform duration-200 group-hover:translate-x-1">
             Read
             <svg
               width="14"

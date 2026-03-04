@@ -76,21 +76,21 @@ export default async function CaseStudyPage({ params }: Props) {
             {/* Header */}
             <div className="space-y-4">
                 {project.role && (
-                    <div className="inline-block rounded-full bg-(--color-accent) px-3 py-1 text-[10px] font-bold tracking-wider text-(--color-text) uppercase">
+                    <div className="inline-block rounded-full bg-accent px-3 py-1 text-[10px] font-bold tracking-wider text-text uppercase">
                         {project.role}
                     </div>
                 )}
-                <h1 className="text-4xl font-extrabold tracking-tight text-(--color-text) md:text-5xl">
+                <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-5xl">
                     {project.title}
                 </h1>
-                <p className="text-xl text-(--color-text-muted) italic">
+                <p className="text-xl text-text-muted italic">
                     {project.tagline}
                 </p>
             </div>
 
             {/* Hero screenshot */}
             {heroUrl && (
-                <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-(--color-border)">
+                <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-border">
                     <Image
                         src={heroUrl}
                         alt={project.coverImage?.alt ?? project.title}
@@ -105,25 +105,25 @@ export default async function CaseStudyPage({ params }: Props) {
             {/* Problem / Solution */}
             <div className="grid gap-12 md:grid-cols-2">
                 <div className="space-y-4">
-                    <h2 className="text-xs font-bold uppercase tracking-widest text-(--color-text-muted)">
+                    <h2 className="text-xs font-bold uppercase tracking-widest text-text-muted">
                         Problem
                     </h2>
                     <ul className="space-y-2">
                         {(project.problem ?? []).map((item, idx) => (
-                            <li key={idx} className="flex gap-2 text-sm text-(--color-text-muted)">
-                                <span className="text-(--color-text)">•</span> {item}
+                            <li key={idx} className="flex gap-2 text-sm text-text-muted">
+                                <span className="text-text">•</span> {item}
                             </li>
                         ))}
                     </ul>
                 </div>
                 <div className="space-y-4">
-                    <h2 className="text-xs font-bold uppercase tracking-widest text-(--color-text-muted)">
+                    <h2 className="text-xs font-bold uppercase tracking-widest text-text-muted">
                         Solution
                     </h2>
                     <ul className="space-y-2">
                         {(project.solution ?? []).map((item, idx) => (
-                            <li key={idx} className="flex gap-2 text-sm text-(--color-text-muted)">
-                                <span className="text-(--color-text)">•</span> {item}
+                            <li key={idx} className="flex gap-2 text-sm text-text-muted">
+                                <span className="text-text">•</span> {item}
                             </li>
                         ))}
                     </ul>
@@ -132,14 +132,14 @@ export default async function CaseStudyPage({ params }: Props) {
 
             {/* Stack */}
             <div className="space-y-4">
-                <h2 className="text-xs font-bold uppercase tracking-widest text-(--color-text-muted)">
+                <h2 className="text-xs font-bold uppercase tracking-widest text-text-muted">
                     Stack
                 </h2>
                 <div className="flex flex-wrap gap-2">
                     {(project.stack ?? []).map((tech) => (
                         <span
                             key={tech}
-                            className="rounded-md border border-(--color-border) bg-(--color-bg) px-2 py-1 text-[10px] font-mono text-(--color-text)"
+                            className="rounded-md border border-border bg-bg px-2 py-1 text-[10px] font-mono text-text"
                         >
                             {tech}
                         </span>
@@ -147,16 +147,36 @@ export default async function CaseStudyPage({ params }: Props) {
                 </div>
             </div>
 
+            {/* Expected Outcomes */}
+            {project.outcome && project.outcome.length > 0 && (
+                <div className="space-y-4">
+                    <h2 className="text-xs font-bold uppercase tracking-widest text-text-muted">
+                        Expected Outcomes
+                    </h2>
+                    <ul className="grid gap-4 md:grid-cols-2">
+                        {project.outcome.map((item, idx) => (
+                            <li
+                                key={idx}
+                                className="flex gap-3 rounded-xl border border-border bg-bg p-4 text-xs font-bold text-text"
+                            >
+                                <span className="text-green-400 shrink-0">✓</span>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
             {/* Deliverables */}
             <div className="space-y-4">
-                <h2 className="text-xs font-bold uppercase tracking-widest text-(--color-text-muted)">
+                <h2 className="text-xs font-bold uppercase tracking-widest text-text-muted">
                     Deliverables
                 </h2>
                 <ul className="grid gap-4 md:grid-cols-2">
                     {(project.deliverables ?? []).map((item, idx) => (
                         <li
                             key={idx}
-                            className="rounded-xl border border-(--color-border) bg-(--color-bg) p-4 text-xs font-bold text-(--color-text)"
+                            className="rounded-xl border border-border bg-bg p-4 text-xs font-bold text-text"
                         >
                             {item}
                         </li>
@@ -172,7 +192,7 @@ export default async function CaseStudyPage({ params }: Props) {
                         return (
                             <div
                                 key={idx}
-                                className="relative aspect-video w-full overflow-hidden rounded-3xl border border-(--color-border)"
+                                className="relative aspect-video w-full overflow-hidden rounded-3xl border border-border"
                             >
                                 <Image
                                     src={src}
@@ -189,13 +209,13 @@ export default async function CaseStudyPage({ params }: Props) {
 
             {/* Links */}
             {(project.liveUrl || project.loomUrl) && (
-                <div className="flex flex-wrap gap-4 pt-8 border-t border-(--color-border)">
+                <div className="flex flex-wrap gap-4 pt-8 border-t border-border">
                     {project.liveUrl && (
                         <a
                             href={project.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-full bg-(--color-text) px-6 py-3 text-xs font-bold text-(--color-bg) transition hover:opacity-90"
+                            className="rounded-full bg-text px-6 py-3 text-xs font-bold text-bg transition hover:opacity-90"
                         >
                             View live site
                         </a>
@@ -205,7 +225,7 @@ export default async function CaseStudyPage({ params }: Props) {
                             href={project.loomUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-full border border-(--color-border) px-6 py-3 text-xs font-bold text-(--color-text) transition hover:bg-(--color-surface-hover)"
+                            className="rounded-full border border-border px-6 py-3 text-xs font-bold text-text transition hover:bg-surface-hover"
                         >
                             Watch walkthrough
                         </a>
@@ -214,13 +234,13 @@ export default async function CaseStudyPage({ params }: Props) {
             )}
 
             {/* Bottom CTA */}
-            <div className="rounded-3xl border border-(--color-border) bg-(--color-surface) p-12 text-center space-y-6">
-                <p className="text-lg font-bold text-(--color-text)">
+            <div className="rounded-3xl border border-border bg-surface p-12 text-center space-y-6">
+                <p className="text-lg font-bold text-text">
                     Interested in a similar project?
                 </p>
                 <Link
                     href="/contact"
-                    className="inline-flex rounded-full bg-(--color-text) px-6 py-3 text-sm font-bold text-(--color-bg) transition hover:opacity-90"
+                    className="inline-flex rounded-full bg-text px-6 py-3 text-sm font-bold text-bg transition hover:opacity-90"
                 >
                     Get in touch
                 </Link>

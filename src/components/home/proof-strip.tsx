@@ -5,7 +5,7 @@ export const ProofStrip = () => {
   if (!stats) return null;
 
   return (
-    <section id="proof" className="w-full py-12 border-y border-(--color-border) bg-(--color-surface)/30">
+    <section id="proof" className="w-full py-12 border-y border-border bg-surface/30">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat) => (
@@ -13,10 +13,10 @@ export const ProofStrip = () => {
               key={stat.label}
               className="flex flex-col items-center justify-center text-center space-y-1"
             >
-              <div className="text-2xl font-bold text-(--color-text) md:text-3xl">
+              <div className="text-2xl font-bold text-text md:text-3xl">
                 {stat.value}
               </div>
-              <div className="text-xs font-bold uppercase tracking-widest text-(--color-text-muted)">
+              <div className="text-xs font-bold uppercase tracking-widest text-text-muted">
                 {stat.label}
               </div>
             </div>

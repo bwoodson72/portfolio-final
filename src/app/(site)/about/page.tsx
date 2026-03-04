@@ -41,13 +41,13 @@ const howIWork = [
     },
 ];
 
-const notAGoodFit = [
-    "WordPress, Webflow, or no-code platforms",
-    "Open-ended hourly or retainer arrangements",
-    "E-commerce builds (Shopify, WooCommerce)",
-    "SaaS products or ongoing feature development",
-    "Projects without defined scope or clear acceptance criteria",
-    "Rush work without adequate lead time",
+const bestFitFor = [
+    "Local businesses that need a professional web presence",
+    "Service companies ready to invest in a site that actually converts",
+    "Business owners who have their content and branding ready to go",
+    "Anyone tired of slow, bloated WordPress sites",
+    "Companies that want a fixed price and a clear delivery date",
+    "Founders who value direct communication over agency layers",
 ];
 
 export default function AboutPage() {
@@ -74,10 +74,10 @@ export default function AboutPage() {
 
                     {/* Text */}
                     <div className="space-y-8">
-                        <h1 className="text-4xl font-extrabold tracking-tight text-(--color-text) md:text-5xl">
+                        <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-5xl">
                             About
                         </h1>
-                        <div className="space-y-4 text-lg text-(--color-text-muted)">
+                        <div className="space-y-4 text-lg text-text-muted">
                             {about.body.map((para, idx) => (
                                 <p key={idx}>{para}</p>
                             ))}
@@ -89,14 +89,14 @@ export default function AboutPage() {
                             </p>
                         </div>
                         <div className="space-y-4">
-                            <h2 className="text-xs font-bold uppercase tracking-widest text-(--color-text-muted)">
+                            <h2 className="text-xs font-bold uppercase tracking-widest text-text-muted">
                                 Primary Stack
                             </h2>
                             <div className="flex flex-wrap gap-3">
                                 {about.stack.map((tech) => (
                                     <span
                                         key={tech}
-                                        className="rounded-xl border border-(--color-border) bg-(--color-surface) px-4 py-2 text-sm font-bold text-(--color-text) transition hover:border-(--color-border-strong)"
+                                        className="rounded-xl border border-border bg-surface px-4 py-2 text-sm font-bold text-text transition hover:border-border-strong"
                                     >
                                         {tech}
                                     </span>
@@ -105,7 +105,7 @@ export default function AboutPage() {
                         </div>
                         <Link
                             href="/contact"
-                            className="inline-flex rounded-full bg-(--color-text) px-6 py-3 text-sm font-bold text-(--color-bg) transition hover:opacity-90"
+                            className="inline-flex rounded-full bg-text px-6 py-3 text-sm font-bold text-bg transition hover:opacity-90"
                         >
                             Get in touch
                         </Link>
@@ -115,12 +115,12 @@ export default function AboutPage() {
             </section>
 
             {/* How I Work */}
-            <section className="space-y-10 border-t border-(--color-border) pt-16">
+            <section className="space-y-10 border-t border-border pt-16">
                 <div className="space-y-3">
-                    <h2 className="text-2xl font-extrabold tracking-tight text-(--color-text) md:text-4xl">
+                    <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-4xl">
                         How I work
                     </h2>
-                    <p className="max-w-2xl text-lg text-(--color-text-muted)">
+                    <p className="max-w-2xl text-lg text-text-muted">
                         Fixed-scope only. Every engagement has defined deliverables, a clear timeline, and a price you agree to before work starts.
                     </p>
                 </div>
@@ -128,15 +128,15 @@ export default function AboutPage() {
                     {howIWork.map((item) => (
                         <div
                             key={item.step}
-                            className="rounded-2xl border border-(--color-border) bg-(--color-surface) p-8 space-y-4"
+                            className="rounded-2xl border border-border bg-surface p-8 space-y-4"
                         >
-                            <div className="text-xs font-bold uppercase tracking-widest text-(--color-text-muted)">
+                            <div className="text-xs font-bold uppercase tracking-widest text-text-muted">
                                 {item.step}
                             </div>
-                            <h3 className="text-base font-bold text-(--color-text)">
+                            <h3 className="text-base font-bold text-text">
                                 {item.title}
                             </h3>
-                            <p className="text-sm leading-relaxed text-(--color-text-muted)">
+                            <p className="text-sm leading-relaxed text-text-muted">
                                 {item.body}
                             </p>
                         </div>
@@ -144,23 +144,23 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* What I don't do */}
-            <section className="space-y-8 border-t border-(--color-border) pt-16">
+            {/* Who this is for */}
+            <section className="space-y-8 border-t border-border pt-16">
                 <div className="space-y-3">
-                    <h2 className="text-2xl font-extrabold tracking-tight text-(--color-text) md:text-4xl">
-                        What I don&apos;t do
+                    <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-4xl">
+                        Who this is for
                     </h2>
-                    <p className="max-w-2xl text-lg text-(--color-text-muted)">
-                        Being upfront about bad-fit work saves everyone time.
+                    <p className="max-w-2xl text-lg text-text-muted">
+                        I do my best work with clients who fit this profile.
                     </p>
                 </div>
                 <ul className="grid gap-3 md:grid-cols-2">
-                    {notAGoodFit.map((item) => (
+                    {bestFitFor.map((item) => (
                         <li
                             key={item}
-                            className="flex gap-3 rounded-xl border border-(--color-border) bg-(--color-surface) px-5 py-4 text-sm text-(--color-text-muted)"
+                            className="flex gap-3 rounded-xl border border-border bg-surface px-5 py-4 text-sm text-text-muted"
                         >
-                            <span className="text-(--color-text-muted) select-none">✕</span>
+                            <span className="text-text select-none">→</span>
                             {item}
                         </li>
                     ))}
@@ -168,16 +168,16 @@ export default function AboutPage() {
             </section>
 
             {/* CTA */}
-            <section className="rounded-3xl border border-(--color-border) bg-(--color-surface) p-12 text-center space-y-6">
-                <h2 className="text-2xl font-extrabold tracking-tight text-(--color-text) md:text-4xl">
+            <section className="rounded-3xl border border-border bg-surface p-12 text-center space-y-6">
+                <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-4xl">
                     Sound like a fit?
                 </h2>
-                <p className="mx-auto max-w-md text-lg text-(--color-text-muted)">
+                <p className="mx-auto max-w-md text-lg text-text-muted">
                     Tell me about your project and I&apos;ll get back to you within one business day.
                 </p>
                 <Link
                     href="/contact"
-                    className="inline-flex rounded-full bg-(--color-text) px-8 py-4 text-sm font-bold text-(--color-bg) transition hover:opacity-90"
+                    className="inline-flex rounded-full bg-text px-8 py-4 text-sm font-bold text-bg transition hover:opacity-90"
                 >
                     Get in touch
                 </Link>

@@ -98,7 +98,7 @@ export default async function PostPage({ params }: Props) {
       {/* Back link */}
       <Link
         href="/knowledge"
-        className="mb-10 inline-flex items-center gap-1.5 text-sm text-(--color-text-muted) transition-colors hover:text-(--color-text)"
+        className="mb-10 inline-flex items-center gap-1.5 text-sm text-text-muted transition-colors hover:text-text"
       >
         ← Knowledge
       </Link>
@@ -107,25 +107,25 @@ export default async function PostPage({ params }: Props) {
       <header className="mb-14 space-y-6">
         {/* Category badge + reading time */}
         <div className="flex items-center gap-2.5">
-          <span className="rounded-full border border-(--color-border) px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-(--color-text-muted)">
+          <span className="rounded-full border border-border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-text-muted">
             {CATEGORY_LABELS[post.category] ?? post.category}
           </span>
-          <span className="text-[10px] text-(--color-text-muted-2)">
+          <span className="text-[10px] text-text-muted-2">
             {post.readingTime} min read
           </span>
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-(--color-text) md:text-5xl">
+        <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-text md:text-5xl">
           {post.title}
         </h1>
 
         {/* Lead / excerpt */}
-        <p className="text-xl text-(--color-text-muted)">{post.excerpt}</p>
+        <p className="text-xl text-text-muted">{post.excerpt}</p>
 
         {/* Date — separated by a top border */}
-        <div className="border-t border-(--color-border) pt-4">
-          <time className="text-sm text-(--color-text-muted-2)" dateTime={post.publishedAt}>
+        <div className="border-t border-border pt-4">
+          <time className="text-sm text-text-muted-2" dateTime={post.publishedAt}>
             {formattedDate}
           </time>
         </div>
@@ -133,7 +133,7 @@ export default async function PostPage({ params }: Props) {
 
       {/* Cover image */}
       {coverImageUrl && (
-        <div className="relative mb-14 aspect-video w-full overflow-hidden rounded-2xl border border-(--color-border)">
+        <div className="relative mb-14 aspect-video w-full overflow-hidden rounded-2xl border border-border">
           <Image
             src={coverImageUrl}
             alt={post.coverImage?.alt ?? post.title}
@@ -151,16 +151,16 @@ export default async function PostPage({ params }: Props) {
       </article>
 
       {/* Footer CTA */}
-      <div className="mt-20 space-y-6 rounded-2xl border border-(--color-border) bg-(--color-surface) p-12 text-center">
-        <h2 className="text-2xl font-extrabold tracking-tight text-(--color-text) md:text-3xl">
+      <div className="mt-20 space-y-6 rounded-2xl border border-border bg-surface p-12 text-center">
+        <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-3xl">
           Let&apos;s build something together.
         </h2>
-        <p className="mx-auto max-w-md text-(--color-text-muted)">
+        <p className="mx-auto max-w-md text-text-muted">
           If this sparked an idea for your project, I&apos;d love to hear about it.
         </p>
         <Link
           href="/contact"
-          className="inline-flex rounded-full bg-(--color-text) px-8 py-4 text-sm font-bold text-(--color-bg) transition hover:opacity-90"
+          className="inline-flex rounded-full bg-text px-8 py-4 text-sm font-bold text-bg transition hover:opacity-90"
         >
           Get in touch
         </Link>

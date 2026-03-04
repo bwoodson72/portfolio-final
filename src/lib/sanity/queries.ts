@@ -46,6 +46,7 @@ const PROJECT_CARD_FIELDS = groq`
   stack,
   featured,
   sortOrder,
+  highlightQuote,
   coverImage { asset, alt, hotspot }
 `
 
@@ -68,6 +69,7 @@ export const PROJECT_BY_SLUG_QUERY = groq`
     problem,
     solution,
     deliverables,
+    outcome,
     screenshots[] { asset, alt, hotspot },
     liveUrl,
     loomUrl,

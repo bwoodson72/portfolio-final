@@ -17,21 +17,21 @@ function assetUrl(ref: string): string {
 export const portableTextComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="mb-6 text-base leading-8 text-(--color-text-muted)">{children}</p>
+      <p className="mb-6 text-base leading-8 text-text-muted">{children}</p>
     ),
     h2: ({ children }) => (
-      <h2 className="mt-14 mb-5 border-b border-(--color-border) pb-3 text-2xl font-extrabold text-(--color-text)">
+      <h2 className="mt-14 mb-5 border-b border-border pb-3 text-2xl font-extrabold text-text">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="mt-10 mb-4 text-xl font-bold text-(--color-text)">{children}</h3>
+      <h3 className="mt-10 mb-4 text-xl font-bold text-text">{children}</h3>
     ),
     h4: ({ children }) => (
-      <h4 className="mt-8 mb-3 text-base font-bold text-(--color-text)">{children}</h4>
+      <h4 className="mt-8 mb-3 text-base font-bold text-text">{children}</h4>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="my-8 border-l-2 border-(--color-border-strong) pl-6 italic text-lg text-(--color-text-muted)">
+      <blockquote className="my-8 border-l-2 border-border-strong pl-6 italic text-lg text-text-muted">
         {children}
       </blockquote>
     ),
@@ -39,11 +39,11 @@ export const portableTextComponents: PortableTextComponents = {
 
   marks: {
     strong: ({ children }) => (
-      <strong className="font-bold text-(--color-text)">{children}</strong>
+      <strong className="font-bold text-text">{children}</strong>
     ),
     em: ({ children }) => <em className="italic">{children}</em>,
     code: ({ children }) => (
-      <code className="rounded-md border border-(--color-border) bg-(--color-surface-hover) px-1.5 py-0.5 font-mono text-sm">
+      <code className="rounded-md border border-border bg-surface-hover px-1.5 py-0.5 font-mono text-sm">
         {children}
       </code>
     ),
@@ -61,12 +61,12 @@ export const portableTextComponents: PortableTextComponents = {
 
   list: {
     bullet: ({ children }) => (
-      <ul className="mb-6 list-disc space-y-2 pl-6 text-(--color-text-muted) marker:text-(--color-text-muted-2)">
+      <ul className="mb-6 list-disc space-y-2 pl-6 text-text-muted marker:text-text-muted-2">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="mb-6 list-decimal space-y-2 pl-6 text-(--color-text-muted) marker:text-(--color-text-muted-2)">
+      <ol className="mb-6 list-decimal space-y-2 pl-6 text-text-muted marker:text-text-muted-2">
         {children}
       </ol>
     ),
@@ -84,7 +84,7 @@ export const portableTextComponents: PortableTextComponents = {
       const src = assetUrl(ref)
       return (
         <figure className="my-10">
-          <div className="overflow-hidden rounded-xl border border-(--color-border)">
+          <div className="overflow-hidden rounded-xl border border-border">
             {/* unoptimized: Sanity CDN domain isn't in next.config remotePatterns */}
             <Image
               src={src}
@@ -96,7 +96,7 @@ export const portableTextComponents: PortableTextComponents = {
             />
           </div>
           {value?.caption && (
-            <figcaption className="mt-3 text-center text-xs italic text-(--color-text-muted-2)">
+            <figcaption className="mt-3 text-center text-xs italic text-text-muted-2">
               {value.caption}
             </figcaption>
           )}
@@ -107,17 +107,17 @@ export const portableTextComponents: PortableTextComponents = {
     codeBlock: ({ value }) => {
       const { language, code, filename } = value ?? {}
       return (
-        <div className="my-8 overflow-hidden rounded-xl border border-(--color-border) bg-(--color-surface)">
-          <div className="flex items-center justify-between border-b border-(--color-border) px-4 py-2.5">
-            <span className="text-xs text-(--color-text-muted-2)">{filename ?? 'Code'}</span>
+        <div className="my-8 overflow-hidden rounded-xl border border-border bg-surface">
+          <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
+            <span className="text-xs text-text-muted-2">{filename ?? 'Code'}</span>
             {language && (
-              <span className="rounded border border-(--color-border) px-2 py-0.5 font-mono text-[10px] text-(--color-text-muted-2)">
+              <span className="rounded border border-border px-2 py-0.5 font-mono text-[10px] text-text-muted-2">
                 {language}
               </span>
             )}
           </div>
           <pre className="overflow-x-auto p-5">
-            <code className="font-mono text-sm leading-7 text-(--color-text-muted)">{code}</code>
+            <code className="font-mono text-sm leading-7 text-text-muted">{code}</code>
           </pre>
         </div>
       )
@@ -155,7 +155,7 @@ export const portableTextComponents: PortableTextComponents = {
             <span>{config.icon}</span>
             <span>{config.label}</span>
           </div>
-          <p className="text-sm leading-7 text-(--color-text-muted)">{text}</p>
+          <p className="text-sm leading-7 text-text-muted">{text}</p>
         </div>
       )
     },

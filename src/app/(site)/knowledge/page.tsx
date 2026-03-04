@@ -68,13 +68,13 @@ export default async function KnowledgePage({ searchParams }: Props) {
     <main className="mx-auto w-full max-w-7xl px-6 py-24">
       {/* Header */}
       <div className="mb-12 space-y-4">
-        <p className="text-xs font-bold uppercase tracking-widest text-(--color-text-muted)">
+        <p className="text-xs font-bold uppercase tracking-widest text-text-muted">
           Knowledge
         </p>
-        <h1 className="text-4xl font-extrabold tracking-tight text-(--color-text) md:text-6xl">
+        <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-6xl">
           Things worth knowing.
         </h1>
-        <p className="max-w-2xl text-lg text-(--color-text-muted)">
+        <p className="max-w-2xl text-lg text-text-muted">
           Practical notes on Next.js, React, performance, and the craft of building for the web.
         </p>
       </div>
@@ -85,8 +85,8 @@ export default async function KnowledgePage({ searchParams }: Props) {
           href="/knowledge"
           className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition-colors ${
             !category
-              ? 'border-(--color-border-strong) bg-(--color-surface-hover) text-(--color-text)'
-              : 'border-(--color-border) text-(--color-text-muted) hover:border-(--color-border-strong) hover:text-(--color-text)'
+              ? 'border-border-strong bg-surface-hover text-text'
+              : 'border-border text-text-muted hover:border-border-strong hover:text-text'
           }`}
         >
           All
@@ -97,8 +97,8 @@ export default async function KnowledgePage({ searchParams }: Props) {
             href={`/knowledge?category=${cat.value}`}
             className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition-colors ${
               category === cat.value
-                ? 'border-(--color-border-strong) bg-(--color-surface-hover) text-(--color-text)'
-                : 'border-(--color-border) text-(--color-text-muted) hover:border-(--color-border-strong) hover:text-(--color-text)'
+                ? 'border-border-strong bg-surface-hover text-text'
+                : 'border-border text-text-muted hover:border-border-strong hover:text-text'
             }`}
           >
             {cat.label}
@@ -119,8 +119,8 @@ export default async function KnowledgePage({ searchParams }: Props) {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center py-24 text-center space-y-3">
-          <p className="text-lg font-semibold text-(--color-text)">No posts yet</p>
-          <p className="text-sm text-(--color-text-muted)">
+          <p className="text-lg font-semibold text-text">No posts yet</p>
+          <p className="text-sm text-text-muted">
             Nothing here for this category — check back soon.
           </p>
         </div>

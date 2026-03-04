@@ -112,6 +112,13 @@ export const projectType = defineType({
       validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
+      name: 'outcome',
+      title: 'Expected Outcomes',
+      type: 'array',
+      description: 'Business-facing outcomes (e.g. "Built to rank for local roofing searches"). Shown on the case study page.',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
       name: 'stack',
       title: 'Stack',
       type: 'array',
@@ -135,6 +142,13 @@ export const projectType = defineType({
       type: 'boolean',
       description: 'Show in the Featured Work section on the homepage.',
       initialValue: false,
+    }),
+    defineField({
+      name: 'highlightQuote',
+      title: 'Highlight Quote',
+      type: 'text',
+      rows: 3,
+      description: 'Short 1-2 sentence summary shown on the homepage highlights section. Business-outcome focused.',
     }),
     defineField({
       name: 'sortOrder',

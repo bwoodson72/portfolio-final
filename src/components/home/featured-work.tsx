@@ -20,10 +20,10 @@ export async function FeaturedWork() {
   return (
     <section id="work" className="mx-auto w-full max-w-7xl px-6 py-24">
       <div className="space-y-4 text-center md:text-left">
-        <h2 className="text-3xl font-extrabold tracking-tight text-(--color-text) md:text-5xl">
+        <h2 className="text-3xl font-extrabold tracking-tight text-text md:text-5xl">
           Featured Work
         </h2>
-        <p className="max-w-2xl text-lg text-(--color-text-muted)">
+        <p className="max-w-2xl text-lg text-text-muted">
           A selection of recent projects focused on measurable outcomes and technical excellence.
         </p>
       </div>
@@ -33,7 +33,7 @@ export async function FeaturedWork() {
           <Link
             key={project._id}
             href={`/work/${project.slug.current}`}
-            className="group flex w-full min-w-xs  flex-col text-left rounded-2xl border border-(--color-border) bg-(--color-surface) overflow-hidden transition hover:border-(--color-border-strong) hover:-translate-y-1"
+            className="group flex w-full min-w-xs  flex-col text-left rounded-2xl border border-border bg-surface overflow-hidden transition hover:border-border-strong hover:-translate-y-1"
           >
             {project.coverImage && (
               <div className="relative aspect-video w-full overflow-hidden">
@@ -48,18 +48,18 @@ export async function FeaturedWork() {
             )}
             <div className="flex flex-col flex-1 p-6 space-evenly">
               {project.role && (
-                <div className="mb-3 inline-block self-start rounded-full bg-(--color-accent) px-3 py-1 text-[10px] font-bold tracking-wider text-(--color-text) uppercase">
+                <div className="mb-3 inline-block self-start rounded-full bg-accent px-3 py-1 text-[10px] font-bold tracking-wider text-text uppercase">
                   {project.role}
                 </div>
               )}
 
               <div className="flex flex-col flex-1">
-              <h3 className="text-xl font-bold text-(--color-text)">{project.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-(--color-text-muted)">
+              <h3 className="text-xl font-bold text-text">{project.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-text-muted">
                 {project.tagline}
               </p>
               </div>
-              <div className="mt-6 text-sm font-bold justify-self-end text-(--color-text)">
+              <div className="mt-6 text-sm font-bold justify-self-end text-text">
                 View details →
               </div>
             </div>

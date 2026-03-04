@@ -41,6 +41,7 @@ export type PackageTier = {
   deliverables: string[];
   timeline: string;
   idealFor: string[];
+  recommended?: boolean;
 };
 
 export type SiteContent = {
@@ -56,8 +57,8 @@ export const INTAKE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfP-GqX9W9T9
 
 export const siteContent: SiteContent = {
   hero: {
-    headline: "Fast, modern websites for local businesses",
-    subheadline: "I build Next.js websites that load fast, rank on Google, and turn visitors into leads. Fixed scope, clear deliverables, no surprises.",
+    headline: "A website you're actually proud to share",
+    subheadline: "I build fast, modern websites for small businesses — sites that load instantly, rank on Google, and make people take you seriously. Fixed price, clear scope, delivered in weeks.",
     ctaPrimary: "See my work",
     ctaSecondary: "View packages"
   },
@@ -101,7 +102,8 @@ export const siteContent: SiteContent = {
         "3 revisions",
       ],
       timeline: "21 days",
-      idealFor: ["Established local businesses", "Service companies", "Anyone who wants it done right"]
+      idealFor: ["Established local businesses", "Service companies", "Anyone who wants it done right"],
+      recommended: true,
     },
   ],
 
@@ -116,8 +118,8 @@ export const siteContent: SiteContent = {
   },
 
   cta: {
-    headline: "Ready to get started?",
-    body: "Tell me about your project and I'll get back to you within one business day.",
+    headline: "Let's build something you're proud of",
+    body: "Tell me about your project. I'll get back to you within one business day with a clear scope and fixed price.",
     email: "hello@brianwoodson.com"
   }
 };

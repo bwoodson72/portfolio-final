@@ -18,10 +18,17 @@ export const ServicePackages = () => {
         {packages.map((pkg) => (
           <div
             key={pkg.name}
-            className="flex flex-col  rounded-3xl border border-border bg-surface p-8 shadow-sm transition hover:border-(--color-border-strong)"
+            className={`flex flex-col rounded-3xl border bg-surface p-8 shadow-sm transition hover:border-border-strong ${pkg.recommended ? "border-border-strong" : "border-border"}`}
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-text">{pkg.name}</h3>
+              <div>
+                {pkg.recommended && (
+                  <div className="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full inline-block mb-3">
+                    Recommended
+                  </div>
+                )}
+                <h3 className="text-xl font-bold text-text">{pkg.name}</h3>
+              </div>
               <div className="text-sm font-bold text-text">
                 From ${pkg.priceFrom.toLocaleString()}
               </div>
@@ -59,6 +66,10 @@ export const ServicePackages = () => {
           </div>
         ))}
       </div>
+
+      <p className="mt-8 text-center text-sm text-text-muted">
+        I take on 2–3 projects per month. Currently booking for <strong className="text-text">July 2025</strong>.
+      </p>
     </section>
   );
 };

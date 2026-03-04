@@ -21,23 +21,23 @@ export async function KnowledgeSection() {
   if (posts.length === 0) return null
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-6 border-t border-(--color-border) pt-16 pb-24">
+    <section className="mx-auto w-full max-w-7xl px-6 border-t border-border pt-16 pb-24">
       {/* Header row */}
       <div className="mb-10 flex items-end justify-between">
         <div className="space-y-2">
-          <p className="text-xs font-bold uppercase tracking-widest text-(--color-text-muted-2)">
+          <p className="text-xs font-bold uppercase tracking-widest text-text-muted-2">
             Knowledge
           </p>
-          <h2 className="text-2xl font-extrabold tracking-tight text-(--color-text) md:text-4xl">
+          <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-4xl">
             Things worth knowing.
           </h2>
-          <p className="text-sm text-(--color-text-muted)">
+          <p className="text-sm text-text-muted">
             Practical notes on Next.js, React, and building fast sites.
           </p>
         </div>
         <Link
           href="/knowledge"
-          className="shrink-0 text-sm font-semibold text-(--color-text-muted) transition-colors hover:text-(--color-text)"
+          className="shrink-0 text-sm font-semibold text-text-muted transition-colors hover:text-text"
         >
           View all →
         </Link>

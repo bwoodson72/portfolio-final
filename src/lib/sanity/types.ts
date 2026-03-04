@@ -29,6 +29,7 @@ export interface ProjectCard {
   stack: string[]
   featured: boolean
   sortOrder?: number
+  highlightQuote?: string
   coverImage?: {
     asset: { _ref: string }
     alt: string
@@ -41,6 +42,7 @@ export interface Project extends ProjectCard {
   problem: string[]
   solution: string[]
   deliverables: string[]
+  outcome?: string[]
   screenshots: {
     asset: { _ref: string }
     alt: string

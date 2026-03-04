@@ -28,13 +28,13 @@ export const Hero = () => {
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
           <Link
             href="#work"
-            className="rounded-full bg-(--color-accent) px-8 py-4 text-sm font-bold text-text transition hover:bg-accent-hover"
+            className="rounded-full bg-accent px-8 py-4 text-sm font-bold text-text transition hover:bg-accent-hover"
           >
             {hero.ctaPrimary}
           </Link>
           <Link
             href="#packages"
-            className="rounded-full border border-border bg-(--color-surface) px-8 py-4 text-sm font-bold text-(--color-text) transition hover:bg-(--color-surface-hover)"
+            className="rounded-full border border-border bg-surface px-8 py-4 text-sm font-bold text-text transition hover:bg-surface-hover"
           >
             {hero.ctaSecondary}
           </Link>

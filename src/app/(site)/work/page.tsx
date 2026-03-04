@@ -42,16 +42,16 @@ export default async function WorkPage() {
     return (
         <main className="mx-auto w-full max-w-7xl px-6 py-24">
             <div className="space-y-4">
-                <h1 className="text-4xl font-extrabold tracking-tight text-(--color-text) md:text-6xl">
+                <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-6xl">
                     Work
                 </h1>
-                <p className="max-w-2xl text-lg text-(--color-text-muted)">
+                <p className="max-w-2xl text-lg text-text-muted">
                     Projects and case studies.
                 </p>
             </div>
 
             {projects.length === 0 ? (
-                <p className="mt-16 text-(--color-text-muted)">No projects yet.</p>
+                <p className="mt-16 text-text-muted">No projects yet.</p>
             ) : (
                 <div className="mt-16 grid gap-8 md:grid-cols-2">
                     {projects.map((project) => {
@@ -60,7 +60,7 @@ export default async function WorkPage() {
                             <Link
                                 key={project._id}
                                 href={`/work/${project.slug.current}`}
-                                className="group flex flex-col rounded-3xl border border-(--color-border) bg-(--color-surface) overflow-hidden transition hover:border-(--color-border-strong)"
+                                className="group flex flex-col rounded-3xl border border-border bg-surface overflow-hidden transition hover:border-border-strong"
                             >
                                 {imageUrl && (
                                     <div className="relative aspect-video w-full overflow-hidden">
@@ -75,21 +75,21 @@ export default async function WorkPage() {
                                 )}
                                 <div className="p-8 space-y-4">
                                     {project.role && (
-                                        <div className="inline-block rounded-full bg-(--color-accent) px-3 py-1 text-[10px] font-bold tracking-wider text-(--color-text) uppercase">
+                                        <div className="inline-block rounded-full bg-accent px-3 py-1 text-[10px] font-bold tracking-wider text-text uppercase">
                                             {project.role}
                                         </div>
                                     )}
-                                    <h2 className="text-xl font-bold text-(--color-text)">
+                                    <h2 className="text-xl font-bold text-text">
                                         {project.title}
                                     </h2>
-                                    <p className="text-sm leading-relaxed text-(--color-text-muted)">
+                                    <p className="text-sm leading-relaxed text-text-muted">
                                         {project.tagline}
                                     </p>
                                     <div className="flex flex-wrap gap-2 pt-2">
                                         {(project.stack ?? []).map((tech) => (
                                             <span
                                                 key={tech}
-                                                className="rounded-md border border-(--color-border) bg-(--color-bg) px-2 py-1 text-[10px] font-mono text-(--color-text)"
+                                                className="rounded-md border border-border bg-bg px-2 py-1 text-[10px] font-mono text-text"
                                             >
                                                 {tech}
                                             </span>

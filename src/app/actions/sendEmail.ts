@@ -14,7 +14,7 @@ export async function sendEmail(formData: {
     lastName: string;
     email: string;
     message: string;
-    package: string;
+    package?: string;
 }): Promise<SendEmailResponse> {
 
     if (!process.env.RESEND_API_KEY) {
@@ -25,7 +25,7 @@ export async function sendEmail(formData: {
         const { error } = await resend.emails.send({
             from: 'Portfolio <onboarding@resend.dev>',
             to: ['bwoodson2@live.com'],
-            subject: `// INQUIRY [${formData.package}]: ${formData.firstName} ${formData.lastName}`,
+            subject: `// INQUIRY [${formData.package ?? 'No package selected'}]: ${formData.firstName} ${formData.lastName}`,
             replyTo: formData.email,
             html: `
                 <div style="font-family: monospace; background-color: #050505; color: #ffffff; padding: 20px; border: 1px solid #3b82f6;">

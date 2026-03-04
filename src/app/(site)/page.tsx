@@ -4,7 +4,8 @@ import { ProofStrip } from "@/components/home/proof-strip";
 import { FeaturedWork } from "@/components/home/featured-work";
 import { ServicePackages } from "@/components/home/service-packages";
 import { HowIWork } from "@/components/home/how-i-work";
-import { KnowledgeSection } from "@/components/home/KnowledgeSection";
+import { TrustStrip } from "@/components/home/trust-strip";
+import { ProjectHighlights } from "@/components/home/project-highlights";
 import { FinalCTA } from "@/components/home/final-cta";
 
 export const metadata: Metadata = {
@@ -33,9 +34,10 @@ export default function Home() {
             <Hero />
             {/*<ProofStrip />*/}
             <FeaturedWork />
+            <TrustStrip />
+            <ProjectHighlights />
             <ServicePackages />
             <HowIWork />
-            <KnowledgeSection />
             <FinalCTA />
         </main>
     );
