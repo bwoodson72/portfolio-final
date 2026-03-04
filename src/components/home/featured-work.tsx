@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FEATURED_PROJECTS_QUERY } from "@/lib/sanity/queries";
 import type { ProjectCard } from "@/lib/sanity/types";
 
-export async function FeaturedOutcomes() {
+export async function FeaturedWork() {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return null;
 
   const { client, urlFor } = await import("@/lib/sanity/client");
@@ -46,17 +46,20 @@ export async function FeaturedOutcomes() {
                 />
               </div>
             )}
-            <div className="flex flex-col flex-1 p-6">
+            <div className="flex flex-col flex-1 p-6 space-evenly">
               {project.role && (
                 <div className="mb-3 inline-block self-start rounded-full bg-(--color-accent) px-3 py-1 text-[10px] font-bold tracking-wider text-(--color-text) uppercase">
                   {project.role}
                 </div>
               )}
+
+              <div className="flex flex-col flex-1">
               <h3 className="text-xl font-bold text-(--color-text)">{project.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-(--color-text-muted)">
                 {project.tagline}
               </p>
-              <div className="mt-6 text-sm font-bold text-(--color-text)">
+              </div>
+              <div className="mt-6 text-sm font-bold justify-self-end text-(--color-text)">
                 View details →
               </div>
             </div>

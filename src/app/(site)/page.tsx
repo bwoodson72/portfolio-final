@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/hero";
 import { ProofStrip } from "@/components/home/proof-strip";
-import { FeaturedOutcomes } from "@/components/home/featured-outcomes";
+import { FeaturedWork } from "@/components/home/featured-work";
 import { PortfolioSection } from "@/components/home/portfolio-section";
 import { HowIWork } from "@/components/home/how-i-work";
 import { KnowledgeSection } from "@/components/home/KnowledgeSection";
@@ -32,7 +32,7 @@ export default function Home() {
         <main className="flex w-full flex-col items-center bg-slate-950 text-slate-50">
             <Hero />
             {/*<ProofStrip />*/}
-            <FeaturedOutcomes />
+            <FeaturedWork />
             <PortfolioSection />
             <HowIWork />
             <KnowledgeSection />
