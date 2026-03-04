@@ -1,6 +1,6 @@
 import { siteContent } from "@/content/portfolio";
 
-export const PortfolioSection = () => {
+export const ServicePackages = () => {
   const { packages } = siteContent;
 
   return (

@@ -44,7 +44,7 @@ export async function KnowledgeSection() {
       </div>
 
       {/* Post grid */}
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 lg:grid-cols-3">
         {posts.map((post) => (
           <PostCardComponent
             key={post._id}

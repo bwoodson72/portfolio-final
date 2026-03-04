@@ -28,12 +28,12 @@ export async function FeaturedWork() {
         </p>
       </div>
 
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
+      <div className="mt-12 grid gap-6  lg:grid-cols-3 row-auto">
         {projects.map((project) => (
           <Link
             key={project._id}
             href={`/work/${project.slug.current}`}
-            className="group flex flex-col text-left rounded-2xl border border-(--color-border) bg-(--color-surface) overflow-hidden transition hover:border-(--color-border-strong) hover:-translate-y-1"
+            className="group flex w-full min-w-xs  flex-col text-left rounded-2xl border border-(--color-border) bg-(--color-surface) overflow-hidden transition hover:border-(--color-border-strong) hover:-translate-y-1"
           >
             {project.coverImage && (
               <div className="relative aspect-video w-full overflow-hidden">

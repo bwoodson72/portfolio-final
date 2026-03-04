@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/home/hero";
 import { ProofStrip } from "@/components/home/proof-strip";
 import { FeaturedWork } from "@/components/home/featured-work";
-import { PortfolioSection } from "@/components/home/portfolio-section";
+import { ServicePackages } from "@/components/home/service-packages";
 import { HowIWork } from "@/components/home/how-i-work";
 import { KnowledgeSection } from "@/components/home/KnowledgeSection";
 import { FinalCTA } from "@/components/home/final-cta";
@@ -33,7 +33,7 @@ export default function Home() {
             <Hero />
             {/*<ProofStrip />*/}
             <FeaturedWork />
-            <PortfolioSection />
+            <ServicePackages />
             <HowIWork />
             <KnowledgeSection />
             <FinalCTA />
