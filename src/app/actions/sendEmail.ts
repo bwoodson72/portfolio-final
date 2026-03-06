@@ -21,36 +21,49 @@ export async function sendEmail(
 ): Promise<SendEmailResponse> {
 
     // Validate Turnstile token
-    console.log("[turnstile] token received:", turnstileToken ? `${turnstileToken.substring(0, 20)}...` : "null");
-    console.log("[turnstile] secret key set:", !!process.env.TURNSTILE_SECRET_KEY);
+    const secretKey = process.env.TURNSTILE_SECRET_KEY;
+    console.log("[turnstile] secret key exists:", !!secretKey);
+    console.log("[turnstile] token exists:", !!turnstileToken);
 
-    if (process.env.TURNSTILE_SECRET_KEY) {
+    if (secretKey) {
         if (!turnstileToken) {
+            console.log("[turnstile] REJECTED: no token provided");
             return { success: false, error: "Bot verification required. Please complete the challenge." };
         }
 
+        let turnstileResult: { success: boolean; "error-codes"?: string[] };
+
         try {
+            const formBody = new URLSearchParams();
+            formBody.append("secret", secretKey);
+            formBody.append("response", turnstileToken);
+
+            console.log("[turnstile] sending validation request...");
+
             const turnstileResponse = await fetch(
                 "https://challenges.cloudflare.com/turnstile/siteverify",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: new URLSearchParams({
-                        secret: process.env.TURNSTILE_SECRET_KEY!,
-                        response: turnstileToken,
-                    }),
+                    body: formBody.toString(),
                 }
             );
-            const turnstileResult = await turnstileResponse.json();
-            console.log("[turnstile] status:", turnstileResponse.status);
+
+            console.log("[turnstile] response status:", turnstileResponse.status);
+
+            turnstileResult = await turnstileResponse.json();
             console.log("[turnstile] result:", JSON.stringify(turnstileResult));
-            if (!turnstileResult.success) {
-                return { success: false, error: "Bot verification failed. Please try again." };
-            }
         } catch (err) {
-            console.error("[turnstile] fetch error:", err);
+            console.error("[turnstile] fetch threw error:", err);
             return { success: false, error: "Could not verify bot protection. Please try again." };
         }
+
+        if (!turnstileResult.success) {
+            console.log("[turnstile] REJECTED by Cloudflare:", turnstileResult["error-codes"]);
+            return { success: false, error: "Bot verification failed. Please try again." };
+        }
+
+        console.log("[turnstile] PASSED");
     }
 
     if (!process.env.RESEND_API_KEY) {
