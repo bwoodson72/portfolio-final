@@ -41,7 +41,7 @@ export async function sendEmail(
             console.log("[turnstile] sending validation request...");
 
             const turnstileResponse = await fetch(
-                "https://challenges.cloudflare.com/turnstile/siteverify",
+                "https://challenges.cloudflare.com/turnstile/v0/siteverify",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
