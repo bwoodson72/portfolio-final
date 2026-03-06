@@ -21,6 +21,9 @@ export async function sendEmail(
 ): Promise<SendEmailResponse> {
 
     // Validate Turnstile token
+    console.log("[turnstile] token received:", turnstileToken ? `${turnstileToken.substring(0, 20)}...` : "null");
+    console.log("[turnstile] secret key set:", !!process.env.TURNSTILE_SECRET_KEY);
+
     if (process.env.TURNSTILE_SECRET_KEY) {
         if (!turnstileToken) {
             return { success: false, error: "Bot verification required. Please complete the challenge." };
@@ -31,18 +34,21 @@ export async function sendEmail(
                 "https://challenges.cloudflare.com/turnstile/siteverify",
                 {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        secret: process.env.TURNSTILE_SECRET_KEY,
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams({
+                        secret: process.env.TURNSTILE_SECRET_KEY!,
                         response: turnstileToken,
                     }),
                 }
             );
             const turnstileResult = await turnstileResponse.json();
+            console.log("[turnstile] status:", turnstileResponse.status);
+            console.log("[turnstile] result:", JSON.stringify(turnstileResult));
             if (!turnstileResult.success) {
                 return { success: false, error: "Bot verification failed. Please try again." };
             }
-        } catch {
+        } catch (err) {
+            console.error("[turnstile] fetch error:", err);
             return { success: false, error: "Could not verify bot protection. Please try again." };
         }
     }
