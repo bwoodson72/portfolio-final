@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import {SpeedInsights} from "@vercel/speed-insights/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { HubSpotTracker } from "@/components/HubSpotTracker";
 
 // 1. Configure Fonts with "swap" for performance
 const geistSans = Geist({
@@ -21,23 +23,23 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://brianwoodson.dev/"),
-    title: "Brian Woodson // Frontend Engineer",
-    description: "Specializing in high-performance, immersive digital experiences with React and Next.js.",
-    keywords: ["Frontend Engineer", "React Developer", "Next.js", "Web Performance"],
+    title: "Brian Woodson // Websites for Small Businesses",
+    description: "Fast, modern websites for small businesses. Fixed price, no monthly fees, built to rank on Google.",
+    keywords: ["small business website", "website developer", "fast website", "Next.js developer", "fixed price website"],
     authors: [{ name: "Brian Woodson" }],
     openGraph: {
-        title: "Brian Woodson // Frontend Engineer",
-        description: "Building high-performance, immersive digital experiences.",
+        title: "Brian Woodson // Websites for Small Businesses",
+        description: "Fast, modern websites for small businesses. Fixed price, no monthly fees, built to rank on Google.",
         url: "https://brianwoodson.dev/",
-        siteName: "Brian Woodson Portfolio",
+        siteName: "Brian Woodson",
         images: [],
         locale: "en_US",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
-        title: "Brian Woodson // Frontend Engineer",
-        description: "Building high-performance, immersive digital experiences.",
+        title: "Brian Woodson // Websites for Small Businesses",
+        description: "Fast, modern websites for small businesses. Fixed price, no monthly fees, built to rank on Google.",
         images: [],
     },
     icons: {
@@ -56,6 +58,10 @@ export default function RootLayout({
             className={`${geistSans.variable} ${geistMono.variable} bg-[#050505] text-white antialiased min-h-screen selection:bg-blue-500/30 selection:text-white font-sans`}
         >
         {children}
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
+        <HubSpotTracker />
         <SpeedInsights/>
         </body>
         </html>

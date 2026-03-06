@@ -40,7 +40,7 @@ export function Footer() {
                     <div className="space-y-4">
                         <h3 className="text-xs font-bold uppercase tracking-widest text-text">Brian Woodson</h3>
                         <p className="text-sm text-text-muted leading-relaxed">
-                            Senior Next.js Partner specializing in high-performance digital experiences.
+                            I build fast, modern websites for small businesses. Fixed price, no monthly fees, delivered in weeks.
                         </p>
                     </div>
                 </div>

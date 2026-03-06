@@ -4,12 +4,12 @@ import { faqs } from "@/content/portfolio";
 
 export const metadata: Metadata = {
     title: "FAQ | Brian Woodson",
-    description: "Common questions about working with Brian Woodson on your Next.js website project",
+    description: "Common questions about working with Brian Woodson on your small business website",
     openGraph: {
         title: "FAQ | Brian Woodson",
-        description: "Common questions about working with Brian Woodson on your Next.js website project",
+        description: "Common questions about working with Brian Woodson on your small business website",
         url: "/faq",
-        siteName: "Brian Woodson Portfolio",
+        siteName: "Brian Woodson",
         images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Portfolio Preview" }],
         locale: "en_US",
         type: "website",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "FAQ | Brian Woodson",
-        description: "Common questions about working with Brian Woodson on your Next.js website project",
+        description: "Common questions about working with Brian Woodson on your small business website",
         images: ["/og-image.png"],
     },
 };

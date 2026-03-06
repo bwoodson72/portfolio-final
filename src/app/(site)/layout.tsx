@@ -1,6 +1,7 @@
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import React from "react";
+import Script from "next/script";
 
 
 export default function SiteLayout({
@@ -15,6 +16,10 @@ export default function SiteLayout({
                 {children}
             </main>
             <Footer />
+            <Script
+                src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                strategy="afterInteractive"
+            />
         </div>
     );
 }

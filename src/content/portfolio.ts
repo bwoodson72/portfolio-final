@@ -57,24 +57,24 @@ export const INTAKE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfP-GqX9W9T9
 
 export const siteContent: SiteContent = {
   hero: {
-    headline: "A website you're actually proud to share",
-    subheadline: "I build fast, modern websites for small businesses — sites that load instantly, rank on Google, and make people take you seriously. Fixed price, clear scope, delivered in weeks.",
-    ctaPrimary: "See my work",
+    headline: "Your website should be your best salesperson",
+    subheadline: "Most small business websites cost money every month and bring in nothing. I build sites that load fast, rank on Google, and actually drive leads — for a fixed price, delivered in weeks.",
+    ctaPrimary: "See what I build",
     ctaSecondary: "View packages"
   },
 
   stats: [
-    { label: "Performance", value: "98" },
-    { label: "SEO", value: "100" },
-    { label: "Best Practices", value: "100" },
-    { label: "Accessibility", value: "96" },
+    { label: "Load Time", value: "< 1s" },
+    { label: "Google-Ready", value: "SEO Built In" },
+    { label: "Delivery", value: "2–3 Weeks" },
+    { label: "Maintenance Fees", value: "$0/mo" },
   ],
 
   packages: [
     {
       name: "Business Site",
       priceFrom: 750,
-      description: "A clean, fast multi-page website for your local business. Built to rank and built to last.",
+      description: "A professional website that makes your business look as good online as it is in person. Fast, mobile-friendly, and ready for Google.",
       deliverables: [
         "Up to 5 pages",
         "Contact form with validation",
@@ -89,7 +89,7 @@ export const siteContent: SiteContent = {
     {
       name: "Full Business Site",
       priceFrom: 1200,
-      description: "A complete business website with performance optimization, SEO infrastructure, and a guaranteed Lighthouse score.",
+      description: "Everything in the Business Site, plus advanced SEO infrastructure, performance guarantees, and a site built to compete for local search traffic.",
       deliverables: [
         "Up to 8 pages",
         "Contact form with validation",
@@ -108,18 +108,18 @@ export const siteContent: SiteContent = {
   ],
 
   about: {
-    headline: "Next.js websites built to perform",
+    headline: "Websites that work as hard as you do",
     body: [
-      "I'm Brian Woodson, a frontend developer specializing in Next.js. I build websites for local businesses that are fast, easy to find on Google, and built to last.",
-      "Every site I deliver is production-ready — clean code, proper SEO foundations, and deployed to Vercel. No page builders, no bloated plugins, no WordPress maintenance headaches.",
-      "Fixed scope on every project. You know exactly what you're getting, what it costs, and when it ships."
+      "I'm Brian Woodson. I build websites for small businesses that actually do something — bring in leads, build credibility, and show up on Google. Not template sites. Not WordPress. Custom-built, fast, and done right.",
+      "Every site I deliver loads in under a second, scores 95+ on Google's performance audit, and comes with the SEO foundations you need to get found. No plugins to maintain, no monthly fees, no surprises after launch.",
+      "Fixed scope on every project. You know exactly what you're getting, what it costs, and when it ships. I take on 2–3 projects a month so every client gets my full attention."
     ],
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"]
   },
 
   cta: {
-    headline: "Let's build something you're proud of",
-    body: "Tell me about your project. I'll get back to you within one business day with a clear scope and fixed price.",
+    headline: "Let's talk about your project",
+    body: "Tell me what your business does and what you need from your website. I'll reply within one business day with a clear scope, a fixed price, and a timeline.",
     email: "hello@brianwoodson.com"
   }
 };

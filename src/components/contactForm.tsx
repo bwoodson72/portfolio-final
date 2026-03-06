@@ -1,12 +1,14 @@
 'use client'
 
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "motion/react";
 import { sendEmail } from "@/app/actions/sendEmail";
 import { siteContent } from "@/content/portfolio";
+import { trackEvent } from "@/lib/analytics/events";
 
 const schema = z.object({
     firstName: z.string().refine((s) => s.length >= 2, { message: "Required" }),
@@ -62,19 +64,72 @@ const inputErr = "border-red-500/50 focus:border-red-500/70";
 export function ContactForm() {
     const [isSuccess, setIsSuccess] = useState(false);
     const [serverError, setServerError] = useState<string | null>(null);
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+    const turnstileRef = useRef<HTMLDivElement>(null);
+    const widgetIdRef = useRef<string | null>(null);
+    const searchParams = useSearchParams();
+    const defaultPackage = searchParams.get("package") ?? "";
 
     const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<Inputs>({
         resolver: zodResolver(schema),
+        defaultValues: { package: defaultPackage },
     });
+
+    useEffect(() => {
+        const render = () => {
+            if (turnstileRef.current && window.turnstile && !widgetIdRef.current) {
+                widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+                    sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
+                    theme: "dark",
+                    callback: (token: string) => setTurnstileToken(token),
+                    "expired-callback": () => setTurnstileToken(null),
+                    "error-callback": () => setTurnstileToken(null),
+                });
+            }
+        };
+
+        render();
+
+        const interval = setInterval(() => {
+            if (window.turnstile && !widgetIdRef.current) {
+                render();
+                clearInterval(interval);
+            }
+        }, 500);
+
+        return () => {
+            clearInterval(interval);
+            if (widgetIdRef.current && window.turnstile) {
+                window.turnstile.remove(widgetIdRef.current);
+                widgetIdRef.current = null;
+            }
+        };
+    }, []);
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setServerError(null);
-        const result = await sendEmail(data);
+        trackEvent("contact_form_submit", { package: data.package ?? "none" });
+        const result = await sendEmail(data, turnstileToken);
         if (result.success) {
             setIsSuccess(true);
+            trackEvent("contact_form_success", { package: data.package ?? "none" });
+            // Identify contact in HubSpot and associate prior page views
+            if (typeof window !== "undefined" && window._hsq) {
+                window._hsq.push(["identify", {
+                    email: data.email,
+                    firstname: data.firstName,
+                    lastname: data.lastName,
+                }]);
+                window._hsq.push(["trackPageView"]);
+            }
             reset();
+            setTurnstileToken(null);
+            if (widgetIdRef.current && window.turnstile) {
+                window.turnstile.reset(widgetIdRef.current);
+            }
         } else {
             setServerError(result.error ?? "Something went wrong. Please try again.");
+            trackEvent("contact_form_error", { error: result.error ?? "unknown" });
         }
     };
 
@@ -82,7 +137,7 @@ export function ContactForm() {
         <div className="mx-auto w-full max-w-3xl px-6 py-24">
             <div className="space-y-4 mb-12">
                 <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-6xl">
-                    Contact
+                    Start a Project
                 </h1>
                 <p className="max-w-xl text-lg text-text-muted">
                     {siteContent.cta.body}
@@ -155,11 +210,16 @@ export function ContactForm() {
                                         {...register("message")}
                                         id="message"
                                         rows={5}
-                                        placeholder="What do you need? Even a sentence or two is fine — I'll follow up with questions."
+                                        placeholder="What does your business do, and what do you need from your website? Even a few sentences is enough — I'll follow up with the right questions."
                                         aria-invalid={!!errors.message}
                                         className={`${baseInput} ${errors.message ? inputErr : inputOk} resize-none`}
                                     />
                                 </Field>
+                            </div>
+
+                            {/* Turnstile widget */}
+                            <div className="md:col-span-2">
+                                <div ref={turnstileRef} />
                             </div>
 
                             {serverError && (
@@ -170,7 +230,7 @@ export function ContactForm() {
 
                             <button
                                 type="submit"
-                                disabled={isSubmitting}
+                                disabled={isSubmitting || !turnstileToken}
                                 className="w-full rounded-full bg-text py-4 text-sm font-bold text-bg transition hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
                             >
                                 {isSubmitting ? "Sending…" : "Send message"}
@@ -196,10 +256,10 @@ export function ContactForm() {
                         </div>
                         <div className="space-y-2">
                             <h2 className="text-2xl font-extrabold tracking-tight text-text">
-                                Message sent
+                                Got it — I&#39;ll be in touch
                             </h2>
                             <p className="text-text-muted">
-                                I&apos;ll get back to you within one business day.
+                                Expect a reply within one business day with a clear scope and next steps.
                             </p>
                         </div>
                         <button

@@ -5,12 +5,12 @@ import { siteContent } from "@/content/portfolio";
 
 export const metadata: Metadata = {
     title: "About | Brian Woodson",
-    description: "Senior frontend developer specializing in Next.js. Fixed-scope projects, fast delivery, no bloat.",
+    description: "I build websites for small businesses that load fast, rank on Google, and actually bring in leads. Fixed price, delivered in weeks.",
     openGraph: {
         title: "About | Brian Woodson",
-        description: "Senior frontend developer specializing in Next.js. Fixed-scope projects, fast delivery, no bloat.",
+        description: "I build websites for small businesses that load fast, rank on Google, and actually bring in leads. Fixed price, delivered in weeks.",
         url: "/about",
-        siteName: "Brian Woodson Portfolio",
+        siteName: "Brian Woodson",
         images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Portfolio Preview" }],
         locale: "en_US",
         type: "website",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "About | Brian Woodson",
-        description: "Senior frontend developer specializing in Next.js. Fixed-scope projects, fast delivery, no bloat.",
+        description: "I build websites for small businesses that load fast, rank on Google, and actually bring in leads. Fixed price, delivered in weeks.",
         images: ["/og-image.png"],
     },
 };
@@ -27,27 +27,27 @@ const howIWork = [
     {
         step: "01",
         title: "Define scope before anything else",
-        body: "Every project starts with a clear scope document — what's included, what's not, and what 'done' looks like. No ambiguity before work starts.",
+        body: "Every project starts with a clear scope document — what you're getting, what it costs, and when it's done. No ambiguity, no moving targets. You approve the plan before any work begins.",
     },
     {
         step: "02",
         title: "Build in a focused sprint",
-        body: "Once scope is agreed, I build. No check-ins every day, no status theatre. You get the result, not the process.",
+        body: "Once we agree on scope, I build. No unnecessary check-ins, no status meetings. You get the finished product, not a front-row seat to the process.",
     },
     {
         step: "03",
         title: "Deliver with a clean handoff",
-        body: "Production deployment, documentation for anything non-obvious, and a revision window to make sure everything lands correctly.",
+        body: "Your site goes live on Vercel, fully deployed and production-ready. I walk you through everything, hand off access, and give you a revision window to make sure it's exactly right.",
     },
 ];
 
 const bestFitFor = [
-    "Local businesses that need a professional web presence",
-    "Service companies ready to invest in a site that actually converts",
+    "Local businesses that want a website that actually brings in customers",
+    "Service companies ready to stop paying monthly for a site that doesn't perform",
     "Business owners who have their content and branding ready to go",
-    "Anyone tired of slow, bloated WordPress sites",
-    "Companies that want a fixed price and a clear delivery date",
-    "Founders who value direct communication over agency layers",
+    "Anyone who's tired of slow, outdated WordPress sites",
+    "Companies that want a fixed price and a guaranteed delivery date",
+    "Founders who want to talk to their developer directly, not through layers",
 ];
 
 export default function AboutPage() {
@@ -75,17 +75,17 @@ export default function AboutPage() {
                     {/* Text */}
                     <div className="space-y-8">
                         <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-5xl">
-                            About
+                            Who You&#39;re Working With
                         </h1>
                         <div className="space-y-4 text-lg text-text-muted">
                             {about.body.map((para, idx) => (
                                 <p key={idx}>{para}</p>
                             ))}
                             <p>
-                                Before going independent, I spent years working across the stack on production React and Next.js applications — dashboards, marketing sites, internal tools. That experience taught me what actually matters at launch: performance, clean code, and zero surprises.
+                                Before going independent, I spent years building production web applications — the kind that have to work under real traffic, real deadlines, and real business pressure. That experience taught me what actually matters when a site launches: it has to be fast, it has to be findable, and it can&#39;t break.
                             </p>
                             <p>
-                                I keep my client list intentional. I&apos;m not trying to scale an agency — I&apos;m one developer who does focused work well. That means you get direct communication, fast iteration, and someone who actually cares whether your site converts.
+                                I keep my client list small on purpose. I&apos;m not an agency — I&apos;m one developer who does focused work well. That means you talk directly to the person building your site, not an account manager. And I only take on projects where I know I can deliver something worth paying for.
                             </p>
                         </div>
                         <div className="space-y-4">
@@ -151,7 +151,7 @@ export default function AboutPage() {
                         Who this is for
                     </h2>
                     <p className="max-w-2xl text-lg text-text-muted">
-                        I do my best work with clients who fit this profile.
+                        I do my best work with clients who are ready to invest in a site that works.
                     </p>
                 </div>
                 <ul className="grid gap-3 md:grid-cols-2">
@@ -170,7 +170,7 @@ export default function AboutPage() {
             {/* CTA */}
             <section className="rounded-3xl border border-border bg-surface p-12 text-center space-y-6">
                 <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-4xl">
-                    Sound like a fit?
+                    Ready to get started?
                 </h2>
                 <p className="mx-auto max-w-md text-lg text-text-muted">
                     Tell me about your project and I&apos;ll get back to you within one business day.

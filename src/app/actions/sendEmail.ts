@@ -9,13 +9,43 @@ interface SendEmailResponse {
     error?: string;
 }
 
-export async function sendEmail(formData: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    message: string;
-    package?: string;
-}): Promise<SendEmailResponse> {
+export async function sendEmail(
+    formData: {
+        firstName: string;
+        lastName: string;
+        email: string;
+        message: string;
+        package?: string;
+    },
+    turnstileToken: string | null
+): Promise<SendEmailResponse> {
+
+    // Validate Turnstile token
+    if (process.env.TURNSTILE_SECRET_KEY) {
+        if (!turnstileToken) {
+            return { success: false, error: "Bot verification required. Please complete the challenge." };
+        }
+
+        try {
+            const turnstileResponse = await fetch(
+                "https://challenges.cloudflare.com/turnstile/siteverify",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        secret: process.env.TURNSTILE_SECRET_KEY,
+                        response: turnstileToken,
+                    }),
+                }
+            );
+            const turnstileResult = await turnstileResponse.json();
+            if (!turnstileResult.success) {
+                return { success: false, error: "Bot verification failed. Please try again." };
+            }
+        } catch {
+            return { success: false, error: "Could not verify bot protection. Please try again." };
+        }
+    }
 
     if (!process.env.RESEND_API_KEY) {
         return { success: false, error: "Server configuration error: Missing API Key." };

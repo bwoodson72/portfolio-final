@@ -56,7 +56,7 @@ export default function OgImage() {
               letterSpacing: '0px',
             }}
           >
-            Next.js Developer
+            Websites for Small Businesses
           </span>
         </div>
 

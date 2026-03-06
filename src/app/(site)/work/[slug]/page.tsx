@@ -236,7 +236,7 @@ export default async function CaseStudyPage({ params }: Props) {
             {/* Bottom CTA */}
             <div className="rounded-3xl border border-border bg-surface p-12 text-center space-y-6">
                 <p className="text-lg font-bold text-text">
-                    Interested in a similar project?
+                    Want something like this for your business?
                 </p>
                 <Link
                     href="/contact"

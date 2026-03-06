@@ -3,23 +3,23 @@ import { Shield, Clock, DollarSign, User } from "lucide-react";
 const items = [
   {
     icon: Shield,
-    label: "98+ Lighthouse Score",
-    sublabel: "Guaranteed on every build",
+    label: "Guaranteed Fast",
+    sublabel: "Every site loads in under 1 second",
   },
   {
     icon: Clock,
-    label: "14–21 Day Delivery",
-    sublabel: "Fixed timeline, no delays",
+    label: "Done in 2–3 Weeks",
+    sublabel: "Fixed timeline — you'll know the delivery date upfront",
   },
   {
     icon: DollarSign,
-    label: "Fixed Price",
-    sublabel: "No hourly billing, no surprises",
+    label: "One Fixed Price",
+    sublabel: "No hourly billing, no change-order surprises",
   },
   {
     icon: User,
-    label: "Direct Communication",
-    sublabel: "You talk to the developer, not a PM",
+    label: "You Talk to Me",
+    sublabel: "No account managers, no middlemen — direct access to your developer",
   },
 ];
 

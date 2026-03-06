@@ -1,4 +1,8 @@
+'use client'
+
+import Link from "next/link";
 import { siteContent } from "@/content/portfolio";
+import { trackEvent } from "@/lib/analytics/events";
 
 export const ServicePackages = () => {
   const { packages } = siteContent;
@@ -57,18 +61,19 @@ export const ServicePackages = () => {
               </div>
             </div>
 
-            <a
-              href={`mailto:${siteContent.cta.email}?subject=Inquiry for ${pkg.name} Package`}
+            <Link
+              href={`/contact?package=${encodeURIComponent(pkg.name)}`}
+              onClick={() => trackEvent("package_click", { package: pkg.name })}
               className="mt-8 block w-full rounded-full bg-text py-3 text-center text-sm font-bold text-bg transition hover:opacity-90"
             >
               Get started
-            </a>
+            </Link>
           </div>
         ))}
       </div>
 
       <p className="mt-8 text-center text-sm text-text-muted">
-        I take on 2–3 projects per month. Currently booking for <strong className="text-text">July 2025</strong>.
+        I take on 2–3 projects at a time to keep quality high. Currently booking for <strong className="text-text">July 2025</strong>.
       </p>
     </section>
   );
