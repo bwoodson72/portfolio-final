@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ALL_POSTS_QUERY } from '@/lib/sanity/queries'
 import type { PostCard } from '@/lib/sanity/types'
-import PostCardComponent from '@/components/knowledge/PostCard'
+import PostCardComponent from '@/components/knowledge/PostCardComponent'
 
 export const revalidate = 3600
 

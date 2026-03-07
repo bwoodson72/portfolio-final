@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import { ContactForm } from "@/components/contactForm";
 
+
 export const metadata: Metadata = {
     title: "Contact | Brian Woodson",
     description: "Get in touch to discuss your Next.js project. Fixed-scope engagements, clear timelines, no surprises.",
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
     return (
         <Suspense>
+            {/*<HubSpotTracker />*/}
             <ContactForm />
         </Suspense>
     );

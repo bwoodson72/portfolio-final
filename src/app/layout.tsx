@@ -4,7 +4,7 @@ import "./globals.css";
 import React from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { HubSpotTracker } from "@/components/HubSpotTracker";
+
 
 // 1. Configure Fonts with "swap" for performance
 const geistSans = Geist({
@@ -61,7 +61,7 @@ export default function RootLayout({
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
             <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         )}
-        <HubSpotTracker />
+
         <SpeedInsights/>
         </body>
         </html>

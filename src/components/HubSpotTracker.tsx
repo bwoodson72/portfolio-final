@@ -9,8 +9,9 @@ export function HubSpotTracker() {
 
   return (
     <Script
+
       id="hs-script-loader"
-      src={`//js.hs-scripts.com/${portalId}.js`}
+      src={`https://js.hs-scripts.com/${portalId}.js`}
       strategy="afterInteractive"
     />
   )

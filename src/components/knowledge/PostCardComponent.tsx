@@ -17,7 +17,7 @@ interface Props {
   imageUrl?: string
 }
 
-export default function PostCard({ post, variant = 'default', imageUrl }: Props) {
+export default function PostCardComponent({ post, variant = 'default', imageUrl }: Props) {
   const { title, slug, excerpt, publishedAt, category, readingTime } = post
   const isFeatured = variant === 'featured'
 

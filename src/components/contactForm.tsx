@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
-import { type SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "motion/react";
@@ -11,11 +11,12 @@ import { siteContent } from "@/content/portfolio";
 import { trackEvent } from "@/lib/analytics/events";
 
 const schema = z.object({
-    firstName: z.string().refine((s) => s.length >= 2, { message: "Required" }),
-    lastName: z.string().refine((s) => s.length >= 2, { message: "Required" }),
-    email: z.email(),
-    message: z.string().refine((s) => s.length >= 2, { message: "Required" }),
+    firstName: z.string().min(2, { error: "Required" }),
+    lastName: z.string().min(2, { error: "Required" }),
+    email: z.email({ error: "Invalid email" }),
+    message: z.string().min(2, { error: "Required" }),
     package: z.string().optional(),
+    turnstileToken: z.string().min(1, { error: "Bot verification required" }),
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -64,15 +65,29 @@ const inputErr = "border-red-500/50 focus:border-red-500/70";
 export function ContactForm() {
     const [isSuccess, setIsSuccess] = useState(false);
     const [serverError, setServerError] = useState<string | null>(null);
-    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
     const turnstileRef = useRef<HTMLDivElement>(null);
     const widgetIdRef = useRef<string | null>(null);
     const searchParams = useSearchParams();
     const defaultPackage = searchParams.get("package") ?? "";
 
-    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<Inputs>({
+    const { 
+        register, 
+        handleSubmit, 
+        reset, 
+        setValue, 
+        control,
+        formState: { errors, isSubmitting } 
+    } = useForm<Inputs>({
         resolver: zodResolver(schema),
-        defaultValues: { package: defaultPackage },
+        defaultValues: { 
+            package: defaultPackage,
+            turnstileToken: "" 
+        },
+    });
+
+    const turnstileToken = useWatch({
+        control,
+        name: "turnstileToken",
     });
 
     useEffect(() => {
@@ -81,9 +96,9 @@ export function ContactForm() {
                 widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
                     sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
                     theme: "dark",
-                    callback: (token: string) => setTurnstileToken(token),
-                    "expired-callback": () => setTurnstileToken(null),
-                    "error-callback": () => setTurnstileToken(null),
+                    callback: (token: string) => setValue("turnstileToken", token, { shouldValidate: true }),
+                    "expired-callback": () => setValue("turnstileToken", "", { shouldValidate: true }),
+                    "error-callback": () => setValue("turnstileToken", "", { shouldValidate: true }),
                 });
             }
         };
@@ -104,15 +119,19 @@ export function ContactForm() {
                 widgetIdRef.current = null;
             }
         };
-    }, []);
+    }, [setValue]);
 
-    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const onSubmit = useCallback<SubmitHandler<Inputs>>(async (data) => {
         setServerError(null);
         trackEvent("contact_form_submit", { package: data.package ?? "none" });
-        const result = await sendEmail(data, turnstileToken);
+        
+        const { turnstileToken: token, ...formData } = data;
+        const result = await sendEmail(formData, token);
+        
         if (result.success) {
             setIsSuccess(true);
             trackEvent("contact_form_success", { package: data.package ?? "none" });
+            
             // Identify contact in HubSpot and associate prior page views
             if (typeof window !== "undefined" && window._hsq) {
                 window._hsq.push(["identify", {
@@ -122,8 +141,8 @@ export function ContactForm() {
                 }]);
                 window._hsq.push(["trackPageView"]);
             }
+            
             reset();
-            setTurnstileToken(null);
             if (widgetIdRef.current && window.turnstile) {
                 window.turnstile.reset(widgetIdRef.current);
             }
@@ -131,7 +150,7 @@ export function ContactForm() {
             setServerError(result.error ?? "Something went wrong. Please try again.");
             trackEvent("contact_form_error", { error: result.error ?? "unknown" });
         }
-    };
+    }, [reset]);
 
     return (
         <div className="mx-auto w-full max-w-3xl px-6 py-24">
@@ -154,7 +173,7 @@ export function ContactForm() {
                         transition={{ duration: 0.3 }}
                     >
                         <form
-                            onSubmit={handleSubmit(onSubmit)}
+                            onSubmit={(e) => handleSubmit(onSubmit)(e)}
                             noValidate
                             className="rounded-3xl border border-border bg-surface p-8 md:p-12 space-y-6"
                         >

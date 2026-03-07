@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { FEATURED_POSTS_QUERY } from '@/lib/sanity/queries'
 import type { PostCard } from '@/lib/sanity/types'
-import PostCardComponent from '@/components/knowledge/PostCard'
+import PostCardComponent from '@/components/knowledge/PostCardComponent'
 
 export async function KnowledgeSection() {
   let posts: PostCard[] = []
