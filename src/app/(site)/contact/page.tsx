@@ -1,33 +1,26 @@
 import { Metadata } from "next";
-import { Suspense } from "react";
 import { ContactForm } from "@/components/contactForm";
-
 
 export const metadata: Metadata = {
     title: "Contact | Brian Woodson",
-    description: "Get in touch to discuss your Next.js project. Fixed-scope engagements, clear timelines, no surprises.",
+    description: "Tell me about your project. I'll reply within one business day with a clear scope, a fixed price, and a timeline.",
     openGraph: {
         title: "Contact | Brian Woodson",
-        description: "Get in touch to discuss your Next.js project. Fixed-scope engagements, clear timelines, no surprises.",
+        description: "Tell me about your project. I'll reply within one business day with a clear scope, a fixed price, and a timeline.",
         url: "/contact",
-        siteName: "Brian Woodson Portfolio",
-        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Portfolio Preview" }],
+        siteName: "Brian Woodson",
+        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Preview" }],
         locale: "en_US",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
         title: "Contact | Brian Woodson",
-        description: "Get in touch to discuss your Next.js project. Fixed-scope engagements, clear timelines, no surprises.",
+        description: "Tell me about your project. I'll reply within one business day with a clear scope, a fixed price, and a timeline.",
         images: ["/og-image.png"],
     },
 };
 
 export default function ContactPage() {
-    return (
-        <Suspense>
-            {/*<HubSpotTracker />*/}
-            <ContactForm />
-        </Suspense>
-    );
+    return <ContactForm />;
 }

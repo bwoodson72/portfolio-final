@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { useSearchParams } from "next/navigation";
+
 import { type SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -69,8 +69,12 @@ export function ContactForm() {
     const [formTouched, setFormTouched] = useState(false);
     const turnstileRef = useRef<HTMLDivElement>(null);
     const widgetIdRef = useRef<string | null>(null);
-    const searchParams = useSearchParams();
-    const defaultPackage = searchParams.get("package") ?? "";
+    const [defaultPackage] = useState(() => {
+        if (typeof window !== "undefined") {
+            return new URLSearchParams(window.location.search).get("package") ?? "";
+        }
+        return "";
+    });
 
     const { 
         register, 
@@ -148,9 +152,9 @@ export function ContactForm() {
                 {!isSuccess ? (
                     <motion.div
                         key="form"
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
                     >
                         <form
@@ -247,8 +251,8 @@ export function ContactForm() {
                 ) : (
                     <motion.div
                         key="success"
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         transition={{ duration: 0.3 }}
                         className="rounded-3xl border border-border bg-surface p-12 md:p-16 text-center space-y-6"
                     >
