@@ -22,12 +22,9 @@ export async function sendEmail(
 
     // Validate Turnstile token
     const secretKey = process.env.TURNSTILE_SECRET_KEY;
-    console.log("[turnstile] secret key exists:", !!secretKey);
-    console.log("[turnstile] token exists:", !!turnstileToken);
 
     if (secretKey) {
         if (!turnstileToken) {
-            console.log("[turnstile] REJECTED: no token provided");
             return { success: false, error: "Bot verification required. Please complete the challenge." };
         }
 
@@ -38,8 +35,6 @@ export async function sendEmail(
             formBody.append("secret", secretKey);
             formBody.append("response", turnstileToken);
 
-            console.log("[turnstile] sending validation request...");
-
             const turnstileResponse = await fetch(
                 "https://challenges.cloudflare.com/turnstile/v0/siteverify",
                 {
@@ -49,21 +44,14 @@ export async function sendEmail(
                 }
             );
 
-            console.log("[turnstile] response status:", turnstileResponse.status);
-
             turnstileResult = await turnstileResponse.json();
-            console.log("[turnstile] result:", JSON.stringify(turnstileResult));
-        } catch (err) {
-            console.error("[turnstile] fetch threw error:", err);
+        } catch {
             return { success: false, error: "Could not verify bot protection. Please try again." };
         }
 
         if (!turnstileResult.success) {
-            console.log("[turnstile] REJECTED by Cloudflare:", turnstileResult["error-codes"]);
             return { success: false, error: "Bot verification failed. Please try again." };
         }
-
-        console.log("[turnstile] PASSED");
     }
 
     if (!process.env.RESEND_API_KEY) {

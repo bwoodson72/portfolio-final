@@ -6,6 +6,7 @@ import { type SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "motion/react";
+import Script from "next/script";
 import { sendEmail } from "@/app/actions/sendEmail";
 import { siteContent } from "@/content/portfolio";
 import { trackEvent } from "@/lib/analytics/events";
@@ -91,35 +92,13 @@ export function ContactForm() {
     });
 
     useEffect(() => {
-        const render = () => {
-            if (turnstileRef.current && window.turnstile && !widgetIdRef.current) {
-                widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
-                    sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
-                    theme: "dark",
-                    callback: (token: string) => setValue("turnstileToken", token, { shouldValidate: true }),
-                    "expired-callback": () => setValue("turnstileToken", "", { shouldValidate: true }),
-                    "error-callback": () => setValue("turnstileToken", "", { shouldValidate: true }),
-                });
-            }
-        };
-
-        render();
-
-        const interval = setInterval(() => {
-            if (window.turnstile && !widgetIdRef.current) {
-                render();
-                clearInterval(interval);
-            }
-        }, 500);
-
         return () => {
-            clearInterval(interval);
             if (widgetIdRef.current && window.turnstile) {
                 window.turnstile.remove(widgetIdRef.current);
                 widgetIdRef.current = null;
             }
         };
-    }, [setValue]);
+    }, []);
 
     const onSubmit = useCallback<SubmitHandler<Inputs>>(async (data) => {
         setServerError(null);
@@ -153,6 +132,7 @@ export function ContactForm() {
     }, [reset]);
 
     return (
+        <>
         <div className="mx-auto w-full max-w-3xl px-6 py-24">
             <div className="space-y-4 mb-12">
                 <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-6xl">
@@ -291,5 +271,21 @@ export function ContactForm() {
                 )}
             </AnimatePresence>
         </div>
+        <Script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            strategy="afterInteractive"
+            onReady={() => {
+                if (turnstileRef.current && window.turnstile && !widgetIdRef.current) {
+                    widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+                        sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
+                        theme: "dark",
+                        callback: (token: string) => setValue("turnstileToken", token, { shouldValidate: true }),
+                        "expired-callback": () => setValue("turnstileToken", "", { shouldValidate: true }),
+                        "error-callback": () => setValue("turnstileToken", "", { shouldValidate: true }),
+                    });
+                }
+            }}
+        />
+        </>
     );
 }
