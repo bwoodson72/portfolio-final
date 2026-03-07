@@ -66,6 +66,7 @@ const inputErr = "border-red-500/50 focus:border-red-500/70";
 export function ContactForm() {
     const [isSuccess, setIsSuccess] = useState(false);
     const [serverError, setServerError] = useState<string | null>(null);
+    const [formTouched, setFormTouched] = useState(false);
     const turnstileRef = useRef<HTMLDivElement>(null);
     const widgetIdRef = useRef<string | null>(null);
     const searchParams = useSearchParams();
@@ -154,6 +155,7 @@ export function ContactForm() {
                     >
                         <form
                             onSubmit={(e) => handleSubmit(onSubmit)(e)}
+                            onFocus={() => { if (!formTouched) setFormTouched(true); }}
                             noValidate
                             className="rounded-3xl border border-border bg-surface p-8 md:p-12 space-y-6"
                         >
@@ -271,21 +273,23 @@ export function ContactForm() {
                 )}
             </AnimatePresence>
         </div>
-        <Script
-            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-            strategy="afterInteractive"
-            onReady={() => {
-                if (turnstileRef.current && window.turnstile && !widgetIdRef.current) {
-                    widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
-                        sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
-                        theme: "dark",
-                        callback: (token: string) => setValue("turnstileToken", token, { shouldValidate: true }),
-                        "expired-callback": () => setValue("turnstileToken", "", { shouldValidate: true }),
-                        "error-callback": () => setValue("turnstileToken", "", { shouldValidate: true }),
-                    });
-                }
-            }}
-        />
+        {formTouched && (
+            <Script
+                src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                strategy="afterInteractive"
+                onReady={() => {
+                    if (turnstileRef.current && window.turnstile && !widgetIdRef.current) {
+                        widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+                            sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
+                            theme: "dark",
+                            callback: (token: string) => setValue("turnstileToken", token, { shouldValidate: true }),
+                            "expired-callback": () => setValue("turnstileToken", "", { shouldValidate: true }),
+                            "error-callback": () => setValue("turnstileToken", "", { shouldValidate: true }),
+                        });
+                    }
+                }}
+            />
+        )}
         </>
     );
 }
