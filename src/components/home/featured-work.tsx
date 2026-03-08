@@ -24,7 +24,7 @@ export async function FeaturedWork() {
           Proof, not promises
         </h2>
         <p className="max-w-2xl text-lg text-text-muted">
-          Every site I ship scores 95+ on Google's performance audit. Here's what that actually looks like.
+          Every site I ship scores 95+ on Google&#39;s performance audit. Here&#39;s what that actually looks like.
         </p>
       </div>
 
