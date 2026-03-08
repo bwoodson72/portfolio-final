@@ -10,12 +10,11 @@ import ShareButtons from '@/components/ShareButtons'
 export const revalidate = 3600
 
 const CATEGORY_LABELS: Record<string, string> = {
-  nextjs: 'Next.js',
-  react: 'React',
+  'your-website': 'Your Website',
   performance: 'Performance',
-  design: 'Design',
-  business: 'Business',
-  tooling: 'Tooling',
+  'getting-found': 'Getting Found',
+  cost: 'Cost & Value',
+  process: 'Behind the Build',
 }
 
 type Props = {

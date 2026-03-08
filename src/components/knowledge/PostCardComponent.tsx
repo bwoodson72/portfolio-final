@@ -3,12 +3,11 @@ import Image from 'next/image'
 import type { PostCard } from '@/lib/sanity/types'
 
 const CATEGORY_LABELS: Record<string, string> = {
-  nextjs: 'Next.js',
-  react: 'React',
+  'your-website': 'Your Website',
   performance: 'Performance',
-  design: 'Design',
-  business: 'Business',
-  tooling: 'Tooling',
+  'getting-found': 'Getting Found',
+  cost: 'Cost & Value',
+  process: 'Behind the Build',
 }
 
 interface Props {

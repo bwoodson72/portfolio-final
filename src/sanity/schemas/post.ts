@@ -66,12 +66,11 @@ export const postType = defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Next.js', value: 'nextjs' },
-          { title: 'React', value: 'react' },
+          { title: 'Your Website', value: 'your-website' },
           { title: 'Performance', value: 'performance' },
-          { title: 'Design', value: 'design' },
-          { title: 'Business', value: 'business' },
-          { title: 'Tooling', value: 'tooling' },
+          { title: 'Getting Found', value: 'getting-found' },
+          { title: 'Cost & Value', value: 'cost' },
+          { title: 'Behind the Build', value: 'process' },
         ],
         layout: 'radio',
       },

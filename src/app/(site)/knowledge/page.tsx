@@ -9,11 +9,11 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: 'Knowledge | Brian Woodson',
   description:
-    'Practical writing on Next.js, React, and web performance — things learned building production sites.',
+    'Straight talk about your website — what it should cost, why it&#39;s slow, and what to do about it.',
   openGraph: {
     title: 'Knowledge | Brian Woodson',
     description:
-      'Practical writing on Next.js, React, and web performance — things learned building production sites.',
+      'Straight talk about your website — what it should cost, why it&#39;s slow, and what to do about it.',
     url: '/knowledge',
     siteName: 'Brian Woodson Portfolio',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Brian Woodson Portfolio Preview' }],
@@ -24,18 +24,17 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Knowledge | Brian Woodson',
     description:
-      'Practical writing on Next.js, React, and web performance — things learned building production sites.',
+      'Straight talk about your website — what it should cost, why it&#39;s slow, and what to do about it.',
     images: ['/og-image.png'],
   },
 }
 
 const CATEGORIES = [
-  { label: 'Next.js', value: 'nextjs' },
-  { label: 'React', value: 'react' },
+  { label: 'Your Website', value: 'your-website' },
   { label: 'Performance', value: 'performance' },
-  { label: 'Design', value: 'design' },
-  { label: 'Business', value: 'business' },
-  { label: 'Tooling', value: 'tooling' },
+  { label: 'Getting Found', value: 'getting-found' },
+  { label: 'Cost & Value', value: 'cost' },
+  { label: 'Behind the Build', value: 'process' },
 ]
 
 interface Props {
@@ -75,7 +74,7 @@ export default async function KnowledgePage({ searchParams }: Props) {
           Before you hire anyone
         </h1>
         <p className="max-w-2xl text-lg text-text-muted">
-          Practical notes on Next.js, React, performance, and the craft of building for the web.
+          Straight talk about your website — what it should cost, why it&#39;s slow, and what to do about it.
         </p>
       </div>
 
