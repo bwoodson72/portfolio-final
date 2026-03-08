@@ -43,10 +43,10 @@ export default async function WorkPage() {
         <main className="mx-auto w-full max-w-7xl px-6 py-24">
             <div className="space-y-4">
                 <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-6xl">
-                    Work
+                    Proof, not promises
                 </h1>
                 <p className="max-w-2xl text-lg text-text-muted">
-                    Projects and case studies.
+                    Every site I ship scores 95+ on Google's performance audit. Here's what that actually looks like.
                 </p>
             </div>
 

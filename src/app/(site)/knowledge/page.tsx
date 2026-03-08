@@ -72,7 +72,7 @@ export default async function KnowledgePage({ searchParams }: Props) {
           Knowledge
         </p>
         <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-6xl">
-          Things worth knowing.
+          Before you hire anyone
         </h1>
         <p className="max-w-2xl text-lg text-text-muted">
           Practical notes on Next.js, React, performance, and the craft of building for the web.
