@@ -21,10 +21,10 @@ export async function FeaturedWork() {
     <section id="work" className="mx-auto w-full max-w-7xl px-6 py-24">
       <div className="space-y-4 text-center md:text-left">
         <h2 className="text-3xl font-extrabold tracking-tight text-text md:text-5xl">
-          Featured Work
+          Proof, not promises
         </h2>
         <p className="max-w-2xl text-lg text-text-muted">
-          A selection of recent projects focused on measurable outcomes and technical excellence.
+          Every site I ship scores 95+ on Google's performance audit. Here's what that actually looks like.
         </p>
       </div>
 

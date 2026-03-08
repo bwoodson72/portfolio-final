@@ -29,7 +29,7 @@ export async function KnowledgeSection() {
             Knowledge
           </p>
           <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-4xl">
-            Things worth knowing.
+            Before you hire anyone
           </h2>
           <p className="text-sm text-text-muted">
             Practical notes on Next.js, React, and building fast sites.

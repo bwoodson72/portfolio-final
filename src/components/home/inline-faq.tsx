@@ -14,7 +14,7 @@ export function InlineFAQ() {
     <section className="mx-auto w-full max-w-3xl px-6 py-24">
       <div className="space-y-4 mb-10">
         <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-4xl">
-          Common Questions
+          Things people ask before they commit
         </h2>
         <p className="text-lg text-text-muted">
           Have more?{" "}

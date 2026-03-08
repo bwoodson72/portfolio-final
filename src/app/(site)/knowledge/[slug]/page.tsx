@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { ALL_POST_SLUGS_QUERY, POST_BY_SLUG_QUERY } from '@/lib/sanity/queries'
 import type { Post } from '@/lib/sanity/types'
 import PostBody from '@/components/knowledge/PostBody'
+import ShareButtons from '@/components/ShareButtons'
 
 export const revalidate = 3600
 
@@ -125,9 +126,12 @@ export default async function PostPage({ params }: Props) {
 
         {/* Date — separated by a top border */}
         <div className="border-t border-border pt-4">
-          <time className="text-sm text-text-muted-2" dateTime={post.publishedAt}>
-            {formattedDate}
-          </time>
+          <div className="flex items-center justify-between">
+            <time className="text-sm text-text-muted-2" dateTime={post.publishedAt}>
+              {formattedDate}
+            </time>
+            <ShareButtons title={post.title} slug={slug} type="knowledge" />
+          </div>
         </div>
       </header>
 
@@ -153,7 +157,7 @@ export default async function PostPage({ params }: Props) {
       {/* Footer CTA */}
       <div className="mt-20 space-y-6 rounded-2xl border border-border bg-surface p-12 text-center">
         <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-3xl">
-          Let&apos;s build something together.
+          This could be your site
         </h2>
         <p className="mx-auto max-w-md text-text-muted">
           If this sparked an idea for your project, I&apos;d love to hear about it.

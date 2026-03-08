@@ -11,10 +11,10 @@ export const ServicePackages = () => {
     <section id="packages" className="mx-auto w-full max-w-7xl px-6 py-24">
       <div className="space-y-4 text-center md:text-left">
         <h2 className="text-3xl font-extrabold tracking-tight text-text md:text-5xl">
-          Fixed-scope Packages
+          What it costs, what you get
         </h2>
         <p className="max-w-2xl text-lg text-text-muted">
-          Productized services with clear deliverables, fast timelines, and transparent pricing.
+          Two options. Both include everything your business needs to show up online and start getting found. No monthly fees, no surprises.
         </p>
       </div>
 

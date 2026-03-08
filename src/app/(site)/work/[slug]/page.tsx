@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PROJECT_BY_SLUG_QUERY, ALL_PROJECT_SLUGS_QUERY } from "@/lib/sanity/queries";
 import type { Project } from "@/lib/sanity/types";
+import ShareButtons from "@/components/ShareButtons";
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -86,6 +87,9 @@ export default async function CaseStudyPage({ params }: Props) {
                 <p className="text-xl text-text-muted italic">
                     {project.tagline}
                 </p>
+                <div className="pt-4">
+                    <ShareButtons title={project.title} slug={slug} type="work" />
+                </div>
             </div>
 
             {/* Hero screenshot */}
