@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Sora } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -20,6 +20,13 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
     display: "swap",
     adjustFontFallback: true,
+});
+
+const sora = Sora({
+    variable: "--font-sora",
+    subsets: ["latin"],
+    display: "swap",
+    weight: ["700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -54,7 +61,7 @@ export default function RootLayout({
     return (
         <html lang="en" className="scroll-smooth">
         <body
-            className={`${geistSans.variable} ${geistMono.variable} bg-[#050505] text-white antialiased min-h-screen selection:bg-blue-500/30 selection:text-white font-sans`}
+            className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} bg-[#050505] text-white antialiased min-h-screen selection:bg-blue-500/30 selection:text-white font-sans`}
         >
         <StructuredData />
         {children}
