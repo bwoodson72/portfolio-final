@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { siteContent } from "@/content/portfolio";
+import { testimonials } from "@/content/testimonials";
+import TestimonialCard from "@/components/testimonialCard";
 
 export const HowIWork = () => {
   const { about } = siteContent;
@@ -36,6 +38,11 @@ export const HowIWork = () => {
               </span>
             ))}
           </div>
+          {testimonials[0] && (
+            <div className="mt-10">
+              <TestimonialCard testimonial={testimonials[0]} />
+            </div>
+          )}
         </div>
       </div>
     </section>
