@@ -153,6 +153,24 @@ export default async function PostPage({ params }: Props) {
         <PostBody value={post.body} />
       </article>
 
+      {/* Article structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: post.title,
+            description: post.excerpt,
+            datePublished: post.publishedAt,
+            author: { '@type': 'Person', name: 'Brian Woodson', url: 'https://brianwoodson.dev' },
+            publisher: { '@type': 'Person', name: 'Brian Woodson', url: 'https://brianwoodson.dev' },
+            mainEntityOfPage: `https://brianwoodson.dev/knowledge/${slug}`,
+            ...(coverImageUrl ? { image: coverImageUrl } : {}),
+          }),
+        }}
+      />
+
       {/* Footer CTA */}
       <div className="mt-20 space-y-6 rounded-2xl border border-border bg-surface p-12 text-center">
         <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-3xl">

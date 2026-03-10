@@ -9,11 +9,11 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: 'Knowledge | Brian Woodson',
   description:
-    'Straight talk about your website — what it should cost, why it&#39;s slow, and what to do about it.',
+    'Guides on website performance, SEO, and what small businesses need to know before investing in a new site.',
   openGraph: {
     title: 'Knowledge | Brian Woodson',
     description:
-      'Straight talk about your website — what it should cost, why it&#39;s slow, and what to do about it.',
+      'Guides on website performance, SEO, and what small businesses need to know before investing in a new site.',
     url: '/knowledge',
     siteName: 'Brian Woodson Portfolio',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Brian Woodson Portfolio Preview' }],
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Knowledge | Brian Woodson',
     description:
-      'Straight talk about your website — what it should cost, why it&#39;s slow, and what to do about it.',
+      'Guides on website performance, SEO, and what small businesses need to know before investing in a new site.',
     images: ['/og-image.png'],
   },
 }

@@ -67,6 +67,24 @@ export default function FAQPage() {
                 ))}
             </ul>
 
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        '@context': 'https://schema.org',
+                        '@type': 'FAQPage',
+                        mainEntity: faqs.map((item) => ({
+                            '@type': 'Question',
+                            name: item.question,
+                            acceptedAnswer: {
+                                '@type': 'Answer',
+                                text: item.answer,
+                            },
+                        })),
+                    }),
+                }}
+            />
+
             <div className="rounded-3xl border border-border bg-surface p-10 text-center space-y-4">
                 <p className="font-bold text-text">
                     Still have questions?

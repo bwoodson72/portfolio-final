@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
+import StructuredData from "@/components/StructuredData";
 
 
 // 1. Configure Fonts with "swap" for performance
@@ -32,7 +33,6 @@ export const metadata: Metadata = {
         description: "Fast, modern websites for small businesses. Fixed price, no monthly fees, built to rank on Google.",
         url: "https://brianwoodson.dev/",
         siteName: "Brian Woodson",
-        images: [],
         locale: "en_US",
         type: "website",
     },
@@ -40,7 +40,6 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Brian Woodson // Websites for Small Businesses",
         description: "Fast, modern websites for small businesses. Fixed price, no monthly fees, built to rank on Google.",
-        images: [],
     },
     icons: {
         icon: "/favicon.ico",
@@ -57,6 +56,7 @@ export default function RootLayout({
         <body
             className={`${geistSans.variable} ${geistMono.variable} bg-[#050505] text-white antialiased min-h-screen selection:bg-blue-500/30 selection:text-white font-sans`}
         >
+        <StructuredData />
         {children}
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
             <>
