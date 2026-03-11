@@ -19,6 +19,9 @@ export const metadata: Metadata = {
         description: "Tell me about your project. I'll reply within one business day with a clear scope, a fixed price, and a timeline.",
         images: ["/og-image.png"],
     },
+    alternates: {
+        canonical: "/contact",
+    },
 };
 
 export default function ContactPage() {

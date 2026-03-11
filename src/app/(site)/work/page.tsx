@@ -22,6 +22,9 @@ export const metadata: Metadata = {
         description: "Case studies and projects — Next.js websites built for real businesses.",
         images: ["/og-image.png"],
     },
+    alternates: {
+        canonical: "/work",
+    },
 };
 
 export default async function WorkPage() {

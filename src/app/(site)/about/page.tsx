@@ -21,6 +21,9 @@ export const metadata: Metadata = {
         description: "I build websites for small businesses that load fast, rank on Google, and actually bring in leads. Fixed price, delivered in weeks.",
         images: ["/og-image.png"],
     },
+    alternates: {
+        canonical: "/about",
+    },
 };
 
 const howIWork = [

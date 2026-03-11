@@ -27,6 +27,9 @@ export const metadata: Metadata = {
         description: "Your website should be your best salesperson. I build fast, modern sites for small businesses — fixed price, delivered in weeks.",
         images: ["/og-image.png"],
     },
+    alternates: {
+        canonical: "/",
+    },
 };
 
 export default function Home() {

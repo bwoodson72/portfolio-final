@@ -20,6 +20,9 @@ export const metadata: Metadata = {
         description: "Common questions about working with Brian Woodson on your small business website",
         images: ["/og-image.png"],
     },
+    alternates: {
+        canonical: "/faq",
+    },
 };
 
 export default function FAQPage() {

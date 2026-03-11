@@ -27,6 +27,9 @@ export const metadata: Metadata = {
       'Guides on website performance, SEO, and what small businesses need to know before investing in a new site.',
     images: ['/og-image.png'],
   },
+  alternates: {
+    canonical: '/knowledge',
+  },
 }
 
 const CATEGORIES = [
