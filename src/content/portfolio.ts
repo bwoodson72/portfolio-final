@@ -57,8 +57,8 @@ export const INTAKE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfP-GqX9W9T9
 
 export const siteContent: SiteContent = {
   hero: {
-    headline: "Your website should be your best salesperson",
-    subheadline: "Most small business websites cost money every month and bring in nothing. I build sites that load fast, rank on Google, and actually drive leads — for a fixed price, delivered in weeks.",
+    headline: "Your Website Should Be Your Hardest-Working Employee",
+    subheadline: " I build fast, clean sites from scratch so nothing technical stands between your business and your customers. Fixed price, delivered in weeks.",
     ctaPrimary: "See what I build",
     ctaSecondary: "View packages"
   },
