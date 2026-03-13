@@ -5,21 +5,21 @@ import { ALL_PROJECTS_QUERY } from "@/lib/sanity/queries";
 import type { ProjectCard } from "@/lib/sanity/types";
 
 export const metadata: Metadata = {
-    title: "Work | Brian Woodson",
-    description: "Case studies and projects — Next.js websites built for real businesses.",
+    title: "Work | Brian Woodson Web Development",
+    description: "Case studies and projects — websites designed, written, and built for real businesses.",
     openGraph: {
-        title: "Work | Brian Woodson",
-        description: "Case studies and projects — Next.js websites built for real businesses.",
+        title: "Work | Brian Woodson Web Development",
+        description: "Case studies and projects — websites designed, written, and built for real businesses.",
         url: "/work",
-        siteName: "Brian Woodson Portfolio",
-        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Portfolio Preview" }],
+        siteName: "Brian Woodson Web Development",
+        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Web Development" }],
         locale: "en_US",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
-        title: "Work | Brian Woodson",
-        description: "Case studies and projects — Next.js websites built for real businesses.",
+        title: "Work | Brian Woodson Web Development",
+        description: "Case studies and projects — websites designed, written, and built for real businesses.",
         images: ["/og-image.png"],
     },
     alternates: {
@@ -49,7 +49,7 @@ export default async function WorkPage() {
                     Proof, not promises
                 </h1>
                 <p className="max-w-2xl text-lg text-text-muted">
-                    Every site I ship scores 95+ on Google's performance audit. Here's what that actually looks like.
+                    Every site we ship scores 95+ on Google's performance audit. Here's what that looks like in practice.
                 </p>
             </div>
 

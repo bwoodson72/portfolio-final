@@ -10,21 +10,21 @@ import { InlineFAQ } from "@/components/home/inline-faq";
 import { FinalCTA } from "@/components/home/final-cta";
 
 export const metadata: Metadata = {
-    title: "Brian Woodson // Websites for Small Businesses",
-    description: "Your website should be your best salesperson. I build fast, modern sites for small businesses — fixed price, delivered in weeks.",
+    title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
+    description: "Your website should be your best salesperson. We design, write, and build fast sites for small businesses — fixed price, delivered in weeks.",
     openGraph: {
-        title: "Brian Woodson // Websites for Small Businesses",
-        description: "Your website should be your best salesperson. I build fast, modern sites for small businesses — fixed price, delivered in weeks.",
+        title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
+        description: "Your website should be your best salesperson. We design, write, and build fast sites for small businesses — fixed price, delivered in weeks.",
         url: "/",
-        siteName: "Brian Woodson",
-        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Portfolio Preview" }],
+        siteName: "Brian Woodson Web Development",
+        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Web Development" }],
         locale: "en_US",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
-        title: "Brian Woodson // Websites for Small Businesses",
-        description: "Your website should be your best salesperson. I build fast, modern sites for small businesses — fixed price, delivered in weeks.",
+        title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
+        description: "Your website should be your best salesperson. We design, write, and build fast sites for small businesses — fixed price, delivered in weeks.",
         images: ["/og-image.png"],
     },
     alternates: {

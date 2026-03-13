@@ -1,13 +1,16 @@
-const person = {
-    "@type": "Person",
-    name: "Brian Woodson",
+const organization = {
+    "@type": "Organization",
+    name: "Brian Woodson Web Development",
     url: "https://brianwoodson.dev",
-    jobTitle: "Web Developer",
+    founder: {
+        "@type": "Person",
+        name: "Brian Woodson",
+    },
     sameAs: [
         "https://www.linkedin.com/in/brianwoodson",
         "https://www.fiverr.com/brianwoodson",
     ],
-    knowsAbout: ["Next.js", "React", "Web Performance", "SEO", "Tailwind CSS"],
+    knowsAbout: ["Web Design", "Web Development", "SEO", "Copywriting", "Next.js", "React", "Tailwind CSS"],
 };
 
 const graph = {
@@ -15,12 +18,12 @@ const graph = {
     "@graph": [
         {
             "@type": "WebSite",
-            name: "Brian Woodson",
+            name: "Brian Woodson Web Development",
             url: "https://brianwoodson.dev",
-            description: "Custom websites for small businesses. Fast, modern, built to rank.",
-            publisher: person,
+            description: "A web studio that designs, writes, and builds fast websites for small businesses.",
+            publisher: organization,
         },
-        person,
+        organization,
     ],
 };
 

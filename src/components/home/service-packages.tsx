@@ -14,7 +14,7 @@ export const ServicePackages = () => {
           What it costs, what you get
         </h2>
         <p className="max-w-2xl text-lg text-text-muted">
-          Two options. Both include everything your business needs to show up online and start getting found. No monthly fees, no surprises.
+          Two packages. Both include everything your business needs to show up online and start getting found. No monthly fees, no surprises.
         </p>
       </div>
 
@@ -73,7 +73,7 @@ export const ServicePackages = () => {
       </div>
 
       <p className="mt-8 text-center text-sm text-text-muted">
-        I take on 2–3 projects at a time to keep quality high. Currently booking for <strong className="text-text">July 2025</strong>.
+        We take on 2–3 projects at a time to keep quality high. Currently booking for <strong className="text-text">July 2025</strong>.
       </p>
     </section>
   );

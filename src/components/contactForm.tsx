@@ -242,7 +242,7 @@ export function ContactForm() {
                             </button>
                         </form>
                         <p className="mt-6 text-center text-sm text-text-muted">
-                            Prefer email? Reach me directly at{" "}
+                            Prefer email? Reach us directly at{" "}
                             <a href="mailto:hello@brianwoodson.com" className="text-text underline underline-offset-4 hover:opacity-80 transition">
                                 hello@brianwoodson.com
                             </a>
@@ -261,7 +261,7 @@ export function ContactForm() {
                         </div>
                         <div className="space-y-2">
                             <h2 className="text-2xl font-extrabold tracking-tight text-text">
-                                Got it — I&#39;ll be in touch
+                                Got it — we&#39;ll be in touch
                             </h2>
                             <p className="text-text-muted">
                                 Expect a reply within one business day with a clear scope and next steps.

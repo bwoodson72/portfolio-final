@@ -20,7 +20,7 @@ export async function ProjectHighlights() {
     <section className="mx-auto w-full max-w-7xl px-6 py-24">
       <div className="space-y-4 text-center md:text-left mb-12">
         <h2 className="text-3xl font-extrabold tracking-tight text-text md:text-5xl">
-          What I&apos;ve Built
+          What We&apos;ve Built
         </h2>
         <p className="max-w-2xl text-lg text-text-muted">
           Results from recent projects.

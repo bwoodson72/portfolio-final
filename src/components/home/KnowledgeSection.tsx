@@ -32,7 +32,7 @@ export async function KnowledgeSection() {
             Before you hire anyone
           </h2>
           <p className="text-sm text-text-muted">
-            Practical notes on Next.js, React, and building fast sites.
+            Practical notes on websites, performance, and getting found online.
           </p>
         </div>
         <Link

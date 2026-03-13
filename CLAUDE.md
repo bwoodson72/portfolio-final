@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Single-page portfolio/services website for Brian Woodson (Senior Frontend Engineer). Built with Next.js 16 App Router, React 19, TypeScript 5, and Tailwind CSS v4. Targets Lighthouse 100/100. Dark theme only.
+Website for Brian Woodson Web Development — a distributed web studio offering design, copywriting, SEO, and development for small businesses. Built with Next.js 16 App Router, React 19, TypeScript 5, and Tailwind CSS v4. Targets Lighthouse 100/100. Dark theme only.
 
 ## Commands
 

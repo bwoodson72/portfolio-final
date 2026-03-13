@@ -30,26 +30,23 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://brianwoodson.dev"),
-    title: "Brian Woodson // Websites for Small Businesses",
-    description: "Fast, modern websites for small businesses. Fixed price, no monthly fees, built to rank on Google.",
-    keywords: ["small business website", "website developer", "fast website", "Next.js developer", "fixed price website"],
+    metadataBase: new URL("https://brianwoodson.dev/"),
+    title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
+    description: "A web studio that designs, writes, and builds fast websites for small businesses. Fixed price, no monthly fees, delivered in weeks.",
+    keywords: ["small business website", "web design agency", "website development", "SEO", "copywriting", "Next.js", "fixed price website"],
     authors: [{ name: "Brian Woodson" }],
-    alternates: {
-        canonical: "/",
-    },
     openGraph: {
-        title: "Brian Woodson // Websites for Small Businesses",
-        description: "Fast, modern websites for small businesses. Fixed price, no monthly fees, built to rank on Google.",
-        url: "https://brianwoodson.dev",
-        siteName: "Brian Woodson",
+        title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
+        description: "A web studio that designs, writes, and builds fast websites for small businesses. Fixed price, no monthly fees, delivered in weeks.",
+        url: "https://brianwoodson.dev/",
+        siteName: "Brian Woodson Web Development",
         locale: "en_US",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
-        title: "Brian Woodson // Websites for Small Businesses",
-        description: "Fast, modern websites for small businesses. Fixed price, no monthly fees, built to rank on Google.",
+        title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
+        description: "A web studio that designs, writes, and builds fast websites for small businesses. Fixed price, no monthly fees, delivered in weeks.",
     },
     icons: {
         icon: "/favicon.ico",

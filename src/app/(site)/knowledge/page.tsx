@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description:
       'Guides on website performance, SEO, and what small businesses need to know before investing in a new site.',
     url: '/knowledge',
-    siteName: 'Brian Woodson Portfolio',
+    siteName: 'Brian Woodson Web Development',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Brian Woodson Portfolio Preview' }],
     locale: 'en_US',
     type: 'website',

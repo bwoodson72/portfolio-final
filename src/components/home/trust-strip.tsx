@@ -18,8 +18,8 @@ const items = [
   },
   {
     icon: User,
-    label: "You Talk to Me",
-    sublabel: "No account managers, no middlemen — direct access to your developer",
+    label: "One Point of Contact",
+    sublabel: "Brian leads every project — no account managers, no runaround",
   },
 ];
 

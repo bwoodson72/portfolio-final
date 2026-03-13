@@ -56,7 +56,7 @@ export default function OgImage() {
               letterSpacing: '0px',
             }}
           >
-            Websites for Small Businesses
+            Design, Copy & Code for Small Businesses
           </span>
         </div>
 

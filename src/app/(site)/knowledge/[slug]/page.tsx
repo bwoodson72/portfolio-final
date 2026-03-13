@@ -166,8 +166,8 @@ export default async function PostPage({ params }: Props) {
             headline: post.title,
             description: post.excerpt,
             datePublished: post.publishedAt,
-            author: { '@type': 'Person', name: 'Brian Woodson', url: 'https://brianwoodson.dev' },
-            publisher: { '@type': 'Person', name: 'Brian Woodson', url: 'https://brianwoodson.dev' },
+            author: { '@type': 'Organization', name: 'Brian Woodson Web Development', url: 'https://brianwoodson.dev' },
+            publisher: { '@type': 'Organization', name: 'Brian Woodson Web Development', url: 'https://brianwoodson.dev' },
             mainEntityOfPage: `https://brianwoodson.dev/knowledge/${slug}`,
             ...(coverImageUrl ? { image: coverImageUrl } : {}),
           }),
@@ -180,7 +180,7 @@ export default async function PostPage({ params }: Props) {
           This could be your site
         </h2>
         <p className="mx-auto max-w-md text-text-muted">
-          If this sparked an idea for your project, I&apos;d love to hear about it.
+          If this sparked an idea for your project, we&apos;d love to hear about it.
         </p>
         <Link
           href="/contact"

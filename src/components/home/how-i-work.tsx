@@ -22,7 +22,7 @@ export const HowIWork = () => {
             href="/about"
             className="inline-block text-sm font-bold text-text hover:underline underline-offset-4"
           >
-            More about me →
+            More about us →
           </Link>
         </div>
 

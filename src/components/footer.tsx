@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import { siteContent, UPWORK_PROFILE_URL, INTAKE_URL } from "@/content/portfolio";
+import { siteContent, INTAKE_URL } from "@/content/portfolio";
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
@@ -30,7 +30,7 @@ export function Footer() {
                         <h3 className="text-xs font-bold uppercase tracking-widest text-text">Links</h3>
                         <ul className="space-y-2 text-sm text-text-muted">
                             <li><Link href="/faq" className="hover:text-text transition-colors">FAQ</Link></li>
-                            <li><a href={UPWORK_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-text transition-colors">Upwork</a></li>
+                            <li><a href="https://www.fiverr.com/brianwoodson" target="_blank" rel="noopener noreferrer" className="hover:text-text transition-colors">Fiverr</a></li>
                             <li><a href={INTAKE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-text transition-colors">Intake Form</a></li>
                             <li><a href={`mailto:${siteContent.cta.email}`} className="hover:text-text transition-colors">Email</a></li>
                         </ul>
@@ -38,15 +38,15 @@ export function Footer() {
 
                     {/* Branding */}
                     <div className="space-y-4">
-                        <h3 className="text-xs font-bold uppercase tracking-widest text-text">Brian Woodson</h3>
+                        <h3 className="text-xs font-bold uppercase tracking-widest text-text">Brian Woodson Web Development</h3>
                         <p className="text-sm text-text-muted leading-relaxed">
-                            I build fast, modern websites for small businesses. Fixed price, no monthly fees, delivered in weeks.
+                            We design, write, and build fast websites for small businesses. Fixed price, no monthly fees, delivered in weeks.
                         </p>
                     </div>
                 </div>
 
                 <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-text-muted">
-                    <div>© {currentYear} Brian Woodson. All rights reserved.</div>
+                    <div>© {currentYear} Brian Woodson Web Development. All rights reserved.</div>
                     <div className="flex gap-6">
                         <a href="#top" className="hover:text-text transition-colors">Back to top</a>
                     </div>
