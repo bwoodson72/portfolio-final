@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import { siteContent, INTAKE_URL } from "@/content/portfolio";
+import { siteContent } from "@/content/portfolio";
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
@@ -31,8 +31,7 @@ export function Footer() {
                         <ul className="space-y-2 text-sm text-text-muted">
                             <li><Link href="/faq" className="hover:text-text transition-colors">FAQ</Link></li>
                             <li><a href="https://www.fiverr.com/brianwoodson" target="_blank" rel="noopener noreferrer" className="hover:text-text transition-colors">Fiverr</a></li>
-                            <li><a href={INTAKE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-text transition-colors">Intake Form</a></li>
-                            <li><a href={`mailto:${siteContent.cta.email}`} className="hover:text-text transition-colors">Email</a></li>
+                            <li><Link href="/contact" className="hover:text-text transition-colors">Email</Link></li>
                         </ul>
                     </div>
 

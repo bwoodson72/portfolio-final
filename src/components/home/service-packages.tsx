@@ -11,10 +11,10 @@ export const ServicePackages = () => {
     <section id="packages" className="mx-auto w-full max-w-7xl px-6 py-24">
       <div className="space-y-4 text-center md:text-left">
         <h2 className="text-3xl font-extrabold tracking-tight text-text md:text-5xl">
-          What it costs, what you get
+          Two ways to get started
         </h2>
         <p className="max-w-2xl text-lg text-text-muted">
-          Two packages. Both include everything your business needs to show up online and start getting found. No monthly fees, no surprises.
+          Every project starts with a base build. Add design, copywriting, CMS, or SEO only if you need it. Fixed price, no monthly fees, no surprises.
         </p>
       </div>
 
@@ -28,7 +28,7 @@ export const ServicePackages = () => {
               <div>
                 {pkg.recommended && (
                   <div className="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full inline-block mb-3">
-                    Recommended
+                    Most popular
                   </div>
                 )}
                 <h3 className="text-xl font-bold text-text">{pkg.name}</h3>
@@ -43,7 +43,7 @@ export const ServicePackages = () => {
 
             <div className="mt-8 space-y-6 grow">
               <div className="space-y-3">
-                <h4 className="text-[10px] font-bold uppercase tracking-widest text-text-muted">What&#39;s included</h4>
+                <h4 className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Base build includes</h4>
                 <ul className="space-y-2">
                   {pkg.deliverables.map((item, idx) => (
                     <li key={idx} className="flex gap-2 text-xs text-text-muted">
@@ -52,6 +52,19 @@ export const ServicePackages = () => {
                   ))}
                 </ul>
               </div>
+
+              {pkg.addOns.length > 0 && (
+                <div className="space-y-3 border-t border-border pt-4">
+                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Available add-ons</h4>
+                  <ul className="space-y-2">
+                    {pkg.addOns.map((addOn, idx) => (
+                      <li key={idx} className="flex gap-2 text-xs text-text-muted">
+                        <span className="text-blue-400 font-bold">+</span> {addOn.label}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               <div className="pt-6 border-t border-border">
                 <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-text-muted">
@@ -73,7 +86,7 @@ export const ServicePackages = () => {
       </div>
 
       <p className="mt-8 text-center text-sm text-text-muted">
-        We take on 2–3 projects at a time to keep quality high. Currently booking for <strong className="text-text">July 2025</strong>.
+        We take on 2–3 projects at a time to keep quality high. Currently booking for <strong className="text-text">April 2026</strong>.
       </p>
     </section>
   );

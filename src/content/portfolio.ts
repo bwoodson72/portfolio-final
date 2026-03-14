@@ -6,19 +6,19 @@ export type FAQItem = {
 export const faqs: FAQItem[] = [
   {
     question: "Do you write the content/copy?",
-    answer: "Yes — copywriting is one of our core services. We can write your website copy from scratch, or refine what you already have. If you bring your own content, we'll make sure it fits the design and reads well on screen."
+    answer: "Copywriting is available as an add-on for any project. We can write your website copy from scratch, or refine what you already have. If you bring your own content, we'll make sure it fits the design and reads well on screen."
   },
   {
     question: "What do you need from us to get started?",
-    answer: "Your branding basics (logo, colors, fonts if you have them), a clear idea of what pages you need, and any reference sites you like. If you don't have content ready, our copywriting team handles that. We'll scope everything before work begins."
+    answer: "Your branding basics (logo, colors, fonts if you have them), a clear idea of what pages you need, and any reference sites you like. If you don't have content ready, we offer copywriting as an add-on. We'll scope everything before work begins."
   },
   {
     question: "Will my site rank on Google?",
-    answer: "Every site ships with technical SEO foundations — metadata, canonical URLs, sitemap, structured data, and fast load times. Our SEO service goes further: keyword research, on-page optimization, and a content strategy to help you compete in local search. Rankings depend on your market and content — we build the infrastructure and the strategy."
+    answer: "Every site ships with technical SEO foundations — metadata, canonical URLs, sitemap, structured data, and fast load times. Our content SEO add-on goes further: keyword research, on-page optimization, and a content strategy to help you compete in local search. Rankings depend on your market and content — we build the infrastructure and the strategy."
   },
   {
     question: "Can you match a design I like?",
-    answer: "Our design team can work from a reference site, a mood board, or a blank canvas. We'll present concepts before building anything, so you approve the direction early. If you have a Figma file, we can build from that too — just let us know when you reach out."
+    answer: "Our design add-on covers custom Figma mockups — we can work from a reference site, a mood board, or a blank canvas. We'll present concepts before building anything, so you approve the direction early. If you already have a Figma file, we can build from that too."
   },
   {
     question: "Do you offer ongoing maintenance?",
@@ -26,7 +26,7 @@ export const faqs: FAQItem[] = [
   },
   {
     question: "How do revisions work?",
-    answer: "Each package includes a set number of design revisions. A revision means changes to existing pages — not adding new pages or features after scope is locked. Anything beyond the original scope gets quoted separately so there are no surprises."
+    answer: "Each service includes a set number of revision rounds — 1 for landing pages, 2 for full website builds. A revision means changes to existing pages, not adding new pages or features after scope is locked. Anything beyond the original scope gets quoted separately so there are no surprises."
   },
   {
     question: "Why Next.js instead of WordPress?",
@@ -40,13 +40,22 @@ export const faqs: FAQItem[] = [
     question: "How is this different from a big agency?",
     answer: "No account managers, no layers, no bloated timelines. You talk directly to the people doing the work. We keep our client list small so every project gets full attention — not a ticket in a queue. Agency-level output, without the agency overhead or price tag."
   },
+  {
+    question: "What are the add-ons?",
+    answer: "Every project starts with a base build — you provide the content and design direction, we code and deploy. Add-ons let you layer in services like custom Figma design, professional copywriting, Sanity CMS integration, analytics setup, form integrations, and content SEO. You only pay for what you need."
+  },
 ];
+
+export type AddOn = {
+  label: string;
+};
 
 export type PackageTier = {
   name: string;
   priceFrom: number;
   description: string;
   deliverables: string[];
+  addOns: AddOn[];
   timeline: string;
   idealFor: string[];
   recommended?: boolean;
@@ -66,54 +75,66 @@ export const INTAKE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfP-GqX9W9T9
 export const siteContent: SiteContent = {
   hero: {
     headline: "Your website should be your best salesperson",
-    subheadline: "Most small business websites cost money every month and bring in nothing. We design, write, and build sites that load fast, rank on Google, and actually drive leads — for a fixed price, delivered in weeks.",
+    subheadline: "Most small business websites cost money every month and bring in nothing. We design, write, and build sites that load fast, rank on Google, and actually drive leads — starting at $1,000.",
     ctaPrimary: "See our work",
-    ctaSecondary: "View packages"
+    ctaSecondary: "View services"
   },
 
   stats: [
-    { label: "Load Time", value: "< 1s" },
+    { label: "Landing Pages", value: "From $1k" },
+    { label: "Full Websites", value: "From $3.5k" },
     { label: "Google-Ready", value: "SEO Built In" },
-    { label: "Delivery", value: "2–3 Weeks" },
-    { label: "Maintenance Fees", value: "$0/mo" },
+    { label: "Fixed Price", value: "No Surprises" },
   ],
 
   packages: [
     {
-      name: "Business Site",
-      priceFrom: 750,
-      description: "A professional website that makes your business look as good online as it is in person. Fast, mobile-friendly, and built to get found.",
+      name: "Landing Page",
+      priceFrom: 1000,
+      description: "A single high-performance page built to convert — for ad campaigns, product launches, or a focused service offering. You provide the content, we build it fast.",
       deliverables: [
-        "Custom design + development",
-        "Up to 5 pages",
-        "Contact form with validation",
-        "SEO metadata + canonical URLs",
-        "Mobile responsive",
+        "Custom single-page Next.js build",
+        "Responsive across all devices",
+        "Optimized for speed (sub-second load)",
+        "Contact or lead capture form",
         "Deployed to Vercel",
-        "2 design revisions",
+        "1 round of revisions",
       ],
-      timeline: "14 days",
-      idealFor: ["Local service businesses", "Professionals", "Contractors"]
+      addOns: [
+        { label: "Custom Figma design" },
+        { label: "Professional copywriting" },
+        { label: "Sanity CMS integration" },
+        { label: "Form & tool integrations (HubSpot, Calendly, etc.)" },
+        { label: "Analytics setup (GA4, conversion tracking)" },
+        { label: "Content SEO (keyword research, on-page optimization)" },
+      ],
+      timeline: "3–5 days",
+      idealFor: ["Ad campaigns", "Product launches", "Service pages"],
     },
     {
-      name: "Full Business Site",
-      priceFrom: 1500,
-      description: "Everything in the Business Site, plus copywriting, advanced SEO, and a site built to compete for search traffic. The complete package.",
+      name: "Website Build",
+      priceFrom: 3500,
+      description: "A complete multi-page website designed to establish your business online, get found on Google, and convert visitors into leads. Built from scratch — no templates, no WordPress.",
       deliverables: [
-        "Custom design + development",
-        "Professional copywriting",
-        "Up to 8 pages",
+        "Custom multi-page Next.js site (up to 5 pages)",
+        "Responsive across all devices",
+        "Optimized for speed (sub-second load)",
         "Contact form with validation",
         "SEO metadata + canonical URLs + sitemap",
-        "On-page SEO optimization",
-        "FAQ page with schema markup",
-        "Mobile responsive",
         "Deployed to Vercel",
-        "95+ Lighthouse score guaranteed",
-        "3 design revisions",
+        "2 rounds of revisions",
       ],
-      timeline: "21 days",
-      idealFor: ["Established local businesses", "Service companies", "Anyone who wants it done right"],
+      addOns: [
+        { label: "Custom Figma design" },
+        { label: "Professional copywriting" },
+        { label: "Sanity CMS integration" },
+        { label: "Additional pages beyond 5" },
+        { label: "Form & tool integrations (HubSpot, Calendly, etc.)" },
+        { label: "Analytics setup (GA4, conversion tracking)" },
+        { label: "Content SEO (keyword research, on-page optimization)" },
+      ],
+      timeline: "2–3 weeks",
+      idealFor: ["Local businesses", "Service companies", "Consultants", "Small agencies"],
       recommended: true,
     },
   ],
@@ -123,7 +144,7 @@ export const siteContent: SiteContent = {
     body: [
       "We're Brian Woodson Web Development — a distributed studio that designs, writes, and builds websites for small businesses. Not template sites. Not WordPress. Custom-built, fast, and done right.",
       "Every site we ship loads in under a second, scores 95+ on Google's performance audit, and comes with the SEO foundations you need to get found. No plugins to maintain, no monthly fees, no surprises after launch.",
-      "We keep our client list small on purpose. Fixed scope on every project — you know exactly what you're getting, what it costs, and when it ships."
+      "Start with the base build and add what you need — design, copywriting, CMS, SEO. Every project is scoped and priced before work begins."
     ],
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"]
   },

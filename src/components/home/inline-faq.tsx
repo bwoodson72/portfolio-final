@@ -2,8 +2,8 @@ import Link from "next/link";
 import { faqs } from "@/content/portfolio";
 
 const SELECTED_QUESTIONS = [
+  "What are the add-ons?",
   "Why Next.js instead of WordPress?",
-  "Do you offer ongoing maintenance?",
   "How do revisions work?",
 ];
 

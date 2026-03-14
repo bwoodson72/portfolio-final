@@ -196,17 +196,17 @@ export function ContactForm() {
                                     />
                                 </Field>
 
-                                <Field label="Package interest" error={errors.package?.message} span2>
+                                <Field label="Service interest" error={errors.package?.message} span2>
                                     <select
                                         {...register("package")}
                                         id="package"
                                         aria-invalid={!!errors.package}
                                         className={`${baseInput} ${errors.package ? inputErr : inputOk} cursor-pointer bg-surface`}
                                     >
-                                        <option value="">Select a package...</option>
-                                        <option value="Business Site">Business Site</option>
-                                        <option value="Full Business Site">Full Business Site</option>
-                                        <option value="Not sure">Not sure</option>
+                                        <option value="">Select a service...</option>
+                                        <option value="Landing Page">Landing Page</option>
+                                        <option value="Website Build">Website Build</option>
+                                        <option value="Not sure yet">Not sure yet</option>
                                     </select>
                                 </Field>
 
@@ -241,12 +241,6 @@ export function ContactForm() {
                                 {isSubmitting ? "Sending…" : "Send message"}
                             </button>
                         </form>
-                        <p className="mt-6 text-center text-sm text-text-muted">
-                            Prefer email? Reach us directly at{" "}
-                            <a href="mailto:hello@brianwoodson.com" className="text-text underline underline-offset-4 hover:opacity-80 transition">
-                                hello@brianwoodson.com
-                            </a>
-                        </p>
                     </motion.div>
                 ) : (
                     <motion.div
