@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/studio',
+      disallow: ['/studio', '/audit'],
     },
     sitemap: 'https://brianwoodson.dev/sitemap.xml',
   }

@@ -8,6 +8,7 @@ import { TrustStrip } from "@/components/home/trust-strip";
 import { ProjectHighlights } from "@/components/home/project-highlights";
 import { InlineFAQ } from "@/components/home/inline-faq";
 import { FinalCTA } from "@/components/home/final-cta";
+import { AuditCta } from "@/components/home/audit-cta";
 
 export const metadata: Metadata = {
     title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
@@ -40,6 +41,7 @@ export default function Home() {
             <TrustStrip />
             <FeaturedWork />
             <ProjectHighlights />
+            <AuditCta />
             <ServicePackages />
             <InlineFAQ />
             <HowIWork />
