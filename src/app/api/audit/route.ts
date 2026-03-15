@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
+function median(values: number[]): number {
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 !== 0
+      ? sorted[mid]
+      : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const rawUrl = searchParams.get("url");
@@ -19,44 +27,52 @@ export async function GET(request: NextRequest) {
   const categoryParams = categories.map((c) => `category=${c}`).join("&");
   let apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(normalizedUrl)}&${categoryParams}&strategy=mobile`;
 
-  // Append API key if available (increases rate limits)
   if (process.env.PAGESPEED_API_KEY) {
     apiUrl += `&key=${process.env.PAGESPEED_API_KEY}`;
   }
 
+  const NUM_RUNS = 5;
+
   try {
-    const res = await fetch(apiUrl);
+    const responses = await Promise.all(
+        Array.from({ length: NUM_RUNS }, () => fetch(apiUrl))
+    );
 
-    if (!res.ok) {
+    const results: { performance: number; accessibility: number; bestPractices: number; seo: number }[] = [];
+
+    for (const res of responses) {
+      if (!res.ok) continue;
+      const data = await res.json();
+      const lighthouseCategories = data?.lighthouseResult?.categories;
+      if (!lighthouseCategories) continue;
+
+      results.push({
+        performance: (lighthouseCategories["performance"]?.score ?? 0) * 100,
+        accessibility: (lighthouseCategories["accessibility"]?.score ?? 0) * 100,
+        bestPractices: (lighthouseCategories["best-practices"]?.score ?? 0) * 100,
+        seo: (lighthouseCategories["seo"]?.score ?? 0) * 100,
+      });
+    }
+
+    if (results.length === 0) {
       return NextResponse.json(
-        { error: "Failed to analyze this URL. Please check the address and try again." },
-        { status: 502 }
+          { error: "Failed to analyze this URL. Please check the address and try again." },
+          { status: 502 }
       );
     }
 
-    const data = await res.json();
-    const lighthouseCategories = data?.lighthouseResult?.categories;
-
-    if (!lighthouseCategories) {
-      return NextResponse.json(
-        { error: "Could not retrieve Lighthouse scores for this URL." },
-        { status: 502 }
-      );
-    }
-
-    // Scores come as 0-1 floats, convert to 0-100 integers
     const scores = {
-      performance: Math.round((lighthouseCategories["performance"]?.score ?? 0) * 100),
-      accessibility: Math.round((lighthouseCategories["accessibility"]?.score ?? 0) * 100),
-      bestPractices: Math.round((lighthouseCategories["best-practices"]?.score ?? 0) * 100),
-      seo: Math.round((lighthouseCategories["seo"]?.score ?? 0) * 100),
+      performance: Math.round(median(results.map((r) => r.performance))),
+      accessibility: Math.round(median(results.map((r) => r.accessibility))),
+      bestPractices: Math.round(median(results.map((r) => r.bestPractices))),
+      seo: Math.round(median(results.map((r) => r.seo))),
     };
 
     return NextResponse.json({ url: normalizedUrl, scores });
   } catch {
     return NextResponse.json(
-      { error: "Failed to reach the PageSpeed Insights service. Please try again later." },
-      { status: 502 }
+        { error: "Failed to reach the PageSpeed Insights service. Please try again later." },
+        { status: 502 }
     );
   }
 }
