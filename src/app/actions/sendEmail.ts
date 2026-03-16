@@ -60,8 +60,8 @@ export async function sendEmail(
 
     try {
         const { error } = await resend.emails.send({
-            from: 'Portfolio <onboarding@resend.dev>',
-            to: ['bwoodson2@live.com'],
+            from: 'Portfolio <contact-form@brianwoodson.dev>',
+            to: ['brian@brianwoodson.dev'],
             subject: `// INQUIRY [${formData.package ?? 'No package selected'}]: ${formData.firstName} ${formData.lastName}`,
             replyTo: formData.email,
             html: `

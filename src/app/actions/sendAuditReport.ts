@@ -284,7 +284,7 @@ export async function sendAuditReport(data: {
   try {
     // Send the report to the visitor
     const { error: reportError } = await resend.emails.send({
-      from: 'Brian Woodson Web Development <hello@brianwoodson.dev>',
+      from: 'Brian Woodson Web Development <no-reply@brianwoodson.dev>',
       to: [email],
       subject: subjectLine,
       html: reportHtml,
@@ -296,7 +296,7 @@ export async function sendAuditReport(data: {
 
     // Notify you of the new lead
     await resend.emails.send({
-      from: 'Brian Woodson Web Development <hello@brianwoodson.dev>',
+      from: 'Brian Woodson Web Development <audit-lead@brianwoodson.dev>',
       to: ['bwoodson2@live.com'],
       subject: `// AUDIT LEAD: ${email} — ${url}`,
       html: `
