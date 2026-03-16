@@ -297,7 +297,7 @@ export async function sendAuditReport(data: {
     // Notify you of the new lead
     await resend.emails.send({
       from: 'Brian Woodson Web Development <audit-lead@brianwoodson.dev>',
-      to: ['bwoodson2@live.com'],
+      to: ['brian@brianwoodson.dev'],
       subject: `// AUDIT LEAD: ${email} — ${url}`,
       html: `
         <div style="font-family: monospace; background-color: #050505; color: #ffffff; padding: 20px; border: 1px solid #3b82f6;">
