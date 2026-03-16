@@ -31,16 +31,14 @@ export async function GET(request: NextRequest) {
     apiUrl += `&key=${process.env.PAGESPEED_API_KEY}`;
   }
 
-  const NUM_RUNS = 5;
+  const NUM_RUNS = 3;
 
   try {
-    const responses = await Promise.all(
-        Array.from({ length: NUM_RUNS }, () => fetch(apiUrl))
-    );
-
     const results: { performance: number; accessibility: number; bestPractices: number; seo: number }[] = [];
 
-    for (const res of responses) {
+    for (let i = 0; i < NUM_RUNS; i++) {
+      if (i > 0) await new Promise((resolve) => setTimeout(resolve, 3000));
+      const res = await fetch(apiUrl);
       if (!res.ok) continue;
       const data = await res.json();
       const lighthouseCategories = data?.lighthouseResult?.categories;

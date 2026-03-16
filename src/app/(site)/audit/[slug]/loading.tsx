@@ -11,7 +11,7 @@ export default function AuditLoading() {
         Analyzing your website...
       </h1>
       <p className="text-lg text-text-muted max-w-xl">
-        Running performance, accessibility, and SEO checks. This usually takes 15–30 seconds.
+        Running performance, accessibility, and SEO checks. This usually takes up to 30 seconds.
       </p>
 
       <div className="w-full max-w-md h-2 rounded-full bg-surface border border-border overflow-hidden mt-8">
