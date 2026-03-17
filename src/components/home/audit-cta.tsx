@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -28,6 +29,7 @@ type AuditInput = z.infer<typeof auditSchema>;
 
 export function AuditCta() {
   const router = useRouter();
+  const [navigating, setNavigating] = useState(false);
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<AuditInput>({
     resolver: zodResolver(auditSchema),
     defaultValues: { url: "" },
@@ -43,6 +45,7 @@ export function AuditCta() {
       .replace(/\+/g, "-")
       .replace(/\//g, "_")
       .replace(/=+$/, "");
+    setNavigating(true);
     router.push(`/audit/${slug}`);
   };
 
@@ -68,10 +71,10 @@ export function AuditCta() {
           />
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || navigating}
             className="rounded-xl bg-text text-bg px-6 py-3 text-sm font-bold transition hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
           >
-            {isSubmitting ? "Analyzing..." : "Run free audit"}
+            {isSubmitting || navigating ? "Analyzing..." : "Run free audit"}
           </button>
         </div>
         {errors.url && (
