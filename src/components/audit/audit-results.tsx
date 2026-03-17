@@ -213,7 +213,7 @@ export function AuditResults({ url }: { url: string }) {
         })}
       </div>
 
-      <AuditEmailCapture url={url} scores={scores} />
+      <AuditEmailCapture url={url} scores={scores!} />
 
       <div className="rounded-2xl border border-border bg-surface p-8 md:p-12 text-center space-y-6">
         <div className="space-y-3">
