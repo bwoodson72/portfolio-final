@@ -1,13 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-function median(values: number[]): number {
-  const sorted = [...values].sort((a, b) => a - b);
-  const mid = Math.floor(sorted.length / 2);
-  return sorted.length % 2 !== 0
-      ? sorted[mid]
-      : (sorted[mid - 1] + sorted[mid]) / 2;
-}
-
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const rawUrl = searchParams.get("url");
@@ -31,28 +23,20 @@ export async function GET(request: NextRequest) {
     apiUrl += `&key=${process.env.PAGESPEED_API_KEY}`;
   }
 
-  const NUM_RUNS = 3;
-
   try {
-    const results: { performance: number; accessibility: number; bestPractices: number; seo: number }[] = [];
+    const res = await fetch(apiUrl);
 
-    for (let i = 0; i < NUM_RUNS; i++) {
-      if (i > 0) await new Promise((resolve) => setTimeout(resolve, 3000));
-      const res = await fetch(apiUrl);
-      if (!res.ok) continue;
-      const data = await res.json();
-      const lighthouseCategories = data?.lighthouseResult?.categories;
-      if (!lighthouseCategories) continue;
-
-      results.push({
-        performance: (lighthouseCategories["performance"]?.score ?? 0) * 100,
-        accessibility: (lighthouseCategories["accessibility"]?.score ?? 0) * 100,
-        bestPractices: (lighthouseCategories["best-practices"]?.score ?? 0) * 100,
-        seo: (lighthouseCategories["seo"]?.score ?? 0) * 100,
-      });
+    if (!res.ok) {
+      return NextResponse.json(
+          { error: "Failed to analyze this URL. Please check the address and try again." },
+          { status: 502 }
+      );
     }
 
-    if (results.length === 0) {
+    const data = await res.json();
+    const lighthouseCategories = data?.lighthouseResult?.categories;
+
+    if (!lighthouseCategories) {
       return NextResponse.json(
           { error: "Failed to analyze this URL. Please check the address and try again." },
           { status: 502 }
@@ -60,10 +44,10 @@ export async function GET(request: NextRequest) {
     }
 
     const scores = {
-      performance: Math.round(median(results.map((r) => r.performance))),
-      accessibility: Math.round(median(results.map((r) => r.accessibility))),
-      bestPractices: Math.round(median(results.map((r) => r.bestPractices))),
-      seo: Math.round(median(results.map((r) => r.seo))),
+      performance: Math.round((lighthouseCategories["performance"]?.score ?? 0) * 100),
+      accessibility: Math.round((lighthouseCategories["accessibility"]?.score ?? 0) * 100),
+      bestPractices: Math.round((lighthouseCategories["best-practices"]?.score ?? 0) * 100),
+      seo: Math.round((lighthouseCategories["seo"]?.score ?? 0) * 100),
     };
 
     return NextResponse.json({ url: normalizedUrl, scores });
