@@ -103,7 +103,7 @@ export default async function PostPage({ params }: Props) {
         href="/knowledge"
         className="mb-10 inline-flex items-center gap-1.5 text-sm text-text-muted transition-colors hover:text-text"
       >
-        ← Knowledge
+        ← Guides
       </Link>
 
       {/* Article header */}

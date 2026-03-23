@@ -40,17 +40,17 @@ const howIWork = [
     {
         step: "03",
         title: "Deliver with a clean handoff",
-        body: "Your site goes live on Vercel, fully deployed and production-ready. We walk you through everything, hand off access, and give you a revision window to make sure it's exactly right.",
+        body: "Your site goes live, fully deployed and production-ready. We walk you through everything, hand off access, and give you a revision window to make sure it's exactly right.",
     },
 ];
 
 const bestFitFor = [
-    "Local businesses that want a website that actually brings in customers",
-    "Service companies ready to stop paying monthly for a site that doesn't perform",
-    "Business owners who want design, copy, and development handled under one roof",
-    "Anyone who's tired of slow, outdated WordPress sites",
-    "Companies that want a fixed price and a guaranteed delivery date",
-    "Founders who want to talk to their team directly, not through layers",
+    "You're paying for a website that's not generating leads",
+    "Your agency built you a slow WordPress site and charges you monthly",
+    "You want design, copy, and development handled under one roof",
+    "You want a fixed price and a guaranteed delivery date",
+    "You'd rather talk to the person building your site than an account manager",
+    "You need a site that actually shows up on Google",
 ];
 
 export default function AboutPage() {
@@ -85,26 +85,11 @@ export default function AboutPage() {
                                 <p key={idx}>{para}</p>
                             ))}
                             <p>
-                                Brian Woodson leads every project and handles all development. Before going independent, he spent years building production web applications — the kind that have to work under real traffic, real deadlines, and real business pressure. That experience shapes how every site gets built: fast, findable, and built to last.
+                                Brian Woodson leads every project and handles all development. Before going independent, he spent years building production web applications under real traffic and real deadlines. That experience shapes how every site gets built: fast, findable, and built to last.
                             </p>
                             <p>
-                                Our design and copywriting specialists have worked together across dozens of projects. We keep the team tight and the client list small — that means you talk directly to the people doing the work, and every project gets full attention.
+                                Most agencies build on WordPress, charge monthly retainers, and deliver sites that take 10 seconds to load. We took a different approach - a small team, a modern stack, and a focus on performance that shows up in every Google audit. You talk directly to the people doing the work, and every project gets full attention.
                             </p>
-                        </div>
-                        <div className="space-y-4">
-                            <h2 className="text-xs font-bold uppercase tracking-widest text-text-muted">
-                                Primary Stack
-                            </h2>
-                            <div className="flex flex-wrap gap-3">
-                                {about.stack.map((tech) => (
-                                    <span
-                                        key={tech}
-                                        className="rounded-xl border border-border bg-surface px-4 py-2 text-sm font-bold text-text transition hover:border-border-strong"
-                                    >
-                                        {tech}
-                                    </span>
-                                ))}
-                            </div>
                         </div>
                         <Link
                             href="/contact"

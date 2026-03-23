@@ -53,10 +53,10 @@ export function AuditCta() {
     <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
       <div className="space-y-4 text-center md:text-left">
         <h2 className="text-3xl font-extrabold tracking-tight text-text md:text-5xl">
-          See how your website actually performs
+          Is your website costing you customers?
         </h2>
         <p className="max-w-2xl text-lg text-text-muted">
-          Enter your URL and get a free performance, SEO, and accessibility audit in under 30 seconds.
+          Enter your URL and get a free performance, SEO, and accessibility audit. Takes 30 seconds — and you might not like what you find.
         </p>
       </div>
 

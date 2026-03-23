@@ -7,11 +7,11 @@ import PostCardComponent from '@/components/knowledge/PostCardComponent'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Knowledge | Brian Woodson',
+  title: 'Guides | Brian Woodson',
   description:
     'Guides on website performance, SEO, and what small businesses need to know before investing in a new site.',
   openGraph: {
-    title: 'Knowledge | Brian Woodson',
+    title: 'Guides | Brian Woodson',
     description:
       'Guides on website performance, SEO, and what small businesses need to know before investing in a new site.',
     url: '/knowledge',
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Knowledge | Brian Woodson',
+    title: 'Guides | Brian Woodson',
     description:
       'Guides on website performance, SEO, and what small businesses need to know before investing in a new site.',
     images: ['/og-image.png'],
@@ -71,7 +71,7 @@ export default async function KnowledgePage({ searchParams }: Props) {
       {/* Header */}
       <div className="mb-12 space-y-4">
         <p className="text-xs font-bold uppercase tracking-widest text-text-muted">
-          Knowledge
+          Guides
         </p>
         <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-6xl">
           Before you hire anyone

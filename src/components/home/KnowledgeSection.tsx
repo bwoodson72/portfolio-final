@@ -26,7 +26,7 @@ export async function KnowledgeSection() {
       <div className="mb-10 flex items-end justify-between">
         <div className="space-y-2">
           <p className="text-xs font-bold uppercase tracking-widest text-text-muted-2">
-            Knowledge
+            Guides
           </p>
           <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-4xl">
             Before you hire anyone

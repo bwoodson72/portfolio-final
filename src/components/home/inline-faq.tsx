@@ -3,7 +3,7 @@ import { faqs } from "@/content/portfolio";
 
 const SELECTED_QUESTIONS = [
   "What are the add-ons?",
-  "Why Next.js instead of WordPress?",
+  "Why don't you use WordPress?",
   "How do revisions work?",
 ];
 

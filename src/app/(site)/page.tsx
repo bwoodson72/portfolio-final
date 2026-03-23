@@ -11,11 +11,11 @@ import { FinalCTA } from "@/components/home/final-cta";
 import { AuditCta } from "@/components/home/audit-cta";
 
 export const metadata: Metadata = {
-    title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
-    description: "Your website should be your best salesperson. We design, write, and build fast sites for small businesses — fixed price, delivered in weeks.",
+    title: "Brian Woodson Web Development // Fast Websites That Bring You Customers",
+    description: "We build fast, SEO-ready websites for small businesses and keep them driving leads. Fixed price, no surprises, delivered in weeks.",
     openGraph: {
-        title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
-        description: "Your website should be your best salesperson. We design, write, and build fast sites for small businesses — fixed price, delivered in weeks.",
+        title: "Brian Woodson Web Development // Fast Websites That Bring You Customers",
+        description: "We build fast, SEO-ready websites for small businesses and keep them driving leads. Fixed price, no surprises, delivered in weeks.",
         url: "/",
         siteName: "Brian Woodson Web Development",
         images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Web Development" }],
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
-        description: "Your website should be your best salesperson. We design, write, and build fast sites for small businesses — fixed price, delivered in weeks.",
+        title: "Brian Woodson Web Development // Fast Websites That Bring You Customers",
+        description: "We build fast, SEO-ready websites for small businesses and keep them driving leads. Fixed price, no surprises, delivered in weeks.",
         images: ["/og-image.png"],
     },
     alternates: {
@@ -39,9 +39,9 @@ export default function Home() {
             <Hero />
             <ProofStrip />
             <TrustStrip />
+            <AuditCta />
             <FeaturedWork />
             <ProjectHighlights />
-            <AuditCta />
             <ServicePackages />
             <InlineFAQ />
             <HowIWork />

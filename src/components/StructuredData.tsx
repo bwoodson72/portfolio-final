@@ -10,7 +10,7 @@ const organization = {
         "https://www.linkedin.com/in/brianwoodson",
         "https://www.fiverr.com/brianwoodson",
     ],
-    knowsAbout: ["Web Design", "Web Development", "SEO", "Copywriting", "Next.js", "React", "Tailwind CSS"],
+    knowsAbout: ["Web Design", "Web Development", "SEO", "Copywriting", "Website Performance", "Small Business Websites"],
 };
 
 const graph = {
@@ -20,7 +20,7 @@ const graph = {
             "@type": "WebSite",
             name: "Brian Woodson Web Development",
             url: "https://brianwoodson.dev",
-            description: "A web studio that designs, writes, and builds fast websites for small businesses.",
+            description: "A web studio that builds fast websites for small businesses and keeps them driving leads.",
             publisher: organization,
         },
         organization,

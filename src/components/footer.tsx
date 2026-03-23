@@ -39,7 +39,7 @@ export function Footer() {
                     <div className="space-y-4">
                         <h3 className="text-xs font-bold uppercase tracking-widest text-text">Brian Woodson Web Development</h3>
                         <p className="text-sm text-text-muted leading-relaxed">
-                            We design, write, and build fast websites for small businesses. Fixed price, no monthly fees, delivered in weeks.
+                            We build fast websites for small businesses and keep them bringing you customers. Fixed price, delivered in weeks.
                         </p>
                     </div>
                 </div>

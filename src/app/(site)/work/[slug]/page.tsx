@@ -137,23 +137,6 @@ export default async function CaseStudyPage({ params }: Props) {
                 </div>
             </div>
 
-            {/* Stack */}
-            <div className="space-y-4">
-                <h2 className="text-xs font-bold uppercase tracking-widest text-text-muted">
-                    Stack
-                </h2>
-                <div className="flex flex-wrap gap-2">
-                    {(project.stack ?? []).map((tech) => (
-                        <span
-                            key={tech}
-                            className="rounded-md border border-border bg-bg px-2 py-1 text-[10px] font-mono text-text"
-                        >
-                            {tech}
-                        </span>
-                    ))}
-                </div>
-            </div>
-
             {/* Expected Outcomes */}
             {project.outcome && project.outcome.length > 0 && (
                 <div className="space-y-4">

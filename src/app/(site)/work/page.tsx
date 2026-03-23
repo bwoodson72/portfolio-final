@@ -88,16 +88,6 @@ export default async function WorkPage() {
                                     <p className="text-sm leading-relaxed text-text-muted">
                                         {project.tagline}
                                     </p>
-                                    <div className="flex flex-wrap gap-2 pt-2">
-                                        {(project.stack ?? []).map((tech) => (
-                                            <span
-                                                key={tech}
-                                                className="rounded-md border border-border bg-bg px-2 py-1 text-[10px] font-mono text-text"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ))}
-                                    </div>
                                 </div>
                             </Link>
                         );

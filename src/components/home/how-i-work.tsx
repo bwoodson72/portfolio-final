@@ -27,21 +27,8 @@ export const HowIWork = () => {
         </div>
 
         <div className="space-y-6">
-          <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">Primary Stack</h3>
-          <div className="flex flex-wrap gap-3">
-            {about.stack.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-xl border border-border bg-surface px-4 py-2 text-sm font-bold text-text transition hover:border-border-strong"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
           {testimonials[0] && (
-            <div className="mt-10">
-              <TestimonialCard testimonial={testimonials[0]} />
-            </div>
+            <TestimonialCard testimonial={testimonials[0]} />
           )}
         </div>
       </div>
