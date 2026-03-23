@@ -104,7 +104,7 @@ export const siteContent: SiteContent = {
       deliverables: [
         "Single high-performance page built to convert",
         "Responsive across all devices",
-        "Optimized for speed (sub-second load)",
+        "Optimized for speed (under 3-second load)",
         "Contact or lead capture form",
         "Deployed and live",
         "1 round of revisions",
@@ -126,7 +126,7 @@ export const siteContent: SiteContent = {
       deliverables: [
         "Complete multi-page site (up to 5 pages)",
         "Responsive across all devices",
-        "Optimized for speed (sub-second load)",
+        "Optimized for speed (under 3-second load)",
         "Contact form with validation",
         "SEO metadata, canonical URLs, and sitemap",
         "Deployed and live",
@@ -176,7 +176,7 @@ export const siteContent: SiteContent = {
     headline: "A small team that builds websites worth paying for",
     body: [
       "We're Brian Woodson Web Development — a distributed studio that designs, writes, and builds websites for small businesses. Not template sites. Not WordPress. Custom-built, fast, and done right.",
-      "Every site we ship loads in under a second, scores 95+ on Google's performance audit, and comes with the SEO foundations you need to get found. No plugins to maintain, no surprises after launch.",
+      "Every site we ship loads in under 3 seconds, scores 95+ on Google's performance audit, and comes with the SEO foundations you need to get found. No plugins to maintain, no surprises after launch.",
       "Start with the base build and add what you need — design, copywriting, SEO. Every project is scoped and priced before work begins."
     ],
     stack: ["Fast Load Times", "SEO-Ready", "Mobile-First", "Fixed Price", "No WordPress"]

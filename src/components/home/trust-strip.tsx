@@ -4,7 +4,7 @@ const items = [
   {
     icon: Shield,
     label: "Guaranteed Fast",
-    sublabel: "Every site loads in under 1 second",
+    sublabel: "Every site loads in under 3 seconds",
   },
   {
     icon: Clock,
