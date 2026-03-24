@@ -30,7 +30,7 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://brianwoodson.dev/"),
+    metadataBase: new URL("https://brianwoodson.dev"),
     title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
     description: "A web studio that designs, writes, and builds fast websites for small businesses. Fixed price, no monthly fees, delivered in weeks.",
     keywords: ["small business website", "web design agency", "website development", "SEO", "copywriting", "Next.js", "fixed price website"],
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
         description: "A web studio that designs, writes, and builds fast websites for small businesses. Fixed price, no monthly fees, delivered in weeks.",
-        url: "https://brianwoodson.dev/",
+        url: "https://brianwoodson.dev",
         siteName: "Brian Woodson Web Development",
         locale: "en_US",
         type: "website",
