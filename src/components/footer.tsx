@@ -30,7 +30,6 @@ export function Footer() {
                         <h3 className="text-xs font-bold uppercase tracking-widest text-text">Links</h3>
                         <ul className="space-y-2 text-sm text-text-muted">
                             <li><Link href="/faq" className="hover:text-text transition-colors">FAQ</Link></li>
-                            <li><a href="https://www.fiverr.com/brianwoodson" target="_blank" rel="noopener noreferrer" className="hover:text-text transition-colors">Fiverr</a></li>
                             <li><Link href="/contact" className="hover:text-text transition-colors">Email</Link></li>
                         </ul>
                     </div>
