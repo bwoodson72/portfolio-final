@@ -85,14 +85,12 @@ export const portableTextComponents: PortableTextComponents = {
       return (
         <figure className="my-10">
           <div className="overflow-hidden rounded-xl border border-border">
-            {/* unoptimized: Sanity CDN domain isn't in next.config remotePatterns */}
             <Image
               src={src}
               alt={value?.alt ?? ''}
               width={1200}
               height={675}
               className="w-full"
-              unoptimized
             />
           </div>
           {value?.caption && (

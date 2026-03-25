@@ -235,6 +235,55 @@ export default async function CaseStudyPage({ params }: Props) {
                     Get in touch
                 </Link>
             </div>
+
+            {/* Structured data */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        '@context': 'https://schema.org',
+                        '@graph': [
+                            {
+                                '@type': 'BreadcrumbList',
+                                itemListElement: [
+                                    {
+                                        '@type': 'ListItem',
+                                        position: 1,
+                                        name: 'Home',
+                                        item: 'https://brianwoodson.dev',
+                                    },
+                                    {
+                                        '@type': 'ListItem',
+                                        position: 2,
+                                        name: 'Work',
+                                        item: 'https://brianwoodson.dev/work',
+                                    },
+                                    {
+                                        '@type': 'ListItem',
+                                        position: 3,
+                                        name: project.title,
+                                        item: `https://brianwoodson.dev/work/${slug}`,
+                                    },
+                                ],
+                            },
+                            {
+                                '@type': 'WebPage',
+                                name: project.title,
+                                description: project.tagline,
+                                url: `https://brianwoodson.dev/work/${slug}`,
+                                datePublished: project.publishedAt,
+                                ...(project._updatedAt ? { dateModified: project._updatedAt } : {}),
+                                ...(heroUrl ? { image: heroUrl } : {}),
+                                isPartOf: {
+                                    '@type': 'WebSite',
+                                    name: 'Brian Woodson Web Development',
+                                    url: 'https://brianwoodson.dev',
+                                },
+                            },
+                        ],
+                    }),
+                }}
+            />
         </main>
     );
 }

@@ -3,21 +3,21 @@ import Link from "next/link";
 import { faqs } from "@/content/portfolio";
 
 export const metadata: Metadata = {
-    title: "FAQ | Brian Woodson",
-    description: "Common questions about working with Brian Woodson on your small business website",
+    title: "FAQ | Brian Woodson Web Development",
+    description: "Common questions about working with Brian Woodson Web Development on your small business website.",
     openGraph: {
-        title: "FAQ | Brian Woodson",
-        description: "Common questions about working with Brian Woodson on your small business website",
+        title: "FAQ | Brian Woodson Web Development",
+        description: "Common questions about working with Brian Woodson Web Development on your small business website.",
         url: "/faq",
-        siteName: "Brian Woodson",
-        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Portfolio Preview" }],
+        siteName: "Brian Woodson Web Development",
+        images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Web Development" }],
         locale: "en_US",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
-        title: "FAQ | Brian Woodson",
-        description: "Common questions about working with Brian Woodson on your small business website",
+        title: "FAQ | Brian Woodson Web Development",
+        description: "Common questions about working with Brian Woodson Web Development on your small business website.",
         images: ["/og-image.png"],
     },
     alternates: {

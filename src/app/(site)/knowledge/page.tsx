@@ -7,22 +7,22 @@ import PostCardComponent from '@/components/knowledge/PostCardComponent'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Guides | Brian Woodson',
+  title: 'Guides | Brian Woodson Web Development',
   description:
     'Guides on website performance, SEO, and what small businesses need to know before investing in a new site.',
   openGraph: {
-    title: 'Guides | Brian Woodson',
+    title: 'Guides | Brian Woodson Web Development',
     description:
       'Guides on website performance, SEO, and what small businesses need to know before investing in a new site.',
     url: '/knowledge',
     siteName: 'Brian Woodson Web Development',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Brian Woodson Portfolio Preview' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Brian Woodson Web Development' }],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Guides | Brian Woodson',
+    title: 'Guides | Brian Woodson Web Development',
     description:
       'Guides on website performance, SEO, and what small businesses need to know before investing in a new site.',
     images: ['/og-image.png'],

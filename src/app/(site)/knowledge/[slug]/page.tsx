@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const ogImage = post.coverImage
       ? urlFor(post.coverImage).width(1200).height(630).url()
       : '/og-image.png'
-    const title = `${post.title} | Brian Woodson`
+    const title = `${post.title} | Brian Woodson Web Development`
 
     return {
       title,
@@ -56,6 +56,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title,
         description: post.excerpt,
         url: `/knowledge/${slug}`,
+        siteName: 'Brian Woodson Web Development',
+        locale: 'en_US',
         publishedTime: post.publishedAt,
         images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
       },
@@ -156,20 +158,56 @@ export default async function PostPage({ params }: Props) {
         <PostBody value={post.body} />
       </article>
 
-      {/* Article structured data */}
+      {/* Structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'Article',
-            headline: post.title,
-            description: post.excerpt,
-            datePublished: post.publishedAt,
-            author: { '@type': 'Organization', name: 'Brian Woodson Web Development', url: 'https://brianwoodson.dev' },
-            publisher: { '@type': 'Organization', name: 'Brian Woodson Web Development', url: 'https://brianwoodson.dev' },
-            mainEntityOfPage: `https://brianwoodson.dev/knowledge/${slug}`,
-            ...(coverImageUrl ? { image: coverImageUrl } : {}),
+            '@graph': [
+              {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                  {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Home',
+                    item: 'https://brianwoodson.dev',
+                  },
+                  {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: 'Guides',
+                    item: 'https://brianwoodson.dev/knowledge',
+                  },
+                  {
+                    '@type': 'ListItem',
+                    position: 3,
+                    name: post.title,
+                    item: `https://brianwoodson.dev/knowledge/${slug}`,
+                  },
+                ],
+              },
+              {
+                '@type': 'Article',
+                headline: post.title,
+                description: post.excerpt,
+                datePublished: post.publishedAt,
+                ...(post._updatedAt ? { dateModified: post._updatedAt } : {}),
+                author: {
+                  '@type': 'Organization',
+                  name: 'Brian Woodson Web Development',
+                  url: 'https://brianwoodson.dev',
+                },
+                publisher: {
+                  '@type': 'Organization',
+                  name: 'Brian Woodson Web Development',
+                  url: 'https://brianwoodson.dev',
+                },
+                mainEntityOfPage: `https://brianwoodson.dev/knowledge/${slug}`,
+                ...(coverImageUrl ? { image: coverImageUrl } : {}),
+              },
+            ],
           }),
         }}
       />

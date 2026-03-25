@@ -1,18 +1,22 @@
 import type { MetadataRoute } from 'next'
-import { ALL_POST_SLUGS_QUERY, ALL_PROJECT_SLUGS_QUERY } from '@/lib/sanity/queries'
+import { ALL_POST_SLUGS_WITH_DATES_QUERY, ALL_PROJECT_SLUGS_WITH_DATES_QUERY } from '@/lib/sanity/queries'
 
 const BASE = 'https://brianwoodson.dev'
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date()
+type SanitySlugWithDates = {
+  slug: string
+  publishedAt: string
+  _updatedAt?: string
+}
 
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${BASE}/`,          lastModified: now, changeFrequency: 'monthly', priority: 1.0 },
-    { url: `${BASE}/work`,      lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/knowledge`, lastModified: now, changeFrequency: 'weekly',  priority: 0.8 },
-    { url: `${BASE}/about`,     lastModified: now, changeFrequency: 'yearly',  priority: 0.5 },
-    { url: `${BASE}/faq`,       lastModified: now, changeFrequency: 'yearly',  priority: 0.4 },
-    { url: `${BASE}/contact`,   lastModified: now, changeFrequency: 'yearly',  priority: 0.6 },
+    { url: `${BASE}/`,          changeFrequency: 'monthly', priority: 1.0 },
+    { url: `${BASE}/work`,      changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/knowledge`, changeFrequency: 'weekly',  priority: 0.8 },
+    { url: `${BASE}/about`,     changeFrequency: 'yearly',  priority: 0.5 },
+    { url: `${BASE}/faq`,       changeFrequency: 'yearly',  priority: 0.4 },
+    { url: `${BASE}/contact`,   changeFrequency: 'yearly',  priority: 0.6 },
   ]
 
   let workRoutes: MetadataRoute.Sitemap = []
@@ -20,19 +24,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
     const { client } = await import('@/lib/sanity/client')
     const [projectSlugs, postSlugs] = await Promise.all([
-      client.fetch<{ slug: string }[]>(ALL_PROJECT_SLUGS_QUERY),
-      client.fetch<{ slug: string }[]>(ALL_POST_SLUGS_QUERY),
+      client.fetch<SanitySlugWithDates[]>(ALL_PROJECT_SLUGS_WITH_DATES_QUERY),
+      client.fetch<SanitySlugWithDates[]>(ALL_POST_SLUGS_WITH_DATES_QUERY),
     ])
-    workRoutes = projectSlugs.map(({ slug }) => ({
+    workRoutes = projectSlugs.map(({ slug, publishedAt, _updatedAt }) => ({
       url: `${BASE}/work/${slug}`,
-      lastModified: now,
-      changeFrequency: 'monthly',
+      lastModified: new Date(_updatedAt ?? publishedAt),
+      changeFrequency: 'monthly' as const,
       priority: 0.7,
     }))
-    knowledgeRoutes = postSlugs.map(({ slug }) => ({
+    knowledgeRoutes = postSlugs.map(({ slug, publishedAt, _updatedAt }) => ({
       url: `${BASE}/knowledge/${slug}`,
-      lastModified: now,
-      changeFrequency: 'weekly',
+      lastModified: new Date(_updatedAt ?? publishedAt),
+      changeFrequency: 'weekly' as const,
       priority: 0.7,
     }))
   }

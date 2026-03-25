@@ -18,6 +18,7 @@ export interface PostCard {
 
 export interface Post extends PostCard {
   body: PortableTextBlock[]
+  _updatedAt?: string
 }
 
 export interface ProjectCard {
@@ -51,4 +52,5 @@ export interface Project extends ProjectCard {
   liveUrl?: string
   loomUrl?: string
   publishedAt: string
+  _updatedAt?: string
 }

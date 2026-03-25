@@ -27,7 +27,8 @@ export const FEATURED_POSTS_QUERY = groq`
 export const POST_BY_SLUG_QUERY = groq`
   *[_type == "post" && slug.current == $slug][0] {
     ${POST_CARD_FIELDS},
-    body
+    body,
+    _updatedAt
   }
 `
 
@@ -73,12 +74,29 @@ export const PROJECT_BY_SLUG_QUERY = groq`
     screenshots[] { asset, alt, hotspot },
     liveUrl,
     loomUrl,
-    publishedAt
+    publishedAt,
+    _updatedAt
   }
 `
 
 export const ALL_PROJECT_SLUGS_QUERY = groq`
   *[_type == "project"] {
     "slug": slug.current
+  }
+`
+
+export const ALL_POST_SLUGS_WITH_DATES_QUERY = groq`
+  *[_type == "post"] {
+    "slug": slug.current,
+    publishedAt,
+    "_updatedAt": _updatedAt
+  }
+`
+
+export const ALL_PROJECT_SLUGS_WITH_DATES_QUERY = groq`
+  *[_type == "project"] {
+    "slug": slug.current,
+    publishedAt,
+    "_updatedAt": _updatedAt
   }
 `
