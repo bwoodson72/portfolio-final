@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
+import {PhoneNumber} from "@/components/phoneNumber";
 
 export function Nav() {
     const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +25,7 @@ export function Nav() {
                         href="/"
                         className="text-lg font-bold tracking-tighter text-text"
                     >
-                        Brian Woodson
+                        Brian Woodson Web Development
                     </Link>
 
                     {/* Center: Links */}
@@ -39,6 +40,7 @@ export function Nav() {
                                 </Link>
                             </li>
                         ))}
+                        <li><PhoneNumber/></li>
                     </ul>
 
                     {/* Right: Mobile Menu Toggle */}
@@ -76,6 +78,7 @@ export function Nav() {
                                     {l.label}
                                 </Link>
                             ))}
+                            <PhoneNumber/>
                         </div>
                     </motion.div>
                 )}
