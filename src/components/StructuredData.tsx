@@ -20,7 +20,7 @@ const graph = {
             "@type": "WebSite",
             name: "Brian Woodson Web Development",
             url: "https://brianwoodson.dev",
-            description: "A web studio that builds fast websites for small businesses and keeps them driving leads.",
+            description: "A web studio that designs, writes, and builds websites for small businesses. Copy, SEO, and ongoing support included.",
             publisher: organization,
         },
         organization,

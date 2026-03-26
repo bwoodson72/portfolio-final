@@ -46,7 +46,7 @@ const howIWork = [
 
 const bestFitFor = [
     "You're paying for a website that's not generating leads",
-    "Your agency built you a slow WordPress site and charges you monthly",
+    "Your current site is slow, outdated, or invisible on Google",
     "You want design, copy, and development handled under one roof",
     "You want a fixed price and a guaranteed delivery date",
     "You'd rather talk to the person building your site than an account manager",
@@ -88,7 +88,7 @@ export default function AboutPage() {
                                 Brian Woodson leads every project and handles all development. Before going independent, he spent years building production web applications under real traffic and real deadlines. That experience shapes how every site gets built: fast, findable, and built to last.
                             </p>
                             <p>
-                                Most agencies build on WordPress, charge monthly retainers, and deliver sites that take 10 seconds to load. We took a different approach - a small team, a modern stack, and a focus on performance that shows up in every Google audit. You talk directly to the people doing the work, and every project gets full attention.
+                                Most agencies build on WordPress and deliver sites that take 10 seconds to load. We took a different approach — a small team, a modern build system, and a focus on performance that shows up in every Google audit. You own your site from day one, you talk directly to the people doing the work, and every project gets full attention.
                             </p>
                         </div>
                         <Link
@@ -109,7 +109,7 @@ export default function AboutPage() {
                         How we work
                     </h2>
                     <p className="max-w-2xl text-lg text-text-muted">
-                        Fixed-scope only. Every engagement has defined deliverables, a clear timeline, and a price you agree to before work starts.
+                        Fixed-scope builds with ongoing support. Every engagement has defined deliverables, a clear timeline, and a price you agree to before work starts.
                     </p>
                 </div>
                 <div className="grid gap-6 md:grid-cols-3">

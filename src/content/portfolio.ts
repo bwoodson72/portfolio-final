@@ -6,15 +6,15 @@ export type FAQItem = {
 export const faqs: FAQItem[] = [
   {
     question: "Do you write the content/copy?",
-    answer: "Copywriting is available as an add-on for any project. We can write your website copy from scratch, or refine what you already have. If you bring your own content, we'll make sure it fits the design and reads well on screen."
+    answer: "Copywriting is included in every tier. We write your website copy from scratch based on your business, services, and target customers. You review and approve before anything goes live."
   },
   {
     question: "What do you need from us to get started?",
-    answer: "Your branding basics (logo, colors, fonts if you have them), a clear idea of what pages you need, and any reference sites you like. If you don't have content ready, we offer copywriting as an add-on. We'll scope everything before work begins."
+    answer: "Your branding basics (logo, colors, fonts if you have them), a clear idea of your services and service areas, and any reference sites you like. We handle copy, design direction, SEO, and everything else. We'll scope everything before work begins."
   },
   {
     question: "Will my site rank on Google?",
-    answer: "Every site ships with technical SEO foundations — metadata, canonical URLs, sitemap, structured data, and fast load times. Our content SEO add-on goes further: keyword research, on-page optimization, and a content strategy to help you compete in local search. Rankings depend on your market and content — we build the infrastructure and the strategy."
+    answer: "Every site ships with on-page SEO, metadata, canonical URLs, sitemap, structured data, and Google Business Profile setup. Our Growth Build tier goes further with ongoing keyword research and monthly blog content. Rankings depend on your market and competition — we build the infrastructure and, on the Growth tier, execute the content strategy."
   },
   {
     question: "Can you match a design I like?",
@@ -22,7 +22,7 @@ export const faqs: FAQItem[] = [
   },
   {
     question: "Do you offer ongoing maintenance?",
-    answer: "Yes. After launch, we offer two monthly plans: Site Care ($250/mo) for content updates, performance monitoring, and security upkeep; and Growth ($600/mo) which adds keyword research, on-page SEO, and two blog posts per month to keep your site climbing in search results."
+    answer: "Every tier includes a post-launch monthly plan that covers hosting, security, uptime monitoring, content updates, and a monthly performance report. Our Growth Build tier also includes ongoing SEO content — 2 blog posts per month, keyword research, and quarterly strategy calls. No contracts — cancel anytime."
   },
   {
     question: "How do revisions work?",
@@ -42,7 +42,7 @@ export const faqs: FAQItem[] = [
   },
   {
     question: "What are the add-ons?",
-    answer: "Every project starts with a base build — you provide the content and design direction, we build and deploy. Add-ons let you layer in services like custom design, professional copywriting, analytics setup, form integrations, and content SEO. You only pay for what you need."
+    answer: "Every tier comes loaded — copywriting, SEO, tracking, and GBP setup are included, not add-ons. Optional extras include custom Figma design, additional pages, tool integrations (HubSpot, Calendly), and PPC landing pages. You only pay for what goes beyond the base scope."
   },
 ];
 
@@ -52,20 +52,14 @@ export type AddOn = {
 
 export type PackageTier = {
   name: string;
-  priceFrom: number;
+  setupPrice: number;
+  monthlyPrice: number;
   description: string;
   deliverables: string[];
+  monthlyIncludes: string[];
   addOns: AddOn[];
   timeline: string;
   idealFor: string[];
-  recommended?: boolean;
-};
-
-export type MonthlyPlan = {
-  name: string;
-  price: number;
-  description: string;
-  includes: string[];
   recommended?: boolean;
 };
 
@@ -73,7 +67,6 @@ export type SiteContent = {
   hero: { headline: string; subheadline: string; ctaPrimary: string; ctaSecondary: string };
   stats?: { label: string; value: string }[];
   packages: PackageTier[];
-  monthlyPlans: MonthlyPlan[];
   about: { headline: string; body: string[]; stack: string[] };
   cta: { headline: string; body: string; email: string };
 };
@@ -84,102 +77,124 @@ export const INTAKE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfP-GqX9W9T9
 export const siteContent: SiteContent = {
   hero: {
     headline: "You paid for a website. It's not bringing in customers.",
-    subheadline: "We build fast, Google-ready websites for small businesses — then make sure they keep driving leads. Fixed price, no surprises, starting at $1,000.",
+    subheadline: "We build websites that get your business found on Google and turn visitors into leads. Fixed setup price, ongoing support included.",
     ctaPrimary: "See our work",
     ctaSecondary: "View services"
   },
 
   stats: [
-    { label: "Landing Pages", value: "From $1k" },
+    { label: "Landing Pages", value: "From $1.5k" },
     { label: "Full Websites", value: "From $3.5k" },
-    { label: "Google-Ready", value: "SEO Built In" },
+    { label: "Lead Systems", value: "From $5.5k" },
     { label: "Fixed Price", value: "No Surprises" },
   ],
 
   packages: [
     {
       name: "Landing Page",
-      priceFrom: 1000,
-      description: "A single high-performance page built to convert — for ad campaigns, product launches, or a focused service offering. You provide the content, we build it fast.",
+      setupPrice: 1500,
+      monthlyPrice: 150,
+      description: "A single conversion-ready page with copy, SEO, and tracking built in. We write it, build it, and keep it running.",
       deliverables: [
         "Single high-performance page built to convert",
+        "Conversion-focused copywriting (we write it)",
         "Responsive across all devices",
-        "Optimized for speed (under 3-second load)",
         "Contact or lead capture form",
+        "GA4 + conversion tracking setup",
+        "On-page SEO optimization",
         "Deployed and live",
         "1 round of revisions",
       ],
+      monthlyIncludes: [
+        "Hosting, security, and uptime monitoring",
+        "Content updates (up to 2 requests/month)",
+        "Monthly performance report",
+        "Security and dependency updates",
+      ],
       addOns: [
         { label: "Custom Figma design" },
-        { label: "Professional copywriting" },
         { label: "Form & tool integrations (HubSpot, Calendly, etc.)" },
-        { label: "Analytics setup (GA4, conversion tracking)" },
-        { label: "Content SEO (keyword research, on-page optimization)" },
       ],
       timeline: "3–5 days",
       idealFor: ["Ad campaigns", "Product launches", "Service pages"],
     },
     {
       name: "Website Build",
-      priceFrom: 3500,
-      description: "A complete multi-page website designed to establish your business online, get found on Google, and convert visitors into leads. Built from scratch — no templates, no WordPress.",
+      setupPrice: 3500,
+      monthlyPrice: 200,
+      description: "A complete multi-page website built to get your business found on Google and convert visitors into leads. Copy, SEO, reviews, and GBP setup included.",
       deliverables: [
         "Complete multi-page site (up to 5 pages)",
+        "Conversion-focused copywriting (we write it)",
+        "Dedicated service pages",
+        "Google Business Profile setup and optimization",
+        "Review widget integration",
+        "GA4 + conversion tracking setup",
+        "On-page SEO for all pages",
+        "Contact forms with validation",
         "Responsive across all devices",
-        "Optimized for speed (under 3-second load)",
-        "Contact form with validation",
-        "SEO metadata, canonical URLs, and sitemap",
         "Deployed and live",
         "2 rounds of revisions",
       ],
-      addOns: [
-        { label: "Custom Figma design" },
-        { label: "Professional copywriting" },
-        { label: "Additional pages beyond 5" },
-        { label: "Form & tool integrations (HubSpot, Calendly, etc.)" },
-        { label: "Analytics setup (GA4, conversion tracking)" },
-        { label: "Content SEO (keyword research, on-page optimization)" },
-      ],
-      timeline: "2–3 weeks",
-      idealFor: ["Local businesses", "Service companies", "Consultants", "Small agencies"],
-      recommended: true,
-    },
-  ],
-
-  monthlyPlans: [
-    {
-      name: "Site Care",
-      price: 250,
-      description: "We keep your site fast, secure, and up to date so you never think about it.",
-      includes: [
+      monthlyIncludes: [
+        "Hosting, security, and uptime monitoring",
         "Content updates (up to 3 requests/month)",
-        "Uptime and performance monitoring",
         "Monthly performance report",
         "Security and dependency updates",
       ],
+      addOns: [
+        { label: "Custom Figma design" },
+        { label: "Additional pages beyond 5" },
+        { label: "Form & tool integrations (HubSpot, Calendly, etc.)" },
+      ],
+      timeline: "2–3 weeks",
+      idealFor: ["Local businesses", "Service companies", "Consultants"],
+      recommended: true,
     },
     {
-      name: "Growth",
-      price: 600,
-      description: "Everything in Site Care, plus SEO content that keeps your site climbing in search results.",
-      includes: [
-        "Everything in Site Care",
+      name: "Growth Build",
+      setupPrice: 5500,
+      monthlyPrice: 400,
+      description: "Everything in Website Build, plus service-area pages, ongoing SEO content, and quarterly strategy calls. For businesses in competitive markets.",
+      deliverables: [
+        "Complete multi-page site (up to 10 pages)",
+        "Conversion-focused copywriting (we write it)",
+        "Dedicated service pages + service-area pages",
+        "Google Business Profile setup and optimization",
+        "Review widget integration",
+        "GA4 + conversion tracking setup",
+        "On-page SEO for all pages",
+        "Contact forms with validation",
+        "Responsive across all devices",
+        "Deployed and live",
+        "2 rounds of revisions",
+      ],
+      monthlyIncludes: [
+        "Everything in Website Build monthly",
         "Keyword research and on-page SEO",
         "2 blog posts per month targeting real search queries",
         "Content published and optimized for Google",
+        "Quarterly performance review call",
       ],
-      recommended: true,
+      addOns: [
+        { label: "Custom Figma design" },
+        { label: "Additional pages beyond 10" },
+        { label: "Form & tool integrations (HubSpot, Calendly, etc.)" },
+        { label: "PPC landing pages" },
+      ],
+      timeline: "2–3 weeks",
+      idealFor: ["Competitive markets", "Multi-service businesses", "Regional coverage"],
     },
   ],
 
   about: {
     headline: "A small team that builds websites worth paying for",
     body: [
-      "We're Brian Woodson Web Development — a distributed studio that designs, writes, and builds websites for small businesses. Not template sites. Not WordPress. Custom-built, fast, and done right.",
-      "Every site we ship loads in under 3 seconds, scores 95+ on Google's performance audit, and comes with the SEO foundations you need to get found. No plugins to maintain, no surprises after launch.",
-      "Start with the base build and add what you need — design, copywriting, SEO. Every project is scoped and priced before work begins."
+      "We're Brian Woodson Web Development — a distributed studio that designs, writes, and builds websites for small businesses. Not template sites. Not WordPress. Custom-built, conversion-focused, and done right.",
+      "Every site ships with the copy, SEO, and tracking your business needs to get found and convert visitors into leads. You own your site from day one — no contracts, no buyout fees, no hostage situation.",
+      "Every project is scoped and priced before work begins. You know what you're getting, what it costs, and when it's done."
     ],
-    stack: ["Fast Load Times", "SEO-Ready", "Mobile-First", "Fixed Price", "No WordPress"]
+    stack: ["SEO-Ready", "Mobile-First", "Fixed Price", "You Own It", "No WordPress"]
   },
 
   cta: {

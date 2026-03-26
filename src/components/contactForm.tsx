@@ -204,8 +204,9 @@ export function ContactForm() {
                                         className={`${baseInput} ${errors.package ? inputErr : inputOk} cursor-pointer bg-surface`}
                                     >
                                         <option value="">Select a service...</option>
-                                        <option value="Landing Page">Landing Page</option>
-                                        <option value="Website Build">Website Build</option>
+                                        <option value="Landing Page">Landing Page — $1,500</option>
+                                        <option value="Website Build">Website Build — $3,500</option>
+                                        <option value="Growth Build">Growth Build — $5,500</option>
                                         <option value="Not sure yet">Not sure yet</option>
                                     </select>
                                 </Field>

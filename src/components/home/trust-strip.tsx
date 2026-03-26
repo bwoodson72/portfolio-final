@@ -8,13 +8,13 @@ const items = [
   },
   {
     icon: Clock,
-    label: "Done in 2–3 Weeks",
-    sublabel: "Fixed timeline — you'll know the delivery date upfront",
+    label: "Done in Days, Not Months",
+    sublabel: "Landing pages in under a week. Full sites in 2–3 weeks.",
   },
   {
     icon: DollarSign,
     label: "One Fixed Price",
-    sublabel: "No hourly billing, no change-order surprises",
+    sublabel: "Setup + monthly — no hourly billing, no surprise invoices",
   },
   {
     icon: User,
