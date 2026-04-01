@@ -100,3 +100,31 @@ export const ALL_PROJECT_SLUGS_WITH_DATES_QUERY = groq`
     "_updatedAt": _updatedAt
   }
 `
+
+export const ALL_LANDING_PAGE_SLUGS_QUERY = groq`
+  *[_type == "landingPage"] {
+    "slug": slug.current
+  }
+`
+
+export const LANDING_PAGE_BY_SLUG_QUERY = groq`
+  *[_type == "landingPage" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    campaignTag,
+    headline,
+    subheadline,
+    problemHeading,
+    problemBody,
+    proofHeading,
+    proofBody,
+    offerHeading,
+    offerBody,
+    formHeading,
+    ctaCopy,
+    faqs[] { question, answer },
+    finalCtaHeading,
+    finalCtaCopy
+  }
+`

@@ -54,3 +54,23 @@ export interface Project extends ProjectCard {
   publishedAt: string
   _updatedAt?: string
 }
+
+export interface LandingPage {
+  _id: string
+  title: string
+  slug: { current: string }
+  campaignTag: string
+  headline: string
+  subheadline?: string
+  problemHeading?: string
+  problemBody?: string
+  proofHeading?: string
+  proofBody?: string
+  offerHeading?: string
+  offerBody?: string
+  formHeading?: string
+  ctaCopy?: string
+  faqs?: { question: string; answer: string }[]
+  finalCtaHeading?: string
+  finalCtaCopy?: string
+}
