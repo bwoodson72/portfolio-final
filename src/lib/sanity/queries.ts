@@ -125,6 +125,8 @@ export const LANDING_PAGE_BY_SLUG_QUERY = groq`
     ctaCopy,
     faqs[] { question, answer },
     finalCtaHeading,
-    finalCtaCopy
+    finalCtaCopy,
+    gadsConversionId,
+    gadsConversionLabel
   }
 `

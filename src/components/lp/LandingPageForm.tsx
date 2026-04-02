@@ -65,10 +65,14 @@ export function LandingPageForm({
     heading,
     ctaCopy,
     campaignTag,
+    gadsConversionId,
+    gadsConversionLabel,
 }: {
     heading?: string
     ctaCopy?: string
     campaignTag: string
+    gadsConversionId?: string
+    gadsConversionLabel?: string
 }) {
     const [isSuccess, setIsSuccess] = useState(false)
     const [serverError, setServerError] = useState<string | null>(null)
@@ -110,6 +114,14 @@ export function LandingPageForm({
             if (result.success) {
                 setIsSuccess(true)
                 trackEvent('contact_form_success', { campaign: campaignTag })
+
+                // Fire Google Ads conversion
+                if (gadsConversionId && gadsConversionLabel && typeof window.gtag === 'function') {
+                    window.gtag('event', 'conversion', {
+                        send_to: `${gadsConversionId}/${gadsConversionLabel}`,
+                    })
+                }
+
                 reset()
                 if (widgetIdRef.current && window.turnstile) {
                     window.turnstile.reset(widgetIdRef.current)
@@ -119,7 +131,7 @@ export function LandingPageForm({
                 trackEvent('contact_form_error', { error: result.error ?? 'unknown' })
             }
         },
-        [reset, campaignTag]
+        [reset, campaignTag, gadsConversionId, gadsConversionLabel]
     )
 
     return (

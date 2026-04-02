@@ -28,6 +28,18 @@ export const landingPageType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'gadsConversionId',
+      title: 'Google Ads Conversion ID',
+      type: 'string',
+      description: 'The AW-XXXXXXXXX conversion ID for this campaign. Leave blank to skip Google Ads tracking.',
+    }),
+    defineField({
+      name: 'gadsConversionLabel',
+      title: 'Google Ads Conversion Label',
+      type: 'string',
+      description: 'The conversion label from your Google Ads conversion action (e.g. "AbCdEfGh123").',
+    }),
+    defineField({
       name: 'headline',
       title: 'Headline',
       type: 'string',

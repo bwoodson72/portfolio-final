@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { LANDING_PAGE_BY_SLUG_QUERY, ALL_LANDING_PAGE_SLUGS_QUERY } from '@/lib/sanity/queries'
 import type { LandingPage } from '@/lib/sanity/types'
 import { LandingPageForm } from '@/components/lp/LandingPageForm'
+import Script from 'next/script'
 
 type Props = {
     params: Promise<{ slug: string }>
@@ -123,6 +124,8 @@ export default async function LandingPageRoute({ params }: Props) {
                     heading={page.formHeading}
                     ctaCopy={page.ctaCopy}
                     campaignTag={page.campaignTag}
+                    gadsConversionId={page.gadsConversionId}
+                    gadsConversionLabel={page.gadsConversionLabel}
                 />
             </section>
 
@@ -181,6 +184,24 @@ export default async function LandingPageRoute({ params }: Props) {
                         {page.finalCtaCopy ?? 'Request a free review'}
                     </a>
                 </section>
+            )}
+
+            {/* Google Ads conversion tag — loaded per landing page */}
+            {page.gadsConversionId && (
+                <>
+                    <Script
+                        src={`https://www.googletagmanager.com/gtag/js?id=${page.gadsConversionId}`}
+                        strategy="afterInteractive"
+                    />
+                    <Script id="gads-init" strategy="afterInteractive">
+                        {`
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', '${page.gadsConversionId}');
+                        `}
+                    </Script>
+                </>
             )}
 
             {/* Minimal footer — no nav links, no sitemap exposure */}

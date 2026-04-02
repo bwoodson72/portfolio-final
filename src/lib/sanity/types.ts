@@ -73,4 +73,6 @@ export interface LandingPage {
   faqs?: { question: string; answer: string }[]
   finalCtaHeading?: string
   finalCtaCopy?: string
+  gadsConversionId?: string
+  gadsConversionLabel?: string
 }
