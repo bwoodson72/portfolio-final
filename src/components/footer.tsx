@@ -1,12 +1,10 @@
 'use client'
 
 import Link from "next/link";
-import { siteContent } from "@/content/portfolio";
 import { PHONE_DISPLAY, PHONE_HREF, PHONE_ARIA_LABEL } from "@/lib/constants";
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
-    const { packages } = siteContent;
 
     return (
         <footer className="w-full border-t border-border bg-bg">
@@ -16,13 +14,12 @@ export function Footer() {
                     <div className="space-y-4">
                         <h3 className="text-xs font-bold uppercase tracking-widest text-text">Services</h3>
                         <ul className="space-y-2 text-sm text-text-muted">
-                            {packages.map((pkg) => (
-                                <li key={pkg.name}>
-                                    <Link href="/services" className="hover:text-text transition-colors">
-                                        {pkg.name}
-                                    </Link>
-                                </li>
-                            ))}
+                            <li><Link href="/services" className="hover:text-text transition-colors">Website Rebuilds</Link></li>
+                            <li><Link href="/services" className="hover:text-text transition-colors">Landing Pages</Link></li>
+                            <li><Link href="/services" className="hover:text-text transition-colors">Performance Optimization</Link></li>
+                            <li><Link href="/services" className="hover:text-text transition-colors">Technical SEO</Link></li>
+                            <li><Link href="/services" className="hover:text-text transition-colors">Copywriting</Link></li>
+                            <li><Link href="/services" className="hover:text-text transition-colors">Ongoing Support</Link></li>
                         </ul>
                     </div>
 
