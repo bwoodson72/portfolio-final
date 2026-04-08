@@ -33,7 +33,7 @@ export const Hero = () => {
             {hero.ctaPrimary}
           </Link>
           <Link
-            href="#packages"
+            href="/services"
             className="rounded-full border border-border bg-surface px-8 py-4 text-sm font-bold text-text transition hover:bg-surface-hover"
           >
             {hero.ctaSecondary}

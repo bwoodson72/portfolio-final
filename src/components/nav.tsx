@@ -10,7 +10,8 @@ export function Nav() {
 
     const navLinks: { label: string; href: string }[] = [
         { label: "Work", href: "/work" },
-        { label: "Services", href: "/#services" },
+        { label: "Services", href: "/services" },
+        { label: "About", href: "/about" },
         { label: "Guides", href: "/knowledge" },
         { label: "FAQ", href: "/faq" },
         { label: "Contact", href: "/contact" },

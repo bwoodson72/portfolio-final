@@ -18,9 +18,9 @@ export function Footer() {
                         <ul className="space-y-2 text-sm text-text-muted">
                             {packages.map((pkg) => (
                                 <li key={pkg.name}>
-                                    <a href="#services" className="hover:text-text transition-colors">
+                                    <Link href="/services" className="hover:text-text transition-colors">
                                         {pkg.name}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -30,6 +30,7 @@ export function Footer() {
                     <div className="space-y-4">
                         <h3 className="text-xs font-bold uppercase tracking-widest text-text">Links</h3>
                         <ul className="space-y-2 text-sm text-text-muted">
+                            <li><Link href="/services" className="hover:text-text transition-colors">Services</Link></li>
                             <li><Link href="/faq" className="hover:text-text transition-colors">FAQ</Link></li>
                             <li><Link href="/contact" className="hover:text-text transition-colors">Email</Link></li>
                             <li>
@@ -56,7 +57,7 @@ export function Footer() {
                 <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-text-muted">
                     <div>© {currentYear} Brian Woodson Web Development. All rights reserved.</div>
                     <div className="flex gap-6">
-                        <a href="#top" className="hover:text-text transition-colors">Back to top</a>
+                        <Link href="#top" className="hover:text-text transition-colors">Back to top</Link>
                     </div>
                 </div>
             </div>

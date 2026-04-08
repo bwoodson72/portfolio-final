@@ -1,108 +1,125 @@
 import Link from "next/link";
 
-const cards = [
+const services = [
   {
-    eyebrow: "Single-page",
-    heading: "Conversion-focused landing page",
-    bestFor: "Ad campaigns, product launches, single-service pages",
-    includes: [
-      "High-performance single page",
-      "Conversion-focused copy",
-      "Lead capture form",
-      "GA4 + conversion tracking",
-      "On-page SEO",
-      "Mobile-first responsive build",
-      "Deployed and live",
+    title: "Website Rebuilds",
+    summary: "Replace an outdated, slow, or underperforming site with a modern build that loads fast, ranks on Google, and converts visitors into leads.",
+    benefits: [
+      "Stronger first impression on mobile",
+      "Cleaner path to contact and conversion",
+      "Better performance in search results",
+      "Built to last without constant maintenance",
     ],
-    highlighted: false,
+    bestFor: "Businesses whose current site is outdated, slow, or not generating leads",
   },
   {
-    eyebrow: "Multi-page",
-    heading: "Full business website",
-    bestFor: "Local service businesses, consultants, companies replacing an outdated site",
-    includes: [
-      "Complete multi-page site",
-      "Conversion-focused copywriting",
-      "Dedicated service pages",
-      "Google Business Profile setup",
-      "Review widget integration",
-      "GA4 + conversion tracking",
-      "On-page SEO",
-      "Deployed and live",
+    title: "Landing Pages",
+    summary: "A focused single-page build for ad campaigns, service-area targeting, or any situation where a dedicated conversion page outperforms a general website.",
+    benefits: [
+      "Higher conversion rate from paid traffic",
+      "Less distraction, clearer call to action",
+      "Fast to build and deploy",
+      "Purpose-built for one goal",
     ],
-    highlighted: true,
+    bestFor: "Ad campaigns, product launches, and service-area pages",
   },
   {
-    eyebrow: "Custom",
-    heading: "Growth-focused build",
-    bestFor: "Competitive markets, multi-location businesses, businesses investing in ongoing SEO",
-    includes: [
-      "Everything in the full website build",
-      "Service-area pages",
-      "Ongoing keyword research",
-      "Monthly SEO content",
-      "Quarterly performance review",
+    title: "Performance Optimization",
+    summary: "If your site is slow, visitors leave before they ever see your content. We diagnose and fix the issues costing you speed, rankings, and conversions.",
+    benefits: [
+      "Lower bounce rate on mobile",
+      "Better Google search rankings",
+      "Faster perceived load for visitors",
+      "Stronger trust signal for new visitors",
     ],
-    highlighted: false,
+    bestFor: "Businesses with a site that's functional but slow or technically weak",
+  },
+  {
+    title: "Technical SEO Foundations",
+    summary: "Metadata, structured data, sitemaps, canonical setup, and crawl health. The technical infrastructure that makes everything else you do in search more effective.",
+    benefits: [
+      "Google can find and index your pages",
+      "Clean structure for long-term rankings",
+      "Reduced duplicate or orphaned content",
+      "Better search appearance with structured data",
+    ],
+    bestFor: "Businesses that have content but aren't showing up in search",
+  },
+  {
+    title: "Copywriting and Messaging",
+    summary: "We write the copy for every site we build. Clear, conversion-focused writing that tells visitors what you do, why it matters, and what to do next.",
+    benefits: [
+      "Clearer value proposition for cold visitors",
+      "Stronger CTAs and higher conversion rates",
+      "Consistent tone across every page",
+      "No placeholder text or generic filler",
+    ],
+    bestFor: "Every project — copy is included, not an afterthought",
+  },
+  {
+    title: "Ongoing Support",
+    summary: "Post-launch support covering hosting, security, uptime monitoring, content updates, and monthly performance reporting. Your site stays current without you managing it.",
+    benefits: [
+      "No server or hosting to manage",
+      "Content updates without needing a developer",
+      "Monthly performance visibility",
+      "Security and dependency updates handled",
+    ],
+    bestFor: "Any business that wants the site maintained after launch",
   },
 ];
 
 export const ServicePackages = () => {
   return (
-    <section id="services" className="mx-auto w-full max-w-7xl px-6 py-24">
-      <div className="space-y-4 text-center md:text-left">
+    <section id="services" className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
+      <div className="space-y-4">
         <h2 className="text-3xl font-extrabold tracking-tight text-text md:text-5xl">
-          How projects are scoped
+          Services
         </h2>
         <p className="max-w-2xl text-lg text-text-muted">
-          Every business has a different starting point. Projects are scoped around the business goal — not forced into a generic package.
+          We help small businesses get found on Google and turn website visitors into leads. Work is scoped around what your business actually needs — not forced into a generic package.
         </p>
       </div>
 
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
-        {cards.map((card) => (
+      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((service) => (
           <div
-            key={card.heading}
-            className={`flex flex-col rounded-3xl border bg-surface p-8 shadow-sm ${card.highlighted ? "border-border-strong" : "border-border"}`}
+            key={service.title}
+            className="flex flex-col rounded-3xl border border-border bg-surface p-8 space-y-4"
           >
-            <div className="mb-4">
-              {card.highlighted && (
-                <div className="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full inline-block mb-3">
-                  Most common
-                </div>
-              )}
-              <div className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-1">
-                {card.eyebrow}
-              </div>
-              <h3 className="text-xl font-bold text-text">{card.heading}</h3>
-            </div>
-
-            <p className="text-sm text-text-muted">
-              <span className="font-bold text-text">Best for:</span> {card.bestFor}
+            <h3 className="text-lg font-bold text-text">{service.title}</h3>
+            <p className="text-sm leading-relaxed text-text-muted">{service.summary}</p>
+            <ul className="space-y-2 mt-2">
+              {service.benefits.map((benefit) => (
+                <li key={benefit} className="flex gap-2 text-xs text-text-muted">
+                  <span className="text-text font-bold shrink-0">✓</span>
+                  {benefit}
+                </li>
+              ))}
+            </ul>
+            <p className="text-[11px] font-bold uppercase tracking-widest text-text-muted-2 pt-2 border-t border-border mt-auto">
+              Best for: {service.bestFor}
             </p>
-
-            <div className="mt-6 grow space-y-3">
-              <h4 className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Typically includes</h4>
-              <ul className="space-y-2">
-                {card.includes.map((item, idx) => (
-                  <li key={idx} className="flex gap-2 text-xs text-text-muted">
-                    <span className="text-text font-bold">✓</span> {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         ))}
       </div>
 
-      <p className="mt-8 text-center text-sm text-text-muted">
-        Every project is fixed-price and scoped before work begins. Not sure which fits?{" "}
-        <Link href="/#audit" className="text-text underline underline-offset-2 hover:opacity-80">
-          Start with a free site review.
+      <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-center">
+        <Link
+          href="/services"
+          className="rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"
+        >
+          Explore services
         </Link>
-      </p>
+        <Link
+          href="/contact"
+          className="rounded-full border border-border px-8 py-3 text-sm font-bold text-text transition hover:border-border-strong"
+        >
+          Start a conversation
+        </Link>
+      </div>
 
-      <p className="mt-4 text-center text-sm text-text-muted">
+      <p className="mt-8 text-center text-sm text-text-muted">
         We take on 2–3 projects at a time to keep quality high.
       </p>
     </section>

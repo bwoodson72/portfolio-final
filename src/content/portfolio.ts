@@ -6,7 +6,7 @@ export type FAQItem = {
 export const faqs: FAQItem[] = [
   {
     question: "Do you write the content/copy?",
-    answer: "Copywriting is included in every tier. We write your website copy from scratch based on your business, services, and target customers. You review and approve before anything goes live."
+    answer: "Copywriting is included in every project. We write your website copy from scratch based on your business, services, and target customers. You review and approve before anything goes live."
   },
   {
     question: "What do you need from us to get started?",
@@ -14,7 +14,7 @@ export const faqs: FAQItem[] = [
   },
   {
     question: "Will my site rank on Google?",
-    answer: "Every site ships with on-page SEO, metadata, canonical URLs, sitemap, structured data, and Google Business Profile setup. Our Growth Build tier goes further with ongoing keyword research and monthly blog content. Rankings depend on your market and competition — we build the infrastructure and, on the Growth tier, execute the content strategy."
+    answer: "Every site ships with on-page SEO, metadata, canonical URLs, sitemap, structured data, and Google Business Profile setup. Full-build projects can include ongoing keyword research and monthly blog content for businesses that want to invest in search visibility. Rankings depend on your market and competition — we build the infrastructure and, where scoped, execute the content strategy."
   },
   {
     question: "Can you match a design I like?",
@@ -22,11 +22,11 @@ export const faqs: FAQItem[] = [
   },
   {
     question: "Do you offer ongoing maintenance?",
-    answer: "Every tier includes a post-launch monthly plan that covers hosting, security, uptime monitoring, content updates, and a monthly performance report. Our Growth Build tier also includes ongoing SEO content — 2 blog posts per month, keyword research, and quarterly strategy calls. No contracts — cancel anytime."
+    answer: "Every project includes a post-launch support period covering hosting, security, uptime monitoring, content updates, and a monthly performance report. Full-build projects can also include ongoing SEO content — 2 blog posts per month, keyword research, and quarterly strategy calls. No contracts — cancel anytime."
   },
   {
     question: "How do revisions work?",
-    answer: "Each service includes a set number of revision rounds — 1 for landing pages, 2 for full website builds. A revision means changes to existing pages, not adding new pages or features after scope is locked. Anything beyond the original scope gets quoted separately so there are no surprises."
+    answer: "Each project includes a defined number of revision rounds based on scope — typically 1 for landing pages and 2 for full website builds. A revision means changes to existing pages, not adding new pages or features after scope is locked. Anything beyond the original scope gets quoted separately so there are no surprises."
   },
   {
     question: "Why don't you use WordPress?",
@@ -42,7 +42,7 @@ export const faqs: FAQItem[] = [
   },
   {
     question: "What are the add-ons?",
-    answer: "Every tier comes loaded — copywriting, SEO, tracking, and GBP setup are included, not add-ons. Optional extras include custom Figma design, additional pages, tool integrations (HubSpot, Calendly), and PPC landing pages. You only pay for what goes beyond the base scope."
+    answer: "Every project comes with copywriting, SEO, tracking, and GBP setup already included. Optional extras include custom Figma design, additional pages, tool integrations (HubSpot, Calendly), and PPC landing pages. You only pay for what goes beyond the base scope."
   },
 ];
 
