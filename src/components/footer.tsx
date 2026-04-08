@@ -1,10 +1,9 @@
-'use client'
-
 import Link from "next/link";
 import { PHONE_DISPLAY, PHONE_HREF, PHONE_ARIA_LABEL } from "@/lib/constants";
+import { LocationLinks } from '@/components/footer/LocationLinks'
+import { FooterYear } from '@/components/footer/FooterYear'
 
 export function Footer() {
-    const currentYear = new Date().getFullYear();
 
     return (
         <footer className="w-full border-t border-border bg-bg">
@@ -42,13 +41,7 @@ export function Footer() {
                     </div>
 
                     {/* Locations */}
-                    <div className="space-y-4">
-                        <h3 className="text-xs font-bold uppercase tracking-widest text-text">Locations</h3>
-                        <ul className="space-y-2 text-sm text-text-muted">
-                            <li><Link href="/locations/granbury" className="hover:text-text transition-colors">Granbury</Link></li>
-                            <li><Link href="/locations/fort-worth" className="hover:text-text transition-colors">Fort Worth</Link></li>
-                        </ul>
-                    </div>
+                    <LocationLinks />
 
                     {/* Branding */}
                     <div className="space-y-4">
@@ -60,7 +53,7 @@ export function Footer() {
                 </div>
 
                 <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-text-muted">
-                    <div>© {currentYear} Brian Woodson Web Development. All rights reserved.</div>
+                    <div>© <FooterYear /> Brian Woodson Web Development. All rights reserved.</div>
                     <div className="flex gap-6">
                         <Link href="#top" className="hover:text-text transition-colors">Back to top</Link>
                     </div>

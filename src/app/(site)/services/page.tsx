@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ALL_LOCATION_CARDS_QUERY } from '@/lib/sanity/queries'
+import type { LocationCard } from '@/lib/sanity/types'
 
 export const metadata: Metadata = {
     title: "Services | Brian Woodson Web Development",
@@ -24,7 +26,17 @@ export const metadata: Metadata = {
     },
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+    let locations: LocationCard[] = []
+    if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+        try {
+            const { client } = await import('@/lib/sanity/client')
+            locations = await client.fetch<LocationCard[]>(ALL_LOCATION_CARDS_QUERY)
+        } catch {
+            locations = []
+        }
+    }
+
     return (
         <main className="flex w-full flex-col items-center">
 
@@ -448,6 +460,7 @@ export default function ServicesPage() {
             </section>
 
             {/* SECTION 6 — Service Areas */}
+            {locations.length > 0 && (
             <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
                 <div className="space-y-4 mb-12">
                     <h2 className="text-3xl font-extrabold tracking-tight text-text md:text-4xl">
@@ -458,17 +471,13 @@ export default function ServicesPage() {
                     </p>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {[
-                        { city: 'Granbury', slug: 'granbury', description: 'Hood County businesses competing in trades, tourism, and professional services.' },
-                        { city: 'Fort Worth', slug: 'fort-worth', description: 'DFW small businesses that need a site built to compete in a larger market.' },
-                    ].map(({ city, slug, description }) => (
+                    {locations.map(({ city, slug }) => (
                         <Link
                             key={slug}
                             href={`/locations/${slug}`}
                             className="flex flex-col rounded-2xl border border-border bg-surface p-6 space-y-2 transition hover:border-border-strong hover:-translate-y-1"
                         >
                             <h3 className="text-sm font-bold text-text">{city}</h3>
-                            <p className="text-sm leading-relaxed text-text-muted">{description}</p>
                             <span className="text-xs font-bold text-text mt-auto pt-2">
                                 View {city} page →
                             </span>
@@ -476,6 +485,7 @@ export default function ServicesPage() {
                     ))}
                 </div>
             </section>
+            )}
 
             {/* SECTION 7 — Final CTA */}
             <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">

@@ -77,6 +77,11 @@ export interface LandingPage {
   gadsConversionLabel?: string
 }
 
+export interface LocationCard {
+  slug: string
+  city: string
+}
+
 export interface LocationPage {
   _id: string
   title: string

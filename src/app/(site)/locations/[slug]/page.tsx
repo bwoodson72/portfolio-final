@@ -12,6 +12,7 @@ type Props = {
 }
 
 export const revalidate = 3600
+export const dynamicParams = true
 
 export async function generateStaticParams() {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return []

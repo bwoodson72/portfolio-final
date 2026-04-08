@@ -145,6 +145,13 @@ export const ALL_LOCATION_PAGE_SLUGS_WITH_DATES_QUERY = groq`
   }
 `
 
+export const ALL_LOCATION_CARDS_QUERY = groq`
+  *[_type == "locationPage"] | order(city asc) {
+    "slug": slug.current,
+    city
+  }
+`
+
 export const LOCATION_PAGE_BY_SLUG_QUERY = groq`
   *[_type == "locationPage" && slug.current == $slug][0] {
     _id,
