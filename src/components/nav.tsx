@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
 import {PhoneNumber} from "@/components/phoneNumber";
+import Image from "next/image";
 
 export function Nav() {
     const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +27,7 @@ export function Nav() {
                         href="/"
                         className="text-lg font-bold tracking-tighter text-text"
                     >
-                        Brian Woodson Web Development
+                        <Image src="/primary-logo.svg" alt="Brian Woodson Logo" width={220} height={220} />
                     </Link>
 
                     {/* Center: Links */}
