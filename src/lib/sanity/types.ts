@@ -76,3 +76,23 @@ export interface LandingPage {
   gadsConversionId?: string
   gadsConversionLabel?: string
 }
+
+export interface LocationPage {
+  _id: string
+  title: string
+  slug: { current: string }
+  city: string
+  state: string
+  nearbyAreas?: string[]
+  metaDescription: string
+  headline: string
+  subheadline?: string
+  bodyIntro: string
+  marketContext: string
+  localBusinessTypes: string[]
+  servicesNote?: string
+  faqs: { question: string; answer: string }[]
+  areaServed: string[]
+  publishedAt?: string
+  _updatedAt?: string
+}

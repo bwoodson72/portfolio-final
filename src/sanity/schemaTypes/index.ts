@@ -2,5 +2,6 @@ import type { SchemaTypeDefinition } from 'sanity'
 import { postType } from '../schemas/post'
 import { projectType } from '../schemas/project'
 import { landingPageType } from '../schemas/landingPage'
+import { locationPageType } from '../schemas/locationPage'
 
-export const schemaTypes: SchemaTypeDefinition[] = [postType, projectType, landingPageType]
+export const schemaTypes: SchemaTypeDefinition[] = [postType, projectType, landingPageType, locationPageType]

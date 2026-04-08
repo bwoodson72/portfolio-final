@@ -130,3 +130,38 @@ export const LANDING_PAGE_BY_SLUG_QUERY = groq`
     gadsConversionLabel
   }
 `
+
+export const ALL_LOCATION_PAGE_SLUGS_QUERY = groq`
+  *[_type == "locationPage"] {
+    "slug": slug.current
+  }
+`
+
+export const ALL_LOCATION_PAGE_SLUGS_WITH_DATES_QUERY = groq`
+  *[_type == "locationPage"] {
+    "slug": slug.current,
+    publishedAt,
+    "_updatedAt": _updatedAt
+  }
+`
+
+export const LOCATION_PAGE_BY_SLUG_QUERY = groq`
+  *[_type == "locationPage" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    city,
+    state,
+    nearbyAreas,
+    metaDescription,
+    headline,
+    subheadline,
+    bodyIntro,
+    marketContext,
+    localBusinessTypes,
+    servicesNote,
+    faqs[] { question, answer },
+    areaServed,
+    _updatedAt
+  }
+`
