@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { ALL_POST_SLUGS_WITH_DATES_QUERY, ALL_PROJECT_SLUGS_WITH_DATES_QUERY } from '@/lib/sanity/queries'
+import { ALL_POST_SLUGS_WITH_DATES_QUERY, ALL_PROJECT_SLUGS_WITH_DATES_QUERY, ALL_LOCATION_PAGE_SLUGS_WITH_DATES_QUERY } from '@/lib/sanity/queries'
 
 const BASE = 'https://brianwoodson.dev'
 
@@ -22,11 +22,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let workRoutes: MetadataRoute.Sitemap = []
   let knowledgeRoutes: MetadataRoute.Sitemap = []
+  let locationRoutes: MetadataRoute.Sitemap = []
   if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
     const { client } = await import('@/lib/sanity/client')
-    const [projectSlugs, postSlugs] = await Promise.all([
+    const [projectSlugs, postSlugs, locationSlugs] = await Promise.all([
       client.fetch<SanitySlugWithDates[]>(ALL_PROJECT_SLUGS_WITH_DATES_QUERY),
       client.fetch<SanitySlugWithDates[]>(ALL_POST_SLUGS_WITH_DATES_QUERY),
+      client.fetch<SanitySlugWithDates[]>(ALL_LOCATION_PAGE_SLUGS_WITH_DATES_QUERY),
     ])
     workRoutes = projectSlugs.map(({ slug, publishedAt, _updatedAt }) => ({
       url: `${BASE}/work/${slug}`,
@@ -40,7 +42,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     }))
+    locationRoutes = locationSlugs.map(({ slug, publishedAt, _updatedAt }) => ({
+      url: `${BASE}/locations/${slug}`,
+      lastModified: new Date(_updatedAt ?? publishedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    }))
   }
 
-  return [...staticRoutes, ...workRoutes, ...knowledgeRoutes]
+  return [...staticRoutes, ...workRoutes, ...knowledgeRoutes, ...locationRoutes]
 }
