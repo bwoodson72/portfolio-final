@@ -265,8 +265,7 @@ export async function sendAuditReport(data: {
       <div style="padding: 0 24px 32px 24px;">
         <div style="text-align: center; padding: 28px 20px; border: 1px solid #1f2937; border-radius: 12px;">
           <h2 style="font-size: 18px; font-weight: 800; margin: 0 0 12px 0;">We can do this for your site.</h2>
-          <p style="font-size: 13px; color: #94a3b8; margin: 0 0 8px 0; line-height: 1.6;">We build custom websites for small businesses. Landing pages start at $1,000. Full website builds start at $3,500.</p>
-          <p style="font-size: 13px; color: #94a3b8; margin: 0 0 20px 0; line-height: 1.6;">Design, copywriting, CMS, and SEO available as add-ons — you only pay for what you need. Every project is scoped and priced before work begins.</p>
+          <p style="font-size: 13px; color: #94a3b8; margin: 0 0 20px 0; line-height: 1.6;">We build custom websites for small businesses that score 95+ on every Google audit. Design, copy, and SEO included. Every project is fixed-price and scoped around your business goals before work begins.</p>
           <a href="https://brianwoodson.dev/contact" style="display: inline-block; background-color: #f1f5f9; color: #020617; padding: 14px 28px; border-radius: 999px; font-size: 13px; font-weight: 700; text-decoration: none;">Let's talk about your site</a>
         </div>
       </div>

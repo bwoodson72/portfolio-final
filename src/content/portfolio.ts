@@ -52,8 +52,6 @@ export type AddOn = {
 
 export type PackageTier = {
   name: string;
-  setupPrice: number;
-  monthlyPrice: number;
   description: string;
   deliverables: string[];
   monthlyIncludes: string[];
@@ -65,7 +63,6 @@ export type PackageTier = {
 
 export type SiteContent = {
   hero: { headline: string; subheadline: string; ctaPrimary: string; ctaSecondary: string };
-  stats?: { label: string; value: string }[];
   packages: PackageTier[];
   about: { headline: string; body: string[]; stack: string[] };
   cta: { headline: string; body: string; email: string };
@@ -82,18 +79,9 @@ export const siteContent: SiteContent = {
     ctaSecondary: "View services"
   },
 
-  stats: [
-    { label: "Landing Pages", value: "From $1.5k" },
-    { label: "Full Websites", value: "From $3.5k" },
-    { label: "Lead Systems", value: "From $5.5k" },
-    { label: "Fixed Price", value: "No Surprises" },
-  ],
-
   packages: [
     {
       name: "Landing Page",
-      setupPrice: 1500,
-      monthlyPrice: 150,
       description: "A single conversion-ready page with copy, SEO, and tracking built in. We write it, build it, and keep it running.",
       deliverables: [
         "Single high-performance page built to convert",
@@ -120,8 +108,6 @@ export const siteContent: SiteContent = {
     },
     {
       name: "Website Build",
-      setupPrice: 3500,
-      monthlyPrice: 200,
       description: "A complete multi-page website built to get your business found on Google and convert visitors into leads. Copy, SEO, reviews, and GBP setup included.",
       deliverables: [
         "Complete multi-page site (up to 5 pages)",
@@ -153,8 +139,6 @@ export const siteContent: SiteContent = {
     },
     {
       name: "Growth Build",
-      setupPrice: 5500,
-      monthlyPrice: 400,
       description: "Everything in Website Build, plus service-area pages, ongoing SEO content, and quarterly strategy calls. For businesses in competitive markets.",
       deliverables: [
         "Complete multi-page site (up to 10 pages)",
@@ -199,7 +183,7 @@ export const siteContent: SiteContent = {
 
   cta: {
     headline: "Let's talk about your project",
-    body: "Tell us what your business does and what you need from your website. We'll reply within one business day with a clear scope, a fixed price, and a timeline.",
+    body: "Tell us what your business does and what you need from your website. We'll reply within one business day with questions, a recommended scope, and a straightforward quote.",
     email: "hello@brianwoodson.com"
   }
 };

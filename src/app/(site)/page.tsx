@@ -12,10 +12,10 @@ import { AuditCta } from "@/components/home/audit-cta";
 
 export const metadata: Metadata = {
     title: "Brian Woodson Web Development // Fast Websites That Bring You Customers",
-    description: "We build websites that get small businesses found on Google and convert visitors into leads. Copywriting, SEO, and ongoing support included. Starting at $1,500.",
+    description: "We build websites that get small businesses found on Google and convert visitors into leads. Copywriting, SEO, and ongoing support included.",
     openGraph: {
         title: "Brian Woodson Web Development // Fast Websites That Bring You Customers",
-        description: "We build websites that get small businesses found on Google and convert visitors into leads. Copywriting, SEO, and ongoing support included. Starting at $1,500.",
+        description: "We build websites that get small businesses found on Google and convert visitors into leads. Copywriting, SEO, and ongoing support included.",
         url: "/",
         siteName: "Brian Woodson Web Development",
         images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Web Development" }],
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Brian Woodson Web Development // Fast Websites That Bring You Customers",
-        description: "We build websites that get small businesses found on Google and convert visitors into leads. Copywriting, SEO, and ongoing support included. Starting at $1,500.",
+        description: "We build websites that get small businesses found on Google and convert visitors into leads. Copywriting, SEO, and ongoing support included.",
         images: ["/og-image.png"],
     },
     alternates: {

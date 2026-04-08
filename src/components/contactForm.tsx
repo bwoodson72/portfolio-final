@@ -146,6 +146,9 @@ export function ContactForm() {
                 <p className="max-w-xl text-lg text-text-muted">
                     {siteContent.cta.body}
                 </p>
+                <p className="max-w-xl text-lg text-text-muted">
+                    Projects are quoted at a fixed price based on scope, goals, and timeline. If it looks like a fit, you&apos;ll get a clear recommendation and a straightforward quote.
+                </p>
             </div>
 
             <AnimatePresence mode="wait">
@@ -196,7 +199,7 @@ export function ContactForm() {
                                     />
                                 </Field>
 
-                                <Field label="Service interest" error={errors.package?.message} span2>
+                                <Field label="What are you looking for?" error={errors.package?.message} span2>
                                     <select
                                         {...register("package")}
                                         id="package"
@@ -204,10 +207,10 @@ export function ContactForm() {
                                         className={`${baseInput} ${errors.package ? inputErr : inputOk} cursor-pointer bg-surface`}
                                     >
                                         <option value="">Select a service...</option>
-                                        <option value="Landing Page">Landing Page — $1,500</option>
-                                        <option value="Website Build">Website Build — $3,500</option>
-                                        <option value="Growth Build">Growth Build — $5,500</option>
-                                        <option value="Not sure yet">Not sure yet</option>
+                                        <option value="Landing Page">Landing page</option>
+                                        <option value="Website Build">Full business website</option>
+                                        <option value="Growth Build">Growth-focused build with ongoing SEO</option>
+                                        <option value="Not sure yet">Not sure yet — I want a recommendation</option>
                                     </select>
                                 </Field>
 
