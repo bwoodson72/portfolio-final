@@ -73,8 +73,8 @@ export const INTAKE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfP-GqX9W9T9
 
 export const siteContent: SiteContent = {
   hero: {
-    headline: "You paid for a website. It's not bringing in customers.",
-    subheadline: "We build websites that get your business found on Google and turn visitors into leads. Fixed setup price, ongoing support included.",
+    headline: "Most business websites don't do anything. Yours should.",
+    subheadline: "We build small business websites that get found on Google, load fast on mobile, and give visitors a reason to call.",
     ctaPrimary: "See our work",
     ctaSecondary: "View services"
   },
