@@ -2,15 +2,15 @@ import Link from "next/link";
 
 const services = [
   {
-    title: "Website Rebuilds",
-    summary: "Replace an outdated, slow, or underperforming site with a modern build that loads fast, ranks on Google, and converts visitors into leads.",
+    title: "Business Websites",
+    summary: "Full business websites for both new launches and outdated-site replacements, built to load fast, rank on Google, and convert visitors into calls and leads.",
     benefits: [
-      "Stronger first impression on mobile",
-      "Cleaner path to contact and conversion",
-      "Better performance in search results",
-      "Built to last without constant maintenance",
+      "Strong first impression on mobile",
+      "Clearer path from page to inquiry",
+      "Built-in performance and SEO foundations",
+      "Works for new sites and full replacements",
     ],
-    bestFor: "Businesses whose current site is outdated, slow, or not generating leads",
+    bestFor: "Businesses that need a new site or want to replace an outdated one",
   },
   {
     title: "Landing Pages",
@@ -22,17 +22,6 @@ const services = [
       "Purpose-built for one goal",
     ],
     bestFor: "Ad campaigns, product launches, and service-area pages",
-  },
-  {
-    title: "Performance Optimization",
-    summary: "If your site is slow, visitors leave before they ever see your content. We diagnose and fix the issues costing you speed, rankings, and conversions.",
-    benefits: [
-      "Lower bounce rate on mobile",
-      "Better Google search rankings",
-      "Faster perceived load for visitors",
-      "Stronger trust signal for new visitors",
-    ],
-    bestFor: "Businesses with a site that's functional but slow or technically weak",
   },
   {
     title: "Technical SEO Foundations",
@@ -65,7 +54,7 @@ const services = [
       "Monthly performance visibility",
       "Security and dependency updates handled",
     ],
-    bestFor: "Any business that wants the site maintained after launch",
+    bestFor: "Sites we build — post-launch hosting, updates, and upkeep",
   },
 ];
 
@@ -78,6 +67,9 @@ export const ServicePackages = () => {
         </h2>
         <p className="max-w-2xl text-lg text-text-muted">
           We help small businesses get found on Google and turn website visitors into leads. Work is scoped around what your business actually needs — not forced into a generic package.
+        </p>
+        <p className="max-w-2xl text-lg text-text-muted">
+          Services are organized around the kind of outcome you need — a full business website, a focused landing page, stronger technical SEO, clearer messaging, or post-launch support.
         </p>
       </div>
 

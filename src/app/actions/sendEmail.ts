@@ -15,7 +15,7 @@ export async function sendEmail(
         lastName: string
         email: string
         message: string
-        package?: string
+        service?: string
         websiteUrl?: string
         campaignTag?: string
     },
@@ -60,13 +60,13 @@ export async function sendEmail(
     }
 
     const campaignLabel = formData.campaignTag ? ` [${formData.campaignTag}]` : ''
-    const packageLabel = formData.package ?? 'No package selected'
+    const serviceLabel = formData.service ?? 'No service selected'
 
     try {
         const { error } = await resend.emails.send({
             from: 'Portfolio <contact-form@brianwoodson.dev>',
             to: ['brian@brianwoodson.dev'],
-            subject: `// INQUIRY${campaignLabel} [${packageLabel}]: ${formData.firstName} ${formData.lastName}`,
+            subject: `// INQUIRY${campaignLabel} [${serviceLabel}]: ${formData.firstName} ${formData.lastName}`,
             replyTo: formData.email,
             html: `
                 <div style="font-family: monospace; background-color: #050505; color: #ffffff; padding: 20px; border: 1px solid #3b82f6;">
@@ -75,7 +75,7 @@ export async function sendEmail(
                     <p><strong>SOURCE:</strong> ${formData.email}</p>
                     ${formData.websiteUrl ? `<p><strong>WEBSITE URL:</strong> ${formData.websiteUrl}</p>` : ''}
                     ${formData.campaignTag ? `<p><strong>CAMPAIGN:</strong> ${formData.campaignTag}</p>` : ''}
-                    <p><strong>PACKAGE:</strong> ${packageLabel}</p>
+                    <p><strong>SERVICE:</strong> ${serviceLabel}</p>
                     <br />
                     <p><strong>MESSAGE:</strong></p>
                     <p style="border-left: 2px solid #3b82f6; padding-left: 15px; color: #cccccc;">${formData.message}</p>

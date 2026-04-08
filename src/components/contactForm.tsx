@@ -16,7 +16,7 @@ const schema = z.object({
     lastName: z.string().min(2, { error: "Required" }),
     email: z.email({ error: "Invalid email" }),
     message: z.string().min(2, { error: "Required" }),
-    package: z.string().optional(),
+    service: z.string().optional(),
     turnstileToken: z.string().min(1, { error: "Bot verification required" }),
 });
 
@@ -69,7 +69,7 @@ export function ContactForm() {
     const [formTouched, setFormTouched] = useState(false);
     const turnstileRef = useRef<HTMLDivElement>(null);
     const widgetIdRef = useRef<string | null>(null);
-    const [defaultPackage] = useState(() => {
+    const [defaultService] = useState(() => {
         if (typeof window !== "undefined") {
             return new URLSearchParams(window.location.search).get("package") ?? "";
         }
@@ -85,9 +85,9 @@ export function ContactForm() {
         formState: { errors, isSubmitting } 
     } = useForm<Inputs>({
         resolver: zodResolver(schema),
-        defaultValues: { 
-            package: defaultPackage,
-            turnstileToken: "" 
+        defaultValues: {
+            service: defaultService,
+            turnstileToken: ""
         },
     });
 
@@ -107,14 +107,14 @@ export function ContactForm() {
 
     const onSubmit = useCallback<SubmitHandler<Inputs>>(async (data) => {
         setServerError(null);
-        trackEvent("contact_form_submit", { package: data.package ?? "none" });
+        trackEvent("contact_form_submit", { service: data.service ?? "none" });
         
         const { turnstileToken: token, ...formData } = data;
         const result = await sendEmail(formData, token);
         
         if (result.success) {
             setIsSuccess(true);
-            trackEvent("contact_form_success", { package: data.package ?? "none" });
+            trackEvent("contact_form_success", { service: data.service ?? "none" });
             
             // Identify contact in HubSpot and associate prior page views
             if (typeof window !== "undefined" && window._hsq) {
@@ -199,12 +199,12 @@ export function ContactForm() {
                                     />
                                 </Field>
 
-                                <Field label="What are you looking for?" error={errors.package?.message} span2>
+                                <Field label="What are you looking for?" error={errors.service?.message} span2>
                                     <select
-                                        {...register("package")}
-                                        id="package"
-                                        aria-invalid={!!errors.package}
-                                        className={`${baseInput} ${errors.package ? inputErr : inputOk} cursor-pointer bg-surface`}
+                                        {...register("service")}
+                                        id="service"
+                                        aria-invalid={!!errors.service}
+                                        className={`${baseInput} ${errors.service ? inputErr : inputOk} cursor-pointer bg-surface`}
                                     >
                                         <option value="">Select a service...</option>
                                         <option value="Landing Page">Landing page</option>

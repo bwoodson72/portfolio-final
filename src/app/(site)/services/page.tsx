@@ -3,10 +3,10 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
     title: "Services | Brian Woodson Web Development",
-    description: "Website rebuilds, landing pages, performance optimization, technical SEO foundations, and conversion-focused web services for small businesses.",
+    description: "Business websites, landing pages, technical SEO foundations, copywriting, and ongoing support for small businesses. Custom-scoped around your goals.",
     openGraph: {
         title: "Services | Brian Woodson Web Development",
-        description: "Website rebuilds, landing pages, performance optimization, technical SEO foundations, and conversion-focused web services for small businesses.",
+        description: "Business websites, landing pages, technical SEO foundations, copywriting, and ongoing support for small businesses. Custom-scoped around your goals.",
         url: "/services",
         siteName: "Brian Woodson Web Development",
         images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Web Development" }],
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Services | Brian Woodson Web Development",
-        description: "Website rebuilds, landing pages, performance optimization, technical SEO foundations, and conversion-focused web services for small businesses.",
+        description: "Business websites, landing pages, technical SEO foundations, copywriting, and ongoing support for small businesses. Custom-scoped around your goals.",
         images: ["/og-image.png"],
     },
     alternates: {
@@ -64,30 +64,30 @@ export default function ServicesPage() {
                         Most web agencies force businesses into preset bundles. You pay for features you don&apos;t need and skip ones you do. We work differently — scope is defined after understanding your business, your goals, and your current situation.
                     </p>
                     <p className="text-lg leading-relaxed text-text-muted">
-                        Every project includes copywriting, SEO foundations, performance optimization, and ongoing support. The scope — number of pages, depth of SEO work, design complexity — is determined by what your business actually requires.
+                        Every project includes copywriting, SEO foundations, and performance built in from the start. The scope — number of pages, depth of SEO work, design complexity — is determined by what your business actually requires.
                     </p>
                 </div>
             </section>
 
             {/* SECTION 3 — Service detail sections */}
 
-            {/* Service 1: Website Rebuilds */}
+            {/* Service 1: Business Websites */}
             <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
                 <div className="grid gap-12 md:grid-cols-2">
                     <div className="space-y-4">
                         <p className="text-xs font-bold uppercase tracking-widest text-text-muted">Full Builds</p>
-                        <h2 className="text-3xl font-extrabold tracking-tight text-text">Website Rebuilds</h2>
+                        <h2 className="text-3xl font-extrabold tracking-tight text-text">Business Websites</h2>
                         <p className="text-lg leading-relaxed text-text-muted">
-                            Your current site was built for a different era — or built quickly with the wrong tools. A rebuild starts from scratch with a modern stack: fast, findable, and designed around how your customers actually think.
+                            Whether you need your first real business website or a replacement for an outdated one, this service covers building a site that looks credible, loads fast, and helps turn visitors into calls and leads.
                         </p>
                         <p className="text-sm text-text-muted">
-                            <span className="font-bold text-text">Who this is for:</span> Businesses whose current site is outdated, slow, difficult to update, or failing to convert visitors into calls and inquiries.
+                            <span className="font-bold text-text">Who this is for:</span> Businesses that need a new website, businesses that have outgrown their current site, and businesses whose current site is outdated, slow, or failing to convert.
                         </p>
                         <Link
                             href="/contact"
                             className="inline-block rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"
                         >
-                            Talk about a rebuild
+                            Talk about your website
                         </Link>
                     </div>
                     <div className="space-y-8">
@@ -95,13 +95,12 @@ export default function ServicesPage() {
                             <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">What&apos;s included</h3>
                             <ul className="space-y-2">
                                 {[
-                                    "Modern responsive layout",
+                                    "Custom multi-page business website",
+                                    "Responsive layout built for mobile",
                                     "Conversion-focused copywriting",
-                                    "Dedicated service pages",
-                                    "Google Business Profile setup",
-                                    "Contact and lead capture forms",
+                                    "Service pages and contact flow",
+                                    "On-page SEO foundations",
                                     "GA4 and conversion tracking",
-                                    "On-page SEO and metadata",
                                     "Clean deployment and handoff",
                                 ].map((item) => (
                                     <li key={item} className="flex gap-2 text-sm text-text-muted">
@@ -114,10 +113,11 @@ export default function ServicesPage() {
                             <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">Business benefits</h3>
                             <ul className="space-y-2">
                                 {[
-                                    "Stronger first impression on mobile",
-                                    "Better position in local search results",
-                                    "Clearer path from page to call",
-                                    "No more embarrassment handing someone your URL",
+                                    "Strong first impression on mobile",
+                                    "Clear path from page to inquiry",
+                                    "Faster loading and better usability than most business sites",
+                                    "Stronger foundation for local search visibility",
+                                    "Built to support real lead generation from day one",
                                 ].map((item) => (
                                     <li key={item} className="flex gap-2 text-sm text-text-muted">
                                         <span className="font-bold text-text shrink-0">✓</span> {item}
@@ -186,62 +186,7 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            {/* Service 3: Performance Optimization */}
-            <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
-                <div className="grid gap-12 md:grid-cols-2">
-                    <div className="space-y-4">
-                        <p className="text-xs font-bold uppercase tracking-widest text-text-muted">Speed Work</p>
-                        <h2 className="text-3xl font-extrabold tracking-tight text-text">Performance Optimization</h2>
-                        <p className="text-lg leading-relaxed text-text-muted">
-                            More than half of mobile visitors leave a site that takes longer than three seconds to load. If your site is slow, you are losing leads before your content is even visible.
-                        </p>
-                        <p className="text-sm text-text-muted">
-                            <span className="font-bold text-text">Who this is for:</span> Businesses with an existing site that loads slowly, has low Google Lighthouse scores, or has been told their site needs to be faster.
-                        </p>
-                        <Link
-                            href="/contact"
-                            className="inline-block rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"
-                        >
-                            Talk about performance work
-                        </Link>
-                    </div>
-                    <div className="space-y-8">
-                        <div className="space-y-3">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">What&apos;s included</h3>
-                            <ul className="space-y-2">
-                                {[
-                                    "Lighthouse audit and diagnosis",
-                                    "Image and asset optimization",
-                                    "Render path improvements",
-                                    "Code cleanup and dead weight removal",
-                                    "Retesting and score verification",
-                                ].map((item) => (
-                                    <li key={item} className="flex gap-2 text-sm text-text-muted">
-                                        <span className="font-bold text-text shrink-0">✓</span> {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="space-y-3">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">Business benefits</h3>
-                            <ul className="space-y-2">
-                                {[
-                                    "Lower bounce rate on mobile",
-                                    "Stronger Google search ranking signals",
-                                    "Faster perceived experience for every visitor",
-                                    "Better conversion rate from existing traffic",
-                                ].map((item) => (
-                                    <li key={item} className="flex gap-2 text-sm text-text-muted">
-                                        <span className="font-bold text-text shrink-0">✓</span> {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Service 4: Technical SEO Foundations */}
+            {/* Service 3: Technical SEO Foundations */}
             <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
                 <div className="grid gap-12 md:grid-cols-2">
                     <div className="space-y-4">
@@ -297,7 +242,7 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            {/* Service 5: Copywriting and Messaging */}
+            {/* Service 4: Copywriting and Messaging */}
             <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
                 <div className="grid gap-12 md:grid-cols-2">
                     <div className="space-y-4">
@@ -352,14 +297,17 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            {/* Service 6: Ongoing Support */}
+            {/* Service 5: Ongoing Support */}
             <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
                 <div className="grid gap-12 md:grid-cols-2">
                     <div className="space-y-4">
                         <p className="text-xs font-bold uppercase tracking-widest text-text-muted">After Launch</p>
                         <h2 className="text-3xl font-extrabold tracking-tight text-text">Ongoing Support</h2>
                         <p className="text-lg leading-relaxed text-text-muted">
-                            A website is not a one-time project. After launch, your site needs hosting, security updates, content edits, and occasional performance checks. Ongoing support means you never have to worry about it.
+                            Ongoing support is available for sites we build. After launch, your site needs hosting, security updates, content edits, and routine upkeep. This service handles all of it.
+                        </p>
+                        <p className="text-sm text-text-muted">
+                            This is not a general maintenance service for existing WordPress, Wix, or Squarespace sites.
                         </p>
                         <p className="text-sm text-text-muted">
                             <span className="font-bold text-text">Who this is for:</span> Businesses that want their site maintained and updated without managing servers, developers, or security patches themselves.
@@ -456,6 +404,14 @@ export default function ServicesPage() {
                 </h2>
                 <div className="space-y-2">
                     {[
+                        {
+                            q: "Do you work with businesses that don't have a website yet?",
+                            a: "Yes. Business website projects include both brand new sites and replacements for outdated ones. If you're starting from scratch, that's a normal starting point.",
+                        },
+                        {
+                            q: "Can you speed up my existing WordPress, Wix, or Squarespace site?",
+                            a: "In most cases, no. That kind of work usually turns into patching around the limits of themes, plugins, or page builders. Performance is handled here as part of a new website or full replacement project, not as a tune-up service for legacy platforms.",
+                        },
                         {
                             q: "What kinds of businesses do you work with?",
                             a: "Primarily small and local businesses — service companies, consultants, tradespeople, retail, and anyone who generates leads through their website. The work is a fit if you want a site that actively brings in customers, not just a digital business card.",

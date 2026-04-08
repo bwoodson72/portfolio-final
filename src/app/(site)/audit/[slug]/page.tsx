@@ -174,7 +174,7 @@ export default async function AuditResultPage({ params }: Props) {
     { label: "SEO", key: "seo" },
   ];
 
-  const tiers = categories.map(({ label, key }) => getTier(scores![key]));
+  const tiers = categories.map(({ key }) => getTier(scores![key]));
   const hasRed = tiers.includes("red");
   const hasYellow = tiers.includes("yellow");
   const ctaTier = hasRed ? "strong" : hasYellow ? "moderate" : "soft";
@@ -255,6 +255,11 @@ export default async function AuditResultPage({ params }: Props) {
           <p className="text-sm text-text-muted max-w-md mx-auto">
             {ctaCopy[ctaTier].body}
           </p>
+          {ctaTier !== "soft" && (
+            <p className="text-xs text-text-muted max-w-md mx-auto">
+              Problems like this usually come from how the site is built, not from one isolated fix.
+            </p>
+          )}
         </div>
         <Link
           href="/contact"
