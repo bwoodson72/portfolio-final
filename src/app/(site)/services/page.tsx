@@ -447,7 +447,37 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            {/* SECTION 6 — Final CTA */}
+            {/* SECTION 6 — Service Areas */}
+            <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
+                <div className="space-y-4 mb-12">
+                    <h2 className="text-3xl font-extrabold tracking-tight text-text md:text-4xl">
+                        Service Areas
+                    </h2>
+                    <p className="max-w-2xl text-lg text-text-muted">
+                        We work with small businesses across the Fort Worth area and surrounding communities. Every project is handled remotely — no in-person meetings required.
+                    </p>
+                </div>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {[
+                        { city: 'Granbury', slug: 'granbury', description: 'Hood County businesses competing in trades, tourism, and professional services.' },
+                        { city: 'Fort Worth', slug: 'fort-worth', description: 'DFW small businesses that need a site built to compete in a larger market.' },
+                    ].map(({ city, slug, description }) => (
+                        <Link
+                            key={slug}
+                            href={`/locations/${slug}`}
+                            className="flex flex-col rounded-2xl border border-border bg-surface p-6 space-y-2 transition hover:border-border-strong hover:-translate-y-1"
+                        >
+                            <h3 className="text-sm font-bold text-text">{city}</h3>
+                            <p className="text-sm leading-relaxed text-text-muted">{description}</p>
+                            <span className="text-xs font-bold text-text mt-auto pt-2">
+                                View {city} page →
+                            </span>
+                        </Link>
+                    ))}
+                </div>
+            </section>
+
+            {/* SECTION 7 — Final CTA */}
             <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
                 <div className="rounded-3xl border border-border bg-surface p-12 text-center space-y-6">
                     <h2 className="text-3xl font-extrabold tracking-tight text-text md:text-4xl">

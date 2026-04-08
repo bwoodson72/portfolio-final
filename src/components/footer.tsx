@@ -9,7 +9,7 @@ export function Footer() {
     return (
         <footer className="w-full border-t border-border bg-bg">
             <div className="mx-auto max-w-7xl px-6 py-16">
-                <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
+                <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
                     {/* Services */}
                     <div className="space-y-4">
                         <h3 className="text-xs font-bold uppercase tracking-widest text-text">Services</h3>
@@ -38,6 +38,15 @@ export function Footer() {
                                     {PHONE_DISPLAY}
                                 </a>
                             </li>
+                        </ul>
+                    </div>
+
+                    {/* Locations */}
+                    <div className="space-y-4">
+                        <h3 className="text-xs font-bold uppercase tracking-widest text-text">Locations</h3>
+                        <ul className="space-y-2 text-sm text-text-muted">
+                            <li><Link href="/locations/granbury" className="hover:text-text transition-colors">Granbury</Link></li>
+                            <li><Link href="/locations/fort-worth" className="hover:text-text transition-colors">Fort Worth</Link></li>
                         </ul>
                     </div>
 
