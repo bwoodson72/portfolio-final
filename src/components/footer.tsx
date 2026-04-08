@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { siteContent } from "@/content/portfolio";
+import { PHONE_DISPLAY, PHONE_HREF, PHONE_ARIA_LABEL } from "@/lib/constants";
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
@@ -17,7 +18,7 @@ export function Footer() {
                         <ul className="space-y-2 text-sm text-text-muted">
                             {packages.map((pkg) => (
                                 <li key={pkg.name}>
-                                    <a href="#packages" className="hover:text-text transition-colors">
+                                    <a href="#services" className="hover:text-text transition-colors">
                                         {pkg.name}
                                     </a>
                                 </li>
@@ -31,6 +32,15 @@ export function Footer() {
                         <ul className="space-y-2 text-sm text-text-muted">
                             <li><Link href="/faq" className="hover:text-text transition-colors">FAQ</Link></li>
                             <li><Link href="/contact" className="hover:text-text transition-colors">Email</Link></li>
+                            <li>
+                                <a
+                                    href={PHONE_HREF}
+                                    aria-label={PHONE_ARIA_LABEL}
+                                    className="hover:text-text transition-colors"
+                                >
+                                    {PHONE_DISPLAY}
+                                </a>
+                            </li>
                         </ul>
                     </div>
 

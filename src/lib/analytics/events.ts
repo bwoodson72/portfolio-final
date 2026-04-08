@@ -9,7 +9,8 @@ export type AnalyticsEventName =
   | "contact_form_error"
   | "cta_click"
   | "audit_submit"
-  | "audit_email_capture";
+  | "audit_email_capture"
+  | "phone_click";
 
 export type AnalyticsPayload = Record<string, string | number | boolean>;
 
