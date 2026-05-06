@@ -30,8 +30,8 @@ export const postType = defineType({
       title: 'Excerpt',
       type: 'text',
       rows: 3,
-      description: 'Shown on cards and used as meta description.',
-      validation: (Rule) => Rule.required().max(200),
+      description: 'Shown on cards and used as meta description. Keep under 155 characters for best display in search results.',
+      validation: (Rule) => Rule.required().max(155),
     }),
     defineField({
       name: 'coverImage',
@@ -107,6 +107,7 @@ export const postType = defineType({
             annotations: [
               defineField({
                 name: 'link',
+                title: 'External Link',
                 type: 'object',
                 fields: [
                   defineField({
@@ -119,6 +120,20 @@ export const postType = defineType({
                     title: 'Open in new tab',
                     type: 'boolean',
                     initialValue: true,
+                  }),
+                ],
+              }),
+              defineField({
+                name: 'internalLink',
+                title: 'Internal Link (Knowledge Article)',
+                type: 'object',
+                fields: [
+                  defineField({
+                    name: 'reference',
+                    title: 'Article',
+                    type: 'reference',
+                    to: [{ type: 'post' }],
+                    options: { disableNew: true },
                   }),
                 ],
               }),

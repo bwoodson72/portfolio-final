@@ -59,6 +59,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         siteName: 'Brian Woodson Web Development',
         locale: 'en_US',
         publishedTime: post.publishedAt,
+        authors: ['https://brianwoodson.dev/about'],
+        ...(post._updatedAt ? { modifiedTime: post._updatedAt } : {}),
         images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
       },
       twitter: {
@@ -189,15 +191,15 @@ export default async function PostPage({ params }: Props) {
                 ],
               },
               {
-                '@type': 'Article',
+                '@type': 'BlogPosting',
                 headline: post.title,
                 description: post.excerpt,
                 datePublished: post.publishedAt,
                 ...(post._updatedAt ? { dateModified: post._updatedAt } : {}),
                 author: {
-                  '@type': 'Organization',
-                  name: 'Brian Woodson Web Development',
-                  url: 'https://brianwoodson.dev',
+                  '@type': 'Person',
+                  name: 'Brian Woodson',
+                  url: 'https://brianwoodson.dev/about',
                 },
                 publisher: {
                   '@type': 'Organization',

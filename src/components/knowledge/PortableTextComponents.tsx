@@ -1,5 +1,6 @@
 import type { PortableTextComponents } from '@portabletext/react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 // Build a Sanity CDN URL directly from an asset _ref, avoiding a module-level
 // import of @/lib/sanity/client (which calls createClient() at module load time
@@ -57,6 +58,18 @@ export const portableTextComponents: PortableTextComponents = {
         {children}
       </a>
     ),
+    internalLink: ({ value, children }) => {
+      const slug = value?.reference?.slug
+      if (!slug) return <span>{children}</span>
+      return (
+        <Link
+          href={`/knowledge/${slug}`}
+          className="underline underline-offset-4 transition-colors hover:text-white"
+        >
+          {children}
+        </Link>
+      )
+    },
   },
 
   list: {
@@ -84,13 +97,13 @@ export const portableTextComponents: PortableTextComponents = {
       const src = assetUrl(ref)
       return (
         <figure className="my-10">
-          <div className="overflow-hidden rounded-xl border border-border">
+          <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-border">
             <Image
               src={src}
               alt={value?.alt ?? ''}
-              width={1200}
-              height={675}
-              className="w-full"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 768px"
             />
           </div>
           {value?.caption && (

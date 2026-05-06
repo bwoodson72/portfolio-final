@@ -1,4 +1,20 @@
-import type { PortableTextBlock } from '@portabletext/types'
+import type { PortableTextBlock, PortableTextMarkDefinition } from '@portabletext/types'
+
+export interface ExternalLinkMark extends PortableTextMarkDefinition {
+  _type: 'link'
+  href: string
+  blank?: boolean
+}
+
+export interface InternalLinkMark extends PortableTextMarkDefinition {
+  _type: 'internalLink'
+  reference: {
+    slug: string
+    title?: string
+  }
+}
+
+export type PostBodyBlock = PortableTextBlock<ExternalLinkMark | InternalLinkMark>
 
 export interface PostCard {
   _id: string
@@ -17,7 +33,7 @@ export interface PostCard {
 }
 
 export interface Post extends PostCard {
-  body: PortableTextBlock[]
+  body: PostBodyBlock[]
   _updatedAt?: string
 }
 
