@@ -22,7 +22,7 @@ export const faqs: FAQItem[] = [
   },
   {
     question: "Do you offer ongoing maintenance?",
-    answer: "Every project includes a post-launch support period covering hosting, security, uptime monitoring, content updates, and a monthly performance report. Full-build projects can also include ongoing SEO content — 2 blog posts per month, keyword research, and quarterly strategy calls. No contracts — cancel anytime."
+    answer: "We offer free post launch support for up to 30 days.  "
   },
   {
     question: "How do revisions work?",
