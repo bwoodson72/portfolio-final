@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+
+export const revalidate = 60;
 import Link from "next/link";
 import Image from "next/image";
 import { ALL_PROJECTS_QUERY } from "@/lib/sanity/queries";
