@@ -5,8 +5,8 @@ const BASE = 'https://brianwoodson.dev'
 
 type SanitySlugWithDates = {
   slug: string
-  publishedAt: string
-  _updatedAt?: string
+  publishedAt: string | null
+  _updatedAt: string
 }
 
 type LocationSlugWithDate = {
@@ -37,13 +37,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ])
     workRoutes = projectSlugs.map(({ slug, publishedAt, _updatedAt }) => ({
       url: `${BASE}/work/${slug}`,
-      lastModified: new Date(_updatedAt ?? publishedAt),
+      lastModified: new Date(_updatedAt ?? publishedAt ?? Date.now()),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     }))
     knowledgeRoutes = postSlugs.map(({ slug, publishedAt, _updatedAt }) => ({
       url: `${BASE}/knowledge/${slug}`,
-      lastModified: new Date(_updatedAt ?? publishedAt),
+      lastModified: new Date(_updatedAt ?? publishedAt ?? Date.now()),
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     }))
