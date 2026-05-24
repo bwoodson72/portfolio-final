@@ -9,6 +9,11 @@ type SanitySlugWithDates = {
   _updatedAt?: string
 }
 
+type LocationSlugWithDate = {
+  slug: string
+  _updatedAt: string
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${BASE}/`,          changeFrequency: 'monthly', priority: 1.0 },
@@ -28,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const [projectSlugs, postSlugs, locationSlugs] = await Promise.all([
       client.fetch<SanitySlugWithDates[]>(ALL_PROJECT_SLUGS_WITH_DATES_QUERY),
       client.fetch<SanitySlugWithDates[]>(ALL_POST_SLUGS_WITH_DATES_QUERY),
-      client.fetch<SanitySlugWithDates[]>(ALL_LOCATION_PAGE_SLUGS_WITH_DATES_QUERY),
+      client.fetch<LocationSlugWithDate[]>(ALL_LOCATION_PAGE_SLUGS_WITH_DATES_QUERY),
     ])
     workRoutes = projectSlugs.map(({ slug, publishedAt, _updatedAt }) => ({
       url: `${BASE}/work/${slug}`,
@@ -42,9 +47,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     }))
-    locationRoutes = locationSlugs.map(({ slug, publishedAt, _updatedAt }) => ({
+    locationRoutes = locationSlugs.map(({ slug, _updatedAt }) => ({
       url: `${BASE}/locations/${slug}`,
-      lastModified: new Date(_updatedAt ?? publishedAt),
+      lastModified: new Date(_updatedAt),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     }))

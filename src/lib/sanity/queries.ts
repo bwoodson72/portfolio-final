@@ -152,7 +152,6 @@ export const ALL_LOCATION_PAGE_SLUGS_QUERY = groq`
 export const ALL_LOCATION_PAGE_SLUGS_WITH_DATES_QUERY = groq`
   *[_type == "locationPage"] {
     "slug": slug.current,
-    publishedAt,
     "_updatedAt": _updatedAt
   }
 `

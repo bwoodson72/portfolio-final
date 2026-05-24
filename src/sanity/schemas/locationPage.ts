@@ -117,6 +117,12 @@ export const locationPageType = defineType({
       of: [{ type: 'string' }],
       validation: (Rule) => Rule.required().min(1),
     }),
+    defineField({
+      name: 'publishedAt',
+      title: 'Published at',
+      type: 'datetime',
+      description: 'Optional. Record when this page went live. Not used for routing or display.',
+    }),
   ],
   preview: {
     select: { title: 'title', subtitle: 'city' },

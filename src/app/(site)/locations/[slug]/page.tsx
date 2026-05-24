@@ -95,10 +95,16 @@ export default async function LocationPage({ params }: Props) {
         ],
       },
       {
-        '@type': 'LocalBusiness',
+        '@type': 'ProfessionalService',
         name: 'Brian Woodson Web Development',
         url: 'https://brianwoodson.dev',
         telephone: '+18177764893',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: page.city,
+          addressRegion: 'TX',
+          addressCountry: 'US',
+        },
         areaServed: page.areaServed.map((area) => ({
           '@type': 'City',
           name: area,
