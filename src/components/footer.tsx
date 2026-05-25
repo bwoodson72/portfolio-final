@@ -28,6 +28,8 @@ export function Footer() {
                             <li><Link href="/services" className="hover:text-text transition-colors">Services</Link></li>
                             <li><Link href="/faq" className="hover:text-text transition-colors">FAQ</Link></li>
                             <li><Link href="/contact" className="hover:text-text transition-colors">Email</Link></li>
+                            <li><Link href="/privacy" className="hover:text-text transition-colors">Privacy Policy</Link></li>
+                            <li><Link href="/terms" className="hover:text-text transition-colors">Terms of Service</Link></li>
                             <li>
                                 <a
                                     href={PHONE_HREF}

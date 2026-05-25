@@ -3,8 +3,8 @@ import { Geist, Geist_Mono, Sora } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Script from "next/script";
 import StructuredData from "@/components/StructuredData";
+import { CookieConsent } from "@/components/CookieConsent";
 
 
 // 1. Configure Fonts with "swap" for performance
@@ -65,24 +65,8 @@ export default function RootLayout({
         >
         <StructuredData />
         {children}
-        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-            <>
-                <Script
-                    src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
-                    strategy="lazyOnload"
-                />
-                <Script id="ga-init" strategy="lazyOnload">
-                    {`
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
-                    `}
-                </Script>
-            </>
-        )}
-
-        <SpeedInsights/>
+        <CookieConsent />
+        <SpeedInsights />
         </body>
         </html>
     );
