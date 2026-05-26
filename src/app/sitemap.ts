@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { ALL_POST_SLUGS_WITH_DATES_QUERY, ALL_PROJECT_SLUGS_WITH_DATES_QUERY, ALL_LOCATION_PAGE_SLUGS_WITH_DATES_QUERY } from '@/lib/sanity/queries'
+import { ALL_POST_SLUGS_WITH_DATES_QUERY, ALL_PROJECT_SLUGS_WITH_DATES_QUERY, ALL_LOCATION_PAGE_SLUGS_WITH_DATES_QUERY, ALL_SERVICE_PAGE_SLUGS_WITH_DATES_QUERY } from '@/lib/sanity/queries'
 
 const BASE = 'https://brianwoodson.dev'
 
@@ -10,6 +10,11 @@ type SanitySlugWithDates = {
 }
 
 type LocationSlugWithDate = {
+  slug: string
+  _updatedAt: string
+}
+
+type ServiceSlugWithDate = {
   slug: string
   _updatedAt: string
 }
@@ -28,12 +33,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let workRoutes: MetadataRoute.Sitemap = []
   let knowledgeRoutes: MetadataRoute.Sitemap = []
   let locationRoutes: MetadataRoute.Sitemap = []
+  let serviceRoutes: MetadataRoute.Sitemap = []
   if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
     const { client } = await import('@/lib/sanity/client')
-    const [projectSlugs, postSlugs, locationSlugs] = await Promise.all([
+    const [projectSlugs, postSlugs, locationSlugs, serviceSlugs] = await Promise.all([
       client.fetch<SanitySlugWithDates[]>(ALL_PROJECT_SLUGS_WITH_DATES_QUERY),
       client.fetch<SanitySlugWithDates[]>(ALL_POST_SLUGS_WITH_DATES_QUERY),
       client.fetch<LocationSlugWithDate[]>(ALL_LOCATION_PAGE_SLUGS_WITH_DATES_QUERY),
+      client.fetch<ServiceSlugWithDate[]>(ALL_SERVICE_PAGE_SLUGS_WITH_DATES_QUERY),
     ])
     workRoutes = projectSlugs.map(({ slug, publishedAt, _updatedAt }) => ({
       url: `${BASE}/work/${slug}`,
@@ -53,7 +60,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     }))
+    serviceRoutes = serviceSlugs.map(({ slug, _updatedAt }) => ({
+      url: `${BASE}/services/${slug}`,
+      lastModified: new Date(_updatedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    }))
   }
 
-  return [...staticRoutes, ...workRoutes, ...knowledgeRoutes, ...locationRoutes]
+  return [...staticRoutes, ...workRoutes, ...knowledgeRoutes, ...locationRoutes, ...serviceRoutes]
 }

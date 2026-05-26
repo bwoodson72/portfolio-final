@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ALL_LOCATION_CARDS_QUERY } from '@/lib/sanity/queries'
-import type { LocationCard } from '@/lib/sanity/types'
+import { ALL_LOCATION_CARDS_QUERY, ALL_SERVICE_CARDS_QUERY } from '@/lib/sanity/queries'
+import type { LocationCard, ServiceCard } from '@/lib/sanity/types'
 
 export const metadata: Metadata = {
     title: "Services | Brian Woodson Web Development",
@@ -37,6 +37,16 @@ export default async function ServicesPage() {
         }
     }
 
+    let serviceCards: ServiceCard[] = []
+    if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+        try {
+            const { client } = await import('@/lib/sanity/client')
+            serviceCards = await client.fetch<ServiceCard[]>(ALL_SERVICE_CARDS_QUERY)
+        } catch {
+            serviceCards = []
+        }
+    }
+
     return (
         <main className="flex w-full flex-col items-center">
 
@@ -66,304 +76,20 @@ export default async function ServicesPage() {
                 </div>
             </section>
 
-            {/* SECTION 2 — Positioning intro */}
-            <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
-                <div className="max-w-3xl space-y-6">
-                    <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-3xl">
-                        Not packages. Scoped around what you actually need.
-                    </h2>
-                    <p className="text-lg leading-relaxed text-text-muted">
-                        Most web agencies force businesses into preset bundles. You pay for features you don&apos;t need and skip ones you do. We work differently — scope is defined after understanding your business, your goals, and your current situation.
-                    </p>
-                    <p className="text-lg leading-relaxed text-text-muted">
-                        Every project includes copywriting, SEO foundations, and performance built in from the start. The scope — number of pages, depth of SEO work, design complexity — is determined by what your business actually requires.
-                    </p>
-                </div>
-            </section>
-
-            {/* SECTION 3 — Service detail sections */}
-
-            {/* Service 1: Business Websites */}
-            <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
-                <div className="grid gap-12 md:grid-cols-2">
-                    <div className="space-y-4">
-                        <p className="text-xs font-bold uppercase tracking-widest text-text-muted">Full Builds</p>
-                        <h2 className="text-3xl font-extrabold tracking-tight text-text">Business Websites</h2>
-                        <p className="text-lg leading-relaxed text-text-muted">
-                            Whether you need your first real business website or a replacement for an outdated one, this service covers building a site that looks credible, loads fast, and helps turn visitors into calls and leads.
-                        </p>
-                        <p className="text-sm text-text-muted">
-                            <span className="font-bold text-text">Who this is for:</span> Businesses that need a new website, businesses that have outgrown their current site, and businesses whose current site is outdated, slow, or failing to convert.
-                        </p>
-                        <Link
-                            href="/contact"
-                            className="inline-block rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"
-                        >
-                            Talk about your website
-                        </Link>
-                    </div>
-                    <div className="space-y-8">
-                        <div className="space-y-3">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">What&apos;s included</h3>
-                            <ul className="space-y-2">
-                                {[
-                                    "Custom multi-page business website",
-                                    "Responsive layout built for mobile",
-                                    "Conversion-focused copywriting",
-                                    "Service pages and contact flow",
-                                    "On-page SEO foundations",
-                                    "GA4 and conversion tracking",
-                                    "Clean deployment and handoff",
-                                ].map((item) => (
-                                    <li key={item} className="flex gap-2 text-sm text-text-muted">
-                                        <span className="font-bold text-text shrink-0">✓</span> {item}
-                                    </li>
-                                ))}
-                            </ul>
+            <section className="mx-auto w-full max-w-7xl px-6 py-16">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {serviceCards.map((service) => (
+                        <div key={service._id} className="flex flex-col gap-4 rounded-lg border border-border p-8">
+                            <h2 className="text-xl font-bold text-text">{service.title}</h2>
+                            <p className="text-text-muted leading-relaxed">{service.shortDescription}</p>
+                            <Link
+                                href={`/services/${service.slug.current}`}
+                                className="mt-auto text-sm font-semibold text-text underline underline-offset-4 hover:opacity-70 transition-opacity"
+                            >
+                                View service
+                            </Link>
                         </div>
-                        <div className="space-y-3">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">Business benefits</h3>
-                            <ul className="space-y-2">
-                                {[
-                                    "Strong first impression on mobile",
-                                    "Clear path from page to inquiry",
-                                    "Faster loading and better usability than most business sites",
-                                    "Stronger foundation for local search visibility",
-                                    "Built to support real lead generation from day one",
-                                ].map((item) => (
-                                    <li key={item} className="flex gap-2 text-sm text-text-muted">
-                                        <span className="font-bold text-text shrink-0">✓</span> {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Service 2: Landing Pages */}
-            <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
-                <div className="grid gap-12 md:grid-cols-2">
-                    <div className="space-y-4">
-                        <p className="text-xs font-bold uppercase tracking-widest text-text-muted">Focused Pages</p>
-                        <h2 className="text-3xl font-extrabold tracking-tight text-text">Landing Pages</h2>
-                        <p className="text-lg leading-relaxed text-text-muted">
-                            A single conversion-focused page built for a specific goal: an ad campaign, a service area, a product launch. Less distraction, clearer message, higher conversion rate.
-                        </p>
-                        <p className="text-sm text-text-muted">
-                            <span className="font-bold text-text">Who this is for:</span> Businesses running paid ads, expanding into new service areas, or testing a new offer without rebuilding the whole site.
-                        </p>
-                        <Link
-                            href="/contact"
-                            className="inline-block rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"
-                        >
-                            Talk about a landing page
-                        </Link>
-                    </div>
-                    <div className="space-y-8">
-                        <div className="space-y-3">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">What&apos;s included</h3>
-                            <ul className="space-y-2">
-                                {[
-                                    "Single high-performance page",
-                                    "Conversion-focused copy",
-                                    "Lead capture or contact form",
-                                    "GA4 and conversion tracking",
-                                    "On-page SEO",
-                                    "Mobile-first responsive build",
-                                    "Deployed and live",
-                                ].map((item) => (
-                                    <li key={item} className="flex gap-2 text-sm text-text-muted">
-                                        <span className="font-bold text-text shrink-0">✓</span> {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="space-y-3">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">Business benefits</h3>
-                            <ul className="space-y-2">
-                                {[
-                                    "Higher conversion rate from paid traffic",
-                                    "Purpose-built for one audience and one action",
-                                    "Faster to build and test than a full site",
-                                    "Trackable from day one",
-                                ].map((item) => (
-                                    <li key={item} className="flex gap-2 text-sm text-text-muted">
-                                        <span className="font-bold text-text shrink-0">✓</span> {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Service 3: Technical SEO Foundations */}
-            <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
-                <div className="grid gap-12 md:grid-cols-2">
-                    <div className="space-y-4">
-                        <p className="text-xs font-bold uppercase tracking-widest text-text-muted">Search Foundations</p>
-                        <h2 className="text-3xl font-extrabold tracking-tight text-text">Technical SEO Foundations</h2>
-                        <p className="text-lg leading-relaxed text-text-muted">
-                            If Google can&apos;t properly read and index your site, your content doesn&apos;t matter. Technical SEO fixes the structural issues that prevent search engines from treating your site as a trustworthy result.
-                        </p>
-                        <p className="text-sm text-text-muted">
-                            <span className="font-bold text-text">Who this is for:</span> Businesses that have content but aren&apos;t showing up in search, or sites that have been online for years but never had proper SEO infrastructure set up.
-                        </p>
-                        <Link
-                            href="/contact"
-                            className="inline-block rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"
-                        >
-                            Talk about technical SEO
-                        </Link>
-                    </div>
-                    <div className="space-y-8">
-                        <div className="space-y-3">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">What&apos;s included</h3>
-                            <ul className="space-y-2">
-                                {[
-                                    "Metadata and title structure",
-                                    "Canonical tags and duplicate content cleanup",
-                                    "XML sitemap and robots.txt",
-                                    "Structured data and schema markup",
-                                    "Crawl health review",
-                                    "Google Search Console setup",
-                                ].map((item) => (
-                                    <li key={item} className="flex gap-2 text-sm text-text-muted">
-                                        <span className="font-bold text-text shrink-0">✓</span> {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="space-y-3">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">Business benefits</h3>
-                            <ul className="space-y-2">
-                                {[
-                                    "Search engines can properly find and index your pages",
-                                    "Cleaner site structure for long-term ranking growth",
-                                    "Stronger appearance in search results with structured data",
-                                    "Foundation that makes all future content more effective",
-                                ].map((item) => (
-                                    <li key={item} className="flex gap-2 text-sm text-text-muted">
-                                        <span className="font-bold text-text shrink-0">✓</span> {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Service 4: Copywriting and Messaging */}
-            <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
-                <div className="grid gap-12 md:grid-cols-2">
-                    <div className="space-y-4">
-                        <p className="text-xs font-bold uppercase tracking-widest text-text-muted">Content</p>
-                        <h2 className="text-3xl font-extrabold tracking-tight text-text">Copywriting and Messaging</h2>
-                        <p className="text-lg leading-relaxed text-text-muted">
-                            Most small business websites say what they do, but not why it matters to the visitor. Good copy makes the case clearly — who you help, what problem you solve, and why the visitor should call you instead of the next option on the list.
-                        </p>
-                        <p className="text-sm text-text-muted">
-                            <span className="font-bold text-text">Who this is for:</span> Any business with a site that talks about services but doesn&apos;t convince visitors to take action. Also included in every full build or landing page project.
-                        </p>
-                        <Link
-                            href="/contact"
-                            className="inline-block rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"
-                        >
-                            Talk about copywriting
-                        </Link>
-                    </div>
-                    <div className="space-y-8">
-                        <div className="space-y-3">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">What&apos;s included</h3>
-                            <ul className="space-y-2">
-                                {[
-                                    "Homepage copy",
-                                    "Service page copy",
-                                    "Headline and subheadline writing",
-                                    "CTA copy",
-                                    "Positioning review and messaging cleanup",
-                                ].map((item) => (
-                                    <li key={item} className="flex gap-2 text-sm text-text-muted">
-                                        <span className="font-bold text-text shrink-0">✓</span> {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="space-y-3">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">Business benefits</h3>
-                            <ul className="space-y-2">
-                                {[
-                                    "Clearer value proposition for cold visitors",
-                                    "Stronger conversion rate on every page",
-                                    "Consistent tone that builds trust",
-                                    "No more generic filler that says nothing",
-                                ].map((item) => (
-                                    <li key={item} className="flex gap-2 text-sm text-text-muted">
-                                        <span className="font-bold text-text shrink-0">✓</span> {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Service 5: Ongoing Support */}
-            <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
-                <div className="grid gap-12 md:grid-cols-2">
-                    <div className="space-y-4">
-                        <p className="text-xs font-bold uppercase tracking-widest text-text-muted">After Launch</p>
-                        <h2 className="text-3xl font-extrabold tracking-tight text-text">Ongoing Support</h2>
-                        <p className="text-lg leading-relaxed text-text-muted">
-                            Ongoing support is available for sites we build. After launch, your site needs hosting, security updates, content edits, and routine upkeep. This service handles all of it.
-                        </p>
-                        <p className="text-sm text-text-muted">
-                            This is not a general maintenance service for existing WordPress, Wix, or Squarespace sites.
-                        </p>
-                        <p className="text-sm text-text-muted">
-                            <span className="font-bold text-text">Who this is for:</span> Businesses that want their site maintained and updated without managing servers, developers, or security patches themselves.
-                        </p>
-                        <Link
-                            href="/contact"
-                            className="inline-block rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"
-                        >
-                            Talk about ongoing support
-                        </Link>
-                    </div>
-                    <div className="space-y-8">
-                        <div className="space-y-3">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">What&apos;s included</h3>
-                            <ul className="space-y-2">
-                                {[
-                                    "Hosting and uptime monitoring",
-                                    "Security and dependency updates",
-                                    "Content updates (text, images, pages)",
-                                    "Monthly performance report",
-                                    "Support window for questions and small changes",
-                                ].map((item) => (
-                                    <li key={item} className="flex gap-2 text-sm text-text-muted">
-                                        <span className="font-bold text-text shrink-0">✓</span> {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="space-y-3">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-text-muted">Business benefits</h3>
-                            <ul className="space-y-2">
-                                {[
-                                    "One less thing to manage",
-                                    "Site stays current and secure",
-                                    "Content stays accurate without requiring a developer",
-                                    "Performance issues caught early",
-                                ].map((item) => (
-                                    <li key={item} className="flex gap-2 text-sm text-text-muted">
-                                        <span className="font-bold text-text shrink-0">✓</span> {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </section>
 
