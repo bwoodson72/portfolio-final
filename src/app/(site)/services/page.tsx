@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ALL_LOCATION_CARDS_QUERY, ALL_SERVICE_CARDS_QUERY } from '@/lib/sanity/queries'
 import type { LocationCard, ServiceCard } from '@/lib/sanity/types'
 
+export const revalidate = 60
+
 export const metadata: Metadata = {
     title: "Services | Brian Woodson Web Development",
     description: "Business websites, landing pages, technical SEO foundations, copywriting, and ongoing support for small businesses. Custom-scoped around your goals.",
