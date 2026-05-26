@@ -4,12 +4,12 @@ import Link from "next/link";
 import { siteContent } from "@/content/portfolio";
 
 export const metadata: Metadata = {
-    title: "About | Brian Woodson Web Development",
-    description: "A distributed studio that designs, writes, and builds websites for small businesses. Led by Brian Woodson. Fixed price, delivered in weeks.",
+    title: "About | Web Designer and Local SEO Specialist | Brian Woodson Web Development",
+    description: "Brian Woodson Web Development builds custom websites and manages local SEO for small businesses in the DFW area. Custom code, no WordPress, 95+ Lighthouse scores.",
     openGraph: {
-        title: "About | Brian Woodson Web Development",
-        description: "A distributed studio that designs, writes, and builds websites for small businesses. Led by Brian Woodson. Fixed price, delivered in weeks.",
-        url: "/about",
+        title: "About | Web Designer and Local SEO Specialist | Brian Woodson Web Development",
+        description: "Brian Woodson Web Development builds custom websites and manages local SEO for small businesses in the DFW area. Custom code, no WordPress, 95+ Lighthouse scores.",
+        url: "https://brianwoodson.dev/about",
         siteName: "Brian Woodson Web Development",
         images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Web Development" }],
         locale: "en_US",
@@ -17,12 +17,12 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "About | Brian Woodson Web Development",
-        description: "A distributed studio that designs, writes, and builds websites for small businesses. Led by Brian Woodson. Fixed price, delivered in weeks.",
+        title: "About | Web Designer and Local SEO Specialist | Brian Woodson Web Development",
+        description: "Brian Woodson Web Development builds custom websites and manages local SEO for small businesses in the DFW area. Custom code, no WordPress, 95+ Lighthouse scores.",
         images: ["/og-image.png"],
     },
     alternates: {
-        canonical: "/about",
+        canonical: "https://brianwoodson.dev/about",
     },
 };
 
@@ -45,19 +45,85 @@ const howIWork = [
 ];
 
 const bestFitFor = [
-    "You're paying for a website that's not generating leads",
-    "Your current site is slow, outdated, or invisible on Google",
+    "Your current site is slow, outdated, or invisible in local search",
     "You want design, copy, and development handled under one roof",
-    "You want a fixed price and a guaranteed delivery date",
-    "You'd rather talk to the person building your site than an account manager",
-    "You need a site that actually shows up on Google",
+    "You want a fixed price and a defined delivery date before work starts",
+    "You need a site that ranks for the searches your customers actually use",
+    "You want to talk directly to the person building your site, not an account manager",
+    "You are a service business, trades company, or local practice in the DFW area",
 ];
 
 export default function AboutPage() {
     const { about } = siteContent;
 
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebPage",
+                "@id": "https://brianwoodson.dev/about/#webpage",
+                "url": "https://brianwoodson.dev/about",
+                "name": "About | Web Designer and Local SEO Specialist | Brian Woodson Web Development",
+                "description": "Brian Woodson Web Development builds custom websites and manages local SEO for small businesses in the DFW area.",
+                "isPartOf": {
+                    "@type": "WebSite",
+                    "url": "https://brianwoodson.dev",
+                    "name": "Brian Woodson Web Development"
+                },
+                "breadcrumb": {
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "Home",
+                            "item": "https://brianwoodson.dev"
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": "About",
+                            "item": "https://brianwoodson.dev/about"
+                        }
+                    ]
+                }
+            },
+            {
+                "@type": "Person",
+                "@id": "https://brianwoodson.dev/#brian-woodson",
+                "name": "Brian Woodson",
+                "jobTitle": "Web Designer and Developer",
+                "worksFor": {
+                    "@type": "ProfessionalService",
+                    "@id": "https://brianwoodson.dev/#organization",
+                    "name": "Brian Woodson Web Development",
+                    "url": "https://brianwoodson.dev"
+                },
+                "url": "https://brianwoodson.dev/about",
+                "sameAs": [
+                    "https://www.linkedin.com/in/brianwoodson",
+                    "https://www.fiverr.com/brianwoodson"
+                ],
+                "knowsAbout": [
+                    "Web Design",
+                    "Website Development",
+                    "Local SEO",
+                    "Copywriting",
+                    "Small Business Websites",
+                    "SvelteKit",
+                    "Next.js",
+                    "Tailwind CSS"
+                ]
+            }
+        ]
+    };
+
     return (
         <main className="mx-auto w-full max-w-7xl px-6 py-24 space-y-24">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+            />
 
             {/* Intro */}
             <section>
@@ -78,7 +144,7 @@ export default function AboutPage() {
                     {/* Text */}
                     <div className="space-y-8">
                         <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-5xl">
-                            Who We Are
+                            Web Designer and Local SEO Specialist Based in Granbury, TX
                         </h1>
                         <div className="space-y-4 text-lg text-text-muted">
                             {about.body.map((para, idx) => (
