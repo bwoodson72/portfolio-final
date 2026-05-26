@@ -4,46 +4,38 @@ export type FAQItem = {
 };
 
 export const faqs: FAQItem[] = [
-  {
-    question: "Do you write the content/copy?",
-    answer: "Copywriting is included in every project. We write your website copy from scratch based on your business, services, and target customers. You review and approve before anything goes live."
-  },
-  {
-    question: "What do you need from us to get started?",
-    answer: "Your branding basics (logo, colors, fonts if you have them), a clear idea of your services and service areas, and any reference sites you like. We handle copy, design direction, SEO, and everything else. We'll scope everything before work begins."
-  },
-  {
-    question: "Will my site rank on Google?",
-    answer: "Every site ships with on-page SEO, metadata, canonical URLs, sitemap, structured data, and Google Business Profile setup. Full-build projects can include ongoing keyword research and monthly blog content for businesses that want to invest in search visibility. Rankings depend on your market and competition — we build the infrastructure and, where scoped, execute the content strategy."
-  },
-  {
-    question: "Can you match a design I like?",
-    answer: "Our design add-on covers custom Figma mockups — we can work from a reference site, a mood board, or a blank canvas. We'll present concepts before building anything, so you approve the direction early. If you already have a Figma file, we can build from that too."
-  },
-  {
-    question: "Do you offer ongoing maintenance?",
-    answer: "We offer free post launch support for up to 30 days.  "
-  },
-  {
-    question: "How do revisions work?",
-    answer: "Each project includes a defined number of revision rounds based on scope — typically 1 for landing pages and 2 for full website builds. A revision means changes to existing pages, not adding new pages or features after scope is locked. Anything beyond the original scope gets quoted separately so there are no surprises."
-  },
-  {
-    question: "Why don't you use WordPress?",
-    answer: "WordPress relies on plugins, page builders, and constant security patches. It's how most agencies build because it's fast for them — not because it's good for you. We use a modern build system that's faster, more secure, and doesn't need monthly maintenance. The 98+ performance scores in our portfolio aren't achievable on a typical WordPress build."
-  },
-  {
-    question: "Who actually does the work?",
-    answer: "Brian Woodson leads every project and handles all development. Design, copywriting, and SEO are handled by vetted specialists we've worked with across dozens of projects. You'll always have a single point of contact — Brian — and the same team from kickoff to launch."
-  },
-  {
-    question: "How is this different from a big agency?",
-    answer: "No account managers, no layers, no bloated timelines. You talk directly to the people doing the work. We keep our client list small so every project gets full attention — not a ticket in a queue. Agency-level output, without the agency overhead or price tag."
-  },
-  {
-    question: "What are the add-ons?",
-    answer: "Every project comes with copywriting, SEO, tracking, and GBP setup already included. Optional extras include custom Figma design, additional pages, tool integrations (HubSpot, Calendly), and PPC landing pages. You only pay for what goes beyond the base scope."
-  },
+    {
+        question: "Do you write the copy?",
+        answer: "Yes. Copywriting is included in every project. We research your business, your services, and your customers, then write copy you review and approve before anything gets built."
+    },
+    {
+        question: "What does a website build actually include?",
+        answer: "Every build includes custom design, development, conversion-focused copywriting, on-page SEO foundations, schema markup, GA4 tracking, and a full handoff at launch. Scope varies by project but there are no hidden extras for the core deliverables."
+    },
+    {
+        question: "Will my site rank on Google?",
+        answer: "Every site ships with the technical SEO foundations that make ranking possible: metadata, schema markup, canonical setup, sitemap, and location-specific signals. Rankings depend on your market and competition. We build the infrastructure that gives you the best possible shot and are honest about what to expect for your specific situation."
+    },
+    {
+        question: "Why not WordPress?",
+        answer: "WordPress sites built with page builders load slowly on mobile, require constant maintenance, and rarely score above 70 on Google's performance audit. Every site we build scores 95 or better across all four Lighthouse categories. That gap is a ranking factor, not a cosmetic difference."
+    },
+    {
+        question: "How does pricing work?",
+        answer: "Every project is fixed-price and scoped before work begins. After a short conversation about your business and goals, you get a clear scope document and a quoted price for the full engagement. No hourly billing, no surprise invoices."
+    },
+    {
+        question: "How do revisions work?",
+        answer: "Each project includes defined revision rounds based on scope: one for landing pages, two for full website builds. A revision means changes to existing pages, not adding new pages or features after scope is locked. Anything beyond the original scope is quoted separately."
+    },
+    {
+        question: "Who does the work?",
+        answer: "Brian Woodson leads every project and handles all development. Design, copywriting, and SEO are handled by vetted specialists. You have one point of contact from kickoff to launch."
+    },
+    {
+        question: "Do you offer ongoing support after launch?",
+        answer: "Yes. Ongoing Support is available for sites we build and covers hosting, security updates, content updates, and monthly performance reporting. It is not available for WordPress, Wix, or Squarespace sites we did not build."
+    },
 ];
 
 export type AddOn = {
@@ -73,8 +65,8 @@ export const INTAKE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfP-GqX9W9T9
 
 export const siteContent: SiteContent = {
   hero: {
-    headline: "Most business websites don't do anything. Yours should.",
-    subheadline: "We build small business websites that get found on Google, load fast on mobile, and give visitors a reason to call.",
+    headline: "Custom Website Design and Local SEO for Small Businesses",
+    subheadline: "We build websites for small businesses in the DFW area that rank on Google, load fast on mobile, and convert visitors into calls and leads. Copy, SEO, and performance built in from the start.",
     ctaPrimary: "See our work",
     ctaSecondary: "View services"
   },
