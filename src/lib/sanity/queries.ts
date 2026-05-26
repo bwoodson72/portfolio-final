@@ -185,7 +185,7 @@ export const LOCATION_PAGE_BY_SLUG_QUERY = groq`
 `
 
 export const ALL_SERVICE_CARDS_QUERY = groq`
-  *[_type == "servicePage" && featuredOnHub == true] | order(coalesce(sortOrder, 999) asc) {
+  *[_type == "servicePage" && featuredOnHub != false] | order(coalesce(sortOrder, 999) asc) {
     _id,
     title,
     slug,
