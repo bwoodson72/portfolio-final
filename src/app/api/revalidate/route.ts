@@ -35,6 +35,10 @@ export async function POST(req: NextRequest) {
       case 'landingPage':
         if (slug?.current) revalidatePath(`/lp/${slug.current}`)
         break
+      case 'servicePage':
+        revalidatePath('/services')
+        if (slug?.current) revalidatePath(`/services/${slug.current}`)
+        break
     }
 
     return Response.json({ revalidated: true, type: _type, slug: slug?.current })

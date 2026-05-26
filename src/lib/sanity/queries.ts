@@ -183,3 +183,56 @@ export const LOCATION_PAGE_BY_SLUG_QUERY = groq`
     _updatedAt
   }
 `
+
+export const ALL_SERVICE_CARDS_QUERY = groq`
+  *[_type == "servicePage" && featuredOnHub == true] | order(coalesce(sortOrder, 999) asc) {
+    _id,
+    title,
+    slug,
+    shortDescription,
+    sortOrder
+  }
+`
+
+export const ALL_SERVICE_PAGE_SLUGS_QUERY = groq`
+  *[_type == "servicePage"] {
+    "slug": slug.current
+  }
+`
+
+export const ALL_SERVICE_PAGE_SLUGS_WITH_DATES_QUERY = groq`
+  *[_type == "servicePage"] {
+    "slug": slug.current,
+    "_updatedAt": _updatedAt
+  }
+`
+
+export const SERVICE_PAGE_BY_SLUG_QUERY = groq`
+  *[_type == "servicePage" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    eyebrow,
+    shortDescription,
+    metaTitle,
+    metaDescription,
+    heroHeadline,
+    heroSubheadline,
+    whoThisIsFor,
+    problemsSolved,
+    includedItems,
+    businessBenefits,
+    notFor,
+    faqs[] { question, answer },
+    relatedServices[]-> {
+      _id,
+      title,
+      slug,
+      shortDescription
+    },
+    sortOrder,
+    featuredOnHub,
+    publishedAt,
+    _updatedAt
+  }
+`

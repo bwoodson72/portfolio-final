@@ -2,8 +2,19 @@ import Link from "next/link";
 import { PHONE_DISPLAY, PHONE_HREF, PHONE_ARIA_LABEL } from "@/lib/constants";
 import { LocationLinks } from '@/components/footer/LocationLinks'
 import { FooterYear } from '@/components/footer/FooterYear'
+import { ALL_SERVICE_CARDS_QUERY } from '@/lib/sanity/queries'
+import type { ServiceCard } from '@/lib/sanity/types'
 
-export function Footer() {
+export async function Footer() {
+    let serviceCards: ServiceCard[] = []
+    if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+        try {
+            const { client } = await import('@/lib/sanity/client')
+            serviceCards = await client.fetch<ServiceCard[]>(ALL_SERVICE_CARDS_QUERY)
+        } catch {
+            serviceCards = []
+        }
+    }
 
     return (
         <footer className="w-full border-t border-border bg-bg">
@@ -13,11 +24,16 @@ export function Footer() {
                     <div className="space-y-4">
                         <h3 className="text-xs font-bold uppercase tracking-widest text-text">Services</h3>
                         <ul className="space-y-2 text-sm text-text-muted">
-                            <li><Link href="/services" className="hover:text-text transition-colors">Business Websites</Link></li>
-                            <li><Link href="/services" className="hover:text-text transition-colors">Landing Pages</Link></li>
-                            <li><Link href="/services" className="hover:text-text transition-colors">Technical SEO</Link></li>
-                            <li><Link href="/services" className="hover:text-text transition-colors">Copywriting</Link></li>
-                            <li><Link href="/services" className="hover:text-text transition-colors">Ongoing Support</Link></li>
+                            {serviceCards.map((service) => (
+                                <li key={service._id}>
+                                    <Link
+                                        href={`/services/${service.slug.current}`}
+                                        className="hover:text-text transition-colors"
+                                    >
+                                        {service.title}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 

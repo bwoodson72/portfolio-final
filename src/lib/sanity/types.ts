@@ -117,3 +117,41 @@ export interface LocationPage {
   publishedAt?: string
   _updatedAt?: string
 }
+
+export interface ServiceCard {
+  _id: string
+  title: string
+  slug: { current: string }
+  shortDescription: string
+  sortOrder?: number
+}
+
+export interface ServicePageRelated {
+  _id: string
+  title: string
+  slug: { current: string }
+  shortDescription: string
+}
+
+export interface ServicePage {
+  _id: string
+  title: string
+  slug: { current: string }
+  eyebrow?: string
+  shortDescription: string
+  metaTitle: string
+  metaDescription: string
+  heroHeadline: string
+  heroSubheadline?: string
+  whoThisIsFor: string
+  problemsSolved?: string[]
+  includedItems: string[]
+  businessBenefits: string[]
+  notFor?: string
+  faqs?: { question: string; answer: string }[]
+  relatedServices?: ServicePageRelated[]
+  sortOrder?: number
+  featuredOnHub?: boolean
+  publishedAt?: string
+  _updatedAt?: string
+}
