@@ -65,7 +65,7 @@ export async function Footer() {
                     <div className="space-y-4">
                         <h3 className="text-xs font-bold uppercase tracking-widest text-text">Brian Woodson Web Development</h3>
                         <p className="text-sm text-text-muted leading-relaxed">
-                            We build websites for small businesses that get found on Google and bring in customers. Copy, SEO, and ongoing support included.
+                            We build websites for small businesses that get found on Google and bring in customers.
                         </p>
                     </div>
                 </div>
