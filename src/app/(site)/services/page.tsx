@@ -85,6 +85,7 @@ export default async function ServicesPage() {
                             <h2 className="text-xl font-bold text-text">{service.title}</h2>
                             <p className="text-text-muted leading-relaxed">{service.shortDescription}</p>
                             <Link
+                                aria-label={`Learn more about ${service.title}`}
                                 href={`/services/${service.slug.current}`}
                                 className="mt-auto text-sm font-semibold text-text underline underline-offset-4 hover:opacity-70 transition-opacity"
                             >
