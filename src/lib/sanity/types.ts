@@ -33,6 +33,7 @@ export interface PostCard {
 }
 
 export interface Post extends PostCard {
+  metaTitle?: string
   body: PostBodyBlock[]
   _updatedAt?: string
 }

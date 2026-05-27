@@ -19,6 +19,13 @@ export const postType = defineType({
       validation: (Rule) => Rule.required().max(100),
     }),
     defineField({
+      name: 'metaTitle',
+      title: 'Meta Title',
+      type: 'string',
+      description: 'Optional. Overrides the article title in search results. Max 60 characters. Leave blank to use the article title.',
+      validation: (Rule) => Rule.max(60),
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',

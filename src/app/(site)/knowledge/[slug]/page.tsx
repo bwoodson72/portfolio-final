@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const ogImage = post.coverImage
       ? urlFor(post.coverImage).width(1200).height(630).url()
       : '/og-image.png'
-    const title = `${post.title} `
+    const title = post.metaTitle ?? post.title
 
     return {
       title,
