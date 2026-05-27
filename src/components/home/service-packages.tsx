@@ -18,11 +18,11 @@ const services = [
         summary: "Monthly local SEO for small businesses built on our stack. GBP management, rank tracking, content, and reporting.",
         href: "/services/local-seo-management",
     },
-    {
-        title: "Ongoing Support",
-        summary: "Hosting, security, content updates, and monthly performance reporting for sites we build.",
-        href: "/services/ongoing-support",
-    },
+    // {
+    //     title: "Ongoing Support",
+    //     summary: "Hosting, security, content updates, and monthly performance reporting for sites we build.",
+    //     href: "/services/ongoing-support",
+    // },
 ];
 
 export const ServicePackages = () => {
