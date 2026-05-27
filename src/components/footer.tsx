@@ -27,6 +27,7 @@ export async function Footer() {
                             {serviceCards.map((service) => (
                                 <li key={service._id}>
                                     <Link
+                                        aria-label={`View more about ${service.title}`}
                                         href={`/services/${service.slug.current}`}
                                         className="hover:text-text transition-colors"
                                     >
