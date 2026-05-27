@@ -47,10 +47,9 @@ export const ServicePackages = () => {
                         <p className="text-sm leading-relaxed text-text-muted">{service.summary}</p>
                         <Link
                             href={service.href}
-                            aria-label={`Learn more about ${service.title}`}
                             className="mt-auto text-sm font-semibold text-text underline underline-offset-4 hover:opacity-70 transition-opacity"
                         >
-                            Learn more
+                            Learn more<span className="sr-only"> about {service.title}</span>
                         </Link>
                     </div>
                 ))}
