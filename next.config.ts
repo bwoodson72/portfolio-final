@@ -23,7 +23,10 @@ const nextConfig: NextConfig = {
 
   /* 3. Experimental Features */
   experimental: {
-    // NOTE: 'optimizeCss' removed to fix 400ms server latency.
+    // Inlines critical CSS at build time, deferring non-critical chunks (Critters).
+    // Safe for static/ISR pages — no runtime latency. Was previously removed for
+    // dev-server latency, which does not apply to production builds.
+    optimizeCss: true,
 
     // Reduces JS bundle size by smarter tree-shaking
     optimizePackageImports: [
