@@ -1,5 +1,53 @@
 import type { NextConfig } from "next";
 
+const securityHeaders = [
+    {
+        key: 'X-Frame-Options',
+        value: 'SAMEORIGIN',
+    },
+    {
+        key: 'X-Content-Type-Options',
+        value: 'nosniff',
+    },
+    {
+        key: 'Referrer-Policy',
+        value: 'strict-origin-when-cross-origin',
+    },
+    {
+        key: 'Strict-Transport-Security',
+        value: 'max-age=63072000; includeSubDomains; preload',
+    },
+    {
+        key: 'Cross-Origin-Opener-Policy',
+        value: 'same-origin-allow-popups',
+    },
+    {
+        key: 'Cross-Origin-Resource-Policy',
+        value: 'same-origin',
+    },
+    {
+        key: 'Permissions-Policy',
+        value: 'camera=(), microphone=(), geolocation=()',
+    },
+    {
+        key: 'Content-Security-Policy',
+        value: [
+            "default-src 'self'",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://js.hs-scripts.com https://js.hsforms.net https://js.hscollectedforms.net https://js.hs-analytics.net https://js.hubspot.com https://snap.licdn.com https://connect.facebook.net",
+            "style-src 'self' 'unsafe-inline'",
+            "img-src 'self' data: blob: https://cdn.sanity.io https://www.googletagmanager.com https://www.google-analytics.com",
+            "font-src 'self'",
+            "connect-src 'self' https://cdn.sanity.io https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com",
+            "frame-src 'self' https://challenges.cloudflare.com",
+            "object-src 'none'",
+            "base-uri 'self'",
+            "form-action 'self'",
+            "frame-ancestors 'none'",
+            "upgrade-insecure-requests",
+        ].join('; '),
+    },
+];
+
 const nextConfig: NextConfig = {
   /* 1. React Compiler (Performance) */
   reactCompiler: true,
@@ -36,6 +84,15 @@ const nextConfig: NextConfig = {
       'react-hook-form',
       'zod'
     ],
+  },
+
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: securityHeaders,
+      },
+    ];
   },
 };
 
