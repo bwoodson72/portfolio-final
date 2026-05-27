@@ -27,7 +27,7 @@ const services = [
 
 export const ServicePackages = () => {
     return (
-        <section id="services" className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
+        <section id="services" className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border ">
             <div className="space-y-4">
                 <h2 className="text-3xl font-extrabold tracking-tight text-text md:text-5xl">
                     Website Design and Local SEO for Small Businesses in the DFW Area
@@ -37,7 +37,7 @@ export const ServicePackages = () => {
                 </p>
             </div>
 
-            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {services.map((service) => (
                     <div
                         key={service.title}
