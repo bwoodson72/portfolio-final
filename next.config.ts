@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-const securityHeaders = [
+const baseHeaders = [
     {
         key: 'X-Frame-Options',
         value: 'SAMEORIGIN',
@@ -29,24 +29,25 @@ const securityHeaders = [
         key: 'Permissions-Policy',
         value: 'camera=(), microphone=(), geolocation=()',
     },
-    {
-        key: 'Content-Security-Policy',
-        value: [
-            "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://js.hs-scripts.com https://js.hsforms.net https://js.hscollectedforms.net https://js.hs-analytics.net https://js.hubspot.com https://snap.licdn.com https://connect.facebook.net",
-            "style-src 'self' 'unsafe-inline'",
-            "img-src 'self' data: blob: https://cdn.sanity.io https://*.sanity.io https://www.googletagmanager.com https://www.google-analytics.com",
-            "font-src 'self'",
-            "connect-src 'self' https://cdn.sanity.io https://*.api.sanity.io https://api.sanity.io https://0s6hkcu1.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com",
-            "frame-src 'self' https://challenges.cloudflare.com",
-            "object-src 'none'",
-            "base-uri 'self'",
-            "form-action 'self'",
-            "frame-ancestors 'none'",
-            "upgrade-insecure-requests",
-        ].join('; '),
-    },
 ];
+
+const cspHeader = {
+    key: 'Content-Security-Policy',
+    value: [
+        "default-src 'self'",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://js.hs-scripts.com https://js.hsforms.net https://js.hscollectedforms.net https://js.hs-analytics.net https://js.hubspot.com https://snap.licdn.com https://connect.facebook.net",
+        "style-src 'self' 'unsafe-inline'",
+        "img-src 'self' data: blob: https://cdn.sanity.io https://*.sanity.io https://www.googletagmanager.com https://www.google-analytics.com",
+        "font-src 'self'",
+        "connect-src 'self' https://cdn.sanity.io https://*.api.sanity.io https://api.sanity.io https://0s6hkcu1.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com",
+        "frame-src 'self' https://challenges.cloudflare.com",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "frame-ancestors 'none'",
+        "upgrade-insecure-requests",
+    ].join('; '),
+};
 
 const nextConfig: NextConfig = {
   /* 1. React Compiler (Performance) */
@@ -89,8 +90,16 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // Base security headers for all routes
         source: '/(.*)',
-        headers: securityHeaders,
+        headers: baseHeaders,
+      },
+      {
+        // CSP only for non-studio routes — Studio loads scripts/connections
+        // from sanity-cdn.com and many dynamic Sanity origins that would
+        // require an unmaintainable allowlist.
+        source: '/((?!studio).*)',
+        headers: [cspHeader],
       },
     ];
   },
