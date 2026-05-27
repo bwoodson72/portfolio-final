@@ -88,7 +88,7 @@ export default async function ServicesPage() {
                                 href={`/services/${service.slug.current}`}
                                 className="mt-auto text-sm font-semibold text-text underline underline-offset-4 hover:opacity-70 transition-opacity"
                             >
-                                View service
+                                Learn more about {service.title} -&gt;
                             </Link>
                         </div>
                     ))}
