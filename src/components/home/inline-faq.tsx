@@ -2,8 +2,8 @@ import Link from "next/link";
 import { faqs } from "@/content/portfolio";
 
 const SELECTED_QUESTIONS = [
-  "Do you write the content/copy?",
-  "Do you offer ongoing maintenance?",
+  "Do you write the copy?",
+  "How does pricing work?",
   "How do revisions work?",
 ];
 

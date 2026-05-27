@@ -14,6 +14,7 @@ export const Hero = () => {
         src="/bg-hero.avif"
         alt=""
         fill
+        quality={50}
         className="object-cover opacity-20 pointer-events-none select-none"
         priority
         aria-hidden

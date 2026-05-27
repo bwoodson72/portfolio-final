@@ -1,26 +1,26 @@
 import { Shield, Clock, DollarSign, User } from "lucide-react";
 
 const items = [
-  {
-    icon: Shield,
-    label: "Guaranteed Fast",
-    sublabel: "Every site loads in under 3 seconds",
-  },
-  {
-    icon: Clock,
-    label: "Done in Days, Not Months",
-    sublabel: "Landing pages in under a week. Full sites in 2–3 weeks.",
-  },
-  {
-    icon: DollarSign,
-    label: "One Fixed Price",
-    sublabel: "Setup + monthly — no hourly billing, no surprise invoices",
-  },
-  {
-    icon: User,
-    label: "One Point of Contact",
-    sublabel: "Brian leads every project — no account managers, no runaround",
-  },
+    {
+        icon: Shield,
+        label: "95+ Lighthouse Score",
+        sublabel: "Every site scores 95 or better on Google's performance audit at launch.",
+    },
+    {
+        icon: Clock,
+        label: "Fixed Scope, Fixed Price",
+        sublabel: "Every project is scoped and priced before work begins. No hourly billing, no surprise invoices.",
+    },
+    {
+        icon: DollarSign,
+        label: "You Own the Site",
+        sublabel: "No platform subscriptions, no vendor lock-in. Your domain, your code, your asset.",
+    },
+    {
+        icon: User,
+        label: "One Point of Contact",
+        sublabel: "Brian leads every project. No account managers, no handoffs, no runaround.",
+    },
 ];
 
 export function TrustStrip() {
