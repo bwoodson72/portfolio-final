@@ -70,29 +70,35 @@ export default function AboutPage() {
                     "url": "https://brianwoodson.dev",
                     "name": "Brian Woodson Web Development"
                 },
-                "breadcrumb": {
-                    "@type": "BreadcrumbList",
-                    "itemListElement": [
-                        {
-                            "@type": "ListItem",
-                            "position": 1,
-                            "name": "Home",
-                            "item": "https://brianwoodson.dev"
-                        },
-                        {
-                            "@type": "ListItem",
-                            "position": 2,
-                            "name": "About",
-                            "item": "https://brianwoodson.dev/about"
-                        }
-                    ]
-                }
+                "breadcrumb": { "@id": "https://brianwoodson.dev/about/#breadcrumb" }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "@id": "https://brianwoodson.dev/about/#breadcrumb",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://brianwoodson.dev"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "About",
+                        "item": "https://brianwoodson.dev/about"
+                    }
+                ]
             },
             {
                 "@type": "Person",
                 "@id": "https://brianwoodson.dev/#brian-woodson",
                 "name": "Brian Woodson",
                 "jobTitle": "Web Designer and Developer",
+                "image": {
+                    "@type": "ImageObject",
+                    "url": "https://brianwoodson.dev/brianwoodson.avif"
+                },
                 "worksFor": {
                     "@type": "ProfessionalService",
                     "@id": "https://brianwoodson.dev/#organization",

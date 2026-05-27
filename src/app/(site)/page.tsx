@@ -50,10 +50,17 @@ export default function Home() {
                 },
                 "about": {
                     "@type": "ProfessionalService",
+                    "@id": "https://brianwoodson.dev/#organization",
                     "name": "Brian Woodson Web Development",
                     "url": "https://brianwoodson.dev",
                     "telephone": "+18177764893",
                     "description": "Custom website design and local SEO for small businesses in the DFW area.",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Granbury",
+                        "addressRegion": "TX",
+                        "addressCountry": "US"
+                    },
                     "areaServed": [
                         { "@type": "City", "name": "Granbury", "containedInPlace": { "@type": "AdministrativeArea", "name": "Hood County" } },
                         { "@type": "City", "name": "Fort Worth", "containedInPlace": { "@type": "AdministrativeArea", "name": "Tarrant County" } },
@@ -63,17 +70,6 @@ export default function Home() {
                     "serviceType": ["Web Design", "Website Development", "Local SEO", "Copywriting", "Landing Page Design"],
                     "priceRange": "$$"
                 }
-            },
-            {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Home",
-                        "item": "https://brianwoodson.dev"
-                    }
-                ]
             }
         ]
     };
