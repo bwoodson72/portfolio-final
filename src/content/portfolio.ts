@@ -164,7 +164,7 @@ export const siteContent: SiteContent = {
   ],
 
   about: {
-    headline: "A small team that builds websites worth paying for",
+    headline: "Website Development for Small Businesses in Granbury and DFW",
     body: [
       "We're Brian Woodson Web Development — a distributed studio that designs, writes, and builds websites for small businesses. Not template sites. Not WordPress. Custom-built, conversion-focused, and done right.",
       "Every site ships with the copy, SEO, and tracking your business needs to get found and convert visitors into leads. You own your site from day one — no contracts, no buyout fees, no hostage situation.",
