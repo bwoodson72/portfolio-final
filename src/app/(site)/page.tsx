@@ -11,11 +11,11 @@ import { FinalCTA } from "@/components/home/final-cta";
 import { AuditCta } from "@/components/home/audit-cta";
 
 export const metadata: Metadata = {
-    title: "Small Business Web Design and Local SEO | Brian Woodson Web Development",
-    description: "Custom website design and local SEO for small businesses in the DFW area. Fast load times, conversion-focused copy, and search rankings built in from the start.",
+    title: "Website Development Services and Local SEO for Small Businesses",
+    description: "Custom website development and local SEO for small businesses in the DFW area. Fast load times, conversion-focused copy, and search rankings built in from the start.",
     openGraph: {
-        title: "Small Business Web Design and Local SEO | Brian Woodson Web Development",
-        description: "Custom website design and local SEO for small businesses in the DFW area. Fast load times, conversion-focused copy, and search rankings built in from the start.",
+        title: "Small Business Website Development and Local SEO ",
+        description: "Custom website development and local SEO for small businesses in the DFW area. Fast load times, conversion-focused copy, and search rankings built in from the start.",
         url: "https://brianwoodson.dev",
         siteName: "Brian Woodson Web Development",
         images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Brian Woodson Web Development" }],
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Small Business Web Design and Local SEO | Brian Woodson Web Development",
-        description: "Custom website design and local SEO for small businesses in the DFW area. Fast load times, conversion-focused copy, and search rankings built in from the start.",
+        title: "Small Business Website Development and Local SEO ",
+        description: "Custom website development and local SEO for small businesses in the DFW area. Fast load times, conversion-focused copy, and search rankings built in from the start.",
         images: ["/og-image.png"],
     },
     alternates: {
@@ -41,8 +41,8 @@ export default function Home() {
                 "@type": "WebPage",
                 "@id": "https://brianwoodson.dev/#webpage",
                 "url": "https://brianwoodson.dev",
-                "name": "Small Business Web Design and Local SEO | Brian Woodson Web Development",
-                "description": "Custom website design and local SEO for small businesses in the DFW area. Fast load times, conversion-focused copy, and search rankings built in from the start.",
+                "name": "Small Business Website Development and Local SEO ",
+                "description": "Custom website development and local SEO for small businesses in the DFW area. Fast load times, conversion-focused copy, and search rankings built in from the start.",
                 "isPartOf": {
                     "@type": "WebSite",
                     "url": "https://brianwoodson.dev",
@@ -54,7 +54,7 @@ export default function Home() {
                     "name": "Brian Woodson Web Development",
                     "url": "https://brianwoodson.dev",
                     "telephone": "+18177764893",
-                    "description": "Custom website design and local SEO for small businesses in the DFW area.",
+                    "description": "Custom website development and local SEO for small businesses in the DFW area.",
                     "address": {
                         "@type": "PostalAddress",
                         "addressLocality": "Granbury",
