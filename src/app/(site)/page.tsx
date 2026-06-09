@@ -38,41 +38,52 @@ export default function Home() {
         "@context": "https://schema.org",
         "@graph": [
             {
+                "@type": "WebSite",
+                "@id": "https://brianwoodson.dev",
+                "url": "https://brianwoodson.dev",
+                "name": "Brian Woodson Web Development",
+                "publisher": { "@id": "https://brianwoodson.dev" }
+            },
+            {
                 "@type": "WebPage",
                 "@id": "https://brianwoodson.dev/#webpage",
                 "url": "https://brianwoodson.dev",
-                "name": "Small Business Website Development and Local SEO ",
+                "name": "Small Business Website Development and Local SEO",
                 "description": "Custom website development and local SEO for small businesses in the DFW area. Fast load times, conversion-focused copy, and search rankings built in from the start.",
-                "isPartOf": {
-                    "@type": "WebSite",
-                    "url": "https://brianwoodson.dev",
-                    "name": "Brian Woodson Web Development"
+                "isPartOf": { "@id": "https://brianwoodson.dev" },
+                "about": { "@id": "https://brianwoodson.dev" }
+            },
+            {
+                "@type": "ProfessionalService",
+                "@id": "https://brianwoodson.dev",
+                "name": "Brian Woodson Web Development",
+                "url": "https://brianwoodson.dev",
+                "telephone": "+18177764893",
+                "description": "Custom website development and local SEO for small businesses in the DFW area.",
+                "priceRange": "$$",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Granbury",
+                    "addressRegion": "TX",
+                    "addressCountry": "US"
                 },
-                "about": {
-                    "@type": "ProfessionalService",
-                    "@id": "https://brianwoodson.dev/#organization",
-                    "name": "Brian Woodson Web Development",
-                    "url": "https://brianwoodson.dev",
-                    "telephone": "+18177764893",
-                    "description": "Custom website development and local SEO for small businesses in the DFW area.",
-                    "address": {
-                        "@type": "PostalAddress",
-                        "addressLocality": "Granbury",
-                        "addressRegion": "TX",
-                        "addressCountry": "US"
-                    },
-                    "areaServed": [
-                        { "@type": "City", "name": "Granbury", "containedInPlace": { "@type": "AdministrativeArea", "name": "Hood County" } },
-                        { "@type": "City", "name": "Fort Worth", "containedInPlace": { "@type": "AdministrativeArea", "name": "Tarrant County" } },
-                        { "@type": "City", "name": "Weatherford", "containedInPlace": { "@type": "AdministrativeArea", "name": "Parker County" } },
-                        { "@type": "City", "name": "Cleburne", "containedInPlace": { "@type": "AdministrativeArea", "name": "Johnson County" } }
-                    ],
-                    "serviceType": ["Web Design", "Website Development", "Local SEO", "Copywriting", "Landing Page Design"],
-                    "priceRange": "$$"
-                }
+                "areaServed": [
+                    { "@type": "City", "name": "Granbury", "containedInPlace": { "@type": "AdministrativeArea", "name": "Hood County" } },
+                    { "@type": "City", "name": "Fort Worth", "containedInPlace": { "@type": "AdministrativeArea", "name": "Tarrant County" } },
+                    { "@type": "City", "name": "Weatherford", "containedInPlace": { "@type": "AdministrativeArea", "name": "Parker County" } },
+                    { "@type": "City", "name": "Cleburne", "containedInPlace": { "@type": "AdministrativeArea", "name": "Johnson County" } }
+                ],
+                "serviceType": ["Web Design", "Website Development", "Local SEO", "Copywriting", "Landing Page Design"],
+                "sameAs": [
+                    "https://www.facebook.com/profile.php?id=61570753541245",
+                    "https://www.linkedin.com/company/brian-woodson-web-development",
+                    "https://www.youtube.com/@BrianWoodsonWebDevelopment",
+                    "https://www.google.com/maps?cid=11334466566285987166"
+                ]
             }
         ]
     };
+
 
     return (
         <main className="flex w-full flex-col items-center bg-slate-950 text-slate-50">
