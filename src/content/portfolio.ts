@@ -67,7 +67,7 @@ export const siteContent: SiteContent = {
   hero: {
     headline: "Website Development Services for Small Businesses",
     subheadline: "Custom-coded websites for small businesses in DFW. Built with real competitor research, keyword strategy, fast mobile performance, clear copy, and no WordPress or page builders.",
-    ctaPrimary: "See our work",
+    ctaPrimary: "Book a free consultation",
     ctaSecondary: "View services"
   },
 

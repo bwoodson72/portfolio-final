@@ -5,23 +5,7 @@ import { motion } from "motion/react"
 export function CtaButton({ label, href }: { label: string; href: string }) {
     return (
         <div className="flex justify-center w-full">
-        <motion.div
-            whileHover={{
-                scale: 1.02,
-                boxShadow: "0 0 30px rgba(37, 99, 235, 0.45)"
-            }}
-            whileTap={{ scale: 0.98 }}
-            animate={{
-                rotate: [0, -1.5, 1.5, -1.5, 1.5, 0],
-            }}
-            transition={{
-                delay: 5,
-                duration: 0.5,
-                repeat: Infinity,
-                repeatDelay: 8
-            }}
-            className="relative group pointer-events-auto max-w-75"
-        >
+
             {/* Background Glow */}
             <div className="absolute inset-0 bg-blue-500 blur-2xl  opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none" />
 
@@ -44,7 +28,7 @@ export function CtaButton({ label, href }: { label: string; href: string }) {
                     →
                 </motion.span>
             </a>
-        </motion.div>
+    
         </div>
     )
 }

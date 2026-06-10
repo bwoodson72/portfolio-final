@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
-import {PhoneNumber} from "@/components/phoneNumber";
+import {CtaButton} from './ctaButton'
 import Image from "next/image";
 
 export function Nav() {
@@ -42,7 +42,7 @@ export function Nav() {
                                 </Link>
                             </li>
                         ))}
-                        <li><PhoneNumber/></li>
+                        <li>   <CtaButton label='Book a Consultation' href='/contact'/></li>
                     </ul>
 
                     {/* Right: Mobile Menu Toggle */}
@@ -80,7 +80,7 @@ export function Nav() {
                                     {l.label}
                                 </Link>
                             ))}
-                            <PhoneNumber/>
+                            <CtaButton label='Book a Consultation' href='/contact'/>
                         </div>
                     </motion.div>
                 )}
