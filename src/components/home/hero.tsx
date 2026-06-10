@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import {ConsultButton} from '../ConsultButton'
 import { siteContent } from "@/content/portfolio";
 
 export const Hero = () => {
@@ -27,12 +28,7 @@ export const Hero = () => {
           {hero.subheadline}
         </p>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-          <Link
-            href="/contact"
-            className="rounded-full bg-accent px-8 py-4 text-sm font-bold text-text transition hover:bg-accent-hover"
-          >
-            {hero.ctaPrimary}
-          </Link>
+         <ConsultButton />
           <Link
             href="/services"
             className="rounded-full border border-border bg-surface px-8 py-4 text-sm font-bold text-text transition hover:bg-surface-hover"
