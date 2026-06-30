@@ -1,11 +1,9 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PROJECT_BY_SLUG_QUERY, ALL_PROJECT_SLUGS_QUERY } from "@/lib/sanity/queries";
 import type { Project } from "@/lib/sanity/types";
 import ShareButtons from "@/components/ShareButtons";
-import {FinalCta} from "@/components/FinalCta";
 
 type Props = {
     params: Promise<{ slug: string }>;

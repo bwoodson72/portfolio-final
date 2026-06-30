@@ -8,17 +8,16 @@ export default function TestimonialCard({ testimonial }: { testimonial: Testimon
         &ldquo;{testimonial.quote}&rdquo;
       </p>
       <div className="flex items-center gap-3">
-        {testimonial.avatar ? (
+        {testimonial.avatar && (
           <Image
-            src={testimonial.avatar}
+
+           src={testimonial.avatar}
             alt={testimonial.name}
             width={32}
             height={32}
             className="h-8 w-8 rounded-full object-cover"
           />
-        ) : (
-          <div className="h-8 w-8 rounded-full bg-[color:var(--color-border)]" />
-        )}
+        ) }
         <div>
           <p className="text-xs font-bold text-[color:var(--color-text)]">{testimonial.name}</p>
           <p className="text-[10px] text-[color:var(--color-text-muted)]">{testimonial.role}</p>

@@ -1,7 +1,6 @@
 
 
 import { Metadata } from "next";
-import { ContactForm } from "@/components/contactForm";
 import Booking from "@/components/Booking";
 
 export const metadata: Metadata = {
@@ -35,7 +34,7 @@ export default function ContactPage() {
                 <h1 className="text-4xl font-extrabold tracking-tight text-text md:text-6xl">
                     Book a Consultation
                 </h1>
-                
+
                 <p >
                     Whether you need your first real business website or your current site is not bringing in the kind of leads it should, this consultation is the place to start.
                 </p>

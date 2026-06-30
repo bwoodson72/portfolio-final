@@ -6,6 +6,7 @@ import {
   ALL_LOCATION_PAGE_SLUGS_QUERY,
 } from '@/lib/sanity/queries'
 import type { LocationPage } from '@/lib/sanity/types'
+import {ConsultButton} from "@/components/ConsultButton";
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -144,18 +145,8 @@ export default async function LocationPage({ params }: Props) {
             </p>
           )}
           <div className="flex flex-col gap-4 sm:flex-row">
-            <Link
-              href="/contact"
-              className="rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"
-            >
-              Start a conversation
-            </Link>
-            <Link
-              href="/#audit"
-              className="rounded-full border border-border px-8 py-3 text-sm font-bold text-text transition hover:border-border-strong"
-            >
-              Get a free site audit
-            </Link>
+           <ConsultButton/>
+           
           </div>
         </div>
       </section>

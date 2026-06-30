@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
 import {ConsultButton} from './ConsultButton'
-import {CtaButton} from './ctaButton'
 import Image from "next/image";
 
 export function Nav() {

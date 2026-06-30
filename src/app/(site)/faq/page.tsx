@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import { faqs } from "@/content/portfolio";
 
 export const metadata: Metadata = {
@@ -88,7 +87,7 @@ export default function FAQPage() {
                 }}
             />
 
-         
+
         </main>
     );
 }
