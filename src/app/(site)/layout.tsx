@@ -1,6 +1,7 @@
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import React from "react";
+import {FinalCta} from "@/components/FinalCta";
 
 export default function SiteLayout({
     children,
@@ -13,6 +14,7 @@ export default function SiteLayout({
             <main className="grow">
                 {children}
             </main>
+            <FinalCta/>
             <Footer />
         </div>
     );

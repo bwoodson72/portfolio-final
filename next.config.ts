@@ -26,6 +26,10 @@ const baseHeaders = [
         value: 'same-origin',
     },
     {
+        key: 'Cross-Origin-Resource-Policy',
+        value: 'same-origin',
+    },
+    {
         key: 'Permissions-Policy',
         value: 'camera=(), microphone=(), geolocation=()',
     },
@@ -35,12 +39,12 @@ const cspHeader = {
     key: 'Content-Security-Policy',
     value: [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://js.hs-scripts.com https://js.hsforms.net https://js.hscollectedforms.net https://js.hs-analytics.net https://js.hubspot.com https://snap.licdn.com https://connect.facebook.net",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.cal.com https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://js.hs-scripts.com https://js.hsforms.net https://js.hscollectedforms.net https://js.hs-analytics.net https://js.hubspot.com https://snap.licdn.com https://connect.facebook.net",
         "style-src 'self' 'unsafe-inline'",
-        "img-src 'self' data: blob: https://cdn.sanity.io https://*.sanity.io https://www.googletagmanager.com https://www.google-analytics.com",
+        "img-src 'self' data: blob: https://app.cal.com https://cal.com https://cdn.sanity.io https://*.sanity.io https://www.googletagmanager.com https://www.google-analytics.com",
         "font-src 'self'",
-        "connect-src 'self' https://cdn.sanity.io https://*.api.sanity.io https://api.sanity.io https://0s6hkcu1.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com",
-        "frame-src 'self' https://challenges.cloudflare.com",
+        "connect-src 'self' https://app.cal.com https://cal.com https://cdn.sanity.io https://*.api.sanity.io https://api.sanity.io https://0s6hkcu1.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://api.hubspot.com https://forms.hubspot.com https://track.hubspot.com",
+        "frame-src 'self' https://app.cal.com https://cal.com https://challenges.cloudflare.com",
         "object-src 'none'",
         "base-uri 'self'",
         "form-action 'self'",

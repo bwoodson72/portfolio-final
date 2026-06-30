@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+
 import { siteContent } from "@/content/portfolio";
+
+import {ConsultButton} from "@/components/ConsultButton";
 
 export const metadata: Metadata = {
     title: "About | Web Designer and Local SEO Specialist | Brian Woodson Web Development",
@@ -163,12 +165,7 @@ export default function AboutPage() {
                                 Most agencies build on WordPress and deliver sites that take 10 seconds to load. We took a different approach — a small team, a modern build system, and a focus on performance that shows up in every Google audit. You own your site from day one, you talk directly to the people doing the work, and every project gets full attention.
                             </p>
                         </div>
-                        <Link
-                            href="/contact"
-                            className="inline-flex rounded-full bg-text px-6 py-3 text-sm font-bold text-bg transition hover:opacity-90"
-                        >
-                            Get in touch
-                        </Link>
+                        <ConsultButton/>
                     </div>
 
                 </div>
@@ -227,21 +224,7 @@ export default function AboutPage() {
                 </ul>
             </section>
 
-            {/* CTA */}
-            <section className="rounded-3xl border border-border bg-surface p-12 text-center space-y-6">
-                <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-4xl">
-                    Ready to get started?
-                </h2>
-                <p className="mx-auto max-w-md text-lg text-text-muted">
-                    Tell me about your project and I&apos;ll get back to you within one business day.
-                </p>
-                <Link
-                    href="/contact"
-                    className="inline-flex rounded-full bg-text px-8 py-4 text-sm font-bold text-bg transition hover:opacity-90"
-                >
-                    Get in touch
-                </Link>
-            </section>
+
 
         </main>
     );

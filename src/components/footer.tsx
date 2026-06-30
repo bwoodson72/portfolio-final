@@ -19,9 +19,9 @@ export async function Footer() {
     return (
         <footer className="w-full border-t border-border bg-bg">
             <div className="mx-auto max-w-7xl px-6 py-16">
-                <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
+                <div className="grid grid-cols-1 gap-12 md:grid-cols-4 text-center ">
                     {/* Services */}
-                    <div className="space-y-4">
+                    <div className="space-y-4 ">
                         <h3 className="text-xs font-bold uppercase tracking-widest text-text">Services</h3>
                         <ul className="space-y-2 text-sm text-text-muted">
                             {serviceCards.map((service) => (

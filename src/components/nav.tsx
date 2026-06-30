@@ -16,7 +16,7 @@ export function Nav() {
         { label: "About", href: "/about" },
         { label: "Guides", href: "/knowledge" },
         { label: "FAQ", href: "/faq" },
-        { label: "Contact", href: "/contact" },
+
     ];
 
     return (
@@ -68,9 +68,9 @@ export function Nav() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden border-t border-border bg-bg"
+                        className="md:hidden border-t border-border bg-bg "
                     >
-                        <div className="px-6 py-8 space-y-6">
+                        <div className="px-6 py-8 space-y-6 flex flex-col justify-center items-center">
                             {navLinks.map((l) => (
                                 <Link
                                     key={l.href}

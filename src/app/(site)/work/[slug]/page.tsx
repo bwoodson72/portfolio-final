@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { PROJECT_BY_SLUG_QUERY, ALL_PROJECT_SLUGS_QUERY } from "@/lib/sanity/queries";
 import type { Project } from "@/lib/sanity/types";
 import ShareButtons from "@/components/ShareButtons";
+import {FinalCta} from "@/components/FinalCta";
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -223,18 +224,7 @@ export default async function CaseStudyPage({ params }: Props) {
                 </div>
             )}
 
-            {/* Bottom CTA */}
-            <div className="rounded-3xl border border-border bg-surface p-12 text-center space-y-6">
-                <p className="text-lg font-bold text-text">
-                    Want something like this for your business?
-                </p>
-                <Link
-                    href="/contact"
-                    className="inline-flex rounded-full bg-text px-6 py-3 text-sm font-bold text-bg transition hover:opacity-90"
-                >
-                    Get in touch
-                </Link>
-            </div>
+
 
             {/* Structured data */}
             <script

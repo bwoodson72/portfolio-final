@@ -88,17 +88,7 @@ export default function FAQPage() {
                 }}
             />
 
-            <div className="rounded-3xl border border-border bg-surface p-10 text-center space-y-4">
-                <p className="font-bold text-text">
-                    Still have questions?
-                </p>
-                <Link
-                    href="/contact"
-                    className="inline-flex rounded-full bg-text px-6 py-3 text-sm font-bold text-bg transition hover:opacity-90"
-                >
-                    Get in touch
-                </Link>
-            </div>
+         
         </main>
     );
 }

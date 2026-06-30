@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AuditEmailCapture } from "@/components/audit/email-capture";
+import {ConsultButton} from "@/components/ConsultButton";
 
 export const metadata: Metadata = {
   title: "Audit Results | Brian Woodson Web Development",
@@ -257,16 +258,11 @@ export default async function AuditResultPage({ params }: Props) {
           </p>
           {ctaTier !== "soft" && (
             <p className="text-xs text-text-muted max-w-md mx-auto">
-              Problems like this usually come from how the site is built, not from one isolated fix.
+              Problems like this usually come from how the site is built, not from one isolated issue.
             </p>
           )}
         </div>
-        <Link
-          href="/contact"
-          className="inline-block rounded-full bg-text py-3 px-8 text-sm font-bold text-bg transition hover:opacity-90"
-        >
-          Talk to us
-        </Link>
+       <ConsultButton/>
       </div>
     </main>
   );
