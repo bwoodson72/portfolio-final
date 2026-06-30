@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import {ConsultButton} from "@/components/ConsultButton";
+
 
 const services = [
     {
@@ -59,11 +59,11 @@ export const ServicePackages = () => {
             <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-center">
                 <Link
                     href="/services"
-                    className="rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"
+                    className="rounded-full bg-surface hover:bg-surface-hover px-8 py-3 text-sm font-bold text-white transition hover:opacity-90"
                 >
                     View all services
                 </Link>
-             <ConsultButton />
+
             </div>
         </section>
     );
