@@ -17,7 +17,7 @@ export const Hero = () => {
         fill
         quality={50}
         loading="eager"
-        className="object-cover opacity-20 pointer-events-none select-none"
+        className="object-cover brightness-40  pointer-events-none select-none"
         aria-hidden
       />
       <div className="relative max-w-240 space-y-8">

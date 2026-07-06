@@ -13,4 +13,13 @@ export const testimonials: Testimonial[] = [
     name: "Sarah M.",
     role: "Owner, Lakeview Dental",
   },
+  {
+    id: "dave-c",
+    quote: "Brian was very professional and really took the time to understand our business needs before anything else. ",
+    name: "Dave C.",
+    role: "Media Manager",
+
+
+  }
+  
 ];

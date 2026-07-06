@@ -65,8 +65,8 @@ export const INTAKE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfP-GqX9W9T9
 
 export const siteContent: SiteContent = {
   hero: {
-    headline: "Website Development Services for Small Businesses",
-    subheadline: "Custom-coded websites for small businesses in DFW. Built with real competitor research, keyword strategy, fast mobile performance, clear copy, and no WordPress or page builders.",
+    headline: "Custom Website Development Services for Small Businesses",
+    subheadline: "High performing web assets built on a modern stack.  Built to maximize conversions and protect your ad spend.  ",
     ctaPrimary: "Book a free consultation",
     ctaSecondary: "View services"
   },

@@ -31,13 +31,13 @@ const sora = Sora({
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://brianwoodson.dev"),
-    title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
-    description: "A web studio that designs, writes, and builds websites for small businesses. Copy, SEO, and monthly support included.",
-    keywords: ["small business website", "web design agency", "website development", "SEO", "copywriting", "Next.js", "fixed price website"],
+    title: "Brian Woodson | Web Design & Development in Granbury, TX",
+    description: "Custom web design and development for small businesses in Granbury and DFW. No WordPress, no page builders, no templates. Fixed price, built by one developer.",
+    keywords: ["Granbury web design", "web design and development", "custom website development", "local SEO Granbury TX", "small business website", "DFW web developer", "fixed price website", "no WordPress web design"],
     authors: [{ name: "Brian Woodson" }],
     openGraph: {
-        title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
-        description: "A web studio that designs, writes, and builds websites for small businesses. Copy, SEO, and monthly support included.",
+        title: " Web Design & Development in Granbury, TX",
+        description: "Custom web design and development for small businesses in Granbury and DFW. No WordPress, no page builders, no templates.",
         url: "https://brianwoodson.dev",
         siteName: "Brian Woodson Web Development",
         locale: "en_US",
@@ -45,14 +45,13 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Brian Woodson Web Development // Design, Copy & Code for Small Businesses",
-        description: "A web studio that designs, writes, and builds websites for small businesses. Copy, SEO, and monthly support included.",
+        title: "Brian Woodson | Web Design & Development in Granbury, TX",
+        description: "Custom web design and development for small businesses in Granbury and DFW. No WordPress, no page builders, no templates. Fixed price, built by one developer.",
     },
     icons: {
         icon: "/favicon.ico",
     },
 };
-
 export default function RootLayout({
                                        children,
                                    }: Readonly<{

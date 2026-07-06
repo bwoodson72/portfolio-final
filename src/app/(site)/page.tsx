@@ -7,7 +7,7 @@ import { HowIWork } from "@/components/home/how-i-work";
 import { TrustStrip } from "@/components/home/trust-strip";
 import { ProjectHighlights } from "@/components/home/project-highlights";
 import { InlineFAQ } from "@/components/home/inline-faq";
-import { FinalCTA } from "@/components/home/final-cta";
+
 import { AuditCta } from "@/components/home/audit-cta";
 
 export const metadata: Metadata = {
