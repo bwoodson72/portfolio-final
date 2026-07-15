@@ -215,20 +215,20 @@ export default async function PostPage({ params }: Props) {
       />
 
       {/* Footer CTA */}
-      <div className="mt-20 space-y-6 rounded-2xl border border-border bg-surface p-12 text-center">
-        <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-3xl">
-          This could be your site
-        </h2>
-        <p className="mx-auto max-w-md text-text-muted">
-          If this sparked an idea for your project, we&apos;d love to hear about it.
-        </p>
-        <Link
-          href="/contact"
-          className="inline-flex rounded-full bg-text px-8 py-4 text-sm font-bold text-bg transition hover:opacity-90"
-        >
-          Get in touch
-        </Link>
-      </div>
+      {/*<div className="mt-20 space-y-6 rounded-2xl border border-border bg-surface p-12 text-center">*/}
+      {/*  <h2 className="text-2xl font-extrabold tracking-tight text-text md:text-3xl">*/}
+      {/*    This could be your site*/}
+      {/*  </h2>*/}
+      {/*  <p className="mx-auto max-w-md text-text-muted">*/}
+      {/*    If this sparked an idea for your project, we&apos;d love to hear about it.*/}
+      {/*  </p>*/}
+      {/*  <Link*/}
+      {/*    href="/contact"*/}
+      {/*    className="inline-flex rounded-full bg-text px-8 py-4 text-sm font-bold text-bg transition hover:opacity-90"*/}
+      {/*  >*/}
+      {/*    Get in touch*/}
+      {/*  </Link>*/}
+      {/*</div>*/}
     </main>
   )
 }
