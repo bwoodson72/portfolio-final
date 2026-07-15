@@ -18,6 +18,20 @@ export const ALL_POSTS_QUERY = groq`
   }
 `
 
+export const PAGINATED_POSTS_QUERY = groq`
+  *[_type == "post"] | order(publishedAt desc) {
+    ${POST_CARD_FIELDS}
+  }
+`
+
+export const POSTS_COUNT_QUERY = groq`
+  count(*[_type == "post"])
+`
+
+export const POSTS_COUNT_BY_CATEGORY_QUERY = groq`
+  count(*[_type == "post" && category == $category])
+`
+
 export const FEATURED_POSTS_QUERY = groq`
   *[_type == "post" && featured == true] | order(publishedAt desc)[0...3] {
     ${POST_CARD_FIELDS}
