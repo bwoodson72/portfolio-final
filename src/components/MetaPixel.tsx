@@ -1,7 +1,7 @@
 'use client';
 
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 
 interface FacebookPixel {
@@ -21,30 +21,18 @@ declare global {
 
 export function MetaPixel() {
   const pathname = usePathname();
+  const hasMounted = useRef(false);
 
+  // The inline <Script> handles the initial PageView on first load.
+  // This effect only fires fbq on subsequent SPA navigations.
   useEffect(() => {
-    // Debug logs to help verify pixel initialization
-    // Pixel ID present at build-time
-    console.log('MetaPixel - NEXT_PUBLIC_META_PIXEL_ID:', process.env.NEXT_PUBLIC_META_PIXEL_ID);
-
-    // If fbq already exists, track page view and log
-    if (typeof window !== 'undefined' && window.fbq) {
-      console.log('MetaPixel - fbq already present:', window.fbq);
-      window.fbq('track', 'PageView');
+    if (!hasMounted.current) {
+      hasMounted.current = true;
       return;
     }
-
-    // Check for fbq after a short delay in case script loads asynchronously
-    const checkTimer = setTimeout(() => {
-      if (window.fbq) {
-        console.log('MetaPixel - fbq available after delay:', window.fbq);
-        window.fbq('track', 'PageView');
-      } else {
-        console.warn('MetaPixel - fbq not found. Script may have been blocked or failed to load.');
-      }
-    }, 1500);
-
-    return () => clearTimeout(checkTimer);
+    if (window.fbq) {
+      window.fbq('track', 'PageView');
+    }
   }, [pathname]);
 
   return (
