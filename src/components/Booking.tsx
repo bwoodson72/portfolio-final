@@ -7,6 +7,16 @@ export default function Booking() {
         (async function () {
             const cal = await getCalApi({"namespace":"30min"});
             cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+            
+            // Track booking completion with Meta Pixel
+            cal("on", {
+                action: "bookingSuccessful",
+                callback: () => {
+                    if (typeof window !== 'undefined' && window.fbq) {
+                        window.fbq('track', 'Lead');
+                    }
+                }
+            });
         })();
     }, [])
     return <Cal namespace="30min"

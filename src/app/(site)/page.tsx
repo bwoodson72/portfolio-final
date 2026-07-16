@@ -91,6 +91,7 @@ export default function Home() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageStructuredData) }}
             />
+
             <Hero />
             <ProofStrip />
             <TrustStrip />

@@ -5,6 +5,7 @@ import React from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import StructuredData from "@/components/StructuredData";
 import { CookieConsent } from "@/components/CookieConsent";
+import { MetaPixel } from "@/components/MetaPixel";
 
 
 // 1. Configure Fonts with "swap" for performance
@@ -63,6 +64,7 @@ export default function RootLayout({
             className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} bg-[#050505] text-white antialiased min-h-screen selection:bg-blue-500/30 selection:text-white font-sans`}
         >
         <StructuredData />
+        <MetaPixel />
         {children}
         <CookieConsent />
         <SpeedInsights />
