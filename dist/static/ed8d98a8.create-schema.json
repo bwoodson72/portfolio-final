@@ -1,0 +1,1581 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 60
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Optional. Overrides the article title in search results. Max 60 characters. Leave blank to use the article title.",
+        "name": "metaTitle",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 155
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Shown on cards and used as meta description. Keep under 155 characters for best display in search results.",
+        "name": "excerpt",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "coverImage",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "publishedAt",
+        "type": "datetime"
+      },
+      {
+        "initialValue": false,
+        "description": "Pin to the homepage Knowledge section",
+        "name": "featured",
+        "type": "boolean"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Your Website",
+              "value": "your-website"
+            },
+            {
+              "title": "Performance",
+              "value": "performance"
+            },
+            {
+              "title": "Getting Found",
+              "value": "getting-found"
+            },
+            {
+              "title": "Cost & Value",
+              "value": "cost"
+            },
+            {
+              "title": "Behind the Build",
+              "value": "process"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "your-website",
+                  "performance",
+                  "getting-found",
+                  "cost",
+                  "process"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "readingTime",
+        "type": "number",
+        "title": "Reading Time (minutes)"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/"
+                                  ],
+                                  "allowRelative": false,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "name": "href",
+                      "type": "url",
+                      "title": "URL"
+                    },
+                    {
+                      "initialValue": true,
+                      "name": "blank",
+                      "type": "boolean",
+                      "title": "Open in new tab"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object",
+                  "title": "External Link"
+                },
+                {
+                  "fields": [
+                    {
+                      "options": {
+                        "disableNew": true
+                      },
+                      "to": [
+                        {
+                          "type": "post"
+                        }
+                      ],
+                      "name": "reference",
+                      "type": "reference",
+                      "title": "Article"
+                    }
+                  ],
+                  "name": "internalLink",
+                  "type": "object",
+                  "title": "Internal Link (Knowledge Article)"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Emphasis"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "name": "alt",
+                "type": "string",
+                "title": "Alt Text"
+              },
+              {
+                "name": "caption",
+                "type": "string"
+              }
+            ],
+            "type": "image",
+            "name": "bodyImage"
+          },
+          {
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "TypeScript",
+                      "value": "typescript"
+                    },
+                    {
+                      "title": "JavaScript",
+                      "value": "javascript"
+                    },
+                    {
+                      "title": "TSX",
+                      "value": "tsx"
+                    },
+                    {
+                      "title": "JSX",
+                      "value": "jsx"
+                    },
+                    {
+                      "title": "Bash",
+                      "value": "bash"
+                    },
+                    {
+                      "title": "JSON",
+                      "value": "json"
+                    },
+                    {
+                      "title": "CSS",
+                      "value": "css"
+                    },
+                    {
+                      "title": "HTML",
+                      "value": "html"
+                    }
+                  ]
+                },
+                "name": "language",
+                "type": "string"
+              },
+              {
+                "name": "code",
+                "type": "text"
+              },
+              {
+                "name": "filename",
+                "type": "string"
+              }
+            ],
+            "type": "object",
+            "name": "codeBlock"
+          },
+          {
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "💡 Tip",
+                      "value": "tip"
+                    },
+                    {
+                      "title": "⚠️ Warning",
+                      "value": "warning"
+                    },
+                    {
+                      "title": "ℹ️ Info",
+                      "value": "info"
+                    }
+                  ],
+                  "layout": "radio"
+                },
+                "name": "type",
+                "type": "string"
+              },
+              {
+                "name": "text",
+                "type": "text"
+              }
+            ],
+            "type": "object",
+            "name": "callout"
+          }
+        ],
+        "name": "body",
+        "type": "array"
+      }
+    ],
+    "name": "post",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 200
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "One-line summary shown on cards and in meta descriptions.",
+        "name": "tagline",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "coverImage",
+        "type": "image"
+      },
+      {
+        "description": "Additional project screenshots.",
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "alt",
+                "type": "string",
+                "title": "Alt Text"
+              }
+            ],
+            "type": "image",
+            "name": "screenshot"
+          }
+        ],
+        "name": "screenshots",
+        "type": "array"
+      },
+      {
+        "name": "role",
+        "type": "string"
+      },
+      {
+        "name": "timeline",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Bullet points describing the problem.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "problem",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Bullet points describing the solution.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "solution",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "What was delivered.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "deliverables",
+        "type": "array"
+      },
+      {
+        "description": "Business-facing outcomes (e.g. \"Built to rank for local roofing searches\"). Shown on the case study page.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "outcome",
+        "type": "array",
+        "title": "Expected Outcomes"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Technologies used (e.g. Next.js, Tailwind CSS).",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "stack",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "liveUrl",
+        "type": "url",
+        "title": "Live Site URL"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "loomUrl",
+        "type": "url",
+        "title": "Walkthrough Video URL"
+      },
+      {
+        "initialValue": false,
+        "description": "Show in the Featured Work section on the homepage.",
+        "name": "featured",
+        "type": "boolean"
+      },
+      {
+        "rows": 3,
+        "description": "Short 1-2 sentence summary shown on the homepage highlights section. Business-outcome focused.",
+        "name": "highlightQuote",
+        "type": "text"
+      },
+      {
+        "description": "Lower numbers appear first. Projects without a sort order appear last.",
+        "name": "sortOrder",
+        "type": "number"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Used for ordering and sitemap.",
+        "name": "publishedAt",
+        "type": "datetime"
+      }
+    ],
+    "name": "project",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Used in the Studio only. Not shown on the page.",
+        "name": "title",
+        "type": "string",
+        "title": "Internal title"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The URL path under /lp/. e.g. \"plumber-dfw\" → /lp/plumber-dfw",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Short label for identifying this page in email subject lines and analytics. e.g. \"plumber-dfw-apr\"",
+        "name": "campaignTag",
+        "type": "string",
+        "title": "Campaign tag"
+      },
+      {
+        "description": "The AW-XXXXXXXXX conversion ID for this campaign. Leave blank to skip Google Ads tracking.",
+        "name": "gadsConversionId",
+        "type": "string",
+        "title": "Google Ads Conversion ID"
+      },
+      {
+        "description": "The conversion label from your Google Ads conversion action (e.g. \"AbCdEfGh123\").",
+        "name": "gadsConversionLabel",
+        "type": "string",
+        "title": "Google Ads Conversion Label"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "name": "subheadline",
+        "type": "string"
+      },
+      {
+        "name": "problemHeading",
+        "type": "string",
+        "title": "Problem section heading"
+      },
+      {
+        "rows": 4,
+        "name": "problemBody",
+        "type": "text",
+        "title": "Problem section body"
+      },
+      {
+        "name": "proofHeading",
+        "type": "string",
+        "title": "Proof section heading"
+      },
+      {
+        "rows": 4,
+        "name": "proofBody",
+        "type": "text",
+        "title": "Proof section body"
+      },
+      {
+        "name": "offerHeading",
+        "type": "string",
+        "title": "Offer heading"
+      },
+      {
+        "rows": 3,
+        "name": "offerBody",
+        "type": "text",
+        "title": "Offer body"
+      },
+      {
+        "initialValue": "Get a free site review",
+        "name": "formHeading",
+        "type": "string",
+        "title": "Form heading"
+      },
+      {
+        "initialValue": "Send my info",
+        "name": "ctaCopy",
+        "type": "string",
+        "title": "Submit button copy"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "question",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "name": "answer",
+                "type": "text"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "faqs",
+        "type": "array",
+        "title": "FAQs (optional)"
+      },
+      {
+        "name": "finalCtaHeading",
+        "type": "string",
+        "title": "Final CTA heading"
+      },
+      {
+        "initialValue": "Request a free review",
+        "name": "finalCtaCopy",
+        "type": "string",
+        "title": "Final CTA button copy"
+      }
+    ],
+    "name": "landingPage",
+    "type": "document",
+    "title": "Landing Pages"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Used in the Studio only. E.g. \"Web Design Granbury\"",
+        "name": "title",
+        "type": "string",
+        "title": "Internal title"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "URL path under /locations/. E.g. \"granbury\" → /locations/granbury",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "E.g. \"Granbury\" — used in headings, copy, and structured data.",
+        "name": "city",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "E.g. \"Texas\"",
+        "name": "state",
+        "type": "string"
+      },
+      {
+        "description": "Surrounding cities and communities.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "nearbyAreas",
+        "type": "array",
+        "title": "Nearby areas served"
+      },
+      {
+        "rows": 2,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 160
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Target 150–160 characters.",
+        "name": "metaDescription",
+        "type": "text",
+        "title": "Meta description"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "E.g. \"Web Design for Granbury Small Businesses\"",
+        "name": "headline",
+        "type": "string",
+        "title": "Headline (H1)"
+      },
+      {
+        "name": "subheadline",
+        "type": "string"
+      },
+      {
+        "rows": 6,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Opening paragraphs. Establish who you serve in this city and why it matters.",
+        "name": "bodyIntro",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "rows": 6,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "What is the business landscape like in this city? What industries are prominent? What does their web presence typically look like?",
+        "name": "marketContext",
+        "type": "text",
+        "title": "Local market context"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The kinds of businesses you work with in this city.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "localBusinessTypes",
+        "type": "array",
+        "title": "Business types served"
+      },
+      {
+        "rows": 4,
+        "description": "Optional paragraph customizing the services pitch for this market.",
+        "name": "servicesNote",
+        "type": "text",
+        "title": "Services note"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Location-specific questions and answers. Minimum 3.",
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "question",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "name": "answer",
+                "type": "text"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "faqs",
+        "type": "array",
+        "title": "FAQs"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Cities and areas for LocalBusiness.areaServed structured data.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "areaServed",
+        "type": "array",
+        "title": "Area served (schema)"
+      },
+      {
+        "description": "Optional. Record when this page went live. Not used for routing or display.",
+        "name": "publishedAt",
+        "type": "datetime",
+        "title": "Published at"
+      }
+    ],
+    "name": "locationPage",
+    "type": "document",
+    "title": "Location Pages"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The full name of this service. Shown as the card title on /services and as the H1 on the detail page.",
+        "name": "title",
+        "type": "string",
+        "title": "Service Name"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Used in the URL: /services/[slug]. Must be lowercase with hyphens.",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "description": "Small category label shown above the title on the detail page. Examples: Full Builds, Focused Pages, Search Foundations.",
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Shown on the /services card. Keep under 220 characters. This is the summary visible to visitors browsing services.",
+        "name": "shortDescription",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 60
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Shown in browser tabs and search results. Keep under 60 characters.",
+        "name": "metaTitle",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 160
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Shown in Google search results. Keep under 160 characters.",
+        "name": "metaDescription",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Main H1 on the service detail page.",
+        "name": "heroHeadline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "description": "Intro copy shown below the H1.",
+        "name": "heroSubheadline",
+        "type": "text"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Qualifies the visitor. Explain what kind of business or situation this service fits.",
+        "name": "whoThisIsFor",
+        "type": "text"
+      },
+      {
+        "description": "Bullet list of pain points this service addresses.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "problemsSolved",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Bullet list of what the client receives.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "includedItems",
+        "type": "array",
+        "title": "What's Included"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Bullet list of why the included items matter to the client's business.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "businessBenefits",
+        "type": "array"
+      },
+      {
+        "rows": 2,
+        "description": "Optional disqualification copy. Use this to prevent wrong-fit inquiries. Example for Ongoing Support: clarify this is only for sites you build, not WordPress/Wix/Squarespace maintenance.",
+        "name": "notFor",
+        "type": "text"
+      },
+      {
+        "description": "Long-form editorial content. Write 400–800 words of prose that explains the service approach, methodology, and what makes this work. Paragraph text that Google can index.",
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/"
+                                  ],
+                                  "allowRelative": false,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "name": "href",
+                      "type": "url",
+                      "title": "URL"
+                    },
+                    {
+                      "initialValue": true,
+                      "name": "blank",
+                      "type": "boolean",
+                      "title": "Open in new tab"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object",
+                  "title": "External Link"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Emphasis"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "body",
+        "type": "array",
+        "title": "Body Copy"
+      },
+      {
+        "description": "Frequently asked questions about this service.",
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "question",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "answer",
+                "type": "text"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "faqs",
+        "type": "array",
+        "title": "FAQs"
+      },
+      {
+        "description": "Other service pages to link from the bottom of this page. Sanity will resolve these to title and slug.",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "servicePage"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to service pages"
+          }
+        ],
+        "name": "relatedServices",
+        "type": "array"
+      },
+      {
+        "description": "Controls display order on the /services hub. Lower numbers appear first.",
+        "name": "sortOrder",
+        "type": "number"
+      },
+      {
+        "initialValue": true,
+        "description": "Uncheck to hide this service from the /services card grid without deleting the document.",
+        "name": "featuredOnHub",
+        "type": "boolean",
+        "title": "Show on Services Hub"
+      },
+      {
+        "description": "Optional. Record when this page went live.",
+        "name": "publishedAt",
+        "type": "datetime"
+      }
+    ],
+    "name": "servicePage",
+    "type": "document",
+    "title": "Service Pages"
+  }
+]

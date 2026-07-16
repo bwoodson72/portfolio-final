@@ -101,6 +101,41 @@ export const servicePageType = defineType({
       description: 'Optional disqualification copy. Use this to prevent wrong-fit inquiries. Example for Ongoing Support: clarify this is only for sites you build, not WordPress/Wix/Squarespace maintenance.',
     }),
     defineField({
+      name: 'body',
+      title: 'Body Copy',
+      type: 'array',
+      description: 'Long-form editorial content. Write 400–800 words of prose that explains the service approach, methodology, and what makes this work. Paragraph text that Google can index.',
+      of: [
+        defineField({
+          name: 'block',
+          type: 'block',
+          styles: [
+            { title: 'Normal', value: 'normal' },
+            { title: 'Heading 2', value: 'h2' },
+            { title: 'Heading 3', value: 'h3' },
+            { title: 'Quote', value: 'blockquote' },
+          ],
+          marks: {
+            decorators: [
+              { title: 'Strong', value: 'strong' },
+              { title: 'Emphasis', value: 'em' },
+            ],
+            annotations: [
+              defineField({
+                name: 'link',
+                title: 'External Link',
+                type: 'object',
+                fields: [
+                  defineField({ name: 'href', title: 'URL', type: 'url' }),
+                  defineField({ name: 'blank', title: 'Open in new tab', type: 'boolean', initialValue: true }),
+                ],
+              }),
+            ],
+          },
+        }),
+      ],
+    }),
+    defineField({
       name: 'faqs',
       title: 'FAQs',
       type: 'array',
