@@ -23,10 +23,28 @@ export function MetaPixel() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Track page views
-    if (window.fbq) {
+    // Debug logs to help verify pixel initialization
+    // Pixel ID present at build-time
+    console.log('MetaPixel - NEXT_PUBLIC_META_PIXEL_ID:', process.env.NEXT_PUBLIC_META_PIXEL_ID);
+
+    // If fbq already exists, track page view and log
+    if (typeof window !== 'undefined' && window.fbq) {
+      console.log('MetaPixel - fbq already present:', window.fbq);
       window.fbq('track', 'PageView');
+      return;
     }
+
+    // Check for fbq after a short delay in case script loads asynchronously
+    const checkTimer = setTimeout(() => {
+      if (window.fbq) {
+        console.log('MetaPixel - fbq available after delay:', window.fbq);
+        window.fbq('track', 'PageView');
+      } else {
+        console.warn('MetaPixel - fbq not found. Script may have been blocked or failed to load.');
+      }
+    }, 1500);
+
+    return () => clearTimeout(checkTimer);
   }, [pathname]);
 
   return (
@@ -46,6 +64,7 @@ export function MetaPixel() {
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '${process.env.NEXT_PUBLIC_META_PIXEL_ID}');
             fbq('track', 'PageView');
+            console.log('MetaPixel inline script executed.');
           `,
         }}
       />

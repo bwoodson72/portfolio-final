@@ -39,7 +39,7 @@ const cspHeader = {
     key: 'Content-Security-Policy',
     value: [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.cal.com https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://js.hs-scripts.com https://js.hsforms.net https://js.hscollectedforms.net https://js.hs-analytics.net https://js.hubspot.com https://snap.licdn.com https://connect.facebook.net",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.cal.com https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://js.hs-scripts.com https://js.hsforms.net https://js.hscollectedforms.net https://js.hs-analytics.net https://js.hubspot.com https://snap.licdn.com https://connect.facebook.net https://va.vercel-scripts.com",
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: blob: https://app.cal.com https://cal.com https://cdn.sanity.io https://*.sanity.io https://www.googletagmanager.com https://www.google-analytics.com https://www.facebook.com https://connect.facebook.net",
         "font-src 'self'",
