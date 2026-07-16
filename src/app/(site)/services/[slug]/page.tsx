@@ -311,31 +311,7 @@ export default async function ServicePageRoute({ params }: Props) {
         </section>
       )}
 
-      {/* Final CTA */}
-      <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
-        <div className="rounded-3xl border border-border bg-surface p-12 text-center space-y-6">
-          <h2 className="text-3xl font-extrabold tracking-tight text-text md:text-4xl">
-            Ready to talk?
-          </h2>
-          <p className="mx-auto max-w-xl text-lg text-text-muted">
-            Tell us about your business and what isn&apos;t working. We&apos;ll reply within one business day.
-          </p>
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link
-              href="/contact"
-              className="rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"
-            >
-              Start a conversation
-            </Link>
-            <Link
-              href="/#audit"
-              className="rounded-full border border-border px-8 py-3 text-sm font-bold text-text transition hover:border-border-strong"
-            >
-              Get a free site review
-            </Link>
-          </div>
-        </div>
-      </section>
+
 
       {/* Structured data */}
       <script
