@@ -144,7 +144,7 @@ export interface ServicePage {
   metaDescription: string
   heroHeadline: string
   heroSubheadline?: string
-  body:string
+  body: PostBodyBlock[]
   whoThisIsFor: string
   problemsSolved?: string[]
   includedItems: string[]

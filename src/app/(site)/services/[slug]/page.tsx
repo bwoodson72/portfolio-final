@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { SERVICE_PAGE_BY_SLUG_QUERY, ALL_SERVICE_PAGE_SLUGS_QUERY } from '@/lib/sanity/queries'
 import type { ServicePage } from '@/lib/sanity/types';
 import {ConsultButton} from "@/components/ConsultButton";
+import PostBody from '@/components/knowledge/PostBody'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -174,9 +175,9 @@ export default async function ServicePageRoute({ params }: Props) {
 
       {/*Body Copy*/}
       <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
-
-        {page.body}
-
+        <div className="max-w-3xl">
+          <PostBody value={page.body} />
+        </div>
       </section>
 
       {/* Who this is for */}
