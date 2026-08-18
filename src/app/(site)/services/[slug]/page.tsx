@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { SERVICE_PAGE_BY_SLUG_QUERY, ALL_SERVICE_PAGE_SLUGS_QUERY } from '@/lib/sanity/queries'
-import type { ServicePage } from '@/lib/sanity/types'
+import type { ServicePage } from '@/lib/sanity/types';
+import {ConsultButton} from "@/components/ConsultButton";
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { client } = await import('@/lib/sanity/client')
     const page = await client.fetch<ServicePage | null>(SERVICE_PAGE_BY_SLUG_QUERY, { slug })
     if (!page) return {}
-    const title = page.metaTitle ?? `${page.title} | Brian Woodson Web Development`
+    const title = page.metaTitle ?? `${page.title} `
     const description = page.metaDescription ?? page.shortDescription
     return {
       title,
@@ -61,6 +62,7 @@ export default async function ServicePageRoute({ params }: Props) {
   let page: ServicePage | null = null
   try {
     page = await client.fetch<ServicePage | null>(SERVICE_PAGE_BY_SLUG_QUERY, { slug })
+    console.log(page)
   } catch {
     notFound()
   }
@@ -153,20 +155,28 @@ export default async function ServicePageRoute({ params }: Props) {
             </p>
           )}
           <div className="flex flex-col gap-4 sm:flex-row">
-            <Link
-              href="/contact"
-              className="rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"
-            >
-              Start a conversation
-            </Link>
-            <Link
-              href="/#audit"
-              className="rounded-full border border-border px-8 py-3 text-sm font-bold text-text transition hover:border-border-strong"
-            >
-              Get a free site review
-            </Link>
+            <ConsultButton/>
+            {/*<Link*/}
+            {/*  href="/contact"*/}
+            {/*  className="rounded-full bg-text px-8 py-3 text-sm font-bold text-bg transition hover:opacity-90"*/}
+            {/*>*/}
+            {/*  Start a conversation*/}
+            {/*</Link>*/}
+            {/*<Link*/}
+            {/*  href="/#audit"*/}
+            {/*  className="rounded-full border border-border px-8 py-3 text-sm font-bold text-text transition hover:border-border-strong"*/}
+            {/*>*/}
+            {/*  Get a free site review*/}
+            {/*</Link>*/}
           </div>
         </div>
+      </section>
+
+      {/*Body Copy*/}
+      <section className="mx-auto w-full max-w-7xl px-6 py-24 border-t border-border">
+
+        {page.body}
+
       </section>
 
       {/* Who this is for */}

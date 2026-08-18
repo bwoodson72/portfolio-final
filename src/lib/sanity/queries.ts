@@ -233,6 +233,7 @@ export const SERVICE_PAGE_BY_SLUG_QUERY = groq`
     metaDescription,
     heroHeadline,
     heroSubheadline,
+    body,
     whoThisIsFor,
     problemsSolved,
     includedItems,
