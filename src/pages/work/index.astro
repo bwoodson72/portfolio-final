@@ -1,0 +1,48 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import { client, urlFor } from '@/lib/sanity/astro-client';
+import { ALL_PROJECTS_QUERY } from '@/lib/sanity/queries';
+import type { ProjectCard } from '@/lib/sanity/types';
+
+const title = 'Web Design Portfolio | Small Business Websites | Brian Woodson Web Development';
+const description = "Custom website design portfolio for small businesses in the DFW area. Every site scores 95 or better on Google's Lighthouse performance audit.";
+let projects: ProjectCard[] = [];
+if (client) {
+  try { projects = await client.fetch<ProjectCard[]>(ALL_PROJECTS_QUERY); } catch { projects = []; }
+}
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': 'https://brianwoodson.dev/work/#webpage', url: 'https://brianwoodson.dev/work', name: title, description, isPartOf: { '@type': 'WebSite', url: 'https://brianwoodson.dev', name: 'Brian Woodson Web Development' } },
+    { '@type': 'ItemList', name: 'Web Design Portfolio', description: 'Custom website design projects for small businesses in the DFW area.', itemListElement: projects.map((project, index) => ({ '@type': 'ListItem', position: index + 1, name: project.title, url: `https://brianwoodson.dev/work/${project.slug.current}`, description: project.tagline })) },
+  ],
+};
+---
+
+<SiteLayout title={title} description={description} canonical="/work">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  <main class="mx-auto w-full max-w-7xl px-6 py-24">
+    <div class="space-y-4">
+      <h1 class="text-4xl font-extrabold tracking-tight text-text md:text-6xl">Web Design Portfolio</h1>
+      <p class="max-w-2xl text-lg text-text-muted">Custom websites built for small businesses in the DFW area. Every site scores 95 or better on Google's Lighthouse performance audit across performance, accessibility, best practices, and SEO.</p>
+      <p class="mt-4 max-w-2xl text-lg text-text-muted">These are real builds, not templates. Every project includes custom design, conversion-focused copy, and local SEO foundations built in from the start.</p>
+    </div>
+    {projects.length === 0 ? <p class="mt-16 text-text-muted">No projects yet.</p> : (
+      <div class="mt-16 grid gap-8 md:grid-cols-2">
+        {projects.map((project) => {
+          const imageUrl = project.coverImage ? urlFor(project.coverImage).width(800).height(450).auto('format').url() : undefined;
+          return (
+            <a href={`/work/${project.slug.current}`} class="group flex flex-col overflow-hidden rounded-3xl border border-border bg-surface transition hover:border-border-strong">
+              {imageUrl && <div class="aspect-video w-full overflow-hidden"><img src={imageUrl} alt={project.coverImage?.alt ?? project.title} class="h-full w-full object-cover" loading="lazy" decoding="async" /></div>}
+              <div class="space-y-4 p-8">
+                {project.role && <div class="inline-block rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-text">{project.role}</div>}
+                <h2 class="text-xl font-bold text-text">{project.title}</h2>
+                <p class="text-sm leading-relaxed text-text-muted">{project.tagline}</p>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    )}
+  </main>
+</SiteLayout>
