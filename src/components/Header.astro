@@ -1,0 +1,33 @@
+---
+import ConsultButton from '@/components/ConsultButton.astro';
+import MobileNav from '@/components/interactive/MobileNav.svelte';
+
+const navLinks = [
+  { label: 'Work', href: '/work' },
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Guides', href: '/knowledge' },
+  { label: 'FAQ', href: '/faq' },
+];
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-border bg-bg/80 backdrop-blur-md">
+  <div class="mx-auto max-w-7xl px-6">
+    <nav class="relative flex h-20 items-center justify-between" aria-label="Primary navigation">
+      <a href="/" class="text-lg font-bold tracking-tighter text-text" aria-label="Brian Woodson Web Development home">
+        <img src="/primary-logo.svg" alt="Brian Woodson Web Development" width="220" height="220" class="h-auto w-[220px]" />
+      </a>
+
+      <ul class="hidden items-center gap-8 text-sm font-bold text-text-muted md:flex">
+        {navLinks.map((link) => (
+          <li>
+            <a href={link.href} class="transition-colors hover:text-text">{link.label}</a>
+          </li>
+        ))}
+        <li><ConsultButton /></li>
+      </ul>
+
+      <MobileNav client:load />
+    </nav>
+  </div>
+</header>
