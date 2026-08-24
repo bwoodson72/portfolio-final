@@ -2,7 +2,9 @@
   import { onMount } from 'svelte';
 
   const CONSENT_KEY = 'cookie_consent';
-  const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+  const GA_ID =
+    import.meta.env.PUBLIC_GA_MEASUREMENT_ID ??
+    import.meta.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   type ConsentState = 'accepted' | 'declined' | null;
   type AnalyticsWindow = Window & { dataLayer?: unknown[] };
