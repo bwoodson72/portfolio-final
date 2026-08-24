@@ -1,0 +1,39 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import { faqs } from '@/content/portfolio';
+
+const title = 'FAQ | Brian Woodson Web Development';
+const description = 'Common questions about working with Brian Woodson Web Development on your small business website.';
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+---
+
+<SiteLayout title={title} description={description} canonical="/faq">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  <main class="mx-auto w-full max-w-3xl space-y-16 px-6 py-24">
+    <div class="space-y-4">
+      <h1 class="text-4xl font-extrabold tracking-tight text-text md:text-6xl">FAQ</h1>
+      <p class="text-lg text-text-muted">Common questions before we work together</p>
+    </div>
+    <ul class="space-y-3">
+      {faqs.map((item) => (
+        <li>
+          <details class="group rounded-2xl border border-border bg-surface open:border-border-strong">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-sm font-bold text-text select-none">
+              {item.question}
+              <span class="shrink-0 text-text-muted transition-transform group-open:rotate-180">⌄</span>
+            </summary>
+            <div class="border-t border-border px-6 py-5"><p class="text-sm leading-relaxed text-text-muted">{item.answer}</p></div>
+          </details>
+        </li>
+      ))}
+    </ul>
+  </main>
+</SiteLayout>
