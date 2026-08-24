@@ -18,7 +18,9 @@
   let error = '';
 
   onMount(() => {
-    const sitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+    const sitekey =
+      import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ??
+      import.meta.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
     if (!sitekey) return;
 
     const render = () => {
