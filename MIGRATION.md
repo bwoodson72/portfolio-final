@@ -58,16 +58,24 @@ Do not introduce React solely to bridge UI libraries into reactive components. S
 - [x] Ignore `.astro` and `dist` generated output
 - [x] Decide Sanity Studio strategy: do not embed React Studio in the Svelte frontend; deploy Studio separately with Sanity
 - [x] Retire Next `revalidatePath()` strategy for migrated pages: Astro is currently server-rendered and queries Sanity on requests
+- [x] Replace Next font handling with self-hosted Geist, Geist Mono, and Sora
+- [x] Restore Meta Pixel in the Astro root layout
+- [x] Restore Vercel Speed Insights in the Astro root layout
+- [x] Restore Cal.com booking-success Meta Pixel tracking without React
+- [x] Remove `next-sanity` from the migrated runtime path; Astro uses `@sanity/client` directly
+- [x] Preserve existing Sanity, GA, Meta Pixel, and Turnstile environment variable names
+- [x] Restore article Open Graph metadata for guides and case studies
+- [x] Fix nested `<main>` landmarks introduced during the first Astro port
+- [x] Restore explicit accessible labels on the Svelte lead form
+- [x] Document the Astro environment contract in `ENVIRONMENT.md`
 - [ ] Regenerate and commit `package-lock.json` after dependency install is stable
-- [ ] Replace Next font handling
-- [ ] Restore Cal.com booking-success Meta Pixel tracking without React
-- [ ] Verify all environment variable names for Astro/Vercel
+- [ ] Verify production social-image asset strategy
 - [ ] Replace/remove React-only dependencies after their last consumer is migrated
 - [ ] Remove retired Next application after parity is confirmed
-- [ ] Route parity QA
-- [ ] Accessibility QA
-- [ ] SEO metadata/schema parity QA
-- [ ] Performance QA
+- [ ] Route parity QA in a running local build
+- [ ] Accessibility QA in a running local build
+- [ ] SEO metadata/schema parity QA in a running local build
+- [ ] Performance QA in a running local build
 - [ ] Production cutover
 
 ## Sanity Studio
