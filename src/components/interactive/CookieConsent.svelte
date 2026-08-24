@@ -5,6 +5,8 @@
   const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 
   type ConsentState = 'accepted' | 'declined' | null;
+  type AnalyticsWindow = Window & { dataLayer?: unknown[] };
+
   let consent: ConsentState | 'uninitialized' = 'uninitialized';
 
   function loadAnalytics() {
@@ -16,8 +18,9 @@
     external.dataset.gaId = GA_ID;
     document.head.appendChild(external);
 
-    window.dataLayer = window.dataLayer || [];
-    const gtag = (...args: unknown[]) => window.dataLayer.push(args);
+    const analyticsWindow = window as AnalyticsWindow;
+    analyticsWindow.dataLayer ??= [];
+    const gtag = (...args: unknown[]) => analyticsWindow.dataLayer?.push(args);
     gtag('js', new Date());
     gtag('config', GA_ID);
   }
@@ -49,14 +52,14 @@
       <div class="flex shrink-0 gap-3">
         <button
           type="button"
-          on:click={decline}
+          onclick={decline}
           class="rounded-full border border-border px-5 py-2 text-sm font-bold text-text-muted transition hover:border-border-strong hover:text-text"
         >
           Decline
         </button>
         <button
           type="button"
-          on:click={accept}
+          onclick={accept}
           class="rounded-full bg-text px-5 py-2 text-sm font-bold text-bg transition hover:opacity-90"
         >
           Accept
@@ -65,5 +68,3 @@
     </div>
   </div>
 {/if}
-
-<svelte:window />
