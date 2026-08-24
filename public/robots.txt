@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /studio
+Disallow: /audit
+Disallow: /lp
+
+Sitemap: https://brianwoodson.dev/sitemap.xml
