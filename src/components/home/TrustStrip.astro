@@ -1,0 +1,39 @@
+---
+const items = [
+  {
+    icon: 'shield',
+    label: '95+ Lighthouse Score',
+    sublabel: "Every site scores 95 or better on Google's performance audit at launch.",
+  },
+  {
+    icon: 'clock',
+    label: 'Fixed Scope, Fixed Price',
+    sublabel: 'Every project is scoped and priced before work begins. No hourly billing, no surprise invoices.',
+  },
+  {
+    icon: 'dollar',
+    label: 'You Own the Site',
+    sublabel: 'No platform subscriptions, no vendor lock-in. Your domain, your code, your asset.',
+  },
+  {
+    icon: 'user',
+    label: 'One Point of Contact',
+    sublabel: 'Brian leads every project. No account managers, no handoffs, no runaround.',
+  },
+];
+---
+
+<section class="mx-auto w-full max-w-7xl px-6 py-16">
+  <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+    {items.map((item) => (
+      <div class="flex flex-col items-center gap-2 text-center md:items-start md:text-left">
+        {item.icon === 'shield' && <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-text-muted" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3z" /></svg>}
+        {item.icon === 'clock' && <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-text-muted" aria-hidden="true"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>}
+        {item.icon === 'dollar' && <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-text-muted" aria-hidden="true"><line x1="12" x2="12" y1="2" y2="22" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6" /></svg>}
+        {item.icon === 'user' && <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-text-muted" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>}
+        <span class="text-sm font-bold text-text">{item.label}</span>
+        <span class="text-xs text-text-muted">{item.sublabel}</span>
+      </div>
+    ))}
+  </div>
+</section>
