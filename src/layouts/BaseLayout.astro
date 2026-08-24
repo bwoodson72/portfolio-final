@@ -13,6 +13,9 @@ interface Props {
   canonical?: string;
   image?: string;
   noindex?: boolean;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 const {
@@ -21,6 +24,9 @@ const {
   canonical = Astro.url.pathname,
   image = '/og-image.png',
   noindex = false,
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
 } = Astro.props;
 
 const canonicalUrl = new URL(canonical, Astro.site ?? Astro.url.origin).toString();
@@ -44,8 +50,11 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="Brian Woodson Web Development" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:image" content={imageUrl} />
+    {ogType === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {ogType === 'article' && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+    {ogType === 'article' && <meta property="article:author" content="https://brianwoodson.dev/about" />}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -54,7 +63,7 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
 
     {noindex && <meta name="robots" content="noindex,nofollow" />}
 
-    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <ThemeInitScript />
     <slot name="head" />
   </head>
