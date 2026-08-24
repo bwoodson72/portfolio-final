@@ -6,7 +6,7 @@ Branch: `astro-migration`
 
 ## Target stack
 
-- Astro 7 for routing, layouts, SEO, static rendering, and server endpoints
+- Astro 7 for routing, layouts, SEO, server rendering, and server endpoints
 - Svelte 5 for reactive islands
 - Starwind UI using its Astro adapter for shared UI primitives
 - Tailwind CSS 4
@@ -38,8 +38,7 @@ Do not introduce React solely to bridge UI libraries into reactive components. S
 - [x] Port shared footer and final CTA
 - [x] Port homepage static sections to Astro
 - [x] Port homepage reactive components to Svelte where required
-- [x] Port services index
-- [x] Port Sanity service `[slug]` route
+- [x] Port services index and Sanity service `[slug]` route
 - [x] Replace React Portable Text usage on migrated routes
 - [x] Port knowledge index and `[slug]` route
 - [x] Port work index and `[slug]` route
@@ -49,16 +48,20 @@ Do not introduce React solely to bridge UI libraries into reactive components. S
 - [x] Port privacy and terms pages
 - [x] Port contact page and replace React Cal.com embed
 - [x] Port PageSpeed audit API endpoint
+- [x] Port audit result UI to Astro/Svelte
+- [x] Port audit report email action to Astro server endpoint
+- [x] Port landing-page route and lead form to Astro/Svelte
+- [x] Replace Next contact server action with Astro endpoint
 - [x] Port sitemap and robots handling
-- [x] Port structured data on homepage, services, knowledge, work, about, FAQ, and locations
-- [ ] Regenerate `package-lock.json` after dependency install
-- [ ] Port audit result UI to Astro/Svelte
-- [ ] Port audit report email action to Astro server endpoint
-- [ ] Port any remaining landing-page routes
-- [ ] Port/decide Sanity Studio strategy
-- [ ] Replace Next revalidation with Sanity publish/build strategy
+- [x] Port structured data on primary public routes
+- [x] Add Astro 404 page
+- [x] Ignore `.astro` and `dist` generated output
+- [x] Decide Sanity Studio strategy: do not embed React Studio in the Svelte frontend; deploy Studio separately with Sanity
+- [x] Retire Next `revalidatePath()` strategy for migrated pages: Astro is currently server-rendered and queries Sanity on requests
+- [ ] Regenerate and commit `package-lock.json` after dependency install is stable
 - [ ] Replace Next font handling
 - [ ] Restore Cal.com booking-success Meta Pixel tracking without React
+- [ ] Verify all environment variable names for Astro/Vercel
 - [ ] Replace/remove React-only dependencies after their last consumer is migrated
 - [ ] Remove retired Next application after parity is confirmed
 - [ ] Route parity QA
@@ -66,6 +69,14 @@ Do not introduce React solely to bridge UI libraries into reactive components. S
 - [ ] SEO metadata/schema parity QA
 - [ ] Performance QA
 - [ ] Production cutover
+
+## Sanity Studio
+
+Sanity recommends deploying Studio separately with `sanity deploy`. The Studio is itself a React application; embedding it in Astro would require retaining React solely for the admin interface. The migration therefore keeps Sanity as the CMS/API but does not embed Studio in the Astro frontend.
+
+## Sanity content freshness
+
+The Astro application currently uses `output: 'server'`, and migrated Sanity routes query content server-side. The old Next webhook endpoint using `revalidatePath()` is not needed for these routes. If the site later switches to prerendered/static content, replace this with a Sanity webhook that triggers a Vercel deploy/build hook.
 
 ## Compatibility during migration
 
