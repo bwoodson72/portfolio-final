@@ -1,4 +1,4 @@
-import { groq } from 'next-sanity'
+const groq = String.raw;
 
 const POST_CARD_FIELDS = groq`
   _id,
