@@ -1,0 +1,26 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import { privacyContent } from '@/content/privacy';
+const title = 'Privacy Policy | Brian Woodson Web Development';
+const description = 'How Brian Woodson Web Development collects, uses, and protects your information.';
+---
+
+<SiteLayout title={title} description={description} canonical="/privacy">
+  <main class="mx-auto w-full max-w-3xl space-y-16 px-6 py-24">
+    <div class="space-y-4">
+      <h1 class="text-4xl font-extrabold tracking-tight text-text md:text-6xl">Privacy Policy</h1>
+      <p class="text-sm text-text-muted">Last updated: {privacyContent.lastUpdated}</p>
+      <p class="text-lg leading-relaxed text-text-muted">{privacyContent.intro}</p>
+    </div>
+    <div class="space-y-12">
+      {privacyContent.sections.map((section) => (
+        <section id={section.id} class="space-y-4">
+          <h2 class="text-xl font-bold text-text">{section.heading}</h2>
+          {section.paragraphs?.map((paragraph) => <p class="text-sm leading-relaxed text-text-muted">{paragraph}</p>)}
+          {section.items && <ul class="mt-2 space-y-3">{section.items.map((item) => <li class="rounded-2xl border border-border bg-surface px-6 py-4"><span class="mb-1 block text-sm font-bold text-text">{item.label}</span><span class="text-sm leading-relaxed text-text-muted">{item.description}</span></li>)}</ul>}
+        </section>
+      ))}
+    </div>
+    <div class="space-y-4 rounded-3xl border border-border bg-surface p-10 text-center"><p class="font-bold text-text">Questions about this policy?</p><a href="/contact" class="inline-flex rounded-full bg-text px-6 py-3 text-sm font-bold text-bg transition hover:opacity-90">Get in touch</a></div>
+  </main>
+</SiteLayout>
