@@ -1,6 +1,10 @@
 ---
 import { ThemeInitScript } from '@starwind-ui/astro/theme';
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '@fontsource-variable/sora';
 import CookieConsent from '@/components/interactive/CookieConsent.svelte';
+import MetaPixel from '@/components/MetaPixel.astro';
 import '@/styles/starwind.css';
 
 interface Props {
@@ -32,12 +36,14 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="Brian Woodson" />
     <link rel="canonical" href={canonicalUrl} />
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="Brian Woodson Web Development" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content={imageUrl} />
 
@@ -53,7 +59,12 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
     <slot name="head" />
   </head>
   <body class="min-h-screen bg-bg text-text antialiased">
+    <MetaPixel />
     <slot />
     <CookieConsent client:load />
+    <script>
+      import { injectSpeedInsights } from '@vercel/speed-insights';
+      injectSpeedInsights();
+    </script>
   </body>
 </html>
