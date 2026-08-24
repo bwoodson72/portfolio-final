@@ -1,0 +1,59 @@
+---
+import { ThemeInitScript } from '@starwind-ui/astro/theme';
+import CookieConsent from '@/components/interactive/CookieConsent.svelte';
+import '@/styles/starwind.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = 'Brian Woodson | Web Design & Development in Granbury, TX',
+  description = 'Custom web design and development for small businesses in Granbury and DFW. No WordPress, no page builders, no templates. Fixed price, built by one developer.',
+  canonical = Astro.url.pathname,
+  image = '/og-image.png',
+  noindex = false,
+} = Astro.props;
+
+const canonicalUrl = new URL(canonical, Astro.site ?? Astro.url.origin).toString();
+const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Brian Woodson Web Development" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={imageUrl} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <ThemeInitScript />
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen bg-bg text-text antialiased">
+    <slot />
+    <CookieConsent client:load />
+  </body>
+</html>
