@@ -59,7 +59,16 @@ const structuredData = post && slug ? {
 } : null;
 ---
 
-<SiteLayout title={title} description={description} canonical={canonical} image={ogImage} noindex={!post}>
+<SiteLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  image={ogImage}
+  noindex={!post}
+  ogType="article"
+  publishedTime={post?.publishedAt}
+  modifiedTime={post?._updatedAt}
+>
   {structuredData && <script slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
 
   {post ? (
