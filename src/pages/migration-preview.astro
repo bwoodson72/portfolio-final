@@ -1,0 +1,33 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Astro Migration Preview | Brian Woodson Web Development"
+  description="Internal preview route for the Astro migration."
+  canonical="/migration-preview"
+  noindex
+>
+  <main class="mx-auto flex min-h-screen w-full max-w-5xl flex-col justify-center px-6 py-24">
+    <p class="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-text-muted">Migration branch</p>
+    <h1 class="max-w-3xl text-4xl font-extrabold tracking-tight text-text md:text-6xl">
+      Astro foundation is running.
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
+      This route verifies the Astro layout, Tailwind theme, Starwind foundation, and Svelte island integration without replacing the current production homepage during the migration.
+    </p>
+
+    <div class="mt-12 grid gap-4 sm:grid-cols-2">
+      <div class="rounded-xl border border-border bg-surface p-6">
+        <h2 class="text-lg font-bold text-text">Rendering</h2>
+        <p class="mt-2 text-sm text-text-muted">Astro owns static markup, routes, metadata, and server rendering.</p>
+      </div>
+      <div class="rounded-xl border border-border bg-surface p-6">
+        <h2 class="text-lg font-bold text-text">Interactivity</h2>
+        <p class="mt-2 text-sm text-text-muted">Svelte islands are hydrated only where browser state or events are required.</p>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
