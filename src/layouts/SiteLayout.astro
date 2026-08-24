@@ -23,7 +23,7 @@ const { showFinalCta = true, ...seo } = Astro.props;
   <Fragment slot="head"><slot name="head" /></Fragment>
   <div class="relative z-10 flex min-h-screen flex-col bg-transparent">
     <Header />
-    <main class="grow"><slot /></main>
+    <div class="grow"><slot /></div>
     {showFinalCta && <FinalCta />}
     <Footer />
   </div>
