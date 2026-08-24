@@ -1,0 +1,50 @@
+---
+import { FEATURED_PROJECTS_QUERY } from '@/lib/sanity/queries';
+import type { ProjectCard } from '@/lib/sanity/types';
+import { client, urlFor } from '@/lib/sanity/astro-client';
+
+let projects: ProjectCard[] = [];
+if (client) {
+  try {
+    projects = await client.fetch<ProjectCard[]>(FEATURED_PROJECTS_QUERY);
+  } catch (error) {
+    console.error('Failed to fetch featured projects:', error);
+  }
+}
+---
+
+{projects.length > 0 && (
+  <section id="work" class="mx-auto w-full max-w-7xl px-6 py-24">
+    <div class="space-y-4 text-center md:text-left">
+      <h2 class="text-3xl font-extrabold tracking-tight text-text md:text-5xl">Proof, not promises</h2>
+      <p class="max-w-2xl text-lg text-text-muted">
+        Every site we ship scores 95+ on Google's performance audit. Here's what that looks like in practice.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      {projects.map((project) => (
+        <a href={`/work/${project.slug.current}`} class="group flex w-full min-w-xs flex-col overflow-hidden rounded-2xl border border-border bg-surface text-left transition hover:-translate-y-1 hover:border-border-strong">
+          {project.coverImage && (
+            <div class="aspect-video w-full overflow-hidden">
+              <img
+                src={urlFor(project.coverImage).width(800).height(450).auto('format').url()}
+                alt={project.coverImage.alt ?? ''}
+                width="800"
+                height="450"
+                loading="lazy"
+                class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+              />
+            </div>
+          )}
+          <div class="flex flex-1 flex-col p-6">
+            {project.role && <span class="mb-3 inline-block self-start rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-text">{project.role}</span>}
+            <h3 class="text-xl font-bold text-text">{project.title}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-text-muted">{project.tagline}</p>
+            <span class="mt-6 text-sm font-bold text-text">View details →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
