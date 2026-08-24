@@ -1,0 +1,90 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import ConsultButton from '@/components/ConsultButton.astro';
+import AuditEmailCapture from '@/components/interactive/AuditEmailCapture.svelte';
+
+export const prerender = false;
+
+const slug = Astro.params.slug;
+if (!slug) return Astro.redirect('/404');
+
+let decodedUrl = '';
+try {
+  let base64 = slug.replace(/-/g, '+').replace(/_/g, '/');
+  while (base64.length % 4 !== 0) base64 += '=';
+  decodedUrl = decodeURIComponent(atob(base64));
+} catch {
+  return Astro.redirect('/404');
+}
+
+type Scores = { performance: number; accessibility: number; bestPractices: number; seo: number };
+let scores: Scores | null = null;
+let fetchError = '';
+
+try {
+  const endpoint = new URL('/api/audit', Astro.url.origin);
+  endpoint.searchParams.set('url', decodedUrl);
+  const response = await fetch(endpoint);
+  const data = await response.json() as { scores?: Scores; error?: string };
+  if (!response.ok || !data.scores) fetchError = data.error ?? 'Audit failed. Please try again.';
+  else scores = data.scores;
+} catch {
+  fetchError = 'Could not reach the audit service. Please try again later.';
+}
+
+const getTier = (score: number) => score >= 90 ? 'green' : score >= 50 ? 'yellow' : 'red';
+const tierClasses = {
+  green: { text: 'text-emerald-400', border: 'border-emerald-500/30', left: 'border-emerald-400' },
+  yellow: { text: 'text-amber-400', border: 'border-amber-500/30', left: 'border-amber-400' },
+  red: { text: 'text-red-400', border: 'border-red-500/30', left: 'border-red-400' },
+};
+const categories = scores ? [
+  ['Performance', 'performance', scores.performance],
+  ['Accessibility', 'accessibility', scores.accessibility],
+  ['Best Practices', 'bestPractices', scores.bestPractices],
+  ['SEO', 'seo', scores.seo],
+] as const : [];
+---
+
+<SiteLayout title="Audit Results | Brian Woodson Web Development" description="Website audit results" canonical={`/audit/${slug}`} noindex={true}>
+  <main class="mx-auto w-full max-w-4xl px-6 py-24 space-y-16">
+    <div class="space-y-3">
+      <h1 class="text-3xl font-extrabold tracking-tight text-text md:text-5xl">Audit Results</h1>
+      <p class="text-lg text-text-muted truncate">{decodedUrl}</p>
+    </div>
+
+    {fetchError || !scores ? (
+      <div class="space-y-6">
+        <p class="text-lg text-red-400">{fetchError}</p>
+        <a href="/" class="inline-flex rounded-full border border-border px-6 py-3 text-sm font-bold text-text">Back to homepage</a>
+      </div>
+    ) : (
+      <>
+        <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
+          {categories.map(([label, , score]) => {
+            const tier = getTier(score);
+            const styles = tierClasses[tier];
+            return <div class={`rounded-2xl border bg-surface p-6 text-center ${styles.border}`}><div class={`text-4xl font-extrabold ${styles.text}`}>{score}</div><div class="mt-2 text-xs font-bold uppercase tracking-widest text-text-muted">{label}</div></div>;
+          })}
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+          {categories.map(([label, , score]) => {
+            const tier = getTier(score);
+            const styles = tierClasses[tier];
+            const body = tier === 'green' ? `${label} is in good shape.` : tier === 'yellow' ? `${label} has room for improvement.` : `${label} has significant issues worth investigating.`;
+            return <div class={`border-l-2 pl-4 ${styles.left}`}><p class="text-sm font-bold text-text">{label}</p><p class="mt-1 text-sm text-text-muted">{body}</p></div>;
+          })}
+        </div>
+
+        <AuditEmailCapture client:visible url={decodedUrl} scores={scores} />
+
+        <div class="rounded-2xl border border-border bg-surface p-8 md:p-12 text-center space-y-6">
+          <h2 class="text-xl font-extrabold text-text">Want help improving the weak spots?</h2>
+          <p class="text-sm text-text-muted max-w-md mx-auto">We can look at the underlying issues and determine whether targeted fixes or a rebuild make more sense.</p>
+          <ConsultButton />
+        </div>
+      </>
+    )}
+  </main>
+</SiteLayout>
