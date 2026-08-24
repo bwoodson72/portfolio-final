@@ -60,8 +60,7 @@
         placeholder="https://yourwebsite.com"
         aria-invalid={Boolean(error)}
         aria-describedby={error ? 'audit-url-error' : undefined}
-        class:border-red-500={Boolean(error)}
-        class="w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-text placeholder:text-text-muted-2 transition-colors focus:border-border-strong focus:outline-none"
+        class={`w-full rounded-xl border bg-surface px-4 py-3 text-sm text-text placeholder:text-text-muted-2 transition-colors focus:outline-none ${error ? 'border-red-500/50 focus:border-red-500/70' : 'border-border focus:border-border-strong'}`}
       />
       <button
         type="submit"
