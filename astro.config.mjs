@@ -8,6 +8,9 @@ export default defineConfig({
   output: 'server',
   adapter: vercel(),
   integrations: [svelte()],
+  build: {
+    inlineStylesheets: 'always',
+  },
   vite: {
     plugins: [tailwindcss()],
   },
