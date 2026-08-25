@@ -1,45 +1,44 @@
-# Brian Woodson - Engineering Portfolio
+# Brian Woodson Web Development
 
-A high-performance personal portfolio engineered with the bleeding-edge React ecosystem. This project serves as a demonstration of modern frontend architecture, accessibility compliance (WCAG AA), and Core Web Vitals optimization.
+Production portfolio and service website built with Astro, Svelte, Starwind, Tailwind CSS, Sanity, and TypeScript.
 
-## ⚡️ Core Tech Stack
+## Stack
 
-* **Framework:** [Next.js 16](https://nextjs.org/) (React 19 RC)
-* **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) (Oxide engine)
-* **Animation:** [Motion](https://motion.dev/) (formerly Framer Motion)
-* **Validation:** [Zod 4](https://zod.dev/) & React Hook Form
-* **Type Safety:** TypeScript 5
+- Astro 7 for routing, layouts, SEO, server rendering, and API endpoints
+- Svelte 5 for reactive islands
+- Starwind UI for reusable Astro UI primitives
+- Tailwind CSS 4
+- Sanity for CMS content and Studio
+- Resend for transactional email
+- Vercel adapter for deployment/runtime endpoints
 
-## 🛠️ Engineering Highlights
+## Architecture
 
-### 1. Performance Optimization (Lighthouse 100/100)
-Achieving a perfect Lighthouse score required granular optimization of the rendering pipeline:
-* **LCP Optimization:** Refactored entrance animations to use native `text-shadow` instead of expensive `drop-shadow` filters, eliminating main-thread blocking time during hydration.
-* **Image Strategy:** Implemented responsive `sizes` prop logic on all `next/image` components to prevent layout shifts (CLS) and minimize payload size on mobile devices.
-* **Tree Shaking:** Replaced heavy icon libraries with inline SVGs to eliminate unused bundle weight.
+Use Astro for static/presentational UI, Svelte only where browser state or events are required, and plain TypeScript for server-only logic. React and Next.js are not part of the frontend runtime.
 
-### 2. Next-Gen Form Architecture
-The contact form demonstrates a robust, type-safe approach to user input:
-* **Validation:** Implemented **Zod 4** schemas with strict refinement logic to handle deprecations in the latest beta API.
-* **Accessibility:** Fully accessible error handling using `role="alert"` and `aria-invalid` states to ensure screen reader compatibility.
-* **UX:** Optimistic UI states for submission loading and success feedback.
-
-### 3. Tailwind v4 Integration
-Leverages the new CSS-first configuration engine:
-* Usage of native CSS variables for theme values.
-* Implementation of new utility shorthands like `size-*` and `bg-linear-*`.
-* Zero runtime overhead for styles.
-
-## 🚀 Running Locally
-
-This project requires **Node.js 18+** due to Next.js 16 dependencies.
+## Local development
 
 ```bash
-# 1. Clone the repository
-git clone [https://github.com/bwoodson72/portfolio-final.git](https://github.com/bwoodson72/portfolio-final.git)
-
-# 2. Install dependencies
 npm install
-
-# 3. Start the development server
 npm run dev
+```
+
+Run type/build validation with:
+
+```bash
+npm run check
+npm run build
+```
+
+Sanity Studio remains a separate admin application and can be run/deployed with:
+
+```bash
+npm run sanity:dev
+npm run sanity:deploy
+```
+
+See `ENVIRONMENT.md` for required environment variables.
+
+## Migration branch
+
+The Astro port was developed on `astro-migration`. Do not merge that branch into `main` unless explicitly instructed.

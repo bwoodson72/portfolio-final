@@ -10,7 +10,7 @@ Branch: `astro-migration`
 - Svelte 5 for reactive islands
 - Starwind UI using its Astro adapter for shared UI primitives
 - Tailwind CSS 4
-- Sanity for CMS content
+- Sanity for CMS content and Studio
 - TypeScript
 - Vercel adapter for runtime endpoints
 
@@ -23,69 +23,42 @@ Use the least-client-side option that satisfies the requirement:
 3. Starwind primitives -> Astro components/native Starwind runtime
 4. Server-only behavior -> `.ts`
 
-Do not introduce React solely to bridge UI libraries into reactive components. Svelte islands should use native markup/Tailwind where the interaction belongs to Svelte; Starwind should own reusable Astro/native primitives where appropriate.
+React and Next.js are retired from the migrated frontend.
 
-## Migration sequence
+## Migration status
 
-- [x] Create `astro-migration` branch
-- [x] Add Astro 7 and Svelte 5 dependencies
-- [x] Add Vercel adapter
-- [x] Add Tailwind Vite integration
-- [x] Add Starwind Astro configuration and theme foundation
-- [x] Add Astro base layout and SEO defaults
-- [x] Port CookieConsent from React to Svelte
-- [x] Port shared header/navigation
-- [x] Port shared footer and final CTA
-- [x] Port homepage static sections to Astro
-- [x] Port homepage reactive components to Svelte where required
-- [x] Port services index and Sanity service `[slug]` route
-- [x] Replace React Portable Text usage on migrated routes
-- [x] Port knowledge index and `[slug]` route
-- [x] Port work index and `[slug]` route
-- [x] Port about page
-- [x] Port location `[slug]` route
-- [x] Port FAQ page
-- [x] Port privacy and terms pages
-- [x] Port contact page and replace React Cal.com embed
-- [x] Port PageSpeed audit API endpoint
-- [x] Port audit result UI to Astro/Svelte
-- [x] Port audit report email action to Astro server endpoint
-- [x] Port landing-page route and lead form to Astro/Svelte
-- [x] Replace Next contact server action with Astro endpoint
-- [x] Port sitemap and robots handling
-- [x] Port structured data on primary public routes
-- [x] Add Astro 404 page
-- [x] Ignore `.astro` and `dist` generated output
-- [x] Decide Sanity Studio strategy: do not embed React Studio in the Svelte frontend; deploy Studio separately with Sanity
-- [x] Retire Next `revalidatePath()` strategy for migrated pages: Astro is currently server-rendered and queries Sanity on requests
-- [x] Replace Next font handling with self-hosted Geist, Geist Mono, and Sora
-- [x] Restore Meta Pixel in the Astro root layout
-- [x] Restore Vercel Speed Insights in the Astro root layout
-- [x] Restore Cal.com booking-success Meta Pixel tracking without React
-- [x] Remove `next-sanity` from the migrated runtime path; Astro uses `@sanity/client` directly
-- [x] Preserve existing Sanity, GA, Meta Pixel, and Turnstile environment variable names
-- [x] Restore article Open Graph metadata for guides and case studies
-- [x] Fix nested `<main>` landmarks introduced during the first Astro port
-- [x] Restore explicit accessible labels on the Svelte lead form
-- [x] Document the Astro environment contract in `ENVIRONMENT.md`
-- [ ] Regenerate and commit `package-lock.json` after dependency install is stable
-- [ ] Verify production social-image asset strategy
-- [ ] Replace/remove React-only dependencies after their last consumer is migrated
-- [ ] Remove retired Next application after parity is confirmed
-- [ ] Route parity QA in a running local build
-- [ ] Accessibility QA in a running local build
-- [ ] SEO metadata/schema parity QA in a running local build
-- [ ] Performance QA in a running local build
-- [ ] Production cutover
+The application port is complete on this branch. The following have been migrated:
 
-## Sanity Studio
+- shared layouts, navigation, footer, SEO defaults, analytics and consent
+- homepage and primary marketing pages
+- Sanity-driven services, knowledge, locations, work, and landing pages
+- Portable Text rendering
+- contact, audit, audit-report, and lead-capture server endpoints
+- Svelte reactive islands for navigation, audit flows, forms, sharing, and cookie consent
+- sitemap, robots, 404 handling, structured data, Open Graph metadata, and self-hosted fonts
+- Cal.com booking integration without React
+- Vercel Speed Insights and Meta Pixel tracking
+- separate Sanity Studio strategy
 
-Sanity recommends deploying Studio separately with `sanity deploy`. The Studio is itself a React application; embedding it in Astro would require retaining React solely for the admin interface. The migration therefore keeps Sanity as the CMS/API but does not embed Studio in the Astro frontend.
+## Cleanup completed
 
-## Sanity content freshness
+- removed the retired Next application and Next-specific route/action files
+- removed superseded React components
+- removed React/Next-only runtime and development dependencies
+- removed the migration preview route
+- removed stale generated `dist` output
+- removed the stale Next-era `package-lock.json`; run `npm install` once in a networked checkout to generate the lockfile for the final dependency set
 
-The Astro application currently uses `output: 'server'`, and migrated Sanity routes query content server-side. The old Next webhook endpoint using `revalidatePath()` is not needed for these routes. If the site later switches to prerendered/static content, replace this with a Sanity webhook that triggers a Vercel deploy/build hook.
+## Validation
 
-## Compatibility during migration
+Repository-side migration work is complete. A networked local checkout should run:
 
-The original Next application remains in `src/app` for reference while pages are ported. The package scripts retain `dev:next`, `build:next`, and `start:next` temporarily. React dependencies should not be removed until all corresponding Next code has either been ported or intentionally retired.
+```bash
+npm install
+npm run check
+npm run build
+```
+
+Then perform browser QA for route parity, accessibility, metadata/schema, forms, analytics, booking, and performance before production cutover.
+
+This branch must remain unmerged until explicitly requested.
