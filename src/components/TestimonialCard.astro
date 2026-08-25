@@ -1,0 +1,22 @@
+---
+import type { Testimonial } from '@/content/testimonials';
+
+interface Props {
+  testimonial: Testimonial;
+}
+
+const { testimonial } = Astro.props;
+---
+
+<article class="space-y-4 rounded-2xl border border-border bg-surface p-6">
+  <p class="text-sm italic leading-relaxed text-text-muted">“{testimonial.quote}”</p>
+  <div class="flex items-center gap-3">
+    {testimonial.avatar && (
+      <img src={testimonial.avatar} alt={testimonial.name} width="32" height="32" class="h-8 w-8 rounded-full object-cover" />
+    )}
+    <div>
+      <p class="text-xs font-bold text-text">{testimonial.name}</p>
+      <p class="text-[10px] text-text-muted">{testimonial.role}</p>
+    </div>
+  </div>
+</article>

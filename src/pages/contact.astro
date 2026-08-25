@@ -1,0 +1,32 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import Booking from '@/components/Booking.astro';
+
+const title = 'Contact | Brian Woodson Web Development';
+const description = "Tell us about your project. We'll reply within one business day with a clear scope, a fixed price, and a timeline.";
+---
+
+<SiteLayout title={title} description={description} canonical="/contact">
+  <main>
+    <div class="mx-auto w-full max-w-3xl space-y-16 px-6 py-24">
+      <div class="space-y-4">
+        <h1 class="text-4xl font-extrabold tracking-tight text-text md:text-6xl">Book a Consultation</h1>
+        <p>Whether you need your first real business website or your current site is not bringing in the kind of leads it should, this consultation is the place to start.</p>
+        <p>We will talk through your business, your services, your service area, and what customers need to see before they feel confident enough to call, request a quote, or book with you.</p>
+        <p>If you already have a website, we can look at where it may be creating friction: slow load times, weak mobile experience, thin service pages, unclear messaging, poor calls to action, or missed local search opportunities.</p>
+        <p>If you do not have a website yet, we will look at what your site needs to do from day one: explain what you offer, build trust quickly, support your Google Business Profile, help customers find you, and make the next step obvious.</p>
+        <p>This is not a high-pressure sales call. The goal is to figure out what your web presence needs, what is currently missing, and whether a custom-built website makes sense for your business.</p>
+        <h2 class="text-2xl font-extrabold tracking-tight text-text">What we’ll cover</h2>
+        <p>During the consultation, we can talk through your services, target locations, competitors, Google Business Profile, current online presence, and the specific action you want visitors to take.</p>
+        <p>That may be phone calls, quote requests, appointment bookings, form submissions, or a clearer path for customers who are comparing you against other businesses.</p>
+        <p>By the end, you should have a clearer picture of what your website needs to accomplish and what a stronger online presence would look like.</p>
+        <h2 class="text-2xl font-extrabold tracking-tight text-text">Best fit</h2>
+        <p>This consultation is a good fit if you run a local service business and want a website that loads fast, works well on mobile, supports local search, and makes it easy for customers to contact you.</p>
+        <p>It is also a good fit if you have been relying only on a Google Business Profile, Facebook page, directory listings, referrals, or word of mouth and now need a website you actually own and control.</p>
+        <h2 class="text-2xl font-extrabold tracking-tight text-text">Schedule your consultation</h2>
+        <p>Choose a time below that works for you. After you book, you will receive a confirmation with the meeting details.</p>
+      </div>
+    </div>
+    <div class="mx-auto w-full max-w-3xl px-6 pb-24"><Booking /></div>
+  </main>
+</SiteLayout>

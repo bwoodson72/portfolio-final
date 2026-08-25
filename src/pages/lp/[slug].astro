@@ -1,0 +1,41 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import LandingPageForm from '@/components/interactive/LandingPageForm.svelte';
+import { client } from '@/lib/sanity/astro-client';
+import { LANDING_PAGE_BY_SLUG_QUERY } from '@/lib/sanity/queries';
+import type { LandingPage } from '@/lib/sanity/types';
+
+export const prerender = false;
+const slug = Astro.params.slug;
+if (!slug || !client) return Astro.redirect('/404');
+const page = await client.fetch<LandingPage | null>(LANDING_PAGE_BY_SLUG_QUERY, { slug });
+if (!page) return Astro.redirect('/404');
+const faqs = page.faqs ?? [];
+---
+
+<BaseLayout title="Brian Woodson Web Development" canonical={`/lp/${slug}`} noindex={true}>
+  <div class="min-h-screen bg-bg text-text">
+    <section class="mx-auto max-w-3xl px-6 py-20 text-center space-y-6">
+      <h1 class="text-4xl font-extrabold tracking-tight md:text-6xl leading-tight">{page.headline}</h1>
+      {page.subheadline && <p class="text-xl text-text-muted max-w-2xl mx-auto">{page.subheadline}</p>}
+      <a href="#lead-form" class="inline-flex rounded-full bg-text px-8 py-4 text-sm font-bold text-bg transition hover:opacity-90">{page.ctaCopy ?? 'Get a free site review'}</a>
+    </section>
+
+    {(page.problemHeading || page.problemBody) && <section class="bg-surface border-y border-border"><div class="mx-auto max-w-3xl px-6 py-16 space-y-4">{page.problemHeading && <h2 class="text-2xl font-extrabold tracking-tight">{page.problemHeading}</h2>}{page.problemBody && <p class="text-text-muted leading-relaxed whitespace-pre-line">{page.problemBody}</p>}</div></section>}
+    {(page.proofHeading || page.proofBody) && <section class="mx-auto max-w-3xl px-6 py-16 space-y-4">{page.proofHeading && <h2 class="text-2xl font-extrabold tracking-tight">{page.proofHeading}</h2>}{page.proofBody && <p class="text-text-muted leading-relaxed whitespace-pre-line">{page.proofBody}</p>}</section>}
+    {(page.offerHeading || page.offerBody) && <section class="bg-surface border-y border-border"><div class="mx-auto max-w-3xl px-6 py-16 space-y-4">{page.offerHeading && <h2 class="text-2xl font-extrabold tracking-tight">{page.offerHeading}</h2>}{page.offerBody && <p class="text-text-muted leading-relaxed whitespace-pre-line">{page.offerBody}</p>}</div></section>}
+
+    <section id="lead-form" class="mx-auto max-w-2xl px-6 py-16">
+      <LandingPageForm client:visible heading={page.formHeading} ctaCopy={page.ctaCopy} campaignTag={page.campaignTag} gadsConversionId={page.gadsConversionId} gadsConversionLabel={page.gadsConversionLabel} />
+    </section>
+
+    {faqs.length > 0 && <section class="bg-surface border-y border-border"><div class="mx-auto max-w-3xl px-6 py-16 space-y-6"><h2 class="text-2xl font-extrabold tracking-tight">Common questions</h2><ul class="space-y-3">{faqs.map((faq) => <li><details class="group rounded-2xl border border-border bg-bg open:border-border-strong"><summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-sm font-bold text-text marker:content-none list-none select-none">{faq.question}<span>+</span></summary><div class="border-t border-border px-6 py-5"><p class="text-sm leading-relaxed text-text-muted whitespace-pre-line">{faq.answer}</p></div></details></li>)}</ul></div></section>}
+
+    {(page.finalCtaHeading || page.finalCtaCopy) && <section class="mx-auto max-w-3xl px-6 py-20 text-center space-y-6">{page.finalCtaHeading && <h2 class="text-3xl font-extrabold tracking-tight">{page.finalCtaHeading}</h2>}<a href="#lead-form" class="inline-flex rounded-full bg-text px-8 py-4 text-sm font-bold text-bg transition hover:opacity-90">{page.finalCtaCopy ?? 'Request a free review'}</a></section>}
+
+    {page.gadsConversionId && <script is:inline set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','${page.gadsConversionId}');`} />}
+    {page.gadsConversionId && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${page.gadsConversionId}`}></script>}
+
+    <footer class="border-t border-border py-8 text-center"><p class="text-xs text-text-muted">© {new Date().getFullYear()} Brian Woodson Web Development</p></footer>
+  </div>
+</BaseLayout>

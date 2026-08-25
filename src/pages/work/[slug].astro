@@ -1,0 +1,48 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import ShareButtons from '@/components/interactive/ShareButtons.svelte';
+import { client, urlFor } from '@/lib/sanity/astro-client';
+import { PROJECT_BY_SLUG_QUERY } from '@/lib/sanity/queries';
+import type { Project } from '@/lib/sanity/types';
+
+const { slug } = Astro.params;
+let project: Project | null = null;
+if (client && slug) {
+  try { project = await client.fetch<Project | null>(PROJECT_BY_SLUG_QUERY, { slug }); } catch { project = null; }
+}
+if (!project) Astro.response.status = 404;
+const title = project?.title ?? 'Project not found';
+const description = project?.tagline ?? 'Project not found.';
+const canonical = slug ? `/work/${slug}` : '/work';
+const heroUrl = project?.coverImage ? urlFor(project.coverImage).width(1200).height(675).auto('format').url() : undefined;
+const ogImage = project?.coverImage ? urlFor(project.coverImage).width(1200).height(630).auto('format').url() : '/bg-hero.webp';
+const outcomes = project?.outcome ?? [];
+const structuredData = project && slug ? {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://brianwoodson.dev' },
+      { '@type': 'ListItem', position: 2, name: 'Work', item: 'https://brianwoodson.dev/work' },
+      { '@type': 'ListItem', position: 3, name: project.title, item: `https://brianwoodson.dev/work/${slug}` },
+    ] },
+    { '@type': 'WebPage', name: project.title, description: project.tagline, url: `https://brianwoodson.dev/work/${slug}`, datePublished: project.publishedAt, ...(project._updatedAt ? { dateModified: project._updatedAt } : {}), ...(heroUrl ? { image: heroUrl } : {}), isPartOf: { '@type': 'WebSite', name: 'Brian Woodson Web Development', url: 'https://brianwoodson.dev' } },
+  ],
+} : null;
+---
+
+<SiteLayout title={title} description={description} canonical={canonical} image={ogImage} noindex={!project} ogType="article" publishedTime={project?.publishedAt} modifiedTime={project?._updatedAt}>
+  {structuredData && <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+  {project ? (
+    <main class="mx-auto w-full max-w-5xl space-y-16 px-6 py-24">
+      <div class="space-y-4">{project.role && <div class="inline-block rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-text">{project.role}</div>}<h1 class="text-4xl font-extrabold tracking-tight text-text md:text-5xl">{project.title}</h1><p class="text-xl italic text-text-muted">{project.tagline}</p><div class="pt-4"><ShareButtons client:visible title={project.title} slug={slug!} type="work" /></div></div>
+      {heroUrl && <div class="aspect-video w-full overflow-hidden rounded-3xl border border-border"><img src={heroUrl} alt={project.coverImage?.alt ?? project.title} class="h-full w-full object-cover" fetchpriority="high" /></div>}
+      <div class="grid gap-12 md:grid-cols-2"><div class="space-y-4"><h2 class="text-xs font-bold uppercase tracking-widest text-text-muted">Problem</h2><ul class="space-y-2">{(project.problem ?? []).map((item) => <li class="flex gap-2 text-sm text-text-muted"><span class="text-text">•</span>{item}</li>)}</ul></div><div class="space-y-4"><h2 class="text-xs font-bold uppercase tracking-widest text-text-muted">Solution</h2><ul class="space-y-2">{(project.solution ?? []).map((item) => <li class="flex gap-2 text-sm text-text-muted"><span class="text-text">•</span>{item}</li>)}</ul></div></div>
+      {outcomes.length > 0 && <section class="space-y-4"><h2 class="text-xs font-bold uppercase tracking-widest text-text-muted">Expected Outcomes</h2><ul class="grid gap-4 md:grid-cols-2">{outcomes.map((item) => <li class="flex gap-3 rounded-xl border border-border bg-bg p-4 text-xs font-bold text-text"><span class="shrink-0 text-green-400">✓</span>{item}</li>)}</ul></section>}
+      <section class="space-y-4"><h2 class="text-xs font-bold uppercase tracking-widest text-text-muted">Deliverables</h2><ul class="grid gap-4 md:grid-cols-2">{(project.deliverables ?? []).map((item) => <li class="rounded-xl border border-border bg-bg p-4 text-xs font-bold text-text">{item}</li>)}</ul></section>
+      {project.screenshots?.length > 0 && <div class="space-y-6">{project.screenshots.map((shot) => { const src = urlFor(shot).width(1200).height(675).auto('format').url(); return <div class="aspect-video w-full overflow-hidden rounded-3xl border border-border"><img src={src} alt={shot.alt} class="h-full w-full object-cover" loading="lazy" /></div>; })}</div>}
+      {(project.liveUrl || project.loomUrl) && <div class="flex flex-wrap gap-4 border-t border-border pt-8">{project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="rounded-full bg-text px-6 py-3 text-xs font-bold text-bg transition hover:opacity-90">View live site</a>}{project.loomUrl && <a href={project.loomUrl} target="_blank" rel="noopener noreferrer" class="rounded-full border border-border px-6 py-3 text-xs font-bold text-text transition hover:bg-surface-hover">Watch walkthrough</a>}</div>}
+    </main>
+  ) : (
+    <main class="mx-auto w-full max-w-3xl px-6 py-32 text-center"><h1 class="text-4xl font-extrabold text-text">Project not found</h1><p class="mt-4 text-text-muted">The project you're looking for doesn't exist.</p><a href="/work" class="mt-8 inline-flex rounded-full bg-text px-6 py-3 text-sm font-bold text-bg">View portfolio</a></main>
+  )}
+</SiteLayout>

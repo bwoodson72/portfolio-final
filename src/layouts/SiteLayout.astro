@@ -1,0 +1,30 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import FinalCta from '@/components/FinalCta.astro';
+import Footer from '@/components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  noindex?: boolean;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  showFinalCta?: boolean;
+}
+
+const { showFinalCta = true, ...seo } = Astro.props;
+---
+
+<BaseLayout {...seo}>
+  <Fragment slot="head"><slot name="head" /></Fragment>
+  <div class="relative z-10 flex min-h-screen flex-col bg-transparent">
+    <Header />
+    <div class="grow"><slot /></div>
+    {showFinalCta && <FinalCta />}
+    <Footer />
+  </div>
+</BaseLayout>

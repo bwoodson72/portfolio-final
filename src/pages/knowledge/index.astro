@@ -1,0 +1,82 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import PostCard from '@/components/knowledge/PostCard.astro';
+import { client, urlFor } from '@/lib/sanity/astro-client';
+import { PAGINATED_POSTS_QUERY } from '@/lib/sanity/queries';
+import type { PostCard as PostCardType } from '@/lib/sanity/types';
+
+const title = 'Guides | Brian Woodson Web Development';
+const description = 'Guides on website performance, SEO, and what small businesses need to know before investing in a new site.';
+const categories = [
+  { label: 'Your Website', value: 'your-website' },
+  { label: 'Performance', value: 'performance' },
+  { label: 'Getting Found', value: 'getting-found' },
+  { label: 'Cost & Value', value: 'cost' },
+  { label: 'Behind the Build', value: 'process' },
+];
+const postsPerPage = 12;
+const category = Astro.url.searchParams.get('category') ?? undefined;
+const requestedPage = Number.parseInt(Astro.url.searchParams.get('page') ?? '1', 10);
+const currentPage = Number.isFinite(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+
+let posts: PostCardType[] = [];
+if (client) {
+  try {
+    posts = await client.fetch<PostCardType[]>(PAGINATED_POSTS_QUERY);
+  } catch {
+    posts = [];
+  }
+}
+
+const filtered = category ? posts.filter((post) => post.category === category) : posts;
+const paginatedPosts = filtered.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
+const totalPages = Math.max(1, Math.ceil(filtered.length / postsPerPage));
+
+function pageHref(page: number) {
+  const params = new URLSearchParams();
+  if (category) params.set('category', category);
+  if (page > 1) params.set('page', String(page));
+  const query = params.toString();
+  return query ? `/knowledge?${query}` : '/knowledge';
+}
+---
+
+<SiteLayout title={title} description={description} canonical="/knowledge">
+  <main class="mx-auto w-full max-w-7xl px-6 py-24">
+    <div class="mb-12 space-y-4">
+      <p class="text-xs font-bold uppercase tracking-widest text-text-muted">Guides</p>
+      <h1 class="text-4xl font-extrabold tracking-tight text-text md:text-6xl">Before you hire anyone</h1>
+      <p class="max-w-2xl text-lg text-text-muted">Straight talk about your website — what it should cost, why it's slow, and what to do about it.</p>
+    </div>
+
+    <div class="mb-10 flex flex-wrap gap-2">
+      <a href="/knowledge" class:list={['rounded-full border px-4 py-1.5 text-xs font-semibold transition-colors', !category ? 'border-border-strong bg-surface-hover text-text' : 'border-border text-text-muted hover:border-border-strong hover:text-text']}>All</a>
+      {categories.map((cat) => (
+        <a href={`/knowledge?category=${cat.value}`} class:list={['rounded-full border px-4 py-1.5 text-xs font-semibold transition-colors', category === cat.value ? 'border-border-strong bg-surface-hover text-text' : 'border-border text-text-muted hover:border-border-strong hover:text-text']}>{cat.label}</a>
+      ))}
+    </div>
+
+    {paginatedPosts.length > 0 ? (
+      <>
+        <div class="mb-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {paginatedPosts.map((post) => (
+            <PostCard post={post} imageUrl={post.coverImage ? urlFor(post.coverImage).width(800).height(450).auto('format').url() : undefined} />
+          ))}
+        </div>
+
+        {totalPages > 1 && (
+          <nav aria-label="Guides pagination" class="flex items-center justify-center gap-3">
+            {currentPage > 1 && <a href={pageHref(currentPage - 1)} class="rounded-full border border-border px-4 py-2 text-sm text-text-muted hover:border-border-strong hover:text-text">← Previous</a>}
+            <span class="text-sm text-text-muted">Page {currentPage} of {totalPages}</span>
+            {currentPage < totalPages && <a href={pageHref(currentPage + 1)} class="rounded-full border border-border px-4 py-2 text-sm text-text-muted hover:border-border-strong hover:text-text">Next →</a>}
+          </nav>
+        )}
+      </>
+    ) : (
+      <div class="flex flex-col items-center justify-center space-y-3 py-24 text-center">
+        <p class="text-lg font-semibold text-text">No posts yet</p>
+        <p class="text-sm text-text-muted">Nothing here for this category — check back soon.</p>
+      </div>
+    )}
+  </main>
+</SiteLayout>

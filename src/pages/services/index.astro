@@ -1,0 +1,111 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import ConsultButton from '@/components/ConsultButton.astro';
+import { client } from '@/lib/sanity/astro-client';
+import { ALL_LOCATION_CARDS_QUERY, ALL_SERVICE_CARDS_QUERY } from '@/lib/sanity/queries';
+import type { LocationCard, ServiceCard } from '@/lib/sanity/types';
+
+const title = 'Services | Brian Woodson Web Development';
+const description = 'Business websites, landing pages, technical SEO foundations, copywriting, and ongoing support for small businesses. Custom-scoped around your goals.';
+
+let locations: LocationCard[] = [];
+let serviceCards: ServiceCard[] = [];
+
+if (client) {
+  try {
+    [locations, serviceCards] = await Promise.all([
+      client.fetch<LocationCard[]>(ALL_LOCATION_CARDS_QUERY),
+      client.fetch<ServiceCard[]>(ALL_SERVICE_CARDS_QUERY),
+    ]);
+  } catch {
+    locations = [];
+    serviceCards = [];
+  }
+}
+
+const processSteps = [
+  ['01', 'Review and scope', 'We look at your current site, ask questions about your business goals, and define exactly what needs to be built. You get a clear scope document before any work starts.'],
+  ['02', 'Design and write', 'Concepts and copy come first for your review. Nothing gets built until you approve the direction. This prevents expensive changes later.'],
+  ['03', 'Build and test', 'Development runs on a preview URL so you can review before anything goes live. We test across devices and browsers before launch.'],
+  ['04', 'Launch and support', 'Clean deployment with a handoff walkthrough. Your revision window starts at launch — and ongoing support keeps the site current after that.'],
+];
+
+const faqs = [
+  ["Do you work with businesses that don't have a website yet?", "Yes. Business website projects include both brand new sites and replacements for outdated ones. If you're starting from scratch, that's a normal starting point."],
+  ['Can you speed up my existing WordPress, Wix, or Squarespace site?', 'In most cases, no. That kind of work usually turns into patching around the limits of themes, plugins, or page builders. Performance is handled here as part of a new website or full replacement project, not as a tune-up service for legacy platforms.'],
+  ['What kinds of businesses do you work with?', 'Primarily small and local businesses — service companies, consultants, tradespeople, retail, and anyone who generates leads through their website. The work is a fit if you want a site that actively brings in customers, not just a digital business card.'],
+  ['Do you rebuild existing sites or only build new ones?', "Both. If your existing site has a strong foundation, we can improve it. If it's beyond repair or built on a system that limits performance, a clean rebuild typically produces better results faster."],
+  ['Can you work from a design I already have?', "Yes. If you have a Figma file, a reference site you like, or a style guide, we can build from that. If you don't have a design direction, we can develop one as part of the project."],
+  ['Do you write the copy, or do I?', 'We write it. Copywriting is included in every project — we research your business, your services, and your customers, then write copy you review and approve before anything is built.'],
+  ['How does pricing work?', 'Every project is fixed-price and scoped before work begins. After a short review of your business and goals, you get a clear recommendation and a quoted price for the full scope. No hourly billing, no surprise invoices.'],
+];
+---
+
+<SiteLayout title={title} description={description} canonical="/services">
+  <main class="flex w-full flex-col items-center">
+    <section class="mx-auto w-full max-w-7xl px-6 py-24">
+      <div class="max-w-3xl space-y-6">
+        <h1 class="text-4xl font-extrabold tracking-tight text-text md:text-6xl">Website Services for Small Businesses That Want More Calls and Leads</h1>
+        <p class="text-lg leading-relaxed text-text-muted">Every engagement starts with understanding your business — what you do, who you serve, and what's not working. Services are scoped around your goals, not bundled into generic packages.</p>
+        <ConsultButton />
+      </div>
+    </section>
+
+    <section class="mx-auto w-full max-w-7xl px-6 py-16">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {serviceCards.map((service) => (
+          <article class="flex flex-col gap-4 rounded-lg border border-border p-8">
+            <h2 class="text-xl font-bold text-text">{service.title}</h2>
+            <p class="leading-relaxed text-text-muted">{service.shortDescription}</p>
+            <a href={`/services/${service.slug.current}`} aria-label={`Learn more about ${service.title}`} class="mt-auto text-sm font-semibold text-text underline underline-offset-4 transition-opacity hover:opacity-70">Learn more about {service.title} →</a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24">
+      <div class="mb-12 space-y-4">
+        <h2 class="text-3xl font-extrabold tracking-tight text-text md:text-5xl">How an engagement works</h2>
+        <p class="max-w-2xl text-lg text-text-muted">Every project follows the same four-step process regardless of scope.</p>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {processSteps.map(([step, heading, body]) => (
+          <article class="space-y-3 rounded-3xl border border-border bg-surface p-8">
+            <div class="text-xs font-bold uppercase tracking-widest text-text-muted">Step {step}</div>
+            <h3 class="text-lg font-bold text-text">{heading}</h3>
+            <p class="text-sm leading-relaxed text-text-muted">{body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mx-auto w-full max-w-3xl border-t border-border px-6 py-24">
+      <h2 class="mb-10 text-3xl font-extrabold tracking-tight text-text">Common questions about working together</h2>
+      <div class="space-y-2">
+        {faqs.map(([question, answer]) => (
+          <details class="group rounded-2xl border border-border bg-surface px-6 py-5">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-text">{question}<span class="shrink-0 text-text-muted transition group-open:rotate-45">+</span></summary>
+            <p class="mt-4 text-sm leading-relaxed text-text-muted">{answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    {locations.length > 0 && (
+      <section class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24">
+        <div class="mb-12 space-y-4">
+          <h2 class="text-3xl font-extrabold tracking-tight text-text md:text-4xl">Service Areas</h2>
+          <p class="max-w-2xl text-lg text-text-muted">We work with small businesses across the Fort Worth area and surrounding communities. Every project is handled remotely — no in-person meetings required.</p>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {locations.map(({ city, slug }) => (
+            <a href={`/locations/${slug}`} class="flex flex-col space-y-2 rounded-2xl border border-border bg-surface p-6 transition hover:-translate-y-1 hover:border-border-strong">
+              <h3 class="text-sm font-bold text-text">{city}</h3>
+              <span class="mt-auto pt-2 text-xs font-bold text-text">View {city} page →</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </main>
+</SiteLayout>

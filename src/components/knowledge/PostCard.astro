@@ -1,0 +1,45 @@
+---
+import type { PostCard } from '@/lib/sanity/types';
+
+interface Props {
+  post: PostCard;
+  imageUrl?: string;
+  variant?: 'default' | 'featured';
+}
+
+const { post, imageUrl, variant = 'default' } = Astro.props;
+const categoryLabels: Record<string, string> = {
+  'your-website': 'Your Website',
+  performance: 'Performance',
+  'getting-found': 'Getting Found',
+  cost: 'Cost & Value',
+  process: 'Behind the Build',
+};
+const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<a href={`/knowledge/${post.slug.current}`} class="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-200 hover:-translate-y-1 hover:border-border-strong">
+  <div class="relative aspect-video w-full overflow-hidden">
+    {imageUrl ? (
+      <img src={imageUrl} alt={post.coverImage?.alt ?? post.title} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" />
+    ) : (
+      <div class="absolute inset-0 bg-linear-to-br from-surface-hover to-bg"></div>
+    )}
+  </div>
+  <div class="flex flex-1 flex-col gap-3 p-6">
+    <div class="flex items-center gap-2.5">
+      <span class="rounded-full border border-border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-text-muted">{categoryLabels[post.category] ?? post.category}</span>
+      <span class="text-[10px] text-text-muted-2">{post.readingTime} min read</span>
+    </div>
+    <h2 class:list={['font-extrabold leading-snug text-text', variant === 'featured' ? 'text-2xl' : 'text-lg']}>{post.title}</h2>
+    <p class="line-clamp-3 text-sm leading-relaxed text-text-muted">{post.excerpt}</p>
+    <div class="mt-auto flex items-center justify-between pt-4">
+      <span class="text-xs text-text-muted-2">{formattedDate}</span>
+      <span class="text-xs font-semibold text-text-muted transition-transform duration-200 group-hover:translate-x-1">Read →</span>
+    </div>
+  </div>
+</a>

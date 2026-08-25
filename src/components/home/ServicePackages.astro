@@ -1,0 +1,48 @@
+---
+const services = [
+  {
+    title: 'Business Websites',
+    summary: 'Custom multi-page websites built to rank on Google, load fast on mobile, and convert visitors into calls and leads.',
+    href: '/services/business-websites',
+  },
+  {
+    title: 'Landing Pages',
+    summary: 'Single-page builds for ad campaigns, new service areas, and single-offer lead generation.',
+    href: '/services/landing-pages',
+  },
+  {
+    title: 'Local SEO Management',
+    summary: 'Monthly local SEO for small businesses built on our stack. GBP management, rank tracking, content, and reporting.',
+    href: '/services/local-seo-management',
+  },
+];
+---
+
+<section id="services" class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24">
+  <div class="space-y-4">
+    <h2 class="text-3xl font-extrabold tracking-tight text-text md:text-5xl">
+      Website Design and Local SEO for Small Businesses in the DFW Area
+    </h2>
+    <p class="max-w-2xl text-lg text-text-muted">
+      Every service is scoped and priced before work begins. No generic packages, no guesswork about what you are getting.
+    </p>
+  </div>
+
+  <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {services.map((service) => (
+      <article class="flex flex-col space-y-4 rounded-3xl border border-border bg-surface p-8">
+        <h3 class="text-lg font-bold text-text">{service.title}</h3>
+        <p class="text-sm leading-relaxed text-text-muted">{service.summary}</p>
+        <a href={service.href} class="mt-auto text-sm font-semibold text-text underline underline-offset-4 transition-opacity hover:opacity-70">
+          Learn more<span class="sr-only"> about {service.title}</span>
+        </a>
+      </article>
+    ))}
+  </div>
+
+  <div class="mt-12 flex justify-center">
+    <a href="/services" class="rounded-full bg-surface px-8 py-3 text-sm font-bold text-white transition hover:bg-surface-hover">
+      View all services
+    </a>
+  </div>
+</section>

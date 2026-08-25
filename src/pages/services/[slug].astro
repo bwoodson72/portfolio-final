@@ -1,0 +1,53 @@
+---
+import SiteLayout from '@/layouts/SiteLayout.astro';
+import ConsultButton from '@/components/ConsultButton.astro';
+import PortableText from '@/components/PortableText.astro';
+import { client } from '@/lib/sanity/astro-client';
+import { SERVICE_PAGE_BY_SLUG_QUERY } from '@/lib/sanity/queries';
+import type { ServicePage } from '@/lib/sanity/types';
+
+const { slug } = Astro.params;
+let page: ServicePage | null = null;
+if (client && slug) {
+  try { page = await client.fetch<ServicePage | null>(SERVICE_PAGE_BY_SLUG_QUERY, { slug }); } catch { page = null; }
+}
+if (!page) Astro.response.status = 404;
+
+const title = page?.metaTitle ?? (page ? `${page.title} | Brian Woodson Web Development` : 'Service not found');
+const description = page?.metaDescription ?? page?.shortDescription ?? 'Service not found.';
+const canonical = slug ? `/services/${slug}` : '/services';
+const problemsSolved = page?.problemsSolved ?? [];
+const faqs = page?.faqs ?? [];
+const relatedServices = page?.relatedServices ?? [];
+const structuredData = page && slug ? {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://brianwoodson.dev' },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://brianwoodson.dev/services' },
+      { '@type': 'ListItem', position: 3, name: page.title, item: `https://brianwoodson.dev/services/${slug}` },
+    ] },
+    { '@type': 'Service', name: page.title, description, provider: { '@type': 'Organization', name: 'Brian Woodson Web Development', url: 'https://brianwoodson.dev' }, areaServed: 'United States', serviceType: page.eyebrow ?? page.title, url: `https://brianwoodson.dev/services/${slug}` },
+    { '@type': 'WebPage', name: title, description, url: `https://brianwoodson.dev/services/${slug}`, isPartOf: { '@type': 'WebSite', url: 'https://brianwoodson.dev' } },
+    ...(faqs.length ? [{ '@type': 'FAQPage', mainEntity: faqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) }] : []),
+  ],
+} : null;
+---
+
+<SiteLayout title={title} description={description} canonical={canonical} noindex={!page}>
+  {structuredData && <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+  {page ? (
+    <main class="flex w-full flex-col items-center">
+      <section class="mx-auto w-full max-w-7xl px-6 py-24"><div class="max-w-3xl space-y-6">{page.eyebrow && <p class="text-xs font-bold uppercase tracking-widest text-text-muted">{page.eyebrow}</p>}<h1 class="text-4xl font-extrabold tracking-tight text-text md:text-6xl">{page.heroHeadline}</h1>{page.heroSubheadline && <p class="text-xl leading-relaxed text-text-muted">{page.heroSubheadline}</p>}<ConsultButton /></div></section>
+      {page.body?.length > 0 && <section class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24"><div class="max-w-3xl"><PortableText value={page.body} /></div></section>}
+      <section class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24"><div class="max-w-3xl space-y-4"><h2 class="text-2xl font-extrabold tracking-tight text-text md:text-3xl">Who this is for</h2><p class="whitespace-pre-line text-lg leading-relaxed text-text-muted">{page.whoThisIsFor}</p></div></section>
+      {problemsSolved.length > 0 && <section class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24"><div class="max-w-3xl space-y-6"><h2 class="text-2xl font-extrabold tracking-tight text-text md:text-3xl">Problems this solves</h2><ul class="space-y-2">{problemsSolved.map((item) => <li class="flex gap-2 text-sm text-text-muted"><span class="shrink-0 font-bold text-text">→</span>{item}</li>)}</ul></div></section>}
+      <section class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24"><div class="grid gap-12 md:grid-cols-2"><div class="space-y-6"><h2 class="text-2xl font-extrabold tracking-tight text-text md:text-3xl">What's included</h2><ul class="space-y-2">{page.includedItems.map((item) => <li class="flex gap-2 text-sm text-text-muted"><span class="shrink-0 font-bold text-text">✓</span>{item}</li>)}</ul></div><div class="space-y-6"><h2 class="text-2xl font-extrabold tracking-tight text-text md:text-3xl">Why it matters</h2><ul class="space-y-2">{page.businessBenefits.map((item) => <li class="flex gap-2 text-sm text-text-muted"><span class="shrink-0 font-bold text-text">✓</span>{item}</li>)}</ul></div></div></section>
+      {page.notFor && <section class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24"><div class="max-w-3xl space-y-4"><h2 class="text-2xl font-extrabold tracking-tight text-text md:text-3xl">This service is not for</h2><p class="whitespace-pre-line text-lg leading-relaxed text-text-muted">{page.notFor}</p></div></section>}
+      {faqs.length > 0 && <section class="mx-auto w-full max-w-3xl border-t border-border px-6 py-24"><h2 class="mb-10 text-2xl font-extrabold tracking-tight text-text md:text-3xl">Common questions</h2><ul class="space-y-3">{faqs.map((faq) => <li><details class="group rounded-2xl border border-border bg-surface open:border-border-strong"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-sm font-bold text-text select-none">{faq.question}<span class="text-text-muted transition group-open:rotate-45">+</span></summary><div class="border-t border-border px-6 py-5"><p class="whitespace-pre-line text-sm leading-relaxed text-text-muted">{faq.answer}</p></div></details></li>)}</ul></section>}
+      {relatedServices.length > 0 && <section class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24"><div class="space-y-10"><h2 class="text-2xl font-extrabold tracking-tight text-text md:text-3xl">Related services</h2><div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">{relatedServices.map((service) => <article class="flex flex-col gap-4 rounded-lg border border-border p-8"><h3 class="text-xl font-bold text-text">{service.title}</h3><p class="leading-relaxed text-text-muted">{service.shortDescription}</p><a href={`/services/${service.slug.current}`} class="mt-auto text-sm font-semibold text-text underline underline-offset-4 transition-opacity hover:opacity-70">View service</a></article>)}</div></div></section>}
+    </main>
+  ) : (
+    <main class="mx-auto w-full max-w-3xl px-6 py-32 text-center"><h1 class="text-4xl font-extrabold text-text">Service not found</h1><p class="mt-4 text-text-muted">The service page you're looking for doesn't exist.</p><a href="/services" class="mt-8 inline-flex rounded-full bg-text px-6 py-3 text-sm font-bold text-bg">View services</a></main>
+  )}
+</SiteLayout>

@@ -13,8 +13,11 @@
 # testing
 /coverage
 
-# next.js
+# framework output
 /.next/
+/.astro/
+/.sanity/runtime/
+/dist/
 /out/
 
 # production
@@ -41,3 +44,5 @@ yarn-error.log*
 next-env.d.ts
 /repomix-output.txt
 /repomix-output.xml
+
+.sanity/
