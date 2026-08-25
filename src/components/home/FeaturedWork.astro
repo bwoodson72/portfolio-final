@@ -30,6 +30,12 @@ if (client) {
             <div class="aspect-video w-full overflow-hidden">
               <Image
                 src={urlFor(project.coverImage).width(800).height(450).auto('format').url()}
+                srcset={[
+                  `${urlFor(project.coverImage).width(400).height(225).auto('format').url()} 400w`,
+                  `${urlFor(project.coverImage).width(640).height(360).auto('format').url()} 640w`,
+                  `${urlFor(project.coverImage).width(800).height(450).auto('format').url()} 800w`,
+                ].join(', ')}
+                sizes="(min-width: 1280px) 405px, (min-width: 1024px) calc((100vw - 72px) / 3), calc(100vw - 48px)"
                 alt={project.coverImage.alt ?? ''}
                 width="800"
                 height="450"

@@ -60,7 +60,15 @@ function pageHref(page: number) {
       <>
         <div class="mb-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {paginatedPosts.map((post) => (
-            <PostCard post={post} imageUrl={post.coverImage ? urlFor(post.coverImage).width(800).height(450).auto('format').url() : undefined} />
+            <PostCard
+              post={post}
+              imageUrl={post.coverImage ? urlFor(post.coverImage).width(800).height(450).auto('format').url() : undefined}
+              imageSrcSet={post.coverImage ? [
+                `${urlFor(post.coverImage).width(400).height(225).auto('format').url()} 400w`,
+                `${urlFor(post.coverImage).width(640).height(360).auto('format').url()} 640w`,
+                `${urlFor(post.coverImage).width(800).height(450).auto('format').url()} 800w`,
+              ].join(', ') : undefined}
+            />
           ))}
         </div>
 

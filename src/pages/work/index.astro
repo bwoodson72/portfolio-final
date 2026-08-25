@@ -34,7 +34,21 @@ const structuredData = {
           const imageUrl = project.coverImage ? urlFor(project.coverImage).width(800).height(450).auto('format').url() : undefined;
           return (
             <a href={`/work/${project.slug.current}`} class="group flex flex-col overflow-hidden rounded-3xl border border-border bg-surface transition hover:border-border-strong">
-              {imageUrl && <div class="aspect-video w-full overflow-hidden"><Image src={imageUrl} alt={project.coverImage?.alt ?? project.title} width={800} height={450} class="h-full w-full object-cover" loading="lazy" decoding="async" /></div>}
+              {imageUrl && project.coverImage && <div class="aspect-video w-full overflow-hidden"><Image
+                src={imageUrl}
+                srcset={[
+                  `${urlFor(project.coverImage).width(400).height(225).auto('format').url()} 400w`,
+                  `${urlFor(project.coverImage).width(640).height(360).auto('format').url()} 640w`,
+                  `${urlFor(project.coverImage).width(800).height(450).auto('format').url()} 800w`,
+                ].join(', ')}
+                sizes="(min-width: 1280px) 616px, (min-width: 768px) calc((100vw - 80px) / 2), calc(100vw - 48px)"
+                alt={project.coverImage.alt ?? project.title}
+                width={800}
+                height={450}
+                class="h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+              /></div>}
               <div class="space-y-4 p-8">
                 {project.role && <div class="inline-block rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-text">{project.role}</div>}
                 <h2 class="text-xl font-bold text-text">{project.title}</h2>
