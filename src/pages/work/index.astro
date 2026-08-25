@@ -3,6 +3,7 @@ import SiteLayout from '@/layouts/SiteLayout.astro';
 import { client, urlFor } from '@/lib/sanity/astro-client';
 import { ALL_PROJECTS_QUERY } from '@/lib/sanity/queries';
 import type { ProjectCard } from '@/lib/sanity/types';
+import { Image } from 'astro:assets';
 
 const title = 'Web Design Portfolio | Small Business Websites | Brian Woodson Web Development';
 const description = "Custom website design portfolio for small businesses in the DFW area. Every site scores 95 or better on Google's Lighthouse performance audit.";
@@ -33,7 +34,7 @@ const structuredData = {
           const imageUrl = project.coverImage ? urlFor(project.coverImage).width(800).height(450).auto('format').url() : undefined;
           return (
             <a href={`/work/${project.slug.current}`} class="group flex flex-col overflow-hidden rounded-3xl border border-border bg-surface transition hover:border-border-strong">
-              {imageUrl && <div class="aspect-video w-full overflow-hidden"><img src={imageUrl} alt={project.coverImage?.alt ?? project.title} class="h-full w-full object-cover" loading="lazy" decoding="async" /></div>}
+              {imageUrl && <div class="aspect-video w-full overflow-hidden"><Image src={imageUrl} alt={project.coverImage?.alt ?? project.title} width={800} height={450} class="h-full w-full object-cover" loading="lazy" decoding="async" /></div>}
               <div class="space-y-4 p-8">
                 {project.role && <div class="inline-block rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-text">{project.role}</div>}
                 <h2 class="text-xl font-bold text-text">{project.title}</h2>

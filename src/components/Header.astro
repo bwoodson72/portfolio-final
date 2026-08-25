@@ -1,6 +1,7 @@
 ---
 import ConsultButton from '@/components/ConsultButton.astro';
 import MobileNav from '@/components/interactive/MobileNav.svelte';
+import { Image } from 'astro:assets';
 
 const navLinks = [
   { label: 'Work', href: '/work' },
@@ -15,7 +16,7 @@ const navLinks = [
   <div class="mx-auto max-w-7xl px-6">
     <nav class="relative flex h-20 items-center justify-between" aria-label="Primary navigation">
       <a href="/" class="text-lg font-bold tracking-tighter text-text" aria-label="Brian Woodson Web Development home">
-        <img src="/primary-logo.svg" alt="Brian Woodson Web Development" width="220" height="220" class="h-auto w-[220px]" />
+        <Image src="/primary-logo.svg" alt="Brian Woodson Web Development" width={220} height={66} class="h-auto w-[220px]" />
       </a>
 
       <ul class="hidden items-center gap-8 text-sm font-bold text-text-muted md:flex">

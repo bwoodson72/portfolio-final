@@ -2,6 +2,7 @@
 import { FEATURED_PROJECTS_QUERY } from '@/lib/sanity/queries';
 import type { ProjectCard } from '@/lib/sanity/types';
 import { client, urlFor } from '@/lib/sanity/astro-client';
+import { Image } from 'astro:assets';
 
 let projects: ProjectCard[] = [];
 if (client) {
@@ -27,7 +28,7 @@ if (client) {
         <a href={`/work/${project.slug.current}`} class="group flex w-full min-w-xs flex-col overflow-hidden rounded-2xl border border-border bg-surface text-left transition hover:-translate-y-1 hover:border-border-strong">
           {project.coverImage && (
             <div class="aspect-video w-full overflow-hidden">
-              <img
+              <Image
                 src={urlFor(project.coverImage).width(800).height(450).auto('format').url()}
                 alt={project.coverImage.alt ?? ''}
                 width="800"

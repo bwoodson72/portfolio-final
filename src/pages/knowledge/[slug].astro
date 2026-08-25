@@ -5,6 +5,7 @@ import ShareButtons from '@/components/interactive/ShareButtons.svelte';
 import { client, urlFor } from '@/lib/sanity/astro-client';
 import { POST_BY_SLUG_QUERY } from '@/lib/sanity/queries';
 import type { Post } from '@/lib/sanity/types';
+import { Image } from 'astro:assets';
 
 const categoryLabels: Record<string, string> = {
   'your-website': 'Your Website',
@@ -29,8 +30,9 @@ if (!post) Astro.response.status = 404;
 const title = post?.metaTitle ?? post?.title ?? 'Guide not found';
 const description = post?.excerpt ?? 'Guide not found.';
 const canonical = slug ? `/knowledge/${slug}` : '/knowledge';
-const coverImageUrl = post?.coverImage ? urlFor(post.coverImage).width(1200).height(675).auto('format').url() : undefined;
-const ogImage = post?.coverImage ? urlFor(post.coverImage).width(1200).height(630).auto('format').url() : '/og-image.png';
+const postCoverImage = post?.coverImage;
+const coverImageUrl = postCoverImage ? urlFor(postCoverImage).width(1200).height(675).auto('format').url() : undefined;
+const ogImage = postCoverImage ? urlFor(postCoverImage).width(1200).height(630).auto('format').url() : '/og-image.png';
 const formattedDate = post ? new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
 
 const structuredData = post && slug ? {
@@ -92,7 +94,7 @@ const structuredData = post && slug ? {
 
       {coverImageUrl && (
         <div class="mb-14 aspect-video w-full overflow-hidden rounded-2xl border border-border">
-          <img src={coverImageUrl} alt={post.coverImage?.alt ?? post.title} class="h-full w-full object-cover" fetchpriority="high" decoding="async" />
+          <Image src={coverImageUrl} alt={post.coverImage?.alt ?? post.title} width={1200} height={675} class="h-full w-full object-cover" priority={true} />
         </div>
       )}
 

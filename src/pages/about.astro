@@ -2,6 +2,7 @@
 import SiteLayout from '@/layouts/SiteLayout.astro';
 import ConsultButton from '@/components/ConsultButton.astro';
 import { siteContent } from '@/content/portfolio';
+import { Image } from 'astro:assets';
 
 const title = 'About | Web Designer and Local SEO Specialist | Brian Woodson Web Development';
 const description = 'Brian Woodson Web Development builds custom websites and manages local SEO for small businesses in the DFW area. Custom code, no WordPress, 95+ Lighthouse scores.';
@@ -37,7 +38,7 @@ const structuredData = {
   <main class="mx-auto w-full max-w-7xl space-y-24 px-6 py-24">
     <section>
       <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start lg:gap-24">
-        <div class="w-full"><img src="/brianwoodson.avif" alt="Brian Woodson" width="600" height="700" class="w-full rounded-2xl object-cover object-top" fetchpriority="high" /></div>
+        <div class="w-full"><Image src="/brianwoodson.avif" alt="Brian Woodson" width={600} height={700} class="w-full rounded-2xl object-cover object-top" priority={true} /></div>
         <div class="space-y-8">
           <h1 class="text-4xl font-extrabold tracking-tight text-text md:text-5xl">Web Designer and Local SEO Specialist Based in Granbury, TX</h1>
           <div class="space-y-4 text-lg text-text-muted">

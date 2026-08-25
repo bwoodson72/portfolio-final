@@ -1,17 +1,18 @@
 ---
 import ConsultButton from '@/components/ConsultButton.astro';
 import { siteContent } from '@/content/portfolio';
+import { Image } from 'astro:assets';
 
 const { hero } = siteContent;
 ---
 
 <section id="top" class="relative flex h-dvh w-full flex-col items-center justify-center overflow-hidden px-6 py-24 text-center md:py-32">
-  <img
+  <Image
     src="/bg-hero.avif"
     alt=""
     width="1920"
     height="1080"
-    fetchpriority="high"
+    priority={true}
     aria-hidden="true"
     class="pointer-events-none absolute inset-0 h-full w-full select-none object-cover brightness-40"
   />

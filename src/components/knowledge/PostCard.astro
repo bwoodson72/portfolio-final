@@ -1,5 +1,6 @@
 ---
 import type { PostCard } from '@/lib/sanity/types';
+import { Image } from 'astro:assets';
 
 interface Props {
   post: PostCard;
@@ -25,7 +26,7 @@ const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
 <a href={`/knowledge/${post.slug.current}`} class="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-200 hover:-translate-y-1 hover:border-border-strong">
   <div class="relative aspect-video w-full overflow-hidden">
     {imageUrl ? (
-      <img src={imageUrl} alt={post.coverImage?.alt ?? post.title} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" />
+      <Image src={imageUrl} alt={post.coverImage?.alt ?? post.title} width={800} height={450} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" />
     ) : (
       <div class="absolute inset-0 bg-linear-to-br from-surface-hover to-bg"></div>
     )}
