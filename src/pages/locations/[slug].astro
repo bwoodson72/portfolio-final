@@ -14,6 +14,8 @@ if (!page) Astro.response.status = 404;
 const title = page ? `${page.headline} | Brian Woodson Web Development` : 'Location not found';
 const description = page?.metaDescription ?? 'Location not found.';
 const canonical = slug ? `/locations/${slug}` : '/locations';
+const nearbyAreas = page?.nearbyAreas ?? [];
+const faqs = page?.faqs ?? [];
 const structuredData = page && slug ? {
   '@context': 'https://schema.org',
   '@graph': [
@@ -22,20 +24,20 @@ const structuredData = page && slug ? {
       { '@type': 'ListItem', position: 2, name: `Web Design ${page.city}`, item: `https://brianwoodson.dev/locations/${slug}` },
     ] },
     { '@type': 'ProfessionalService', name: 'Brian Woodson Web Development', url: 'https://brianwoodson.dev', telephone: '+18177764893', address: { '@type': 'PostalAddress', addressLocality: page.city, addressRegion: 'TX', addressCountry: 'US' }, areaServed: page.areaServed.map((area) => ({ '@type': 'City', name: area })), knowsAbout: ['Web Design', 'Web Development', 'SEO', 'Copywriting', 'Small Business Websites'] },
-    ...(page.faqs?.length ? [{ '@type': 'FAQPage', mainEntity: page.faqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) }] : []),
+    ...(faqs.length ? [{ '@type': 'FAQPage', mainEntity: faqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) }] : []),
   ],
 } : null;
 ---
 
 <SiteLayout title={title} description={description} canonical={canonical} noindex={!page}>
-  {structuredData && <script slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+  {structuredData && <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
   {page ? (
     <main class="flex w-full flex-col items-center">
       <section class="mx-auto w-full max-w-7xl px-6 py-24"><div class="max-w-3xl space-y-6"><h1 class="text-4xl font-extrabold tracking-tight text-text md:text-6xl">{page.headline}</h1>{page.subheadline && <p class="text-xl leading-relaxed text-text-muted">{page.subheadline}</p>}<ConsultButton /></div></section>
       <section class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24"><div class="max-w-3xl"><p class="whitespace-pre-line text-lg leading-relaxed text-text-muted">{page.bodyIntro}</p></div></section>
-      <section class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24"><div class="grid gap-12 md:grid-cols-2"><div class="space-y-4"><h2 class="text-2xl font-extrabold tracking-tight text-text md:text-3xl">The {page.city} business landscape</h2><p class="whitespace-pre-line text-lg leading-relaxed text-text-muted">{page.marketContext}</p></div><div class="space-y-4"><h3 class="text-xs font-bold uppercase tracking-widest text-text-muted">Businesses we work with in {page.city}</h3><ul class="space-y-2">{page.localBusinessTypes.map((type) => <li class="flex gap-2 text-sm text-text-muted"><span class="shrink-0 font-bold text-text">→</span>{type}</li>)}</ul>{page.nearbyAreas?.length > 0 && <div class="space-y-2 border-t border-border pt-6"><h3 class="text-xs font-bold uppercase tracking-widest text-text-muted">Also serving</h3><p class="text-sm text-text-muted">{page.nearbyAreas.join(', ')}</p></div>}</div></div></section>
+      <section class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24"><div class="grid gap-12 md:grid-cols-2"><div class="space-y-4"><h2 class="text-2xl font-extrabold tracking-tight text-text md:text-3xl">The {page.city} business landscape</h2><p class="whitespace-pre-line text-lg leading-relaxed text-text-muted">{page.marketContext}</p></div><div class="space-y-4"><h3 class="text-xs font-bold uppercase tracking-widest text-text-muted">Businesses we work with in {page.city}</h3><ul class="space-y-2">{page.localBusinessTypes.map((type) => <li class="flex gap-2 text-sm text-text-muted"><span class="shrink-0 font-bold text-text">→</span>{type}</li>)}</ul>{nearbyAreas.length > 0 && <div class="space-y-2 border-t border-border pt-6"><h3 class="text-xs font-bold uppercase tracking-widest text-text-muted">Also serving</h3><p class="text-sm text-text-muted">{nearbyAreas.join(', ')}</p></div>}</div></div></section>
       {page.servicesNote && <section class="mx-auto w-full max-w-7xl border-t border-border px-6 py-24"><div class="max-w-3xl space-y-4"><h2 class="text-2xl font-extrabold tracking-tight text-text md:text-3xl">What we build for {page.city} businesses</h2><p class="whitespace-pre-line text-lg leading-relaxed text-text-muted">{page.servicesNote}</p><a href="/services" class="inline-block text-sm font-bold text-text underline-offset-4 hover:underline">View all services →</a></div></section>}
-      {page.faqs?.length > 0 && <section class="mx-auto w-full max-w-3xl border-t border-border px-6 py-24"><h2 class="mb-10 text-2xl font-extrabold tracking-tight text-text md:text-3xl">Common questions from {page.city} businesses</h2><ul class="space-y-3">{page.faqs.map((faq) => <li><details class="group rounded-2xl border border-border bg-surface open:border-border-strong"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-sm font-bold text-text select-none">{faq.question}<span class="text-text-muted transition group-open:rotate-45">+</span></summary><div class="border-t border-border px-6 py-5"><p class="whitespace-pre-line text-sm leading-relaxed text-text-muted">{faq.answer}</p></div></details></li>)}</ul></section>}
+      {faqs.length > 0 && <section class="mx-auto w-full max-w-3xl border-t border-border px-6 py-24"><h2 class="mb-10 text-2xl font-extrabold tracking-tight text-text md:text-3xl">Common questions from {page.city} businesses</h2><ul class="space-y-3">{faqs.map((faq) => <li><details class="group rounded-2xl border border-border bg-surface open:border-border-strong"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-sm font-bold text-text select-none">{faq.question}<span class="text-text-muted transition group-open:rotate-45">+</span></summary><div class="border-t border-border px-6 py-5"><p class="whitespace-pre-line text-sm leading-relaxed text-text-muted">{faq.answer}</p></div></details></li>)}</ul></section>}
     </main>
   ) : (
     <main class="mx-auto w-full max-w-3xl px-6 py-32 text-center"><h1 class="text-4xl font-extrabold text-text">Location not found</h1><p class="mt-4 text-text-muted">The location page you're looking for doesn't exist.</p><a href="/services" class="mt-8 inline-flex rounded-full bg-text px-6 py-3 text-sm font-bold text-bg">View services</a></main>
