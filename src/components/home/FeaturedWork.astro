@@ -1,8 +1,10 @@
 ---
 import { FEATURED_PROJECTS_QUERY } from '@/lib/sanity/queries';
 import type { ProjectCard } from '@/lib/sanity/types';
-import { client, urlFor } from '@/lib/sanity/astro-client';
+import { client } from '@/lib/sanity/astro-client';
+import { sanityImageSrcSet, sanityImageUrl } from '@/lib/sanity/image';
 
+const cardWidths = [360, 560, 800] as const;
 let projects: ProjectCard[] = [];
 if (client) {
   try {
@@ -23,28 +25,35 @@ if (client) {
     </div>
 
     <div class="mt-12 grid gap-6 lg:grid-cols-3">
-      {projects.map((project) => (
-        <a href={`/work/${project.slug.current}`} class="group flex w-full min-w-xs flex-col overflow-hidden rounded-2xl border border-border bg-surface text-left transition hover:-translate-y-1 hover:border-border-strong">
-          {project.coverImage && (
-            <div class="aspect-video w-full overflow-hidden">
-              <img
-                src={urlFor(project.coverImage).width(800).height(450).auto('format').url()}
-                alt={project.coverImage.alt ?? ''}
-                width="800"
-                height="450"
-                loading="lazy"
-                class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-              />
+      {projects.map((project) => {
+        const imageUrl = project.coverImage ? sanityImageUrl(project.coverImage, 800, 450) : undefined;
+        const imageSrcSet = project.coverImage ? sanityImageSrcSet(project.coverImage, cardWidths) : undefined;
+        return (
+          <a href={`/work/${project.slug.current}`} class="group flex w-full min-w-xs flex-col overflow-hidden rounded-2xl border border-border bg-surface text-left transition hover:-translate-y-1 hover:border-border-strong">
+            {imageUrl && imageSrcSet && (
+              <div class="aspect-video w-full overflow-hidden">
+                <img
+                  src={imageUrl}
+                  srcset={imageSrcSet}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  alt={project.coverImage?.alt ?? ''}
+                  width="800"
+                  height="450"
+                  loading="lazy"
+                  decoding="async"
+                  class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                />
+              </div>
+            )}
+            <div class="flex flex-1 flex-col p-6">
+              {project.role && <span class="mb-3 inline-block self-start rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-text">{project.role}</span>}
+              <h3 class="text-xl font-bold text-text">{project.title}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-text-muted">{project.tagline}</p>
+              <span class="mt-6 text-sm font-bold text-text">View details →</span>
             </div>
-          )}
-          <div class="flex flex-1 flex-col p-6">
-            {project.role && <span class="mb-3 inline-block self-start rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-text">{project.role}</span>}
-            <h3 class="text-xl font-bold text-text">{project.title}</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-text-muted">{project.tagline}</p>
-            <span class="mt-6 text-sm font-bold text-text">View details →</span>
-          </div>
-        </a>
-      ))}
+          </a>
+        );
+      })}
     </div>
   </section>
 )}

@@ -1,11 +1,14 @@
 ---
+import { Image } from 'astro:assets';
 import SiteLayout from '@/layouts/SiteLayout.astro';
 import ConsultButton from '@/components/ConsultButton.astro';
 import { siteContent } from '@/content/portfolio';
+import brianPortrait from '@/assets/brianwoodson.avif';
 
 const title = 'About | Web Designer and Local SEO Specialist | Brian Woodson Web Development';
 const description = 'Brian Woodson Web Development builds custom websites and manages local SEO for small businesses in the DFW area. Custom code, no WordPress, 95+ Lighthouse scores.';
 const { about } = siteContent;
+const brianImageUrl = new URL(brianPortrait.src, Astro.site ?? Astro.url.origin).toString();
 const howIWork = [
   ['01', 'Define scope before anything else', "Every project starts with a clear scope document — what you're getting, what it costs, and when it's done. No ambiguity, no moving targets. You approve the plan before any work begins."],
   ['02', 'Design, write, and build in a focused sprint', 'Once scope is locked, our team executes. Design concepts come first for your approval, then copy and development run in parallel. No unnecessary check-ins or status meetings — just focused work.'],
@@ -27,7 +30,7 @@ const structuredData = {
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://brianwoodson.dev' },
       { '@type': 'ListItem', position: 2, name: 'About', item: 'https://brianwoodson.dev/about' },
     ] },
-    { '@type': 'Person', '@id': 'https://brianwoodson.dev/#brian-woodson', name: 'Brian Woodson', jobTitle: 'Web Designer and Developer', image: { '@type': 'ImageObject', url: 'https://brianwoodson.dev/brianwoodson.avif' }, worksFor: { '@type': 'ProfessionalService', name: 'Brian Woodson Web Development', url: 'https://brianwoodson.dev' }, url: 'https://brianwoodson.dev/about' },
+    { '@type': 'Person', '@id': 'https://brianwoodson.dev/#brian-woodson', name: 'Brian Woodson', jobTitle: 'Web Designer and Developer', image: { '@type': 'ImageObject', url: brianImageUrl }, worksFor: { '@type': 'ProfessionalService', name: 'Brian Woodson Web Development', url: 'https://brianwoodson.dev' }, url: 'https://brianwoodson.dev/about' },
   ],
 };
 ---
@@ -37,7 +40,16 @@ const structuredData = {
   <main class="mx-auto w-full max-w-7xl space-y-24 px-6 py-24">
     <section>
       <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start lg:gap-24">
-        <div class="w-full"><img src="/brianwoodson.avif" alt="Brian Woodson" width="600" height="700" class="w-full rounded-2xl object-cover object-top" fetchpriority="high" /></div>
+        <div class="w-full">
+          <Image
+            src={brianPortrait}
+            alt="Brian Woodson"
+            widths={[320, 480, 600]}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            priority
+            class="w-full rounded-2xl object-cover object-top"
+          />
+        </div>
         <div class="space-y-8">
           <h1 class="text-4xl font-extrabold tracking-tight text-text md:text-5xl">Web Designer and Local SEO Specialist Based in Granbury, TX</h1>
           <div class="space-y-4 text-lg text-text-muted">
