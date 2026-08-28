@@ -67,7 +67,7 @@ const homepageStructuredData = {
   <link slot="head" rel="preload" as="image" href="/bg-hero.avif" type="image/avif" fetchpriority="high" />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(homepageStructuredData)} />
 
-  <div class="flex w-full flex-col items-center bg-slate-950 text-slate-50">
+  <main class="flex w-full flex-col items-center bg-slate-950 text-slate-50">
     <Hero />
     <TrustStrip />
     <AuditCta client:visible />
@@ -76,5 +76,5 @@ const homepageStructuredData = {
     <ServicePackages />
     <InlineFAQ />
     <HowIWork />
-  </div>
+  </main>
 </SiteLayout>
